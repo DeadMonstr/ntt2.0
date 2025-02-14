@@ -1,0 +1,33 @@
+.applicationList__name {
+  font-size: 1.3rem;
+}
+.applicationList__number {
+  font-size: 1rem;
+  color: #C8C8C8;
+}
+.applicationList__list td:last-child {
+  border-right: 0.8rem solid #4DEC7C;
+}
+.applicationList__list:hover {
+  background-color: #B5FFB7 !important;
+}
+.applicationList__list.debt td:last-child {
+  border-right: 0.8rem solid #FF7979;
+}
+.applicationList__list.debt:hover {
+  background-color: #FFB0B0 !important;
+}
+
+@media (max-width: 1268px) {
+  .applicationList__td-hidden {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .applicationList thead {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=applicationList.module.css.map */

@@ -1,0 +1,33 @@
+
+@import "app/styles/abstracts/variables"
+
+.header
+  width: 100%
+  height: $appHeader-height
+  background-color: white
+  border-radius: 8px
+  display: flex
+  align-items: center
+  padding: 0 60px
+  justify-content: space-between
+  position: relative
+  .container
+    display: flex
+    align-items: center
+    gap: 2rem
+
+@media (max-width: 1024px)
+  .header
+    .container
+      h1
+        display: none
+
+@media (max-width: 430px)
+  .header
+    padding: 0
+    justify-content: space-around
+    height: 6rem
+    .container
+      &__img
+        width: 14rem
+        height: 3rem

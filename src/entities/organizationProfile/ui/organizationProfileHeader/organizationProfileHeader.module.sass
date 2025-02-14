@@ -1,0 +1,33 @@
+.header
+  width: 100%
+  display: flex
+  gap: 3rem
+  padding: 2.5rem 3rem
+  box-shadow: 0 13.97px 24.84px 0 #D0D2DA26
+  background: #fff
+  border-radius: 1.5rem
+  overflow-x: auto
+  overflow-y: hidden
+  //height: 10rem
+  .item
+    padding: 1.5rem 3rem
+    display: flex
+    align-items: center
+    gap: 1rem
+    border: 1px solid var(--Grays-Gray-4, #D1D1D6)
+    box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-100) var(--sds-color-black-100) var(--sds-size-depth-0) var(--sds-size-depth-400) var(--sds-size-depth-800) var(--sds-size-depth-negative-100) var(--sds-color-black-200)
+    border-radius: 1rem
+    transition: .3s
+    h2
+      font-size: 2rem
+    &.active
+      border-bottom: 3px solid #2D60FF
+      border-left: none
+      border-right: none
+      border-top: none
+      border-radius: 0
+      h2
+        color: #2D60FF
+    &__image
+      padding: 1rem
+      border-radius: 1.7rem

@@ -1,0 +1,23 @@
+.box {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 40rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .box {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 35rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/*# sourceMappingURL=box.module.css.map */

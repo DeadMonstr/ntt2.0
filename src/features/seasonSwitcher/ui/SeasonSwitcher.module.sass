@@ -1,0 +1,31 @@
+
+
+.switcher
+  &__title
+    cursor: pointer
+  &__icon
+    display: none
+  &__popup
+    transition: .4s
+    z-index: -100
+    top: 10%
+    visibility: hidden
+    opacity: 0
+    &.active
+      opacity: 1
+      visibility: visible
+      top: 4.5rem
+      z-index: 100 !important
+
+@media (max-width: 430px)
+  .switcher
+    position: relative
+    &__icon
+      display: flex
+      font-size: 2rem
+    &__popup
+      width: max-content
+      left: -3.6rem
+      
+
+
