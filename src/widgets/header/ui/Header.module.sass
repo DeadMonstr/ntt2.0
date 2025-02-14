@@ -1,20 +1,34 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+15&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
 @import "app/styles/abstracts/variables"
 
 .header
   width: 100%
   height: $appHeader-height
-  background-color: white
-  border-radius: 8px
+  background-color: rgba(0, 74, 173, 1)
+  //border-radius: 8px
   display: flex
   align-items: center
-  padding: 0 60px
+  padding: 0 40px
   justify-content: space-between
   position: relative
-  .container
+
+  &__userInfo
     display: flex
     align-items: center
     gap: 2rem
+    color: #FFFFFF
+    font-family: "Inter", serif
+    font-optical-sizing: auto
+    font-weight: 500
+    font-size: 1.2rem
+    font-style: normal
+    &_img
+      width: 5rem
+      height: 5rem
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
 
 @media (max-width: 1024px)
   .header

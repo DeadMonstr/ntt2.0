@@ -77,7 +77,8 @@ export const SeasonSwitcher = ({active, setActive}) => {
             // extraClass={classNames(cls.switcher__popup, {
             //     [cls.active]: active === "season"
             // })}
-            options={isMobile ? telOptionsSeason : years.map(item => ({...item, title: item.date}))}
+            options={telOptionsSeason}
+            // options={isMobile ? telOptionsSeason : years.map(item => ({...item, title: item.date}))}
         />
     );
 };

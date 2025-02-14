@@ -21,7 +21,7 @@ export const MenuBar = () => {
 
     const renderMenuList = useCallback(() => {
         return menuConfig?.map(item => {
-            if (item.roles?.includes(userRole?.toLowerCase())) {
+            // if (item.roles?.includes(userRole?.toLowerCase())) {
 
 
                 if (item?.isMultiLink) {
@@ -86,7 +86,7 @@ export const MenuBar = () => {
                         {item?.isOrganization ? userOrganizationName : item.label}
                     </NavLink>
                 )
-            }
+            // }
         })
     }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole  ,menuConfig])
 
