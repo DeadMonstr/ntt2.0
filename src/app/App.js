@@ -16,9 +16,11 @@ function App() {
         //     {/*<ApplicationPage/>*/}
         //   <DashboardPage/>
         // </div>
-        <div>
-            <AppRouter/>
-        </div>
+
+
+
+        <AppRouter/>
+
     );
 }
 

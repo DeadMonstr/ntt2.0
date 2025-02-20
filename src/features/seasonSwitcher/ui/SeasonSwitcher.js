@@ -15,13 +15,16 @@ import {getAcademicYears} from "entities/oftenUsed/model/selector/oftenUsedSelec
 
 const telOptionsSeason = [
     {
-        title: "21-22"
+        id: 1,
+        title: "2024-2025"
     },
     {
-        title: "22-23"
+        id: 2,
+        title: "2025-2026"
     },
     {
-        title: "24-25"
+        id: 3,
+        title: "2026-2027"
     }
 ]
 
@@ -41,9 +44,8 @@ export const SeasonSwitcher = ({active, setActive}) => {
 
     useEffect(() => {
         if (years.length) {
-            dispatch(fetchCurrentSeason(years.filter(item => item.current_year)[0]))
+            dispatch(fetchCurrentSeason(years.filter(item => item.current_year)[0].title))
         }
-
     }, [years])
 
     const onChange = (data) => {
@@ -51,35 +53,40 @@ export const SeasonSwitcher = ({active, setActive}) => {
     }
     const onToggle = () => setActive(active === "season" ? "" : "season")
 
-
+    console.log(currentYear)
     return (
-        <Popup
-            trigger={
-                <div className={cls.switcher}>
-                    <h1
-                        className={cls.switcher__title}
-                        onClick={onToggle}
-                    >
-                        Mavsumni o'zgartirish
-                    </h1>
+        <div className={cls.switcher}>
+            <h2 className={cls.subtitle}>Mavsumni o'zgartirish</h2>
+            <Popup
+                extraClass={cls.switcher__popup}
+                trigger={
+                    <>
+                        <h1
+                            className={cls.switcher__title}
+                            onClick={onToggle}
+                        >
+                            Qabul: {currentYear?.title}
+                        </h1>
 
-                    <i
-                        onClick={onToggle}
-                        className={classNames(
-                            "fas " + (active === "season" ? "fa-chevron-up" : "fa-chevron-down"),
-                            cls.switcher__icon
-                        )}
-                    />
-                </div>
-            }
-            defaultActive={currentYear}
-            onChange={onChange}
-            // extraClass={classNames(cls.switcher__popup, {
-            //     [cls.active]: active === "season"
-            // })}
-            options={telOptionsSeason}
-            // options={isMobile ? telOptionsSeason : years.map(item => ({...item, title: item.date}))}
-        />
+                        <i
+                            onClick={onToggle}
+                            className={classNames(
+                                "fas " + (active === "season" ? "fa-chevron-up" : "fa-chevron-down"),
+                                cls.switcher__icon
+                            )}
+                        />
+                    </>
+                }
+                defaultActive={currentYear}
+                onChange={onChange}
+                // extraClass={classNames(cls.switcher__popup, {
+                //     [cls.active]: active === "season"
+                // })}
+                options={telOptionsSeason}
+                // options={isMobile ? telOptionsSeason : years.map(item => ({...item, title: item.date}))}
+            />
+        </div>
+
     );
 };
 
