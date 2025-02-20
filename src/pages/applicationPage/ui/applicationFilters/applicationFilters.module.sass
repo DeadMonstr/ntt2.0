@@ -2,36 +2,26 @@
   align-self: flex-end
   display: flex
   gap: 1rem
-  &__search
-    background: #FFFFFF
-    border-radius: .8rem
-    display: flex
-    align-items: center
-    gap: 1rem
-    padding: 0 2rem
-    i
-      color: #D6D6D6
-      font-size: 1.8rem
+  padding: 2rem
+  &__button
+    width: 10rem
+    height: 4rem
+    font-size: 1.5rem
+    background-color: rgba(243, 243, 243, 1)
+    color: black
+    border: 1px solid rgba(127, 127, 127, 0.4)
+
+
   &__select
     display: flex
+    flex-direction: column
     gap: 2rem
-    align-items: center
+    padding: 2rem 0
     select
-      width: 15rem
-  &__input
-    //color: #D6D6D6
-    border: none
-    font-size: 1.6rem
-    outline: none
-    &::placeholder
-      color: rgba(214, 214, 214, 1)
-  &__settings
-    background: white
-    border-radius: .8rem
-    color: #D6D6D6
-    padding: 1rem 2rem
-    i
-      font-size: 2.4rem
+      width: 40rem
+      border: 1px solid
+
+
 
 @media (max-width: 430px)
   .filter

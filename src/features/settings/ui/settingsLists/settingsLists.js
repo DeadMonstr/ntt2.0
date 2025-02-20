@@ -21,17 +21,20 @@ export const SettingsLists = ({data, activeFilter}) => {
     const renderData = () => {
         return data?.map(item => (
             <div className={cls.box}>
-                <div className={cls.box__title}>
-                    {item?.name}
-                    <i className={`fa fa-pen ${cls.pen}`} onClick={() => {
-                        setActiveEdit(true)
-                        setActiveItem(item)
-                    }}/>
-                </div>
-                <div className={cls.box__desc}>
-                    {item?.desc}
+                <div style={{display: 'flex' , flexDirection: 'column'}}>
+                    <div className={cls.box__title}>
+                        {item?.name}
+
+                    </div>
+                    <div className={cls.box__desc}>
+                        {item?.desc}
+                    </div>
                 </div>
 
+                <i className={`fa-regular fa-pen-to-square ${cls.pen}`} onClick={() => {
+                    setActiveEdit(true)
+                    setActiveItem(item)
+                }}/>
             </div>
         ))
     }

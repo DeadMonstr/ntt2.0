@@ -44,12 +44,12 @@ export const OrganizationTypesPage = () => {
                         selectType={selectType}
                     />
                 </div>
-                <Pagination
+                {cards.length >= pageSize && <Pagination
                     totalCount={cards?.count}
                     onPageChange={setCurrentPage}
                     currentPage={currentPage}
                     pageSize={pageSize}
-                />
+                />}
             </div>
         </Box>
     );

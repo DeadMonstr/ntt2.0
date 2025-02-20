@@ -4,18 +4,17 @@ import {
     getSettingsData, getSettingsDegree,
     getSettingsDirection,
     getSettingsHeader
-} from "../../../entities/settings/model/settingsSelector";
-
+} from "entities/settings/model/settingsSelector";
 
 
 import {useEffect, useMemo, useState} from "react";
-import {SettingsFilter, SettingsHeader, SettingsLists} from "../../../features/settings";
+import {SettingsFilter, SettingsHeader, SettingsLists} from "features/settings";
 import {
     fetchOrganizationList,
     fetchOrganizationTypeDegree,
     fetchOrganizationTypeList
-} from "../../../entities/settings/model/settingsThunk";
-import {Pagination} from "../../../features/pagination";
+} from "entities/settings/model/settingsThunk";
+import {Pagination} from "features/pagination";
 
 const filter = [
     {name: "Yo’nalishlar", id: 1},
@@ -24,7 +23,7 @@ const filter = [
 
 export const SettingsPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const pageSize = useMemo(() => 9, [])
+    const pageSize = useMemo(() => 10, [])
     const settingsDirection = useSelector(getSettingsDirection)
     const settingsDegree = useSelector(getSettingsDegree)
     const settingsHeader = useSelector(getSettingsHeader)
@@ -50,23 +49,28 @@ export const SettingsPage = () => {
         <div className={cls.settings}>
 
 
-            <SettingsHeader active={active} setActive={setActive} settingsHeader={settingsHeader}/>
+            {/*<SettingsHeader/>*/}
 
-            <SettingsFilter active={active} activeFilter={activeFilter} setActiveFilter={setActiveFilter}
+            <SettingsFilter filterData={settingsHeader} active={active} setActive={setActive}
+                            activeFilter={activeFilter} setActiveFilter={setActiveFilter}
                             filterItem={filter}/>
 
 
-            <SettingsLists
+            <div style={{maxHeight: "calc(100vh - 33rem)", overflow: "auto"}}>
+                <SettingsLists
 
-                activeFilter={activeFilter}
-                data={activeFilter === 1 ? settingsDirection?.results : settingsDegree?.results}/>
+                    activeFilter={activeFilter}
+                    data={activeFilter === 1 ? settingsDirection?.results : settingsDegree?.results}/>
+            </div>
 
-            <Pagination
-                totalCount={activeFilter === 1 ? settingsDirection?.count : settingsDegree?.count}
-                onPageChange={setCurrentPage}
-                currentPage={currentPage}
-                pageSize={pageSize}
-            />
+            {
+                settingsDirection?.results?.length > 8 ? <Pagination
+                    totalCount={activeFilter === 1 ? settingsDirection?.count : settingsDegree?.count}
+                    onPageChange={setCurrentPage}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
+                /> : null
+            }
         </div>
     );
 };

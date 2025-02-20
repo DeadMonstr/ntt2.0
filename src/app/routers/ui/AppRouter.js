@@ -23,7 +23,7 @@ export const AppRouter = () => {
                 />
 
                 <Route
-                    element={<RequireAuth/>}
+                    // element={<RequireAuth/>}
                 >
                     <Route
                         path={"admin/*"}

@@ -17,7 +17,7 @@ export const fetchOrganizationTypeList = createAsyncThunk(
     async ({id, currentPage, pageSize}) => {
         const {request} = useHttp()
 
-        return await request(`${API_URL}organization_fields/get/organization-fields/${id}/?offset=${(currentPage - 1) * 9}&limit=${pageSize}`, "GET", null, headers())
+        return await request(`${API_URL}organization_fields/get/organization-fields/${id}/?offset=${(currentPage - 1) * 10}&limit=${pageSize}`, "GET", null, headers())
     }
 )
 
