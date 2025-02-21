@@ -22,12 +22,7 @@ export const Header = () => {
     return (
         <div className={cls.header}>
 
-            <div className={cls.header__userInfo}>
-                <div className={cls.header__userInfo_img}>
-                    <img className={cls.container__img} src={userLogo} alt="Logo"/>
-                </div>
-                <h2>Shahzod Sobirjonov</h2>
-            </div>
+
             <div>
                 <div>
                     <SeasonSwitcher setActive={setActive} active={active}/>

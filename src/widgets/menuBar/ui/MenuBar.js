@@ -4,12 +4,11 @@ import {isMobile} from "react-device-detect";
 import {NavLink} from "react-router-dom";
 
 
-
-
 import cls from "./MenuBar.module.sass"
 import {useSelector} from "react-redux";
 import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
 import {menuConfig} from "../model/config/menuConfig";
+import userLogo from "shared/assets/images/userLogo.svg";
 
 export const MenuBar = () => {
 
@@ -24,100 +23,43 @@ export const MenuBar = () => {
             // if (item.roles?.includes(userRole?.toLowerCase())) {
 
 
-                if (item?.isMultiLink) {
-                    return (
-                        <details
-                            open={activeMultiLink}
-                            className={classNames(cls.menubar__multiItem)}
-                        >
-                            <summary
-                                className={cls.menubar__title}
-                                onClick={() => setActiveMultiLink(!activeMultiLink)}
-                            >
-                                <NavLink
-                                    key={item.to}
-                                    className={
-                                        ({isActive}) =>
-                                            isActive ? classNames(cls.menubar__item, cls.active) : cls.menubar__item
-                                    }
-                                    to={item.to}
-                                >
-                                    <i className={classNames(item.icon)}/>
-                                    {item.label}
-                                </NavLink>
-                                <i className="fas fa-chevron-down"/>
-                            </summary>
-                            <div
-                                className={classNames(cls.menubar__wrapper)}
-                            >
-                                {
-                                    item?.types?.map(link => {
-                                        return (
-                                            <NavLink
-                                                key={link.to}
-                                                className={
-                                                    ({isActive}) =>
-                                                        isActive ? classNames(cls.menubar__fork, cls.active) : cls.menubar__fork
-                                                }
-                                                to={`${item.to}/${link.to}`}
-                                            >
-                                                {/*<i className={classNames(item.icon)}/>*/}
-                                                {link.label}
-                                            </NavLink>
-                                        )
-                                    })
-                                }
-                            </div>
-                        </details>
-                    )
-                }
+            return (
+                <NavLink
+                    onClick={() => setActiveMultiLink(false)}
+                    key={item.to}
+                    className={
+                        ({isActive}) =>
+                            isActive ? classNames(cls.options__item, cls.active) : cls.options__item
+                    }
+                    to={item?.isOrganization ? `${item.to}/${userOrganizationId}` : item.to}
+                >
+                    {item.icon}
 
-                return (
-                    <NavLink
-                        onClick={() => setActiveMultiLink(false)}
-                        key={item.to}
-                        className={
-                            ({isActive}) =>
-                                isActive ? classNames(cls.menubar__item, cls.active) : cls.menubar__item
-                        }
-                        to={item?.isOrganization ? `${item.to}/${userOrganizationId}` : item.to}
-                    >
-                        {item.icon ? <i className={classNames(item.icon)}/> : <img src={item.img.organization} alt=""/>}
-                        {item?.isOrganization ? userOrganizationName : item.label}
-                    </NavLink>
-                )
+                    {/*{item.icon ? <i className={classNames(item.icon)}/> : <img src={item.img.organization} alt=""/>}*/}
+                    <h1>{item?.isOrganization ? userOrganizationName : item.label}</h1>
+
+                </NavLink>
+            )
             // }
         })
-    }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole  ,menuConfig])
+    }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole, menuConfig])
 
     return (
         <>
-            <i
-                onClick={() => setActiveMenu(true)}
-                className={classNames("fas fa-bars", cls.bars)}
-            />
-            <div
-                className={classNames(cls.menubar, "close", {
-                    [cls.activeOpe]: activeMenu
-                })}
-                onClick={(e) => {
-                    console.log(e?.target?.classList.value)
-                    if (e?.target?.classList && e?.target?.classList?.value?.includes("close")) {
-                        setActiveMenu(false)
-                    }
-                }}
-            >
-                {
-                    isMobile ? <div
-                        className={classNames(cls.menubar__telMenu, {
-                            [cls.activeOpe]: activeMenu
-                        })}
-                    >
-                        {renderMenuList()}
-                    </div> : renderMenuList()
-                }
-            </div>
+            <div className={cls.menubar}>
+                <div className={cls.profile}>
 
+                    <img className={cls.profile__img} src={userLogo} alt="Logo"/>
+
+                    <h2>Shahzod Sobirjonov</h2>
+                </div>
+                <div className={cls.options}>
+                    {
+                        renderMenuList()
+                    }
+                </div>
+
+            </div>
         </>
     );
 };

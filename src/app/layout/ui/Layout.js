@@ -33,13 +33,13 @@ export const Layout = ({back}) => {
             <Alert/>
             <div className={cls.layout}>
 
-                <Header/>
-
+                {!isMobile &&
+                    <MenuBar/>
+                }
                 <main>
-                    {!isMobile &&
-                        <MenuBar/>
-                    }
 
+
+                    <Header/>
 
                     <div className={cls.page}>
 
