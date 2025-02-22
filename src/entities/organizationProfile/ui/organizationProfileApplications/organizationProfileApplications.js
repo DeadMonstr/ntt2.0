@@ -68,7 +68,6 @@ export const OrganizationProfileApplications = memo(() => {
     return (
         <div className={cls.applications}>
             <div className={cls.applications__header}>
-                <h2 className={cls.applications__title}>Arizalar</h2>
                 <Select onChangeOption={setSelectedDegree} options={degree} extraClass={cls.applications__select}
                         titleOption={"Bakalavriat"}/>
                 <Select onChangeOption={setSelectedFields} options={fields} extraClass={cls.applications__select}

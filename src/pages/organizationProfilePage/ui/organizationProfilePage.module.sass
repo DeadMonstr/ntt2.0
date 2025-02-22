@@ -1,3 +1,6 @@
+@import "app/styles/abstracts/mixins"
+@import "app/styles/abstracts/variables"
+
 .organization
   display: flex
   flex-direction: column
@@ -8,10 +11,28 @@
   &__container
     display: flex
     gap: 2.8rem
-    //.left
-      width: 30%
+    .left
+      border: 1px solid rgba(209, 209, 214, 1)
+      border-radius: 10px
+      padding: 1rem
+      //width: 30%
 
     .right
       width: 0rem
       flex: 1
 
+.announcementsHeader
+  display: flex
+  justify-content: space-between
+  align-items: center
+  &__inner
+    padding: 2rem
+    font-size: 1.8rem
+    color: $main-color
+  &__icon
+    align-self: flex-end
+    width: fit-content
+    border: 1px solid rgba(0, 74, 173, 1)
+
+    border-radius: 50%
+    @include btn-active

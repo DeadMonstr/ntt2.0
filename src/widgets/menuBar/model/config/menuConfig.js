@@ -19,8 +19,8 @@ export const menuConfig = [
         roles: [ROLES.admin , ROLES.organization_admin]
     },
     {
-        to: "courseApplications",
-        label: "Kurs arizalari",
+        to: "organizationTypes",
+        label: "Organizations",
         icon: <CourseApplications/>,
         roles: [ROLES.admin]
     },

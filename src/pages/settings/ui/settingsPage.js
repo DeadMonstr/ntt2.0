@@ -64,7 +64,7 @@ export const SettingsPage = () => {
             </div>
 
             {
-                settingsDirection?.results?.length > 8 ? <Pagination
+                settingsDirection?.results?.length > 2 ? <Pagination
                     totalCount={activeFilter === 1 ? settingsDirection?.count : settingsDegree?.count}
                     onPageChange={setCurrentPage}
                     currentPage={currentPage}

@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
+.main
+  padding: 5rem 0
+  &__container
+    display: flex
+    gap: 2rem
+    justify-content: space-between
+    //padding: 0 4rem
+    flex-wrap: wrap
+    &_infos
+      padding-left: 3rem
+      width: 60rem
+      display: flex
+      gap: 3rem
+      flex-direction: column
+      align-self: flex-start
+      &_title
+        h2
+          color: #004AAD
+          font-size: 4rem
+          font-family: "Funnel Sans", serif
+          font-optical-sizing: auto
+          font-weight: bold
+          font-style: normal
+        span
+          font-size: 4.8rem
+          color: #1A4048
+          font-family: "Funnel Sans", serif
+          font-optical-sizing: auto
+          font-weight: bold
+          font-style: normal
+      &_list
+        font-size: 2.4rem
+        font-family: "Funnel Sans", serif
+        font-optical-sizing: auto
+        //font-weight: bold
+        color: #171D1C
+        list-style: none
+        li
+          display: flex
+          gap: 2rem
+          align-items: center
+      &_contact
+        display: flex
+        flex-direction: column
+        gap: 2rem
+        &_btn
+          width: 90%
+          height: 6rem
+
+          display: flex
+          gap: 2rem
+          border-radius: 8px
+        &_text
+          box-shadow: 0 0 2px 0
+          width: 90%
+
+          display: flex
+          align-items: center
+          justify-content: space-between
+          padding: 1.6rem
+          border-radius: 10px
+
+    &_aside
+      width: 50%
+      height: 60rem
+      img
+        width: 100%
+        height: 100%

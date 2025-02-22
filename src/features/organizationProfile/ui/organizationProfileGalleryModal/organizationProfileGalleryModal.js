@@ -14,7 +14,7 @@ import {useDropzone} from "react-dropzone";
 import {API_URL, useHttp} from "../../../../shared/api/base";
 import {useParams} from "react-router";
 
-export const OrganizationProfileGalleryModal = memo(({userRole}) => {
+export const OrganizationProfileGalleryModal = memo(({userRole  , addActiveModal  ,setAddActiveModal}) => {
 
     const {id} = useParams()
     useEffect(() => {
@@ -25,7 +25,6 @@ export const OrganizationProfileGalleryModal = memo(({userRole}) => {
     const formData = new FormData()
     const dispatch = useDispatch()
     const [activeModal, setActiveModal] = useState(false)
-    const [addActiveModal, setAddActiveModal] = useState(false)
     const [newImageFile, setNewImageFile] = useState(null)
     const {getRootProps, getInputProps} = useDropzone({
         onDrop: (acceptedFiles) => {
