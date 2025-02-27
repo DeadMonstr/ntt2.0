@@ -6,6 +6,7 @@ import {Button} from "shared/ui/button/button";
 import {Select} from "shared/ui/select";
 import {Input} from "shared/ui/input";
 import {Modal} from "shared/ui/modal";
+import {useForm} from "react-hook-form";
 
 export const SubjectsTests = () => {
 
@@ -17,7 +18,7 @@ export const SubjectsTests = () => {
     const [selectedSubject,setSelectedSubject] = useState(null)
 
 
-
+    const {register} = useForm()
 
 
 
@@ -46,7 +47,11 @@ export const SubjectsTests = () => {
 
 
             <Modal active={activeAdd} setActive={setActiveAdd}>
-
+                <Input
+                    register={register}
+                    placeholder={"Name"}
+                    onChange={}
+                />
             </Modal>
 
         </div>
