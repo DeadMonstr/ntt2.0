@@ -6,8 +6,9 @@ import {Layout} from "app/layout";
 import {routersConfig} from "../config/routersConfig";
 
 import "app/styles/index.sass"
-import {Login} from "../../../pages/login";
+import {Login} from "pages/login";
 import {RequireAuth} from "./RequireAuth";
+import {Home} from "pages/homePage";
 
 
 export const AppRouter = () => {
@@ -17,13 +18,15 @@ export const AppRouter = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
+                <Route path={"/*"} element={<Home/>}/>
+
                 <Route
                     path={"/login"}
                     element={<Login/>}
                 />
 
                 <Route
-                    element={<RequireAuth/>}
+                    // element={<RequireAuth/>}
                 >
                     <Route
                         path={"admin/*"}
@@ -49,10 +52,10 @@ export const AppRouter = () => {
                 </Route>
 
 
-                <Route
-                    index
-                    element={<Navigate to={"login"}/>}
-                />
+                {/*<Route*/}
+                {/*    index*/}
+                {/*    element={<Navigate to={"/"}/>}*/}
+                {/*/>*/}
 
             </>
         )

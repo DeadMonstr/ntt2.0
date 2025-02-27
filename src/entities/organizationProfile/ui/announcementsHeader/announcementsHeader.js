@@ -38,7 +38,7 @@ export const AnnouncementsHeader = memo(({userRole,setIsChange}) => {
 
     useEffect(() => {
         if (org?.id)
-        dispatch(fetchOrganizationProfileDegrees(org.organization_type.id))
+        dispatch(fetchOrganizationProfileDegrees(org.organization_type?.id))
     },[org])
 
     useEffect(() => {
@@ -64,16 +64,16 @@ export const AnnouncementsHeader = memo(({userRole,setIsChange}) => {
 
     return (
         <div className={cls.announcementsHeader}>
-            <h1 className={cls.announcementsHeader__title}>E’lonlar</h1>
-            <div className={cls.announcementsHeader__icon}>
-                {userRole&&<i
-                    onClick={onNavigate}
-                    className={classNames(
-                        "fas fa-plus",
-                        cls.announcementsHeader__inner
-                    )}
-                />}
-            </div>
+            {/*<h1 className={cls.announcementsHeader__title}>E’lonlar</h1>*/}
+            {/*<div className={cls.announcementsHeader__icon}>*/}
+            {/*    {userRole&&<i*/}
+            {/*        onClick={onNavigate}*/}
+            {/*        className={classNames(*/}
+            {/*            "fas fa-plus",*/}
+            {/*            cls.announcementsHeader__inner*/}
+            {/*        )}*/}
+            {/*    />}*/}
+            {/*</div>*/}
             <div className={cls.announcementsHeader__menu}>
                 {
                     degrees.map(item => {

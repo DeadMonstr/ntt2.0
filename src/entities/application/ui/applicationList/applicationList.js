@@ -23,7 +23,7 @@ export const ApplicationList = memo(({list = []}) => {
 
 
 
-    console.log(list)
+
 
     return (
         <div className={cls.applicationList}>

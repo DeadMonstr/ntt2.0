@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&family=Funnel+Sans:ital,wght@0,300..800;1,300..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
+.profile
+  padding: 10rem 0 5rem 0
+  display: flex
+  flex-direction: column
+  gap: 2rem
+
+
+  &__container
+    display: flex
+    gap: 4rem
+    //justify-content: center
+    &_left
+      width: 70rem
+      object-fit: cover
+      height: fit-content
+      box-shadow: 0 16px 32px -4px rgba(12, 12, 13, 0.1), 0 4px 4px -4px rgba(12, 12, 13, 0.05)
+      position: relative
+
+      &_img
+        width: 100%
+
+        img
+          width: 100%
+
+      &_info
+        padding: 2rem
+
+        text-align: center
+        font-size: 2.4rem
+        font-family: "Funnel Sans", serif
+        font-optical-sizing: auto
+        font-style: normal
+        position: relative
+        font-weight: bold
+
+    &_right
+      display: flex
+      flex-direction: column
+      gap: 2rem
+
+      &_header
+        background-color: #004AAD
+
+        width: 14rem
+        color: #FFFFFF
+        border-radius: 7px
+        padding: 1rem
+        text-align: center
+        font-size: 1.6rem
+        font-family: "Funnel Sans", serif
+        font-optical-sizing: auto
+        font-style: normal
+        font-weight: bold
+
+      &_info
+        display: flex
+        flex-direction: column
+        gap: 2rem
+
+        ul, p
+          list-style: none
+          font-size: 2rem
+          font-family: "Funnel Sans", serif
+          font-optical-sizing: auto
+          font-style: normal
+          font-weight: 500
+
+          li
+            color: #222222
+
+  &__footer
+    display: flex
+    flex-direction: column
+    gap: 2rem
+
+    &_title
+      font-size: 2.4rem
+      font-family: "Funnel Sans", serif
+      font-optical-sizing: auto
+      font-style: normal
+      font-weight: bold
+      text-transform: uppercase
+
+    &_container
+      display: flex
+      gap: 2rem
+      flex-wrap: wrap
+
+
+      &_box
+        width: 55rem
+        box-shadow: 0 16px 32px -4px rgba(12, 12, 13, 0.1), 0 4px 4px -4px rgba(12, 12, 13, 0.05)
+        border-radius: 7px
+        padding: 2rem
+        display: flex
+        flex-direction: column
+        gap: 1rem
+        border: 1px solid #D1D1D6
+
+        &_header
+          display: flex
+          gap: 1rem
+          align-items: center
+
+        & > ul
+          display: grid
+          list-style: none
+          gap: 2rem 0
+          grid-template-columns: repeat(3, 12rem)
+
+          li
+            color: #8999AB
+            display: flex
+            flex-direction: column
+            gap: .4rem
+            font-size: 1.2rem
+
+            span
+              color: black
+
+        &_footer
+          & > h2
+            margin: .5rem 0
+            color: #004AAD
+
+          & > p
+            font-size: 1.4rem
+
+@media (max-width: 1340px)
+  .profile
+    &__container
+      &_left
+        width: 60%
+
+        &_info
+          font-size: 2rem
+
+      &_right
+        width: 50%
+
+        &_info
+          ul, p
+            font-size: 1.6rem
+
+@media (max-width: 1180px)
+  .profile
+    &__footer
+      &_container
+        &_box
+          width: 40rem
+
+@media (max-width: 950px)
+  .profile
+
+    &__container
+      flex-direction: column
+
+      &_left
+        width: 100%
+
+        &_info
+          position: absolute
+          width: fit-content
+          background-color: #FFFFFF
+          left: 50%
+          transform: translateX(-50%)
+          bottom: 0
+
+          padding: 1rem
+          font-size: 1.4rem
+
+      &_right
+        width: 100%
+
+        &_info
+          ul, p
+            font-size: 1.6rem
+
+@media (max-width: 880px)
+  .profile
+    &__container
+      &_right
+        &_info
+          ul, p
+            font-size: 1.4rem
+
+    &__footer
+      &_container
+        &_box
+          width: 35rem
+
+          & > ul
+            grid-template-columns: repeat(3, 1.2fr)
+
+          &_footer
+
+            & > p
+              font-size: 1rem
+
+@media (max-width: 780px)
+  .profile
+    height: 90vh
+    overflow: auto
+    &__footer
+      &_container
+        &_box
+          width: 30rem
+
+          &_header
+            img
+              width: 4rem
+              height: 4rem
+              object-fit: cover
+
+            & > h2
+              font-size: 1.3rem
+
+@media (max-width: 680px)
+  .profile
+    height: 80vh
+    overflow: auto
+
+    &__footer
+      &_container
+        &_box
+          width: 100%
+
+          &_header
+            img
+              width: 6rem
+              height: 6rem
+              object-fit: cover
+
+            & > h2
+              font-size: 1.6rem
+          &_footer
+            & > p
+              font-size: 1.4rem

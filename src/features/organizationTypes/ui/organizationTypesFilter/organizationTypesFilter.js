@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect} from 'react';
+import  React, {useRef, useState, useEffect} from 'react';
 import cls from "./organizationTypesFilter.module.sass";
 import {Button} from "shared/ui/button/button";
 import mapIcon from 'shared/assets/icons/map.png'
@@ -18,7 +18,7 @@ import {Select} from "../../../../shared/ui/select";
 import {ConfirmModal} from "../../../../shared/ui/confirmModal";
 import {Textarea} from "../../../../shared/ui/textArea";
 import {useNavigate} from "react-router";
-
+import logo from "shared/assets/logo/logo.png"
 
 export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelectType, selectType}) => {
 
@@ -75,20 +75,6 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     //     }
     // }, [selectType, selectRegion])
 
-    useEffect(() => {
-        const updateConstraints = () => {
-            const containerWidth = containerRef.current.offsetWidth;
-            const childWidth = containerRef.current.scrollWidth;
-            const constraint = containerWidth - childWidth;
-            setConstraint(constraint);
-        };
-
-        updateConstraints();
-        window.addEventListener('resize', updateConstraints);
-        return () => window.removeEventListener('resize', updateConstraints);
-
-
-    }, []);
 
 
     const renderItem = () => {
@@ -112,7 +98,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const onCreate = (data) => {
         const res = {
             ...data,
-            region: +changeRegion,
+            region: +selectRegion,
             organization_type: changeType
         }
         request(`${API_URL}organizations/organization/crud/create/`, "POST", JSON.stringify(res), headers())
@@ -151,54 +137,78 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     }
 
 
+    console.log(cards , "cards")
+    let number = "13213213"
+
     return (
         <div className={cls.box}>
 
             <div className={cls.box__buttonPanel}>
-                <h1>Tashkilot turlari</h1>
+                <h1>Tashkilotlar</h1>
                 <div className={cls.box__buttonPanel__container}>
                     <div className={cls.box__buttonPanel__wrapper}>
-                        <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion} options={region}/>
                         <Select defaultValue={selectType} title={"Tashkilot turlari"} onChangeOption={setSelectType} options={filter}/>
+                        <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion} options={region}/>
+
                     </div>
                     <Button onClick={() => setPortal(!portal)} extraClass={cls.box__buttonPanel__container__btn}>
                         <i className={"fa fa-plus"}/>
+                        Yangi taskilot qo'shish
+
                     </Button>
 
                 </div>
             </div>
-            <div className={cls.box__spinnerContainer} ref={containerRef}>
+            <div className={cls.box__container}>
+                {cards?.results?.map(card => (
                 <div
-                    // drag="x"
-                    // dragConstraints={{right: 0, left: constraint}}
-                    className={cls.box__spinnerContainer__spinBox}
+                    className={cls.box__item}
+                    // key={card.id}
                 >
-                    {cards?.results?.map(card => (
+                    <div className={cls.box__item_header}>
                         <div
-                            className={cls.box__spinnerContainer__spinBox__spinner} key={card.id}
-                        >
-                            <img
-                                onClick={() => navigate(`../organizationProfile/${card.id}`)}
-                                src={asset}
-                                alt=""
-                            />
-                            <div className={cls.box__spinnerContainer__spinBox__spinner__innerBox}>
-                                <div className={cls.box__item}>
-                                    <h1>{card?.name}</h1>
-                                    <i onClick={() => {
-                                        setActiveEdit(true)
-                                        setActiveItem(card)
-                                    }} className={"fa fa-pen"}/>
-                                </div>
-                                <h2>{card?.location}</h2>
-                                <h3>Phone: {card?.phone}</h3>
+                            onClick={() => navigate(`../organizationProfile/${card.id}`)}
 
+                            className={cls.box__item_logo}>
+                            <div className={cls.box__item_logo_img}>
+                                <img
+                                    src={card?.img?.length ? card.img : logo}
+                                    alt=""
+                                />
                             </div>
-                            {/*<h3>{card.title}</h3>*/}
-                            {/*<p>{card.content}</p>*/}
+                            <h2>{card.name.substring(0 , 14)}</h2>
+                            <div className={cls.popupName}>
+                                {card.name}
+                            </div>
                         </div>
-                    ))}
+                        <div className={cls.box__item_request}>
+                            <div className={cls.box__item_request_number}>
+                                {number.substring(0, 4)}
+                                <div className={cls.popup}>
+                                    {number}
+                                </div>
+                            </div>
+                            <h2>Arizalar Soni</h2>
+                        </div>
+                    </div>
+
+                    <div className={cls.box__item_body}>
+                        <div className={cls.box__item_body_info}>
+                            <h2>Location</h2>
+                            <span>{card.region.name}</span>
+                        </div>
+                        <div className={cls.box__item_body_info}>
+                            <h2>Phone</h2>
+                            <span>{card.phone}</span>
+                        </div>
+                        <div className={cls.box__item_body_info}>
+                            <h2>INN</h2>
+                            <span>1234567891011121314</span>
+                        </div>
+                    </div>
+
                 </div>
+                ))}
             </div>
             <Modal extraClass={cls.box__portal} active={portal} setActive={setPortal}>
                 <h1>Add</h1>
@@ -206,9 +216,12 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
                     <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
-                    <Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
+                    {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
+
+                    <Input extraClass={cls.box__portal__form__input} placeholder={`Arizalar soni`}/>
+                    <Input placeholder={`INN`} extraClass={cls.box__portal__form__input}/>
 
                     <Button extraClass={cls.box__portal__form__btn}>Add</Button>
                 </Form>
@@ -218,13 +231,14 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <h1>Add</h1>
                 <Form extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
-                           placeholder={"Name"}/>
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}
-                            defaultValue={changeRegion}/>
-                    <Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}
-                            defaultValue={changeType}/>
+                           placeholder={"Name"} />
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
+                    {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
+
+                    <Input extraClass={cls.box__portal__form__input} placeholder={`Arizalar soni`}/>
+                    <Input placeholder={`INN`} extraClass={cls.box__portal__form__input}/>
 
                     <div style={{display: "flex", gap: "1rem"}}>
                         <Button onClick={handleSubmit(onEdit)} extraClass={cls.box__portal__form__btn}>Edit</Button>
@@ -244,3 +258,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     );
 };
 
+// <i onClick={() => {*/}
+//     {/*    // setActiveEdit(true)*/}
+//     {/*    // // setActiveItem(card)*/}
+//     {/*}} className={"fa fa-pen"}/>

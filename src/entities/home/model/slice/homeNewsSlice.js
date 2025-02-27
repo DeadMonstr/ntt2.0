@@ -1,0 +1,77 @@
+import {createSlice} from "@reduxjs/toolkit";
+
+const initialState = {
+    loading: false,
+    error: false,
+    data: [
+        {id: 1, name: "fdfdsfdf", date: "11-11-1111", descr: "fsfdfsdfdf dfdsfdf "},
+        {id: 1, name: "fdfdsfdf", date: "11-11-1111", descr: "fsfdfsdfdf dfdsfdf "},
+        {id: 1, name: "fdfdsfdf", date: "11-11-1111", descr: "fsfdfsdfdf dfdsfdf "},
+    ],
+    profileItem: [
+        {
+            id: 1,
+            name: "Filologiya va tillarni o’qitish: xitoy tili",
+            lang: "Uz",
+            shift: "Kunduzgi",
+            requirements: "Yunalishlarga mos",
+            pay_sum: "200000",
+            about: "Tadbirkorlik yoki biznes (inglizcha: business– „bandlik“), deb har qanday qonuniy tijorat faoliyatiga aytiladi. Tadbirkorlik bilan shugʻullanuvchi shaxs tadbirkor, "
+        },
+        {
+            id: 1,
+            name: "Filologiya va tillarni o’qitish: xitoy tili",
+            lang: "Uz",
+            shift: "Kunduzgi",
+            requirements: "Yunalishlarga mos",
+            pay_sum: "200000",
+            about: "Tadbirkorlik yoki biznes (inglizcha: business– „bandlik“), deb har qanday qonuniy tijorat faoliyatiga aytiladi. Tadbirkorlik bilan shugʻullanuvchi shaxs tadbirkor, "
+        },
+        {
+            id: 1,
+            name: "Filologiya va tillarni o’qitish: xitoy tili",
+            lang: "Uz",
+            shift: "Kunduzgi",
+            requirements: "Yunalishlarga mos",
+            pay_sum: "200000",
+            about: "Tadbirkorlik yoki biznes (inglizcha: business– „bandlik“), deb har qanday qonuniy tijorat faoliyatiga aytiladi. Tadbirkorlik bilan shugʻullanuvchi shaxs tadbirkor, "
+        },
+        {
+            id: 1,
+            name: "Filologiya va tillarni o’qitish: xitoy tili",
+            lang: "Uz",
+            shift: "Kunduzgi",
+            requirements: "Yunalishlarga mos",
+            pay_sum: "200000",
+            about: "Tadbirkorlik yoki biznes (inglizcha: business– „bandlik“), deb har qanday qonuniy tijorat faoliyatiga aytiladi. Tadbirkorlik bilan shugʻullanuvchi shaxs tadbirkor, "
+        },
+    ]
+
+}
+
+
+const homeNewsSlice = createSlice({
+    name: "homeNewsSlice",
+    initialState,
+    reducers: {
+        onAddHomeNews: (state, action) => {
+            state.data = [...state.data, action.payload]
+        },
+        onEditHomeNews: (state, action) => {
+            state.data = state.data.map(item => {
+                if (item.id === action.payload.id) {
+                    return action.payload.data
+                }
+                return item
+            })
+        },
+        onDeleteHomeNews: (state, action) => {
+            state.data = state.data.filter(item => item.id !== action.payload)
+        }
+    },
+    extraReducers: builder => {
+    }
+})
+
+export const {onAddHomeNews, onEditHomeNews, onDeleteHomeNews} = homeNewsSlice.actions
+export default homeNewsSlice.reducer

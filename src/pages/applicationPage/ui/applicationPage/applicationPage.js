@@ -1,9 +1,9 @@
 
-import {ApplicationList} from "entities/application";
+import {ApplicationHeader, ApplicationList} from "entities/application";
 
-import cls from "pages/applicationPage/ui/applicationPage/applicationPage.module.sass";
+import cls from "./applicationPage.module.sass";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {fetchApplicationData} from "pages/applicationPage/model/thunk/applicationThunk";
 import {ApplicationFilters} from "../applicationFilters/applicationFilters";
 import {
@@ -14,6 +14,19 @@ import {
     applicationShiftSelectors,
     applicationTypeSelectors
 } from "../../model/selectors/applicationSelectors";
+import {Navigate, Outlet, Route, Routes} from "react-router";
+
+
+
+const listData = [
+
+    {name: "allRequest", label: "Hamma arizalar"},
+    {name: "newRequest", label: "Yangi arizalar"},
+    {name: "acceptRequest", label: "Qabul qilinganlar"},
+    {name: "rejectRequest", label: "Rad etilganlar"},
+    {name: "returnRequest", label: "Tahrirlashga qaytarilganlar"},
+    {name: "invitedRequest", label: "Imtihonga chaqirilganlar"}
+]
 
 export const ApplicationPage = () => {
 
@@ -23,6 +36,7 @@ export const ApplicationPage = () => {
     const requests = useSelector(applicationRequestsSelectors)
 
 
+    const [active , setActive] = useState(listData[0].name)
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
     const degree = useSelector(applicationDegreeSelectors)
@@ -47,11 +61,27 @@ export const ApplicationPage = () => {
 
     return (
         <div className={cls.applicationPage}>
+            <ApplicationHeader data={listData} active={active} setActive={setActive}/>
+
             <div className={cls.applicationPage__header}>
-                <h1 className={cls.applicationPage__title}>Barcha arizalar</h1>
+                <h1 className={cls.applicationPage__title}>{listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}</h1>
                 <ApplicationFilters/>
+
+
             </div>
-            <ApplicationList list={requests?.results || []}/>
+            <Outlet/>
+            <Routes>
+                <Route
+                    index
+                    element={<Navigate to={active}/>}
+                />
+                <Route
+                    path={"allRequest"}
+                    element={
+                        <ApplicationList list={requests?.results || []}/>
+                    }
+                />
+            </Routes>
         </div>
     )
 }

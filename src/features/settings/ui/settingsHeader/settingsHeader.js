@@ -1,15 +1,15 @@
 import cls from "./settingsHeader.module.sass"
 import {useEffect, useState} from "react";
-import {Modal} from "../../../../shared/ui/modal";
-import {Form} from "../../../../shared/ui/form";
-import {Input} from "../../../../shared/ui/input";
-import {Textarea} from "../../../../shared/ui/textArea";
-import {Button} from "../../../../shared/ui/button/button";
+import {Modal} from "shared/ui/modal";
+import {Form} from "shared/ui/form";
+import {Input} from "shared/ui/input";
+
+import {Button} from "shared/ui/button/button";
 import {useForm} from "react-hook-form";
 import {useDispatch} from "react-redux";
-import {onAddHeaderItem, onDeleteHeaderItem, onEditHeaderItem} from "../../../../entities/settings";
-import {ConfirmModal} from "../../../../shared/ui/confirmModal";
-import {API_URL, headers, useHttp} from "../../../../shared/api/base";
+import {onAddHeaderItem, onDeleteHeaderItem, onEditHeaderItem} from "entities/settings";
+import {ConfirmModal} from "shared/ui/confirmModal";
+import {API_URL, headers, useHttp} from "shared/api/base";
 
 export const SettingsHeader = ({settingsHeader, setActive, active}) => {
 
@@ -19,48 +19,48 @@ export const SettingsHeader = ({settingsHeader, setActive, active}) => {
 
     const [activeItem, setActiveItem] = useState(null)
 
-    const renderTable = () => {
-        return settingsHeader.map(item => (
-            <li
-                onClick={() => {
-                    setActive(item.id)
-                    setActiveItem(item)
-
-                }}
-
-
-                className={active === item.id ? cls.active_list : ""}
-            >
-                {item.name}
-            </li>
-        ))
-    }
-
-    const render = renderTable()
+    // const renderTable = () => {
+    //     return settingsHeader.map(item => (
+    //         <li
+    //             onClick={() => {
+    //                 setActive(item.id)
+    //                 setActiveItem(item)
+    //
+    //             }}
+    //
+    //
+    //             className={active === item.id ? cls.active_list : ""}
+    //         >
+    //             {item.name}
+    //         </li>
+    //     ))
+    // }
+    //
+    // const render = renderTable()
 
     return (
         <div>
 
             <div className={cls.settings}>
-                <h2>Organizations</h2>
-                <div className={cls.filter__buttons}>
-                    <div
-                        onClick={() => setActiveAdd(true)}
-                        className={cls.filter__add}
-                    >
-                        <i className={"fa fa-plus"}/>
-                    </div>
+                <h2>Yangi tashkilotlar</h2>
+                {/*<div className={cls.filter__buttons}>*/}
+                {/*    <div*/}
+                {/*        onClick={() => setActiveAdd(true)}*/}
+                {/*        className={cls.filter__add}*/}
+                {/*    >*/}
+                {/*        <i className={"fa fa-plus"}/>*/}
+                {/*    </div>*/}
 
-                    <div onClick={() => setActiveEdit(true)}
-                         className={cls.filter__edit}
-                    >
-                        <i className={"fa fa-pen"}/>
-                    </div>
-                </div>
+                {/*    <div onClick={() => setActiveEdit(true)}*/}
+                {/*         className={cls.filter__edit}*/}
+                {/*    >*/}
+                {/*        <i className={"fa fa-pen"}/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
-            <ul className={cls.settings__header}>
-                {render}
-            </ul>
+            {/*<ul className={cls.settings__header}>*/}
+            {/*    {render}*/}
+            {/*</ul>*/}
 
 
             <Add

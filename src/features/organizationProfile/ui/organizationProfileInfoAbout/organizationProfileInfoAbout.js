@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 import {getOrganizationProfileData} from "entities/organizationProfile";
 
 
-export const OrganizationProfileInfoAbout = ({userRole}) => {
+export const OrganizationProfileInfoAbout = ({userRole , isChange , setIsChange}) => {
 
 
     const {id} = useParams()
@@ -19,21 +19,17 @@ export const OrganizationProfileInfoAbout = ({userRole}) => {
     const [text, setText] = useState(null)
     const [editorState, setEditorState] = useState(null)
 
-    const [isChange, setIsChange] = useState(false)
 
 
     useEffect(() => {
-        if (data.desc) {
-            setText(data.desc)
-            setEditorState(data.desc_json)
+        if (data?.desc) {
+            setText(data?.desc)
+            setEditorState(data?.desc_json)
         }
 
     }, [data])
 
 
-    const onChange = () => {
-        setIsChange(state => !state)
-    }
 
 
     const {request} = useHttp()
@@ -59,23 +55,22 @@ export const OrganizationProfileInfoAbout = ({userRole}) => {
 
     return (
         <div className={cls.info}>
-            <div className={cls.header}>
-                <h1>Haqida</h1>
-                {userRole && <div className={cls.pen} onClick={onChange}>
-                    {
-                        isChange ?
-                            <i
+            {/*<div className={cls.header}>*/}
+            {/*    {userRole && <div className={cls.pen} onClick={onChange}>*/}
+            {/*        {*/}
+            {/*            isChange ?*/}
+            {/*                <i*/}
 
-                                className={classNames("fas fa-times")}
-                            />
-                            :
-                            <i
-                                className={classNames("fas fa-pen")}
-                            />
-                    }
+            {/*                    className={classNames("fas fa-times")}*/}
+            {/*                />*/}
+            {/*                :*/}
+            {/*                <i*/}
+            {/*                    className={classNames("fas fa-pen")}*/}
+            {/*                />*/}
+            {/*        }*/}
 
-                </div>}
-            </div>
+            {/*    </div>}*/}
+            {/*</div>*/}
 
             <div className={cls.container}>
 

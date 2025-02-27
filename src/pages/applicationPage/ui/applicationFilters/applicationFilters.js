@@ -25,11 +25,13 @@ import {
     setShift,
     setType
 } from "pages/applicationPage/model/slice/applicationSlice";
+import {Button} from "shared/ui/button/button";
+import {Modal} from "shared/ui/modal";
 
 
 export const ApplicationFilters = () => {
-    const [settings, setSettings] = useState(true)
-    
+    const [settings, setSettings] = useState(false)
+
 
     const types = useSelector(applicationTypesSelectors)
     const degrees = useSelector(applicationDegreesSelectors)
@@ -49,7 +51,7 @@ export const ApplicationFilters = () => {
 
     useEffect(() => {
         dispatch(fetchApplicationFiltersData({id: type}))
-    },[type])
+    }, [type])
 
 
     const onChangeSearch = (e) => {
@@ -78,36 +80,29 @@ export const ApplicationFilters = () => {
     }
 
 
-
-
-
     return (
         <div className={cls.filter}>
-            {settings ?
-                <div className={cls.filter__search}>
-                    <Input
-                        value={search}
-                        onChange={onChangeSearch}
-                        extraClass={cls.filter__input}
-                        placeholder={"Search..."}
-                    />
-                    <i className="fas fa-search"/>
-                </div>
-                :
-                <div className={cls.filter__select}>
-                    <Select defaultValue={type} options={types} onChangeOption={onChangeType} titleOption={'Turi'}/>
-                    <Select defaultValue={degree} options={degrees} onChangeOption={onChangeDegree} titleOption={'Daraja'}/>
-                    <Select defaultValue={field} options={fields} onChangeOption={onChangeField} titleOption={'Yo’nalish'}/>
-                    <Select defaultValue={shift} options={shifts} onChangeOption={onChangeShift} titleOption={'Ta’lim turi'}/>
-                    <Select defaultValue={language} options={languages} onChangeOption={onChangeLanguage} titleOption={'Ta’lim tili'}/>
-                </div>
-            }
-            <div onClick={() => setSettings(!settings)} style={{background : settings ?  null : "rgba(53, 66, 210, 1)" }} className={cls.filter__settings}>
+            <Button extraClass={cls.filter__button} onClick={() => setSettings(true)}>Filter</Button>
 
-                {settings ?
-                <i className="fas fa-sliders-h"/> :
-                <i className="fas fa-undo"></i>}
-            </div>
+
+            <Modal setActive={setSettings} active={settings}>
+
+                <h1>Filter</h1>
+                   <div className={cls.filter__select}>
+                       <Select defaultValue={type} options={types} onChangeOption={onChangeType} titleOption={'Turi'}/>
+                       <Select defaultValue={degree} options={degrees} onChangeOption={onChangeDegree}
+                               titleOption={'Daraja'}/>
+                       <Select defaultValue={field} options={fields} onChangeOption={onChangeField}
+                               titleOption={'Yo’nalish'}/>
+                       <Select defaultValue={shift} options={shifts} onChangeOption={onChangeShift}
+                               titleOption={'Ta’lim turi'}/>
+                       <Select defaultValue={language} options={languages} onChangeOption={onChangeLanguage}
+                               titleOption={'Ta’lim tili'}/>
+                   </div>
+
+
+            </Modal>
+
         </div>
     )
 }

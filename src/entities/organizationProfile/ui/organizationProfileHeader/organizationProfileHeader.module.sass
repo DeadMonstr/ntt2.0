@@ -3,29 +3,43 @@
   display: flex
   gap: 3rem
   padding: 2.5rem 3rem
-  box-shadow: 0 13.97px 24.84px 0 #D0D2DA26
   background: #fff
   border-radius: 1.5rem
-  overflow-x: auto
-  overflow-y: hidden
+  justify-content: space-around
+  position: relative
   //height: 10rem
+  &:after
+    display: block
+    content: ""
+    position: absolute
+    width: 100%
+    background-color: rgba(229, 229, 234, 1)
+    height: 3px
+    bottom: 1px
   .item
     padding: 1.5rem 3rem
     display: flex
     align-items: center
     gap: 1rem
-    border: 1px solid var(--Grays-Gray-4, #D1D1D6)
-    box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-100) var(--sds-color-black-100) var(--sds-size-depth-0) var(--sds-size-depth-400) var(--sds-size-depth-800) var(--sds-size-depth-negative-100) var(--sds-color-black-200)
     border-radius: 1rem
     transition: .3s
+    cursor: pointer
+    position: relative
+    justify-content: center
+    color: rgba(73, 69, 79, 1)
+
+
     h2
-      font-size: 2rem
+      font-size: 1.8rem
     &.active
-      border-bottom: 3px solid #2D60FF
-      border-left: none
-      border-right: none
-      border-top: none
-      border-radius: 0
+      &:before
+        content: ""
+        bottom: -20px
+        width: 100%
+        height: 5px
+        border-radius: 10px 10px 0 0
+        background-color: #2D60FF
+        position: absolute
       h2
         color: #2D60FF
     &__image

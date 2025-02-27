@@ -12,9 +12,9 @@ import {
     OrganizationAccouncementsForm
 } from "../organizationAccouncementsForm/organizationAccouncementsForm";
 
-export const OrganizationProfileAnnouncementsModal = memo(({seasonId,userRole}) => {
+export const OrganizationProfileAnnouncementsModal = memo(({seasonId,userRole , isChange ,setIsChange }) => {
 
-    const [isChange, setIsChange] = useState(false)
+
     const [changedItem,setChangedItem] = useState(null)
 
 

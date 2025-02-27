@@ -14,16 +14,6 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
 
     const linksList = useMemo(() => [
         {
-            name: "Haqida",
-            image: info,
-            bgColor: "#E7EFFF"
-        },
-        {
-            name: "Grantlar",
-            image: grants,
-            bgColor: "#E7EFFF"
-        },
-        {
             name: "Arizalar",
             image: applications,
             bgColor: "#E7EFFF"
@@ -38,6 +28,20 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
             image: gallery,
             bgColor: "#E7EFFF"
         },
+        {
+            name: "Grantlar",
+            image: grants,
+            bgColor: "#E7EFFF"
+        },
+        {
+            name: "Haqida",
+            image: info,
+            bgColor: "#E7EFFF"
+        },
+
+
+
+
     ], [])
 
 
@@ -67,12 +71,6 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
                     })}
                     onClick={() => onChangeActiveMenu(item.name)}
                 >
-                    <div
-                        style={{background: item.bgColor}}
-                        className={cls.item__image}
-                    >
-                        <img src={item.image} alt=""/>
-                    </div>
                     <h2>{item.name}</h2>
                 </div>
             )

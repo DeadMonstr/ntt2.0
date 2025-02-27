@@ -11,7 +11,6 @@ export const OrganizationProfileGallery = memo(({userRole, setActive, isAdd}) =>
 
     const data = useSelector(getOrganizationProfileGallery)
 
-    console.log(data, "data")
 
     const renderImages = useCallback(() => {
         return data?.map((item, index) => {
@@ -41,12 +40,7 @@ export const OrganizationProfileGallery = memo(({userRole, setActive, isAdd}) =>
             )}
         >
             {renderImages()}
-            {userRole && <div
-                onClick={() => isAdd(true)}
-                className={cls.images__add}
-            >
-                <i className={classNames("fas fa-plus", cls.images__editIcon)}/>
-            </div>}
+
         </div>
     );
 })
