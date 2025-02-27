@@ -96,6 +96,7 @@ export const routersConfig = [
     {
         path: getRouteApplicationsProfile(":id"),
         element: <ApplicationProfile/>
-    }
+    },
+
 
 ]

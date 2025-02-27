@@ -4,7 +4,14 @@
   display: flex
   justify-content: space-between
   align-items: center
-  position: relative
+  position: fixed
+  width: 100%
+  background-color: white
+  height: 10rem
+  top: 0
+  left: 0
+  z-index: 1000
+  padding: 2rem
   &__hamburger
     display: none
   &__menu
@@ -101,6 +108,7 @@
           font-size: 1.3rem
 @media (max-width: 950px)
   .header
+    //width: 90%
     gap: 0
     justify-content: space-between
     &__hamburger

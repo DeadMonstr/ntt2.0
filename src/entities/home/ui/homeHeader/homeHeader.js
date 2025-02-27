@@ -41,7 +41,6 @@ export const HomeHeader = () => {
         ))
     }
 
-    console.log(activeSubMenu)
     return (
         <div className={cls.header}>
             <div onClick={() => setActiveSubMenu(!activeSubMenu)} className={cls.header__hamburger}>
