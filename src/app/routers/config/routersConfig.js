@@ -5,7 +5,7 @@ import {
     getRouteMain,
     getRouteOrganizationProfile,
     getRouteOrganizations,
-    getRouteOrganizationTypes, getRouteTest
+    getRouteOrganizationTypes, getRouteTest,
 } from "shared/const/routers";
 import {DashboardPage} from "pages/dashboardPage";
 
@@ -25,7 +25,6 @@ import {DirectionProfile} from "features/organizationProfile/ui/directionProfile
 import {Gallery} from "features/organizationProfile/ui/basicOrganization/basicOrganization";
 import {OrganizationTypesPage} from "pages/organizationTypesPage";
 import {SubjectsTests} from "pages/subjectsTests";
-
 
 export const routersConfig = [
     {

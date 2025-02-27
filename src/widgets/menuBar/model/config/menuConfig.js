@@ -31,14 +31,11 @@ export const menuConfig = [
         back: true,
         roles: [ROLES.admin]
     },
-
     {
         to: "subjectsTests",
         label: "Fan Testlari",
         icon: <Settings/>,
         back: true,
         roles: [ROLES.admin]
-    },
-
-
+    }
 ]
