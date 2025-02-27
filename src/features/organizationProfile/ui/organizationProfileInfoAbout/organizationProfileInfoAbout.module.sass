@@ -1,0 +1,35 @@
+@import "app/styles/abstracts/variables"
+@import "app/styles/abstracts/mixins"
+
+
+.info
+  width: 100%
+  background-color: white
+  min-height: 100%
+  padding: 3rem
+  .header
+    width: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+    .pen
+      width: 5rem
+      height: 5rem
+      background-color: $color-gray
+      border-radius: 50%
+      display: flex
+      align-items: center
+      justify-content: center
+      cursor: pointer
+      transition: all .1s
+      @include btn-active
+      i
+        font-size: 1.7rem
+        color: #5a5a5e
+
+  .container
+    padding: 2.5rem 0
+    p
+      margin-top: 2rem
+      font-size: 1.6rem

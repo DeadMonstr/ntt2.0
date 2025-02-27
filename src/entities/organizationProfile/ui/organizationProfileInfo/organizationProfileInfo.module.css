@@ -1,0 +1,52 @@
+.info {
+  padding: 2.8rem 1.7rem 5.6rem 1.7rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 3.4rem;
+}
+.info__header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-bottom: 1.7rem;
+  border-bottom: 1px solid #2D60FF;
+}
+.info__ava {
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+}
+.info__user {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.info__user h2, .info__user p {
+  font-size: 1.6rem;
+}
+.info__container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.info__image {
+  max-width: 28.5rem;
+  min-width: 28.5rem;
+}
+.info__form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.info__input {
+  width: 100%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: #fff;
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: 1rem;
+}
+
+/*# sourceMappingURL=organizationProfileInfoAbout.module.css.map */

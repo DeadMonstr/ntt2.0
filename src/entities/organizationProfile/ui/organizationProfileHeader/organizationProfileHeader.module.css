@@ -1,0 +1,35 @@
+.header {
+  width: fit-content;
+  display: flex;
+  gap: 3rem;
+  padding: 2.5rem 3rem;
+  box-shadow: 0 13.97px 24.84px 0 rgba(208, 210, 218, 0.1490196078);
+  background: #fff;
+  border-radius: 1.5rem;
+}
+.header .item {
+  padding: 1.5rem 3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--Grays-Gray-4, #D1D1D6);
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-100) var(--sds-color-black-100) var(--sds-size-depth-0) var(--sds-size-depth-400) var(--sds-size-depth-800) var(--sds-size-depth-negative-100) var(--sds-color-black-200);
+  border-radius: 1rem;
+  transition: 0.3s;
+}
+.header .item.active {
+  border-bottom: 3px solid #2D60FF;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: 0;
+}
+.header .item.active h2 {
+  color: #2D60FF;
+}
+.header .item__image {
+  padding: 1rem;
+  border-radius: 1.7rem;
+}
+
+/*# sourceMappingURL=organizationProfileHeader.module.css.map */

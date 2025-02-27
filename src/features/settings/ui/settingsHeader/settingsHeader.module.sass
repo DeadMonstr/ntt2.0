@@ -1,0 +1,62 @@
+@import "app/styles/abstracts/mixins"
+.settings
+  display: flex
+  justify-content: space-between
+  margin-bottom: 3rem
+  &__header
+    display: flex
+    list-style: none
+    justify-content: space-around
+    border-bottom: 2px solid rgba(199, 199, 204, 1)
+    padding-bottom: 10px
+    li
+      font-size: 2.4rem
+      color: rgba(199, 199, 204, 1)
+      cursor: pointer
+      transition: .2s all
+      &:hover
+        transform: scale(1.05)
+    .active_list
+      color: rgba(45, 96, 255, 1)
+      position: relative
+      &:before
+        content: ''
+        display: block
+        position: absolute
+        background-color: rgba(45, 96, 255, 1)
+        width: 100%
+        height: 3px
+        border-radius: 10px
+        bottom: -1.1rem
+
+  &__button
+    display: flex
+    justify-content: space-between
+.filter
+  &__edit , &__add
+    width: 5rem
+    height: 5rem
+    border-radius: 50%
+    background-color: rgba(231, 237, 255, 1)
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 2rem
+    color: rgba(45, 96, 255, 1)
+    @include btn-active
+    cursor: pointer
+  &__edit
+    color: rgba(142, 142, 147, 1)
+    background-color: rgba(240, 240, 240, 1)
+
+  &__buttons
+    display: flex
+    gap: 2rem
+  &__input
+    margin-top: 10px
+    border: 1px solid
+  &__btn
+    align-self: flex-end
+    border: 1px solid
+    &:hover
+      border: 1px solid

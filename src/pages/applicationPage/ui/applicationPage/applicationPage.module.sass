@@ -1,0 +1,27 @@
+.applicationPage
+  width: 100%
+  height: 100%
+  background: #E7F3FF
+  padding: 3rem
+  display: flex
+  flex-direction: column
+  gap: 2rem
+  &__header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    flex-wrap: wrap
+    gap: 1rem 
+  &__title
+    font-size: 2.4rem
+  &__wrapper
+    display: flex
+    flex-direction: column
+@media (max-width: 1040px)
+  .applicationPage
+    &__header
+      justify-content: flex-end
+
+@media (max-width: 430px)
+  .applicationPage
+    padding: 0

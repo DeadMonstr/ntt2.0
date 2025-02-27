@@ -1,0 +1,35 @@
+.switcher__title {
+  cursor: pointer;
+}
+.switcher__icon {
+  display: none;
+}
+.switcher__popup {
+  transition: 0.4s;
+  z-index: -100;
+  top: 10%;
+  visibility: hidden;
+  opacity: 0;
+}
+.switcher__popup.active {
+  opacity: 1;
+  visibility: visible;
+  top: 4.5rem;
+  z-index: 100 !important;
+}
+
+@media (max-width: 430px) {
+  .switcher {
+    position: relative;
+  }
+  .switcher__icon {
+    display: flex;
+    font-size: 2rem;
+  }
+  .switcher__popup {
+    width: max-content;
+    left: -3.6rem;
+  }
+}
+
+/*# sourceMappingURL=SeasonSwitcher.module.css.map */

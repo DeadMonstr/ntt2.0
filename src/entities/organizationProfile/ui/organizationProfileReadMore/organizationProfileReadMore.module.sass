@@ -1,0 +1,58 @@
+@import "app/styles/abstracts/variables"
+@import "app/styles/abstracts/mixins"
+
+.applications
+  height: fit-content
+  display: flex
+  flex-direction: column
+  gap: 3.5rem
+  padding: 3rem
+  background: #fff
+  position: relative
+  &__edit
+    cursor: pointer
+    top: 2.8rem
+    right: 2.4rem
+    position: absolute
+    padding: 1.6rem
+    border-radius: 50%
+    width: fit-content
+    background: #F0F0F0
+    border: 0.73px solid #D1D1D6
+    transition: .1s
+    @include btn-active
+  &__icon
+    font-size: 1.6rem
+    color: #8E8E93
+  &__title
+    color: $main-color
+    font-size: 4rem
+  &__container
+    display: flex
+    gap: 7rem
+    .images
+      position: relative
+      &__main
+        width: 41rem
+        height: 41rem
+        border-radius: 50%
+      &__sub
+        top: 2rem
+        right: 3.5rem
+        width: 11rem
+        height: 11rem
+        background: #fff
+        //padding: 1rem
+        border-radius: 50%
+        position: absolute
+    .text
+      display: flex
+      flex-direction: column
+      gap: 3.2rem
+      &__title
+        font-size: 2.5rem
+        color: $main-color
+      p
+        font-size: 1.5rem
+        color: #737373
+

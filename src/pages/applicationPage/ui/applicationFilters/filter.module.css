@@ -1,0 +1,47 @@
+.filter {
+  align-self: flex-end;
+  display: flex;
+  gap: 1rem;
+}
+.filter__search {
+  background: #FFFFFF;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+.filter__search i {
+  color: #D6D6D6;
+  font-size: 1.8rem;
+}
+.filter__select {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.filter__input {
+  border: none;
+  font-size: 1.6rem;
+  outline: none;
+}
+.filter__input::placeholder {
+  color: rgb(214, 214, 214);
+}
+.filter__settings {
+  background: white;
+  border-radius: 0.8rem;
+  color: #D6D6D6;
+  padding: 1rem 2rem;
+}
+.filter__settings i {
+  font-size: 2.4rem;
+}
+
+@media (max-width: 430px) {
+  .filter__input {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=filter.module.css.map */

@@ -1,0 +1,1 @@
+export const getOrganizationsData = (state) => state.organizationsSlice.data

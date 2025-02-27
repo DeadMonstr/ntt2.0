@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+.organizations {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.organizations__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.organizations h2 {
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 2.4rem;
+  color: rgb(45, 45, 45);
+}
+
+.filter {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.filter__search {
+  background: #FFFFFF;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.3rem 2rem;
+}
+.filter__search i {
+  color: #D6D6D6;
+  font-size: 1.8rem;
+}
+.filter__select {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+.filter__input {
+  border: none;
+  font-size: 1.6rem;
+  outline: none;
+}
+.filter__input::placeholder {
+  color: rgb(214, 214, 214);
+}
+.filter__settings {
+  background: white;
+  border-radius: 0.8rem;
+  color: #D6D6D6;
+  padding: 1rem 2rem;
+}
+.filter__settings i {
+  font-size: 2.4rem;
+}
+
+/*# sourceMappingURL=organization.module.css.map */

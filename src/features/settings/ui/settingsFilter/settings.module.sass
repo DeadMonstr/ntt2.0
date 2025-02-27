@@ -1,0 +1,54 @@
+@import "app/styles/abstracts/_mixins.sass"
+
+.filter
+  display: flex
+  justify-content: space-between
+  align-items: center
+  &__list
+    display: flex
+    padding: 2rem
+    font-size: 1.4rem
+    list-style: none
+    border-radius: 10px
+
+    li
+      border: 1px solid
+      padding: 1rem
+      cursor: pointer
+      &:nth-child(1)
+        border-radius: 10px 0 0 10px
+      &:nth-child(2)
+        border-radius: 0 10px 10px 0
+
+    .active
+      background-color: rgba(231, 237, 255, 1)
+      border: 1px solid rgba(24, 20, 243, 1)
+  &__edit , &__add
+    width: 5rem
+    height: 5rem
+    border-radius: 50%
+    background-color: rgba(231, 237, 255, 1)
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 2rem
+    color: rgba(45, 96, 255, 1)
+    @include btn-active
+    cursor: pointer
+  &__edit
+    color: rgba(142, 142, 147, 1)
+    background-color: rgba(240, 240, 240, 1)
+
+  &__buttons
+    display: flex
+    gap: 2rem
+
+  &__input
+    margin: 10px 0
+    border: 1px solid
+  &__btn
+    align-self: flex-end
+    margin:  10px 80%
+    border: 1px solid
+    &:hover
+      border: 1px solid

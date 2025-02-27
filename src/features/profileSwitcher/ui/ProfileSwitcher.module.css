@@ -1,0 +1,72 @@
+.switcher {
+  position: relative;
+}
+.switcher__title {
+  cursor: pointer;
+}
+.switcher .popup {
+  width: fit-content;
+  height: fit-content;
+  background-color: #FFFFFF;
+  padding: 2px 1rem;
+  position: absolute;
+  border-radius: 0.8rem;
+  transition: 0.4s;
+  z-index: -100;
+  top: 10%;
+  visibility: hidden;
+  opacity: 0;
+  left: -95%;
+}
+.switcher .popup.active {
+  opacity: 1;
+  visibility: visible;
+  top: 195%;
+  z-index: 100 !important;
+}
+.switcher .popup .item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #878787;
+  padding: 8px;
+  color: #C8C8C8;
+  transition: 0.3s;
+  gap: 1rem;
+}
+.switcher .popup .item:last-child {
+  border-bottom: none;
+}
+.switcher .popup .item i {
+  font-size: 3rem;
+  color: #2561FA;
+}
+.switcher .popup .item .exit {
+  color: #FF5757 !important;
+}
+.switcher .popup .item h2 {
+  font-family: "Inter";
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  cursor: pointer;
+}
+.switcher .popup .item.active {
+  color: #2D2D2D;
+}
+
+@media (max-width: 430px) {
+  .switcher__title {
+    width: 2.2rem;
+  }
+  .switcher .popup .item h2 {
+    display: none;
+  }
+}
+@media (max-width: 320px) {
+  .switcher .popup .item i {
+    font-size: 2rem;
+  }
+}
+
+/*# sourceMappingURL=ProfileSwitcher.module.css.map */

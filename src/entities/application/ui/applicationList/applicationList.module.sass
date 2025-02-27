@@ -1,0 +1,33 @@
+.applicationList
+  //height: fit-content
+  //height: 95%
+  //overflow-y: scroll
+  &__name
+    font-size: 1.3rem
+  &__number
+    font-size: 1rem
+    color: #C8C8C8
+
+  &__list
+    td:last-child
+      border-right: .8rem solid #4DEC7C
+
+    &:hover
+      background-color: #B5FFB7 !important
+
+    &.debt
+      td:last-child
+        border-right: .8rem solid #FF7979
+
+      &:hover
+        background-color: #FFB0B0 !important
+
+
+.applicationList__td-hidden
+  @media (max-width: 1268px)
+    display: none
+
+@media (max-width: 430px)
+  .applicationList
+    thead
+      display: none
