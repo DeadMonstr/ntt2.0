@@ -16,9 +16,13 @@ export const SubjectsTests = () => {
     const [subjects,setSubjects] = useState([])
     const [search,setSearch] = useState("")
     const [selectedSubject,setSelectedSubject] = useState(null)
+    const [selectedFormSubject,setSelectedFormSubject] = useState(null)
 
 
     const {register} = useForm()
+
+
+
 
 
 
@@ -50,8 +54,15 @@ export const SubjectsTests = () => {
                 <Input
                     register={register}
                     placeholder={"Name"}
-                    onChange={}
+                    name={"name"}
                 />
+                <Select
+                    title={"subjects"}
+                    options={subjects}
+                    onChangeOption={setSelectedFormSubject}
+                />
+
+                <Button>Submit</Button>
             </Modal>
 
         </div>
