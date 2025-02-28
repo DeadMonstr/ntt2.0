@@ -1,0 +1,35 @@
+.label {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: 0.7s;
+}
+.label .info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.label .info span {
+  font-weight: 500;
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+.label__inner {
+  outline: none;
+  min-height: 40px;
+  padding: 0.5rem 1rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgb(255, 255, 255);
+}
+.label__inner.error {
+  border: 1px solid #900B09;
+}
+.label__error {
+  font-size: 1.6rem;
+  color: #900B09;
+}
+
+/*# sourceMappingURL=select.module.css.map */

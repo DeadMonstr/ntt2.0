@@ -1,0 +1,66 @@
+.table {
+  width: 100%;
+  border-collapse: separate;
+  -webkit-border-horizontal-spacing: 0;
+  -webkit-border-vertical-spacing: 1.5rem;
+}
+.table thead tr {
+  background: #FFFFFF;
+  width: 100%;
+}
+.table thead th:first-child {
+  border-top-left-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
+}
+.table thead th:last-child {
+  border-top-right-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
+}
+.table thead th {
+  min-width: 10rem;
+  padding: 2rem;
+  margin: 0;
+  border: none;
+  outline: none;
+  font-size: 1.7rem;
+  text-align: left;
+  color: #2D2D2D;
+}
+.table thead th:first-child {
+  min-width: 5rem;
+  width: 5rem;
+}
+.table tbody {
+  border-collapse: separate;
+  -webkit-border-vertical-spacing: 1rem !important;
+}
+.table tbody tr {
+  background: #FFFFFF;
+  width: 100%;
+  transition: all 0.1s;
+  border: 0 solid;
+  border-radius: 1.6rem;
+}
+.table tbody td:first-child {
+  border-top-left-radius: 1.6rem;
+  border-bottom-left-radius: 1.6rem;
+}
+.table tbody td:last-child {
+  border-top-right-radius: 1.6rem;
+  border-bottom-right-radius: 1.6rem;
+}
+.table tbody td {
+  width: fit-content;
+  padding: 2rem;
+  font-size: 1.6rem;
+  color: #2D2D2D;
+}
+.table tbody td i {
+  cursor: pointer;
+  font-size: 2rem;
+  margin: 0 1rem;
+  transition: all 0.1s;
+  color: #2D2D2D;
+}
+
+/*# sourceMappingURL=table.module.css.map */

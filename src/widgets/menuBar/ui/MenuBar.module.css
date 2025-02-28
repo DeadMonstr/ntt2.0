@@ -1,0 +1,125 @@
+.bars {
+  position: absolute;
+  left: 1.5rem;
+  font-size: 2.5rem;
+  display: none;
+  top: 13%;
+}
+
+.menubar {
+  width: 344px;
+  height: 70rem;
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  gap: 2rem;
+  overflow: auto;
+}
+.menubar::-webkit-scrollbar {
+  width: 0;
+}
+.menubar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.61);
+}
+.menubar__item {
+  color: #BEBEBE;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  transition: 0.3s;
+}
+.menubar__item i {
+  font-size: 4rem;
+  color: #BEBEBE;
+}
+.menubar .active {
+  color: #2D2D2D;
+}
+.menubar .active i {
+  color: #001C79;
+}
+.menubar__multiItem {
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+  transition: 3s;
+}
+.menubar__multiItem[open] {
+  block-size: auto;
+}
+.menubar__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menubar__inner {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: #BEBEBE;
+}
+.menubar__inner i {
+  font-size: 4rem;
+}
+.menubar__wrapper {
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #2D2D2D;
+  height: fit-content;
+  visibility: visible;
+  margin-top: 1.5rem;
+  margin-left: 5rem;
+  padding: 1rem;
+  gap: 1.5rem;
+}
+.menubar__fork {
+  font-size: 1.6rem;
+  color: #BEBEBE;
+  transition: 0.3s;
+}
+
+@media (max-width: 430px) {
+  .bars {
+    display: flex;
+  }
+  .menubar {
+    top: 0;
+    position: absolute;
+    visibility: hidden;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: none;
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+  }
+  .menubar.activeOpe {
+    visibility: visible;
+  }
+  .menubar__telMenu {
+    width: 70%;
+    height: 80%;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -100%;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    gap: 2rem;
+    overflow: auto;
+    transition: 0.3s;
+  }
+  .menubar__telMenu.activeOpe {
+    left: 0;
+  }
+}
+
+/*# sourceMappingURL=MenuBar.module.css.map */

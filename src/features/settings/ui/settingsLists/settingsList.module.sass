@@ -1,0 +1,56 @@
+.settings
+  display: flex
+  //gap: 2rem
+  //flex-wrap: wrap
+  flex-direction: column
+  width: 100%
+
+  .box
+    //background-color: rgba(254, 247, 255, 1)
+    //max-width: 60rem
+    width: 100%
+    padding: 1.5rem 0
+    gap: 1rem
+
+
+    overflow: auto
+    display: flex
+    //flex-direction: column
+    //border-radius: 10px
+    justify-content: space-between
+    align-items: center
+    border-bottom: 1px solid
+    //border: 1px solid rgba(202, 196, 208, 1)
+    &::-webkit-scrollbar
+      height: 6px
+      background-color: #7F7F7F
+
+    &__title
+      color: rgba(45, 96, 255, 1)
+      font-size: 2rem
+      font-weight: 500
+
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+    &__desc
+      width: 100%
+      color: rgba(73, 69, 79, 1)
+      font-size: 1.2rem
+    .pen
+      cursor: pointer
+      font-size: 2.2rem
+      padding-right: 2rem
+      color: rgba(98, 77, 227, 1)
+.filter
+  &__buttons
+    display: flex
+    justify-content: space-between
+  &__input
+    margin: 10px 0
+    border: 1px solid
+  &__btn
+    border: 1px solid
+    &:hover
+      border: 1px solid

@@ -1,0 +1,161 @@
+*
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Risque&family=Space+Grotesk:wght@300..700&display=swap')
+.dashboard
+  display: flex
+  flex-direction: column
+  //align-items: center
+  gap: 1rem
+  //width: 100%
+  //width: 70%
+  h1
+
+    color: rgba(45, 45, 45, 1)
+    font-family: "Inter" , serif
+    font-weight: 500
+  .wrapper
+    display: flex
+    flex-wrap: wrap
+    height: 60vh
+    overflow: auto
+    //width: 80%
+    gap: 2rem
+    //display: grid
+    //grid-template-columns: repeat(3 , 400px)
+    .box
+      background-color: rgba(255, 255, 255, 1)
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px
+
+      justify-content: space-around
+      width: 38rem
+
+      border-radius: 8px
+      padding:  2rem
+      display: flex
+      height: 25rem
+
+      flex-direction: column
+      cursor: pointer
+
+      h2
+
+
+        margin: 0
+        font-family: "Inter", serif
+        font-optical-sizing: auto
+        font-weight: 500
+
+        font-size: 3rem
+        width: 100%
+        color: #2D2D2D
+      span
+        display: block
+        font-size: 2.2rem
+        width: 25rem
+        color: rgba(200, 200, 200, 1)
+        //text-transform: capitalize
+
+      .div
+        font-size: 5rem
+        //color: rgba(97, 136, 236, 1)
+        align-self: flex-end
+        font-family: "Risque", serif
+        font-weight: 400
+        font-style: normal
+
+
+@media (max-width: 1285px)
+  .dashboard
+    .wrapper
+      .box
+        width: 30rem
+        h2
+          font-size: 2.5rem
+
+
+@media (max-width: 1100px)
+  .dashboard
+    .wrapper
+      .box
+        width: 25rem
+        height: 20rem
+        h2
+          font-size: 2rem
+
+        span
+          font-size: 2rem
+
+        .div
+          font-size: 4.5rem
+@media (max-width: 998px)
+  .dashboard
+    .wrapper
+      .box
+        width: 20rem
+        height: 18rem
+        h2
+          font-size: 1.5rem
+          width: 15rem
+
+        span
+          font-size: 1.7rem
+          width: 15rem
+
+        .div
+          font-size: 3.5rem
+
+
+@media (max-width: 875px)
+  .dashboard
+    .wrapper
+      .box
+        width: 27rem
+        //height: 20rem
+        h2
+          font-size: 2rem
+
+          width: 25rem
+        span
+          font-size: 2rem
+          width: 20rem
+
+        .div
+          font-size: 4.5rem
+
+@media (max-width: 715px)
+  .dashboard
+    .wrapper
+      .box
+        width: 20rem
+        height: 15rem
+        h2
+          font-size: 1.6rem
+
+          width: 17rem
+        span
+          font-size: 1.8rem
+          width: 20rem
+
+        .div
+          font-size: 3rem
+
+@media (max-width: 635px)
+  .dashboard
+    .wrapper
+      .box
+        width: 15rem
+        height: 15rem
+        h2
+          font-size: 1.3rem
+
+          width: 10rem
+        span
+          font-size: 1.4rem
+          width: 12rem
+
+        .div
+          font-size: 2.5rem

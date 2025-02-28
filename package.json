@@ -1,0 +1,68 @@
+{
+  "name": "ntt",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@lexical/code": "^0.23.1",
+
+    "@lexical/html": "^0.23.1",
+    "@lexical/link": "^0.23.1",
+    "@lexical/list": "^0.23.1",
+    "@lexical/markdown": "^0.23.1",
+    "@lexical/rich-text": "^0.23.1",
+    "@lexical/table": "^0.23.1",
+    "@reduxjs/toolkit": "^2.3.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "framer-motion": "^11.17.0",
+    "jwt-decode": "^4.0.0",
+    "react": "^18.3.1",
+
+
+
+    "react-dom": "^18.3.1",
+    "react-dropzone": "^14.3.5",
+    "react-hook-form": "^7.54.1",
+    "react-redux": "^9.1.2",
+    "react-router": "^6.28.0",
+    "react-router-dom": "^6.28.0",
+
+
+    "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
+    "redux": "^5.0.1",
+    "sass": "^1.80.6",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@lexical/react": "^0.23.1",
+    "classnames": "^2.5.1",
+    "lexical": "^0.23.1",
+    "react-device-detect": "^2.2.3"
+  }
+}

@@ -1,0 +1,67 @@
+.application {
+  padding: 2rem;
+}
+.application__box {
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+}
+.application__box h1 {
+  font-size: 1.8rem;
+  font-weight: lighter;
+}
+.application__header {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.application__header i {
+  font-size: 2rem;
+  color: rgb(45, 45, 45);
+}
+.application__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.application__info_wrapper {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.application__info_profile {
+  align-items: center;
+  font-size: 2rem;
+  display: flex;
+  text-transform: capitalize;
+  gap: 2rem;
+}
+.application__info_infos {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 1.8rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.application__info_infos li {
+  display: flex;
+  color: rgb(200, 200, 200);
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.application__info_infos li span {
+  color: rgb(102, 102, 102);
+}
+.application__info_infos_images {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  gap: 2rem;
+  overflow: auto;
+}
+
+/*# sourceMappingURL=applicationProfile.model.css.map */

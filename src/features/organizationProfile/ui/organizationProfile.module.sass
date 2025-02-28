@@ -1,0 +1,222 @@
+.organizations
+  display: flex
+  flex-direction: column
+  gap: 2.4rem
+
+  &__header
+    display: flex
+    align-items: center
+    justify-content: space-between
+
+  h2
+    font-family: "Inter", serif
+    font-optical-sizing: auto
+    font-weight: 500
+    font-style: normal
+    font-size: 2.4rem
+    color: rgba(45, 45, 45, 1)
+
+
+.filter
+  display: flex
+  align-items: center
+  gap: 2rem
+
+  &__search
+    background: #FFFFFF
+    border-radius: .8rem
+    display: flex
+    align-items: center
+    gap: 1rem
+    padding: 1.3rem 2rem
+
+    i
+      color: #D6D6D6
+      font-size: 1.8rem
+
+  &__select
+    display: flex
+    gap: 2rem
+    align-items: center
+
+  &__input
+    //color: #D6D6D6
+    border: none
+    font-size: 1.6rem
+    outline: none
+
+    &::placeholder
+      color: rgba(214, 214, 214, 1)
+
+  &__settings
+    background: white
+    border-radius: .8rem
+    color: #D6D6D6
+    padding: 1rem 2rem
+
+    i
+      font-size: 2.4rem
+
+.directions
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  margin-top: 10px
+
+.addProfile
+  background-color: #FFFFFF
+  width: 30rem
+  max-width: 80rem
+  display: flex
+  align-items: center
+  padding: 3rem
+  border-radius: 10px
+  align-self: flex-end
+  font-size: 1.8rem
+  cursor: pointer
+  gap: 2rem
+
+  i
+    color: #001C79
+
+.addDirections
+  display: flex
+  gap: 2rem
+  flex-wrap: wrap
+
+  .box
+    width: 30rem !important
+    display: flex !important
+    justify-content: flex-start !important
+
+
+  input, select, textarea
+    border: 2px solid rgba(210, 210, 210, 1) !important
+    width: 25rem !important
+    margin-top: 10px
+
+  .button
+    width: 10rem
+    height: 6rem
+    align-items: center
+    align-self: center
+
+.direction
+  margin: 2rem 0 0 0
+  display: flex
+  flex-direction: column
+  gap: 2rem
+
+  &__main
+    display: flex
+    gap: 2rem
+    flex-wrap: wrap
+
+  h2
+    font-size: 2rem
+
+  ul
+    display: flex
+    font-size: 1.4rem
+    flex-wrap: wrap
+
+    align-items: center
+    gap: 2rem 3rem
+
+    li
+      display: flex
+      flex-direction: column
+
+      span
+        font-size: 1.2rem
+
+  &__link
+    align-self: flex-end
+    color: #001C79
+    font-size: 1.6rem
+    cursor: pointer
+
+.imagesContainer
+  width: 100%
+  margin-top: 10px
+
+  height: 200px
+
+  img
+    width: 100%
+.placeholder
+  margin-top: 10px
+  box-shadow:  0 0 5px 0
+  height: 200px
+  width: 250px
+  display: flex
+  justify-content: center
+  align-items: center
+  border-radius: 10px
+  i
+    color: grey
+    font-size: 5rem
+
+.aboutOtm
+  margin-top: 20px
+  h2
+
+    font-size: 2rem
+  &_box
+    width: 100%!important
+    display: flex
+    flex-direction: column
+    textarea
+      width: 100%!important
+      height: 60vh!important
+
+    button
+      align-self: flex-end!important
+      border: 1px solid #7F7F7F
+      color: #1E1E1E
+      &:hover
+        border: 1px solid
+.gallery
+  width: 100%!important
+  &__header
+    display: flex
+    justify-content: space-between
+    align-items: center
+  &__box
+    display: flex
+    gap: 2rem
+    flex-wrap: wrap
+
+  &__container
+    width: 250px
+
+    height: 200px
+
+    img
+      width: 100%
+      height: 100%
+      border-radius: 10px 10px 0 0
+  &__placeholder
+    margin-top: 10px
+    //box-shadow:  0 0 5px 0
+    height: 200px
+    width: 250px
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 10px
+    i
+      color: grey
+      font-size: 5rem
+  &__img
+    display: flex
+    flex-direction: column
+    box-shadow:  0 0 5px 0
+    border-radius: 10px
+    justify-content: center
+    align-items: center
+    h2
+      color: red
+      padding: 1rem
+      cursor: pointer

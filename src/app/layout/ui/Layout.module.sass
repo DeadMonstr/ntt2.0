@@ -1,0 +1,36 @@
+@import "app/styles/abstracts/variables"
+
+
+.layout
+  width: 100%
+  height: 100dvh
+  background-color: white
+  display: flex
+  //padding: 5.27rem 10rem
+  main
+    //padding-top: 4rem
+    width: 100%
+    height: 100vh
+    display: flex
+
+    flex-direction: column
+    position: relative
+    gap: 3rem
+
+    //overflow: auto
+    .page
+      width: 100%
+      //margin-top: 7.4rem
+      padding: 2rem
+      flex: 1
+      height: calc(100vh  - #{$appHeader-height} - .5rem)
+      overflow: auto
+
+@media (max-width: 430px)
+  .layout
+    padding: 1rem 1rem
+    main
+      .page
+        margin-top: 0
+        margin-left: 0
+

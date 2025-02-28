@@ -1,0 +1,34 @@
+
+
+.switcher
+  &__title
+    cursor: pointer
+    margin-left: 1rem
+  &__popup
+    transition: .4s
+    z-index: -100
+    top: 10%
+    visibility: hidden
+    opacity: 0
+    right: 5.8rem
+    background-color: white
+    &.active
+      opacity: 1
+      visibility: visible
+      top: 108%
+      z-index: 100 !important
+
+@media (max-width: 430px)
+  .switcher
+    &__title
+      width: 2.2rem
+
+@media (max-width: 375px)
+  .switcher
+    &__popup
+      right: 4.5rem
+
+@media (max-width: 320px)
+  .switcher
+    &__popup
+      right: 3.2rem

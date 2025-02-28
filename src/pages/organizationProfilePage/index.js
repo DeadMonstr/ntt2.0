@@ -1,0 +1,1 @@
+export {OrganizationProfilePage} from "./ui/organizationProfilePage";

@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jersey+15&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap')
+
+.table
+  width: 100%
+  //padding: 1rem
+  border-collapse: separate
+  //border-spacing: 0 3rem
+  -webkit-border-horizontal-spacing: 0
+  -webkit-border-vertical-spacing: 1.5rem
+
+  thead
+    tr
+      background: rgba(0, 74, 173, 1)
+      width: 100%
+
+    //border-bottom: 2px solid  #CFCFCF
+    //background-color: var(--thead-bg-color)
+    //th:first-child
+    //  border-top-left-radius: .8rem
+    //  border-bottom-left-radius: .8rem
+    //
+    //th:last-child
+    //  border-top-right-radius: .8rem
+    //  border-bottom-right-radius: .8rem
+
+    th
+      min-width: 10rem
+      padding: 2rem
+      margin: 0
+      border: none
+      outline: none
+      //padding: 1rem
+      font-size: 1.4rem
+      text-align: left
+      color: #FFFFFF
+      font-family: "Inter", serif
+      font-optical-sizing: auto
+      font-weight: 500
+      font-style: normal
+
+      &:first-child
+        min-width: 5rem
+        width: 5rem
+
+  tbody
+    border-collapse: separate
+    -webkit-border-vertical-spacing: 1rem !important
+    tr
+      background: #FFFFFF
+      width: 100%
+      transition: all .1s
+      border: 0 solid
+      border-radius: 1.6rem
+    td:first-child
+      border-top-left-radius: 1.6rem
+      border-bottom-left-radius: 1.6rem
+
+    td:last-child
+      border-top-right-radius: 1.6rem
+      border-bottom-right-radius: 1.6rem
+
+    //border-bottom: 2px solid #CFCFCF
+    //&:hover
+      background-color: #f3faff
+
+    td
+      width: fit-content
+      padding: 2rem
+      font-size: 1.6rem
+      color: #2D2D2D
+
+      i
+        cursor: pointer
+        font-size: 2rem
+        margin: 0 1rem
+        transition: all .1s
+        color: #2D2D2D
+
+@media (max-width: 430px)
+  .table
+

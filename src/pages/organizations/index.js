@@ -1,0 +1,1 @@
+import {OrganizationsPage} from "./ui/organizationsPage"

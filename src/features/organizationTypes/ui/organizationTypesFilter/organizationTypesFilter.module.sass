@@ -1,0 +1,232 @@
+.box
+  display: flex
+  flex-direction: column
+  gap: 2rem
+
+  &__container
+    display: flex
+    gap: 2rem
+    flex-wrap: wrap
+
+  &__btnBox
+    display: flex
+    width: 100%
+    gap: 3rem
+
+  &__buttonPanel
+    width: 100%
+    display: flex
+
+    gap: 2rem
+    flex-direction: column
+    &__wrapper
+      display: flex
+      gap: 1rem
+
+    &__container
+
+      height: 12rem
+      display: flex
+      //flex-direction: column
+      justify-content: space-between
+      gap: 1rem
+      //align-items: center
+      //align-self: end
+
+      select
+        border: 1px solid
+        width: 25rem
+      &__btn
+        //padding: 2.5rem
+        background: rgba(0, 74, 173, 1)
+        color: rgba(255, 255, 255, 1)
+        display: flex
+        height: fit-content
+        align-items: center
+        justify-content: center
+        //align-self: flex-end
+        //border-radius: 50%
+  &__item
+    width: 40rem
+    border: 1px solid rgba(174, 174, 178, 1)
+    padding: 2rem
+    border-radius: 10px
+    gap: 1rem
+    display: flex
+    //align-items: center
+    justify-content: space-between
+    flex-direction: column
+
+    &_header
+      display: flex
+      width: 100%
+      justify-content: space-between
+    &_logo
+      gap: 1rem
+      display: flex
+      align-items: center
+      position: relative
+      &_img
+        width: 4rem
+        height: 4rem
+        img
+          border-radius: 50%
+          width: 100%
+          height: 100%
+      .popupName
+        opacity: 0
+        position: absolute
+        bottom: -39px
+        font-size: 1.4rem
+        background-color: rgba(0, 0, 0, 0.56)
+        padding: 1rem
+        border-radius: 10px
+        backdrop-filter: blur(5px)
+        color: white
+        transition: .3s all
+      &:hover
+        .popupName
+          opacity: 1
+    &_request
+      display: flex
+      flex-direction: column
+      align-items: center
+      gap: .2rem
+      h2
+        font-weight: 400
+      &_number
+        font-weight: 700
+        background-color: rgba(52, 199, 89, 1)
+        width: 5rem
+        display: flex
+        justify-content: center
+        align-items: center
+
+        height: 5rem
+        border-radius: 50%
+        font-size: 1.6rem
+        color: white
+        cursor: pointer
+        position: relative
+        .popup
+          opacity: 0
+          position: absolute
+          bottom: -40px
+          background-color: rgba(0, 0, 0, 0.56)
+          padding: 1rem
+          border-radius: 10px
+          backdrop-filter: blur(5px)
+          transition: .3s all
+        &:hover
+          .popup
+            opacity: 1
+    &_body
+      display: grid
+      grid-template-columns: repeat(2 , 1fr)
+      gap: 2rem
+      &_info
+        h2
+          font-size: 1.8rem
+          font-weight: 500
+        span
+          font-size: 1.8rem
+          color: rgba(73, 69, 79, 1)
+  &__portal
+    display: flex
+    flex-direction: column
+    gap: 3rem
+
+    &__form
+      padding: 1rem
+      display: flex
+      flex-direction: column
+      gap: 2rem
+      &__input
+
+        border: 1px solid rgba(217, 217, 217, 1)
+      &__btn
+        width: 100%
+        background: #2561FA
+        color: white
+        transition: .5s
+
+        &:hover
+          background: #3757b9
+          color: white
+
+.mainBox__extraBox__typeBox__handlerBox
+
+
+  width: fit-content!important
+  height: 12rem
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: start
+  //padding-left: 4rem
+  gap: 2rem
+
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0
+
+  &__iconBox
+    width: 1rem
+    height: 1rem
+    padding: 3rem
+    display: flex
+    align-items: center
+    justify-content: center
+    background: #F2F2F7
+    border-radius: 50%
+
+    i
+      font-size: 2.5rem
+      color: #C7C7CC
+
+  &__contentBox
+    width: fit-content
+    display: flex
+    flex-direction: column
+    gap: 1rem
+
+    h1
+      font-family: Inter
+      font-weight: bold
+      color: #8E8E93
+
+    h3
+      font-family: Inter
+      font-weight: bolder
+      color: #8E8E93
+      font-size: 1.4rem
+.select
+  width: 100%
+
+  //box-shadow: 0 0 3px 0
+  outline: none
+  border-radius: 10px
+  border-color: rgba(217, 217, 217, 1)
+.active
+
+  height: 12rem
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: start
+  //padding-left: 4rem
+  gap: 2rem
+  border-radius: 20px
+  box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0
+  border: 1px solid #2D60FF
+
+  h1
+    color: black
+    font-family: Inter
+
+  h3
+    color: #718EBF
+
+  i
+    color: #2561FA
+
+  .mainBox__extraBox__typeBox__handlerBox__iconBox
+    background: #E7EDFF
