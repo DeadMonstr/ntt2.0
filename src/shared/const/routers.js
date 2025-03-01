@@ -5,6 +5,7 @@ export const getRouteApplications = () => "applications/*"
 export const getRouteApplicationsProfile = (id) => `applications/profile/${id}`
 
 export const getRouteTest = () => `subjectsTests`
+export const getRouteCreteTest = () => `createTest`
 
 export const getRouteOrganizationProfile = () => "organizationProfile/:id"
 

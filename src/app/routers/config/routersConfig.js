@@ -1,6 +1,6 @@
 import {
     getRouteApplications,
-    getRouteApplicationsProfile,
+    getRouteApplicationsProfile, getRouteCreteTest,
     getRouteDashboard,
     getRouteMain,
     getRouteOrganizationProfile,
@@ -24,7 +24,8 @@ import {
 import {DirectionProfile} from "features/organizationProfile/ui/directionProfile/directionProfile";
 import {Gallery} from "features/organizationProfile/ui/basicOrganization/basicOrganization";
 import {OrganizationTypesPage} from "pages/organizationTypesPage";
-import {SubjectsTests} from "pages/subjectsTests";
+import {SubjectsTestsPage} from "pages/subjectsTestsPage";
+import {CreateTest} from "pages/createTest";
 
 export const routersConfig = [
     {
@@ -99,7 +100,11 @@ export const routersConfig = [
     },
     {
         path: getRouteTest(),
-        element: <SubjectsTests/>
+        element: <SubjectsTestsPage/>
+    },
+    {
+        path: getRouteCreteTest(),
+        element: <CreateTest/>
     }
 
 ]
