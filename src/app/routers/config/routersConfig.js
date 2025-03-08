@@ -2,7 +2,7 @@ import {
     getRouteApplications,
     getRouteApplicationsProfile,
     getRouteDashboard,
-    getRouteMain,
+    getRouteMain, getRouteNews,
     getRouteOrganizationProfile,
     getRouteOrganizations,
     getRouteOrganizationTypes
@@ -24,6 +24,7 @@ import {
 import {DirectionProfile} from "../../../features/organizationProfile/ui/directionProfile/directionProfile";
 import {Gallery} from "../../../features/organizationProfile/ui/basicOrganization/basicOrganization";
 import {OrganizationTypesPage} from "../../../pages/organizationTypesPage";
+import {NewsPage} from "pages/newsPage";
 
 
 export const routersConfig = [
@@ -96,6 +97,10 @@ export const routersConfig = [
     {
         path: getRouteApplicationsProfile(":id"),
         element: <ApplicationProfile/>
+    },
+    {
+        path: getRouteNews(":id"),
+        element: <NewsPage/>
     },
 
 

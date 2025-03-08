@@ -21,6 +21,7 @@ export const AnnouncementsList = memo(({userRole,setIsChange,seasonId}) => {
 
 
     const dispatch= useDispatch()
+    console.log(selectedDegree)
 
     useEffect(() => {
         if (id && seasonId && selectedDegree) {
@@ -29,12 +30,14 @@ export const AnnouncementsList = memo(({userRole,setIsChange,seasonId}) => {
     },[id,seasonId,selectedDegree])
 
 
+    console.log(listAnn , "das")
 
 
 
 
     return (
         <div className={cls.announcements}>
+
             {
                 listAnn.map(item => {
                     return (

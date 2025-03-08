@@ -6,6 +6,7 @@
   width: 40rem
   gap: 2rem
   position: relative
+  overflow: hidden
   height: 50rem
   &__link
     position: absolute
@@ -65,13 +66,9 @@
       font-style: normal
     &_text
       font-size: 1.6rem
-      height: 7rem
-      overflow: auto
-      //color: #666666
-  &__links
-    display: flex
-    gap: 2rem
-    font-size: 3rem
+      color: #666666
+      height: 10rem
+      overflow-y: auto
 
 
 @media (max-width: 990px)

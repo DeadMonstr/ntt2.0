@@ -8,17 +8,15 @@ export const ApplicationHeader = ({active , setActive , data}) => {
 
     const renderList = () => {
         return data.map(item => (
-           <NavLink to={item.name}>
-               <li
-                   onClick={() => {
-                       setActive(item.name)
-                   }}
-                   className={classNames({
-                       [cls.active]: active === item.name
-                   })}>
-                   {item.label}
-               </li>
-           </NavLink>
+            <li
+                onClick={() => {
+                    setActive(item.name)
+                }}
+                className={classNames({
+                    [cls.active]: active === item.name
+                })}>
+                {item.label}
+            </li>
         ))
     }
 

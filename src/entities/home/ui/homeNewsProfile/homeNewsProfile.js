@@ -1,19 +1,28 @@
 import cls from "./homeNewsProfile.module.sass"
 import {getHomeNewsProfileItem} from "entities/home/model/selector/homeNewsSelector";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import profileImg from "shared/assets/images/profileImg.svg"
 import {Button} from "shared/ui/button/button";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import univerImg from "shared/assets/images/Ellipse 118.png"
+import {useEffect, useState} from "react";
+import {fetchProfileItem} from "entities/home/model/thunk/newsThunk";
 
 
 export const HomeNewsProfile = () => {
     const data = useSelector(getHomeNewsProfileItem)
 
+    const {id} = useParams()
     const navigate = useNavigate()
 
+    const dispatch = useDispatch()
+
+
+    useEffect(() => {
+        dispatch(fetchProfileItem(id))
+    } , [])
     const renderData = () => {
-        return data.map(item => (
+        return data?.landing?.map(item => (
             <div className={cls.profile__footer_container_box}>
 
                 <div className={cls.profile__footer_container_box_header}>
@@ -21,17 +30,17 @@ export const HomeNewsProfile = () => {
                     <h2>{item.name}</h2>
                 </div>
                 <ul>
-                    <li>Ta'lim tili <span>{item.lang}</span></li>
+                    <li>Ta'lim tili <span>{item.language}</span></li>
                     <li>Ta’lim shakli <span>{item.shift}</span></li>
-                    <li>Talablar <span>{item.requirements}</span></li>
-                    <li>Kontrakt to’lovi<span>{item.pay_sum}</span></li>
+                    <li>Talablar <span dangerouslySetInnerHTML={{__html: item.requirements}}></span></li>
+                    <li>Kontrakt to’lovi<span>{item.price}</span></li>
                 </ul>
 
                 <div className={cls.profile__footer_container_box_footer}>
                     <h2>
                         Yo'nalish haqida
                     </h2>
-                    <p>{item.about}</p>
+                    <p dangerouslySetInnerHTML={{__html: item.desc}}></p>
                 </div>
 
 
@@ -48,32 +57,14 @@ export const HomeNewsProfile = () => {
                         <img src={profileImg} alt=""/>
                     </div>
                     <div className={cls.profile__container_left_info}>
-                        O’zbekistonda Oliy Ta’limni 7 tilda olish mumkin.
+                        O’zbekistonda Oliy Ta’limni 3 tilda olish mumkin.
                     </div>
                 </div>
                 <div className={cls.profile__container_right}>
                     <div className={cls.profile__container_right_header}>
                         Ma’lumotlar
                     </div>
-                    <div className={cls.profile__container_right_info}>
-                        <ul>
-                            <li>- Barcha ta’lim dasturlarining 80%i o‘zbek tilida beriladi;</li>
-                            <li>- Rus tilida 13%;</li>
-                            <li>- Boshqa tillarda 7%: jumladan, qozoq, turkman va qoraqalpoq tillarida.</li>
-                        </ul>
-
-
-
-                        <ul>
-                            <li> Talabalar soni bo‘yicha qariyb 837 ming kishi o‘zbek tilida ta’lim olmoqda.</li>
-                            <li>- 135 mingga yaqini rus tilini asosiy til sifatida tanlagan.</li>
-                            <li>- 34 ming nafari qoraqalpoq tilini tanlagan.</li>
-                        </ul>
-
-                        <p>O‘tgan o‘quv yiliga nisbatan ushbu uch tildan birida tahsil olayotgan talabalar soni ko‘paydi.</p>
-
-                        <p>Tojik, turkman yoki qirg‘iz tillarida o‘qishni xohlovchilar kamroq.</p>
-
+                    <div className={cls.profile__container_right_info} dangerouslySetInnerHTML={{__html: data?.desc_json?.text}}>
 
                     </div>
                 </div>

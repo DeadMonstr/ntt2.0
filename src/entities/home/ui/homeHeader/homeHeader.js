@@ -8,7 +8,7 @@ import classNames from "classnames";
 import {useNavigate} from "react-router";
 
 const menuList = [
-    {name: "home", label: "Home"},
+    {name: "/", label: "Home"},
     {name: "technicSchools", label: "Texnikumlar"},
     {name: "directions", label: "Yo'nalish"},
     {name: "grant", label: "Grant"},
@@ -26,6 +26,7 @@ export const HomeHeader = () => {
 
     const navigate = useNavigate()
 
+
     const renderMenu = () => {
         return menuList.map(item => (
             <li
@@ -33,6 +34,7 @@ export const HomeHeader = () => {
                 setActiveMenu(item.name)
                 setActiveSubMenu(false)
 
+                navigate(item.name)
             }}
             className={classNames({
                 [activeSubMenu ? cls.activeSubmenu : cls.active]: activeMenu === item.name

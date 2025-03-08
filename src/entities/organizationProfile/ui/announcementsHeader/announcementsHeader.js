@@ -75,6 +75,7 @@ export const AnnouncementsHeader = memo(({userRole,setIsChange}) => {
             {/*    />}*/}
             {/*</div>*/}
             <div className={cls.announcementsHeader__menu}>
+
                 {
                     degrees.map(item => {
                         return (
