@@ -15,6 +15,7 @@ import {organizationTypesSlice} from "../features/organizationTypes";
 import {dashboardSlice} from "../pages/dashboardPage";
 import {alertSlice} from "../features/alert";
 import {homeNewsSlice} from "entities/home";
+import {subjectsTests} from "entities/subjectsTests";
 
 
 const stringMiddleware = () => (next) => (action) => {
@@ -44,7 +45,8 @@ export const store = configureStore({
         oftenUsedSlice,
         organizationTypesSlice,
         dashboardSlice,
-        homeNewsSlice
+        homeNewsSlice,
+        subjectsTests
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(

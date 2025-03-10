@@ -61,9 +61,6 @@ export const ApplicationPage = () => {
     },[type, degree, field, shift, language,search , active])
 
 
-
-
-
     return (
         <div className={cls.applicationPage}>
             <ApplicationHeader data={listData} active={active} setActive={setActive}/>

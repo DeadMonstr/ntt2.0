@@ -1,14 +1,14 @@
-import {Input} from "../../../shared/ui/input";
+import {Input} from "shared/ui/input";
 import cls from "./login.module.sass"
-import {Button} from "../../../shared/ui/button/button";
-import {Form} from "../../../shared/ui/form";
+import {Button} from "shared/ui/button/button";
+import {Form} from "shared/ui/form";
 import {useForm} from "react-hook-form";
-import {API_URL, useHttp} from "../../../shared/api/base";
+import {API_URL, useHttp} from "shared/api/base";
 import {useDispatch} from "react-redux";
 import {getUserData} from "../model/loginSlice";
 import {useNavigate} from "react-router";
-import {onAddAlertOptions} from "../../../features/alert/model/slice/alertSlice";
-import {Alert} from "../../../features/alert";
+import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {Alert} from "features/alert";
 
 export const Login = () => {
 

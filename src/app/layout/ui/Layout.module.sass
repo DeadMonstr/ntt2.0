@@ -4,26 +4,23 @@
 .layout
   width: 100%
   height: 100dvh
-  background-color: white
+  background-color: $color-main-bg
   display: flex
-  //padding: 5.27rem 10rem
+
+
   main
     //padding-top: 4rem
-    width: 100%
     height: 100vh
+    width: calc(100% - #{$appMenu-width})
     display: flex
-
     flex-direction: column
     position: relative
-    gap: 3rem
-
     //overflow: auto
     .page
       width: 100%
       //margin-top: 7.4rem
-      padding: 2rem
       flex: 1
-      height: calc(100vh  - #{$appHeader-height} - .5rem)
+      height: 100%
       overflow: auto
 
 @media (max-width: 430px)

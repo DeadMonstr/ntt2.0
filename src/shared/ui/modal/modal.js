@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import cls from "./modal.module.sass";
 import close from "shared/assets/icons/cross.svg";
 
-export const Modal = memo(({children, active, setActive, extraClass,type="simple" , typeIcon}) => {
+export const Modal = memo(({children, active, setActive, extraClass,type="simple" , typeIcon,title}) => {
 
     const onClick = (target) => {
         if (target && typeof target.className === 'string') {
@@ -27,6 +27,7 @@ export const Modal = memo(({children, active, setActive, extraClass,type="simple
                         onClick={(e) => onClick(e.target)}
                     >
                         <div className={classNames(cls.modal__inner, extraClass)}>
+                            <h1>{title}</h1>
 
                             {!typeIcon ?
                             <img

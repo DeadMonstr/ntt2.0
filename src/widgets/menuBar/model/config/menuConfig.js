@@ -33,6 +33,13 @@ export const menuConfig = [
         roles: [ROLES.admin]
     },
     {
+        to: "subjectsTests",
+        label: "Fan Testlari",
+        icon: <Settings/>,
+        back: true,
+        roles: [ROLES.admin]
+    },
+    {
         to: "news",
         label: "Yangiliklar",
         icon: <News/>,
