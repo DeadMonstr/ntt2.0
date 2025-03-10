@@ -5,12 +5,12 @@ import cls from "./Layout.module.sass"
 import {Header} from "widgets/header";
 import {MenuBar} from "widgets/menuBar/ui/MenuBar";
 import {Outlet, useNavigate} from "react-router";
-import {Button} from "../../../shared/ui/button/button";
+
 import {useDispatch, useSelector} from "react-redux";
-import {fetchUserProfileData} from "../../../entities/userProfile/model/userProfileThunk";
-import {getUserId} from "../../../pages/login/model/loginSelector";
-import {Alert} from "../../../features/alert";
-import {MenuConfig} from "../../../widgets/menuBar/model/config/menuConfig";
+import {fetchUserProfileData} from "entities/userProfile/model/userProfileThunk";
+
+import {Alert} from "features/alert";
+
 
 
 
