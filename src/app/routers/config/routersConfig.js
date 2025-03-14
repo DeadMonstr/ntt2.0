@@ -1,11 +1,11 @@
 import {
     getRouteApplications,
-    getRouteApplicationsProfile,
+    getRouteApplicationsProfile, getRouteCreteTest,
     getRouteDashboard,
-    getRouteMain,
+    getRouteMain, getRouteNews,
     getRouteOrganizationProfile,
     getRouteOrganizations,
-    getRouteOrganizationTypes
+    getRouteOrganizationTypes, getRouteTest,
 } from "shared/const/routers";
 import {DashboardPage} from "pages/dashboardPage";
 
@@ -21,9 +21,12 @@ import {
     OrganizationAbout,
     OrganizationProfile
 } from "features/organizationProfile";
-import {DirectionProfile} from "../../../features/organizationProfile/ui/directionProfile/directionProfile";
-import {Gallery} from "../../../features/organizationProfile/ui/basicOrganization/basicOrganization";
-import {OrganizationTypesPage} from "../../../pages/organizationTypesPage";
+import {DirectionProfile} from "features/organizationProfile/ui/directionProfile/directionProfile";
+import {Gallery} from "features/organizationProfile/ui/basicOrganization/basicOrganization";
+import {OrganizationTypesPage} from "pages/organizationTypesPage";
+import {SubjectsTestsPage} from "pages/subjectsTestsPage";
+import {CreateTest} from "pages/createTest";
+import {NewsPage} from "pages/newsPage";
 
 
 export const routersConfig = [
@@ -96,6 +99,18 @@ export const routersConfig = [
     {
         path: getRouteApplicationsProfile(":id"),
         element: <ApplicationProfile/>
+    },
+    {
+        path: getRouteTest(),
+        element: <SubjectsTestsPage/>
+    },
+    {
+        path: getRouteCreteTest(),
+        element: <CreateTest/>
+    },
+    {
+        path: getRouteNews(":id"),
+        element: <NewsPage/>
     },
 
 

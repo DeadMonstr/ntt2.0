@@ -52,14 +52,13 @@ export const ApplicationPage = () => {
             field_id:field,
             shift_id: shift,
             language_id: language,
-            search
+            search,
+            status: active
+
         }
 
         dispatch(fetchApplicationData(data))
-    },[type, degree, field, shift, language,search])
-
-
-
+    },[type, degree, field, shift, language,search , active])
 
 
     return (
@@ -72,19 +71,7 @@ export const ApplicationPage = () => {
 
 
             </div>
-            <Outlet/>
-            <Routes>
-                <Route
-                    index
-                    element={<Navigate to={active}/>}
-                />
-                <Route
-                    path={"allRequest"}
-                    element={
-                        <ApplicationList list={requests?.results || []}/>
-                    }
-                />
-            </Routes>
+            <ApplicationList list={requests?.results || []}/>
         </div>
     )
 }

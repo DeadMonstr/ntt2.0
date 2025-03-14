@@ -1,7 +1,8 @@
-import {HomeHeader, HomeNewsProfile, HomePage} from "entities/home";
+import {HomeHeader, HomeNewsProfile, HomePage, OnlineTestEnter} from "entities/home";
+
 
 import cls from "./homePage.module.sass"
-import {HomeNews} from "features/homePage";
+import {HomeNews, OnlineTestEnterFeature} from "features/homePage";
 import {Outlet, Route, Routes} from "react-router";
 
 export const Home = () => {
@@ -16,7 +17,9 @@ export const Home = () => {
                         <HomePage/>
                         <HomeNews/>
                     </div>}/>
-                <Route path={"news-profile/:id"} element={<HomeNewsProfile/>}/>
+                <Route path={"news/:id"} element={<HomeNewsProfile/>}/>
+                <Route path={"onlineTest"} element={<OnlineTestEnter/>}/>
+                <Route path={"onlineTest/onlineTestEnter"} element={<OnlineTestEnterFeature/>}/>
 
             </Routes>
 

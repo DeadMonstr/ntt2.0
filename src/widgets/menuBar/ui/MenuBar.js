@@ -51,7 +51,7 @@ export const MenuBar = () => {
 
                     <img className={cls.profile__img} src={userLogo} alt="Logo"/>
 
-                    <h2>Shahzod Sobirjonov</h2>
+                    <h2>Shahzod Omonboyev</h2>
                 </div>
                 <div className={cls.options}>
                     {
