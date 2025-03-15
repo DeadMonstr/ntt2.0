@@ -65,7 +65,6 @@ export const OrganizationProfilePage = () => {
                 <div className={cls.left}>
                     <OrganizationProfileInfoModal
                         userRole={userRole === "organization"}
-                        // userRole={true}
                     />
                 </div>
                 <div className={cls.right}>

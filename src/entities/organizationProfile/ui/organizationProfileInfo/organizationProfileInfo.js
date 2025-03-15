@@ -17,10 +17,10 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
     const userProfile = useSelector(getOrganizationProfileUserData)
     const userProfileImage = useSelector(getOrganizationProfileUserImageData)
 
-    console.log(data?.locations)
+
     return (
         <div className={cls.info}>
-            {userRole && userProfile?.id && (
+            {/*{userRole && userProfile?.id && (*/}
                 <>
                     <i
                         className={classNames(
@@ -38,7 +38,7 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
                         onClick={() => isDel(true)}
                     />
                 </>
-            )}
+            {/*)}*/}
             <div
                 className={cls.info__header}
             >
@@ -70,13 +70,15 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
             </div>
             <div className={cls.info__container}>
                 <img className={cls.info__image} src={data?.img} alt=""/>
-                {userRole && <i
+                {/*{userRole && */}
+                    <i
                     className={classNames(
                         "fas fa-pen",
                         cls.iconSub
                     )}
                     onClick={() => setActive(true)}
-                />}
+                />
+                {/*}*/}
                 <div className={cls.info__form}>
                     <Input
                         value={data?.name}

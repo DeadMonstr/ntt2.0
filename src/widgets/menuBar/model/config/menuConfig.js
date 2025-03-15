@@ -10,42 +10,51 @@ export const menuConfig = [
     {
         to: "dashboard",
         label: "Dashboard",
-        icon: <Dashboard/>,
+        img: <Dashboard/>,
         roles: [ROLES.admin , ROLES.organization_admin]
     },
     {
         to: "applications",
         label: "Arizalar",
-        icon: <Applications/>,
+        img: <Applications/>,
         roles: [ROLES.admin , ROLES.organization_admin]
     },
     {
         to: "organizationTypes",
-        label: "Organizations",
-        icon: <CourseApplications/>,
-        roles: [ROLES.admin]
+        label: "Tashkilotlar",
+        img: <CourseApplications/>,
+        roles: [ROLES.admin ]
+    },
+    {
+        to: "organizationProfile",
+        label: "",
+        img: <CourseApplications/>,
+        back: true,
+        isOrganization: true,
+        roles: [ROLES.organization_admin]
     },
     {
         to: "settings",
         label: "Sozlamalar",
-        icon: <Settings/>,
+        img: <Settings/>,
         back: true,
         roles: [ROLES.admin]
     },
     {
         to: "subjectsTests",
         label: "Fan Testlari",
-        icon: <Settings/>,
+        img: <Settings/>,
         back: true,
-        roles: [ROLES.admin]
+        roles: [ROLES.admin , ROLES.organization_admin]
     },
     {
         to: "news",
         label: "Yangiliklar",
-        icon: <News/>,
+        img: <News/>,
         back: true,
-        roles: [ROLES.admin]
+        roles: [ROLES.admin , ROLES.organization_admin]
     },
+
 
 
 ]

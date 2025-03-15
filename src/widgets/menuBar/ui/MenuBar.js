@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import classNames from "classnames";
 import {isMobile} from "react-device-detect";
 import {NavLink} from "react-router-dom";
+import logOut from "shared/assets/icons/Log out.svg"
 
 
 import cls from "./MenuBar.module.sass"
@@ -9,6 +10,7 @@ import {useSelector} from "react-redux";
 import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
 import {menuConfig} from "../model/config/menuConfig";
 import userLogo from "shared/assets/images/userLogo.svg";
+import {useNavigate} from "react-router";
 
 export const MenuBar = () => {
 
@@ -18,32 +20,36 @@ export const MenuBar = () => {
     const userOrganizationName = useSelector(getUserOrganizationName)
     const userOrganizationId = useSelector(getUserOrganizationId)
 
+    const navigate = useNavigate()
+
     const renderMenuList = useCallback(() => {
         return menuConfig?.map(item => {
-            // if (item.roles?.includes(userRole?.toLowerCase())) {
+            if (item.roles?.includes(userRole?.toLowerCase())) {
 
 
-            return (
-                <NavLink
-                    onClick={() => setActiveMultiLink(false)}
-                    key={item.to}
-                    className={
-                        ({isActive}) =>
-                            isActive ? classNames(cls.options__item, cls.active) : cls.options__item
-                    }
-                    to={item?.isOrganization ? `${item.to}/${userOrganizationId}` : item.to}
-                >
-                    {item.icon}
+                return (
+                    <NavLink
+                        onClick={() => setActiveMultiLink(false)}
+                        key={item.to}
+                        className={
+                            ({isActive}) =>
+                                isActive ? classNames(cls.options__item, cls.active) : cls.options__item
+                        }
+                        to={item?.isOrganization ? `${item.to}/${userOrganizationId}` : item.to}
+                    >
+                        {item.img}
+                        <h1>{item?.isOrganization ? userOrganizationName : item.label}</h1>
 
-                    {/*{item.icon ? <i className={classNames(item.icon)}/> : <img src={item.img.organization} alt=""/>}*/}
-                    <h1>{item?.isOrganization ? userOrganizationName : item.label}</h1>
-
-                </NavLink>
-            )
-            // }
+                    </NavLink>
+                )
+            }
         })
     }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole, menuConfig])
 
+    const onLogOut = () => {
+        localStorage.clear()
+        navigate("/login")
+    }
     return (
         <>
             <div className={cls.menubar}>
@@ -57,7 +63,17 @@ export const MenuBar = () => {
                     {
                         renderMenuList()
                     }
+                    <div onClick={onLogOut} className={cls.menubar__logout}>
+
+                        <img src={logOut} alt=""/>
+                        <h2>Chiqish</h2>
+
+                    </div>
                 </div>
+
+
+
+
 
             </div>
         </>

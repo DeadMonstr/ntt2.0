@@ -16,6 +16,7 @@ import {useForm} from "react-hook-form";
 export const OrganizationProfileGrants = ({isChange, setIsChange}) => {
     const {id} = useParams()
     const data = useSelector(getOrganizationProfileData)
+    console.log(data)
 
     // const formData = new FormData()
     // const {register , handleSubmit , setValue} = useForm()

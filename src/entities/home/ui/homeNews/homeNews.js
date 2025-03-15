@@ -8,7 +8,7 @@ export const HomeNewsList = ({item}) => {
     console.log(item)
     const navigate = useNavigate()
 
-    const [activeItem , setActiveItem] = useState(null)
+    const [activeItem, setActiveItem] = useState(null)
 
     console.log(activeItem)
     const [activeModal, setActiveModal] = useState(false)
@@ -16,13 +16,21 @@ export const HomeNewsList = ({item}) => {
 
         return item?.results?.map(item => (
             <div className={cls.box}>
-                <div className={cls.box__icons}>
-                    <i onClick={() => {
-                        setActiveModal(true)
-                        setActiveItem(item)
-                    }} className="fa-solid fa-share-from-square"></i>
+
+                <div className={cls.box__links}>
+                    <a href={item?.shared?.telegram}>
+                        <i className={"fa-brands fa-telegram"}/>
+                    </a>
+                    <a href={item?.shared?.facebook}>
+                        <i className={"fa-brands fa-facebook"}/>
+                    </a>
+                    <a href={item?.shared?.instagram}>
+                        <i className={"fa-brands fa-instagram"}/>
+                    </a>
+
 
                 </div>
+
 
                 <div className={cls.box__img}>
                     <img src={item.img ? item.img : itemImg} alt=""/>
@@ -57,25 +65,9 @@ export const HomeNewsList = ({item}) => {
     }
     return (
         <>
+
             {renderData()}
-            <Modal active={activeModal} setActive={setActiveModal}>
-                <h2>Links</h2>
-                <div className={cls.box__links}>
-                    <a href={activeItem?.shared?.telegram}>
-                        <i className={"fa-brands fa-telegram"}/>
-                    </a>
-                    <a href={activeItem?.shared?.facebook}>
-                        <i className={"fa-brands fa-facebook"}/>
-                    </a>
-                    <a href={activeItem?.shared?.instagram}>
-                        <i className={"fa-brands fa-instagram"}/>
-                    </a>
 
-
-
-                </div>
-
-            </Modal>
         </>
     );
 };
