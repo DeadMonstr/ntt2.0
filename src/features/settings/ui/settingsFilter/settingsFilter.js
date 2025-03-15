@@ -32,7 +32,7 @@ export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, activ
             <Radio children={item.name} checked={activeFilter === item.id} onChange={() => setActiveFilter(item.id)}/>
         ))
     }
-    console.log(active)
+
 
     return (
 
@@ -45,7 +45,7 @@ export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, activ
                     <div onClick={() => setActiveAdd(true)} className={cls.filter__add}>
 
                         <i className={"fa fa-plus"}/>
-                        Tashkilot qo’shish
+                        {activeFilter === 1 ? "Yo'nalish qo'shish" : "Darajalar qo'shish"}
                     </div>
                 </div>
 
@@ -55,7 +55,9 @@ export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, activ
             </div>
             <div onClick={() => setActiveElem(!activeElem)} className={cls.filter__filter}>
 
-                {activeItem}
+                <div className={cls.filter__filter_item}>
+                    {activeItem} <i className="fa-solid fa-up-down"></i>
+                </div>
                 <div className={`${cls.filter__hidden} ${activeElem ? cls.filter__active : ""}`}>
                     {filterData?.map(item => (
                         <div

@@ -11,3 +11,4 @@ export const getRouteOrganizationProfile = () => "organizationProfile/:id"
 
 export const getRouteOrganizations = () => "organizations"
 export const getRouteOrganizationTypes = () => "organizationTypes"
+export const getRouteNews = () => "news"

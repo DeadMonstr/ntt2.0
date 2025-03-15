@@ -45,6 +45,8 @@ export const SettingsPage = () => {
             }
         }
     }, [active, currentPage, dispatch, activeFilter])
+
+
     return (
         <div className={cls.settings}>
 

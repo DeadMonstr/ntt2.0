@@ -9,7 +9,7 @@ import {useSelector} from "react-redux";
 import {getOrganizationProfileData} from "entities/organizationProfile";
 
 
-export const OrganizationProfileInfoAbout = ({userRole , isChange , setIsChange}) => {
+export const OrganizationProfileInfoAbout = ({isChange , setIsChange}) => {
 
 
     const {id} = useParams()

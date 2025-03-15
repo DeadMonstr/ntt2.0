@@ -28,9 +28,13 @@ import {useParams} from "react-router";
 import {
     getOrganizationProfileUserImageData
 } from "../../../../entities/organizationProfile/model/selector/organizationProfileSelector";
-import {getOrganizationImage} from "../../../../entities/organizationProfile/model/slice/organizationProfileSlice";
+import {
+    getOrganizationImage,
+    updateAdminInfo
+} from "../../../../entities/organizationProfile/model/slice/organizationProfileSlice";
 import {fetchOrganizationTypesFilter} from "../../../organizationTypes/model/thunk/organizationTypesThunk";
 import {organizationTypeFilter} from "../../../organizationTypes/model/selector/organizationTypesSelector";
+import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 
 export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
@@ -92,6 +96,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 dispatch(updateData(res))
                 console.log(res, "update")
                 setActiveModal(false)
+                dispatch(updateAdminInfo(res))
             })
             .catch(err => console.log(err))
         formData.delete("name")
@@ -118,6 +123,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                             phone_extra: data?.phone_extra
                         }
                     }
+
                     request(
                         `${API_URL}organizations/organization_user/crud/create/`,
                         "POST",
@@ -127,6 +133,11 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                     )
                         .then(res => {
                             dispatch(createUserData(res))
+                            dispatch(onAddAlertOptions({
+                                status: true,
+                                type: "success",
+                                msg: "Admin qo'shildi"
+                            }))
                             setActiveAddModal(false)
                         })
                         .catch(err => console.log(err))
@@ -153,6 +164,11 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 .then(res => {
                     dispatch(createUserData(res))
                     setActiveAddModal(false)
+                    dispatch(onAddAlertOptions({
+                        status: true,
+                        type: "success",
+                        msg: "Admin qo'shildi"
+                    }))
                 })
                 .catch(err => console.log(err))
         }
@@ -192,6 +208,11 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                             .then(res => {
                                 dispatch(createUserData(res))
                                 setActiveAddModal(false)
+                                dispatch(onAddAlertOptions({
+                                    status: true,
+                                    type: "success",
+                                    msg: "Admin muvaffaqiyatli o'zgartirildi"
+                                }))
                             })
                             .catch(err => console.log(err))
                     }
@@ -221,6 +242,11 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         console.log(res)
                         dispatch(createUserData(res))
                         setActiveAddModal(false)
+                        dispatch(onAddAlertOptions({
+                            status: true,
+                            type: "success",
+                            msg: "Admin muvaffaqiyatli o'zgartirildi"
+                        }))
                     })
                     .catch(err => console.log(err))
             }
@@ -234,10 +260,16 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         )
             .then(res => {
                 console.log(res)
+                dispatch(onAddAlertOptions({
+                    status: true,
+                    type: "success",
+                    msg: "Admin muvaffaqiyatli o'chirildi"
+                }))
+                dispatch(deleteUserData())
+                setIsDelete(false)
             })
             .catch(err => console.log(err))
-        dispatch(deleteUserData())
-        setIsDelete(false)
+
     }
 
     const onChangeUserName = (e) => {
@@ -306,7 +338,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         titleOption={"Region"}
                     />
                     <Input
-                        required
+                        // required
                         name={"locations"}
                         value={data?.locations}
                         register={register}

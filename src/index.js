@@ -6,13 +6,16 @@ import App from "./app/App";
 import {StoreProvider} from "app/providers/storeProvider";
 
 import "./app/styles/index.sass"
+import {HelmetProvider} from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
-        <StoreProvider>
-            <App/>
-        </StoreProvider>
+        <HelmetProvider>
+            <StoreProvider>
+                <App/>
+            </StoreProvider>
+        </HelmetProvider>
     </React.StrictMode>
 );
 

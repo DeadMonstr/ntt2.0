@@ -9,6 +9,9 @@ import {getUserData} from "../model/loginSlice";
 import {useNavigate} from "react-router";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {Alert} from "features/alert";
+import logo from "shared/assets/logo/blue_logo.png"
+import loginImg from "shared/assets/images/login.png"
+import bg from "shared/assets/images/bg.svg"
 
 export const Login = () => {
 
@@ -23,9 +26,9 @@ export const Login = () => {
         request(`${API_URL}token/`, "POST", JSON.stringify(data))
             .then(res => {
                 dispatch(getUserData(res))
-                if (res.status !== "False"){
+                if (res.status !== "False") {
                     navigate(`../admin`)
-                }else {
+                } else {
                     dispatch(onAddAlertOptions({
                         status: true,
                         type: "error",
@@ -38,21 +41,28 @@ export const Login = () => {
     }
 
     return (
-        <div className={cls.login}>
-            <Alert/>
-            <div className={cls.login__box}>
-                <h1>Login</h1>
-                <Form isChange={false} onSubmit={handleSubmit(onPost)}>
+        <div className={cls.pcContainer}>
+            <div className={cls.pcContainer__img}>
+                <img src={loginImg} alt=""/>
+                <img className={cls.pcContainer__img_posImg} src={bg} alt=""/>
+            </div>
 
+            <div style={{display: "flex", justifyContent: "center", width: "50%"}}>
+                <div className={cls.pcContainer__content}>
+                    <img src={logo} alt=""/>
+                    <h1>Tizimga kirish!</h1>
+                    <Form isChange={false}>
+                        <Input style={{width: "50rem"}} extraClass={cls.pcContainer__content__form__input}
+                               title={"Username"} register={register}
+                               placeholder={"Username"} name={"phone"}/>
+                        <Input style={{width: "50rem"}} extraClass={cls.pcContainer__content__form__input}
+                               title={"Parol"} register={register}
+                               placeholder={"Parol"} name={"password"} type={"password"}/>
+                        <Button onClick={handleSubmit(onPost)}>Login</Button>
 
-                    <Input required placeholder={"Enter your username"} register={register} name={"phone"}/>
-                    <Input required placeholder={"Enter your password"} type={"password"} register={register} name={"password"}/>
+                    </Form>
 
-                    <Button type={"submit"} extraClass={cls.login__button}>
-                        Login
-                    </Button>
-                </Form>
-
+                </div>
             </div>
         </div>
     );
