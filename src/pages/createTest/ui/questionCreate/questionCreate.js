@@ -2,10 +2,12 @@ import React, {useCallback, useEffect, useLayoutEffect, useRef, useState, create
 import styles from "./style.module.sass";
 import classNames from "classnames";
 import QuestionVariants from "pages/createTest/ui/questionCreate/variants/questionVariant";
-import {BackUrlForDoc} from "constants/global";
-import Radio from "components/ui/form/radio";
-import {ExcContext} from "helpers/contexts";
-import Input from "../../ui/form/input";
+import {API_URL_DOC} from "shared/api/base";
+import {Radio} from "shared/ui/radio";
+import {ExcContext} from "shared/lib/context/excContext";
+import {Input} from "shared/ui/input";
+import {Select} from "shared/ui/select";
+import {Button} from "shared/ui/button/button";
 
 const QuestionContext = createContext()
 
@@ -96,7 +98,7 @@ const ViewExc = ({onChangeCompletedComponent, questionComponent = {}, setAnswers
                 someFilled: questionComponent?.variants?.typeVariants === "select" ? variants.some(item => item.checked) : input.length > 0
             })
         }
-    }, [variants, input, questionComponent,isChanged])
+    }, [variants, input, questionComponent, isChanged])
 
 
     return (
@@ -118,7 +120,7 @@ const ViewExc = ({onChangeCompletedComponent, questionComponent = {}, setAnswers
                         questionComponent.innerType === "text" ? <p>{questionComponent.text}</p>
                             :
                             questionComponent.innerType === "image" ? <img
-                                    src={typeof questionComponent.image === "string" ? `${BackUrlForDoc}${questionComponent.image}` : URL.createObjectURL(questionComponent.image)}
+                                    src={typeof questionComponent.image === "string" ? `${API_URL_DOC}${questionComponent.image}` : URL.createObjectURL(questionComponent.image)}
                                     alt=""/>
                                 :
                                 <div className={styles.words}>
@@ -145,7 +147,7 @@ const ViewExc = ({onChangeCompletedComponent, questionComponent = {}, setAnswers
                                                     <p>{item.text}</p>
                                                     :
                                                     <img
-                                                        src={typeof item.img === "string" ? `${BackUrlForDoc}${item.img}` : URL.createObjectURL(item.img)}
+                                                        src={typeof item.img === "string" ? `${API_URL_DOC}${item.img}` : URL.createObjectURL(item.img)}
                                                         alt=""/>
                                             }
                                         </Radio>
@@ -185,14 +187,15 @@ const CreateExc = ({questionComponent, onSetCompletedComponent, onDeleteComponen
     const imageRef = useRef()
 
     const changeType = (e) => {
-        setInnerType(e.target.value)
+        setInnerType(e)
     }
 
     useEffect(() => {
         if (questionComponent) {
             setText(questionComponent?.text)
             setInnerType(questionComponent.innerType ? questionComponent.innerType : "text")
-            setWords(questionComponent?.words)
+            // setWords(questionComponent?.words)
+            setWords([])
             setVariants(questionComponent?.variants)
             setImage(questionComponent?.image)
         }
@@ -288,25 +291,48 @@ const CreateExc = ({questionComponent, onSetCompletedComponent, onDeleteComponen
     return (
         <div className={styles.createQuestion}>
 
+            <h1>Создание теста</h1>
 
-            <div className={styles.subHeader}>
-                <i
-                    onClick={() => onDeleteComponent(questionComponent.index)}
-                    className={`fa-solid fa-trash ${styles.trash}`}
-                />
-            </div>
+            <Input
+                placeholder={"Название теста"}
+            />
+
+            {/*<div className={styles.subHeader}>*/}
+            {/*    */}
+            {/*</div>*/}
             <div className={styles.createQuestion__header}>
+
+                <div className={styles.subHeader}>
+                    <i
+                        onClick={() => onDeleteComponent(questionComponent.index)}
+                        className={`fa-solid fa-trash ${styles.trash}`}
+                    />
+                    <Select
+                        extraClass={styles.input}
+                        onChangeOption={changeType}
+                        defaultValue={"text"}
+                        options={[
+                            {id: "text", name: "Text"},
+                            {id: "image", name: "Image"},
+                            {id: "imageInText", name: "Image in text"},
+                        ]}
+                    />
+                </div>
                 {
                     innerType === "text" || innerType === "imageInText" ?
-                        <textarea disabled={innerType === "imageInText"} value={text}
-                                  onChange={e => setText(e.target.value)} name="" id=""/>
-                        : null
+                        <Input placeholder={"Введите вопрос"}/> : null
                 }
+                {/*{*/}
+                {/*    innerType === "text" || innerType === "imageInText" ?*/}
+                {/*        <textarea disabled={innerType === "imageInText"} value={text}*/}
+                {/*                  onChange={e => setText(e.target.value)} name="" id=""/>*/}
+                {/*        : null*/}
+                {/*}*/}
                 {
                     innerType === "image" ?
                         <div className={styles.image} onClick={onGetImage}>
                             {image ? <img
-                                src={typeof image === "string" ? `${BackUrlForDoc}${image}` : URL.createObjectURL(image)}
+                                src={typeof image === "string" ? `${API_URL_DOC}${image}` : URL.createObjectURL(image)}
                                 alt=""/> : <h1>Rasm tanlang</h1>}
                         </div>
                         : null
@@ -317,19 +343,19 @@ const CreateExc = ({questionComponent, onSetCompletedComponent, onDeleteComponen
                     ref={imageRef}
                 />
                 {/*<input value={text} onChange={e => setText(e.target.value)} type="text"/>*/}
-                <select value={innerType} name="" id="" onChange={changeType}>
-                    <option value="text">Text</option>
-                    <option value="image">Image</option>
-                    <option value="imageInText">Image in text</option>
-                </select>
+                {/*<select value={innerType} name="" id="" onChange={changeType}>*/}
+                {/*    <option value="text">Text</option>*/}
+                {/*    <option value="image">Image</option>*/}
+                {/*    <option value="imageInText">Image in text</option>*/}
+                {/*</select>*/}
             </div>
             <div className={styles.createQuestion__container}>
-                {
-                    innerType === "text" ?
-                        <div className={styles.createQuestion__text}>
-                            {text}
-                        </div> : null
-                }
+                {/*{*/}
+                {/*    innerType === "text" ?*/}
+                {/*        <div className={styles.createQuestion__text}>*/}
+                {/*            {text}*/}
+                {/*        </div> : null*/}
+                {/*}*/}
                 {
                     innerType === "image" ?
                         <>
@@ -369,9 +395,15 @@ const CreateExc = ({questionComponent, onSetCompletedComponent, onDeleteComponen
                     setVariants={setVariants}
                 />
 
-                <div onClick={onSubmit} className={styles.btn}>
-                    Tasdiqlash
-                </div>
+                <Button
+                    extraClass={styles.button}
+                >
+                    Сохранить тест
+                </Button>
+
+                {/*<div onClick={onSubmit} className={styles.btn}>*/}
+                {/*    Tasdiqlash*/}
+                {/*</div>*/}
             </div>
         </div>
     )
@@ -387,7 +419,7 @@ const Words = React.memo(({words, handleDoubleClick, type}) => {
                 return (
                     <img
                         onDoubleClick={() => handleDoubleClick(index)}
-                        src={typeof item.img === "string" ? `${BackUrlForDoc}${item.img}` : URL.createObjectURL(item.img)}
+                        src={typeof item.img === "string" ? `${API_URL_DOC}${item.img}` : URL.createObjectURL(item.img)}
                         alt=""
                     />
                 )
@@ -410,7 +442,7 @@ const Words = React.memo(({words, handleDoubleClick, type}) => {
                 return (
                     <img
                         onDoubleClick={() => handleDoubleClick(index)}
-                        src={typeof item.img === "string" ? `${BackUrlForDoc}${item.img}` : URL.createObjectURL(item.img)}
+                        src={typeof item.img === "string" ? `${API_URL_DOC}${item.img}` : URL.createObjectURL(item.img)}
                         alt=""
                     />
                 )
