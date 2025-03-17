@@ -1,9 +1,7 @@
 import {
-    ApplicationProfileHeader,
+
     ApplicationProfileInfo,
-    ApplicationProfileInfoDocument,
-    ApplicationProfileInfoEducation,
-    ApplicationProfileUserDocument,
+
     fetchApplicationProfileData
 } from "entities/applicationProfile";
 import cls from "./application.module.sass"
@@ -12,24 +10,26 @@ import {useDispatch, useSelector} from "react-redux";
 import {applicationProfileSelectors} from "entities/applicationProfile";
 import {useParams} from "react-router";
 
-export const ApplicationProfile = ({getId}) => {
+export const ApplicationProfile = () => {
     const {id} = useParams()
-    console.log(id, 'dsdds')
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(fetchApplicationProfileData({id}))
-    },[dispatch])
+    }, [dispatch])
+
+    const data = useSelector(applicationProfileSelectors)
+
+
 
 
 
     return (
         <div className={cls.application}>
-            <ApplicationProfileHeader/>
-            <ApplicationProfileInfo/>
-            <ApplicationProfileInfoDocument/>
-            <ApplicationProfileUserDocument/>
-            <ApplicationProfileInfoEducation/>
+            <h2>Ariza beruvchi</h2>
+
+            <ApplicationProfileInfo data={data}/>
+
         </div>
     );
 };
