@@ -30,7 +30,12 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const [portal, setPortal] = useState(false)
     const [activeConfirm, setActiveConfirm] = useState(false)
     const [changeRegion, setChangeRegion] = useState(false)
+
+    useEffect(() => {
+        if (region) setChangeRegion(region[0].id)
+    } , [region])
     const [changeType, setChangeType] = useState(false)
+
 
     const navigate = useNavigate()
 
@@ -95,7 +100,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const onCreate = (data) => {
         const res = {
             ...data,
-            region: +selectRegion,
+            region: changeRegion,
             organization_type: selectType
         }
         request(`${API_URL}organizations/organization/crud/create/`, "POST", JSON.stringify(res), headers())
@@ -215,7 +220,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <Form onSubmit={handleSubmit(onCreate)} extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
@@ -231,7 +236,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <Form extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}

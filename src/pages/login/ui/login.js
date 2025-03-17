@@ -38,10 +38,13 @@ export const Login = () => {
 
             })
 
+
+
     }
 
     return (
         <div className={cls.pcContainer}>
+            <Alert/>
             <div className={cls.pcContainer__img}>
                 <img src={loginImg} alt=""/>
                 <img className={cls.pcContainer__img_posImg} src={bg} alt=""/>

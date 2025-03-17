@@ -52,7 +52,7 @@ export const menuConfig = [
         label: "Yangiliklar",
         img: <News/>,
         back: true,
-        roles: [ROLES.admin , ROLES.organization_admin]
+        roles: [ROLES.organization_admin]
     },
 
 

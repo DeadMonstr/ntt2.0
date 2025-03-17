@@ -8,57 +8,67 @@ import homeImg from "shared/assets/images/homeImg.svg"
 import univerLogo from "shared/assets/logo/logo.png"
 import {Button} from "shared/ui/button/button";
 import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getHomeItem} from "entities/home/model/selector/homeSelector";
+import {fetchHomeItem} from "entities/home/model/thunk/homeThunk";
 
 
 export const HomePage = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1114);
 
+    const homeItem = useSelector(getHomeItem)
+
+    const dispatch = useDispatch()
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth <= 1114);
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+    useEffect(() => {
+        dispatch(fetchHomeItem())
+    }, [])
 
     const renderItem = () => {
-         if (!isMobile) {return [ 1 , 2 ,3 ,4].map(item => (
-            <div className={cls.main__footer_box}>
-                <div className={cls.main__footer_box_logo}>
-                    <img src={univerLogo} alt=""/>
-                    <div className={cls.main__footer_box_logo_text}>
-                        <h1>Buxgalteriya hisobi va moliya</h1>
-                        <h2>Toshkent Viloyati</h2>
+        if (!isMobile) {
+            return homeItem?.results?.map(item => (
+                <div className={cls.main__footer_box}>
+                    <div className={cls.main__footer_box_logo}>
+                        <img src={univerLogo} alt=""/>
+                        <div className={cls.main__footer_box_logo_text}>
+                            <h1>{item.name}</h1>
+                            <h2>{item.region}</h2>
+                        </div>
+                    </div>
+                    <div className={cls.main__footer_box_descr}>
+                        {item.descr}
+                    </div>
+                    <div className={cls.main__footer_box_contact}>
+                        <h2>{item.direction}</h2>
+                        <h3>Batafsil <i className={"fa fa-arrow-right"}/></h3>
                     </div>
                 </div>
-                <div className={cls.main__footer_box_descr}>
-                    Oliy ta’lim muassasasi bo‘lib, talabalar ilmiy va kasbiy bilimlarni chuqurlashtirishadi. ta’lim
-                    beradi.
+            ))
+        } else {
+            return (
+                <div className={cls.main__footer_box}>
+                    <div className={cls.main__footer_box_logo}>
+                        <img src={univerLogo} alt=""/>
+                        <div className={cls.main__footer_box_logo_text}>
+                            <h1>Buxgalteriya hisobi va moliya</h1>
+                            <h2>Toshkent Viloyati</h2>
+                        </div>
+                    </div>
+                    <div className={cls.main__footer_box_descr}>
+                        Oliy ta’lim muassasasi bo‘lib, talabalar ilmiy va kasbiy bilimlarni chuqurlashtirishadi. ta’lim
+                        beradi.
+                    </div>
+                    <div className={cls.main__footer_box_contact}>
+                        <h2>18 ta yo’nalish bor</h2>
+                        <h3>Batafsil <i className={"fa fa-arrow-right"}/></h3>
+                    </div>
                 </div>
-                <div className={cls.main__footer_box_contact}>
-                    <h2>18 ta yo’nalish bor</h2>
-                    <h3>Batafsil <i className={"fa fa-arrow-right"}/></h3>
-                </div>
-            </div>
-        ))} else {
-             return (
-                 <div className={cls.main__footer_box}>
-                     <div className={cls.main__footer_box_logo}>
-                         <img src={univerLogo} alt=""/>
-                         <div className={cls.main__footer_box_logo_text}>
-                             <h1>Buxgalteriya hisobi va moliya</h1>
-                             <h2>Toshkent Viloyati</h2>
-                         </div>
-                     </div>
-                     <div className={cls.main__footer_box_descr}>
-                         Oliy ta’lim muassasasi bo‘lib, talabalar ilmiy va kasbiy bilimlarni chuqurlashtirishadi. ta’lim
-                         beradi.
-                     </div>
-                     <div className={cls.main__footer_box_contact}>
-                         <h2>18 ta yo’nalish bor</h2>
-                         <h3>Batafsil <i className={"fa fa-arrow-right"}/></h3>
-                     </div>
-                 </div>
-             )
-         }
+            )
+        }
     }
 
     return (
