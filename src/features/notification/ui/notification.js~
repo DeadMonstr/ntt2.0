@@ -29,7 +29,7 @@ export const Notification = () => {
 
             <div className={cls.notification__list}>
                 {
-                    data?.results?.map(item => (
+                    data?.map(item => (
                         <Link to={`/admin/notification/item/${item.student_id}`}>
                             <div className={cls.notification__list_item}>
                                 <img src={img} alt=""/>

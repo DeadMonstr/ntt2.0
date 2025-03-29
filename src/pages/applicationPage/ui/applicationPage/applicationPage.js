@@ -1,4 +1,3 @@
-
 import {ApplicationHeader, ApplicationList} from "entities/application";
 
 import cls from "./applicationPage.module.sass";
@@ -15,7 +14,6 @@ import {
     applicationTypeSelectors
 } from "../../model/selectors/applicationSelectors";
 import {Navigate, Outlet, Route, Routes} from "react-router";
-
 
 
 const listData = [
@@ -36,7 +34,7 @@ export const ApplicationPage = () => {
     const requests = useSelector(applicationRequestsSelectors)
 
 
-    const [active , setActive] = useState(listData[0].name)
+    const [active, setActive] = useState(listData[0].name)
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
     const degree = useSelector(applicationDegreeSelectors)
@@ -49,7 +47,7 @@ export const ApplicationPage = () => {
         const data = {
             type_id: type,
             degree_id: degree,
-            field_id:field,
+            field_id: field,
             shift_id: shift,
             language_id: language,
             search,
@@ -58,19 +56,19 @@ export const ApplicationPage = () => {
         }
 
         dispatch(fetchApplicationData(data))
-    },[type, degree, field, shift, language,search , active])
+    }, [type, degree, field, shift, language, search, active])
 
-
+    const role = localStorage.getItem("role")
     return (
         <div className={cls.applicationPage}>
             <ApplicationHeader data={listData} active={active} setActive={setActive}/>
 
-            <div className={cls.applicationPage__header}>
+            {role !== "organization" && <div className={cls.applicationPage__header}>
                 <h1 className={cls.applicationPage__title}>{listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}</h1>
                 <ApplicationFilters/>
 
 
-            </div>
+            </div>}
             <ApplicationList list={requests?.results || []}/>
         </div>
     )
