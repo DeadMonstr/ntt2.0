@@ -42,11 +42,16 @@ export const SeasonSwitcher = ({active, setActive}) => {
         dispatch(fetchAcademicYear())
     }, [])
 
-    console.log(years , "dasd")
+    console.log(years, "dasd")
 
     useEffect(() => {
 
-            dispatch(fetchCurrentSeason({id: years.filter(item => item.current_year)[0]?.id , title: years.filter(item => item.current_year)[0]?.date}))
+        if (years) {
+            dispatch(fetchCurrentSeason({
+                id: years.filter(item => item.current_year)[0]?.id,
+                title: years.filter(item => item.current_year)[0]?.date
+            }))
+        }
 
     }, [years])
 
@@ -55,7 +60,7 @@ export const SeasonSwitcher = ({active, setActive}) => {
     }
     const onToggle = () => setActive(active === "season" ? "" : "season")
 
-    console.log(currentYear , "das")
+    console.log(currentYear, "das")
     return (
         <div className={cls.switcher}>
             <h2 className={cls.subtitle}>Mavsumni o'zgartirish</h2>

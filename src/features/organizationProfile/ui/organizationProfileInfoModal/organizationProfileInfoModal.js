@@ -174,11 +174,12 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         }
     }
 
+    console.log(userProfileImage , "dasd")
     const onChange = (data) => {
         if (newImageFile) {
             formData.append("url", newImageFile)
             request(
-                `${API_URL}organizations/organization_user/crud/update-file/${userProfileImage?.id}/`,
+                `${API_URL}organizations/organization_user/crud/update-file/${userProfile?.id}/`,
                 "PATCH",
                 formData,
                 {}

@@ -1,0 +1,28 @@
+.notification {
+  width: fit-content;
+  max-width: 34rem;
+  border: 1px solid #D1D1D6;
+  border-radius: 0.8rem;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.notification__title {
+  color: #2D2D2D;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.notification__text {
+  font-size: 1.4rem;
+  color: #929292;
+}
+.notification__date {
+  font-size: 1.2rem;
+  color: #2561FA;
+  align-self: flex-end;
+}
+
+/*# sourceMappingURL=notificationItem.module.css.map */

@@ -28,6 +28,7 @@ export const loginSlice =createSlice({
                 const oldUserId  = localStorage.getItem('user_id');
                 console.log(oldUserId, decodedToken.user_id, "hellllllllo")
                 localStorage.setItem('user_id', decodedToken.user_id);
+
             }
             state.loading = false
             state.error = null

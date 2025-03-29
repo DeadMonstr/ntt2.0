@@ -35,7 +35,7 @@ export const News = () => {
         <div className={cls.news}>
 
             <div className={cls.news__header}>
-                <h1>So’ngi yangiliklar {!activeModal ? "% Trendlar" : "yaratish"}</h1>
+                <h1>So’ngi yangiliklar {!activeModal ? "Trendlar" : "yaratish"}</h1>
                 <h3>Hamasini ko’rish</h3>
             </div>
 
