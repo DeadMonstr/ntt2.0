@@ -71,6 +71,9 @@ const OrganizationProfileSlice = createSlice({
         updateSelectedDegree: (state, action) => {
             state.selectedDegree = action.payload
         },
+        updateAdminInfo: (state , action) => {
+            state.userData = action.payload
+        }
     },
     extraReducers: builder =>
         builder
@@ -206,6 +209,7 @@ export const {
     createUserData,
     deleteAnnouncements,
     getOrganizationImage,
-    updateSelectedDegree
+    updateSelectedDegree,
+    updateAdminInfo
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer

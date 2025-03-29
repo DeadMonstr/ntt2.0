@@ -189,6 +189,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
             <Form extraClassname={cls.create} id={"createForm"} isChange={false} onSubmit={onSubmit}>
                 <Button onClick={() => setIsChange(false)}>Back</Button>
+
                 <div className={cls.create__change}>
                     <Select defaultValue={degree} required onChangeOption={setDegree} options={degrees}
                             extraClass={cls.create__select}
@@ -212,7 +213,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                     <Input value={end} required onChange={onChangedEndTime} type={"date"} title={"End date"}
                            extraClass={cls.create__input}/>
                     <Input
-                        required
+                        // required
                         checked={grant}
                         onChange={onChangedGrant}
                         type={"checkbox"}

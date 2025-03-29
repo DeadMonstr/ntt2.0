@@ -1,7 +1,7 @@
 import React, {useCallback, useContext, useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "../style.module.sass";
 import {QuestionContext} from "pages/createTest/ui/questionCreate/questionCreate";
-import {BackUrlForDoc} from "constants/global";
+import {API_URL_DOC} from "shared/api/base";
 
 const QuestionVariants = ({setVariants,variants}) => {
 
@@ -325,7 +325,7 @@ const Option = React.memo( ({index,item,onChange,onChangeIsTrue,isView,onDeleteO
 					item.innerType === "text" ?
 						<span>{item.text}</span>
 						:
-						<img src={typeof item.img === "string" ? `${BackUrlForDoc}${item.img}` : URL.createObjectURL(item.img)} alt=""/>
+						<img src={typeof item.img === "string" ? `${API_URL_DOC}${item.img}` : URL.createObjectURL(item.img)} alt=""/>
 				}
 			</label>
 		)
@@ -352,7 +352,7 @@ const Option = React.memo( ({index,item,onChange,onChangeIsTrue,isView,onDeleteO
 								<div onClick={onGetImage} className={styles.option__img}>
 
 									{
-										img ? <img src={typeof img === "string" ? `${BackUrlForDoc}${img}` : URL.createObjectURL(img)} alt=""/> : <h1>Rasm tanlang</h1>
+										img ? <img src={typeof img === "string" ? `${API_URL_DOC}${img}` : URL.createObjectURL(img)} alt=""/> : <h1>Rasm tanlang</h1>
 									}
 
 									<input

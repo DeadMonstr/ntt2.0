@@ -19,31 +19,32 @@ import {ConfirmModal} from "../../../../shared/ui/confirmModal";
 import {Textarea} from "../../../../shared/ui/textArea";
 import {useNavigate} from "react-router";
 import logo from "shared/assets/logo/logo.png"
+import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 
 export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelectType, selectType}) => {
 
     const filter = useSelector(organizationTypeFilter)
     const cards = useSelector(organizationTypeCard)
     const region = useSelector(getRegions)
-    const containerRef = useRef(null);
-    const [constraint, setConstraint] = useState(0);
-    const [category, setCategory] = useState('school')
     const [active, setActive] = useState(filter[0]?.id)
     const [portal, setPortal] = useState(false)
     const [activeConfirm, setActiveConfirm] = useState(false)
     const [changeRegion, setChangeRegion] = useState(false)
+
+    useEffect(() => {
+        if (region) setChangeRegion(region[0].id)
+    } , [region])
     const [changeType, setChangeType] = useState(false)
-    // const [selectRegion, setSelectRegion] = useState(false)
-    // const [selectType, setSelectType] = useState(filter[0]?.id)
+
 
     const navigate = useNavigate()
 
 
-    useEffect(() => {
-        if (filter && Object.keys(filter).length) {
-            setActive(filter[0].id)
-        }
-    }, [filter])
+    // useEffect(() => {
+    //     if (filter && Object.keys(filter).length) {
+    //         setActive(filter[0].id)
+    //     }
+    // }, [filter])
 
 
     const [activeItem, setActiveItem] = useState(null)
@@ -77,35 +78,40 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
 
 
 
-    const renderItem = () => {
-        return filter?.map(item => (
-            <Button
-                extraClass={active === item.id ? cls.active : cls.mainBox__extraBox__typeBox__handlerBox}
-                onClick={() => {
-                    setCategory(item?.category)
-                    setActive(item?.id)
-                }}
-            >
-                <span className={cls.mainBox__extraBox__typeBox__handlerBox__contentBox}>
-                            <h1>{item?.name}</h1>
-                            <h3>{item?.descr}</h3>
-                        </span>
-
-            </Button>
-        ))
-    }
+    // const renderItem = () => {
+    //     return filter?.map(item => (
+    //         <Button
+    //             extraClass={active === item.id ? cls.active : cls.mainBox__extraBox__typeBox__handlerBox}
+    //             onClick={() => {
+    //                 setCategory(item?.category)
+    //                 setActive(item?.id)
+    //             }}
+    //         >
+    //             <span className={cls.mainBox__extraBox__typeBox__handlerBox__contentBox}>
+    //                         <h1>{item?.name}</h1>
+    //                         <h3>{item?.descr}</h3>
+    //                     </span>
+    //
+    //         </Button>
+    //     ))
+    // }
 
 
     const onCreate = (data) => {
         const res = {
             ...data,
-            region: +selectRegion,
+            region: changeRegion,
             organization_type: selectType
         }
         request(`${API_URL}organizations/organization/crud/create/`, "POST", JSON.stringify(res), headers())
             .then(res => {
                 dispatch(addOrganization(res))
                 setPortal(false)
+                dispatch(onAddAlertOptions({
+                    type: "success",
+                    status: true,
+                    msg: "Tashkilot qo'shildi"
+                }))
             })
 
     }
@@ -160,12 +166,13 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
             <div className={cls.box__container}>
                 {cards?.results?.map(card => (
                 <div
+                    onClick={() => navigate(`../organizationProfile/${card.id}`)}
                     className={cls.box__item}
                     // key={card.id}
                 >
                     <div className={cls.box__item_header}>
                         <div
-                            onClick={() => navigate(`../organizationProfile/${card.id}`)}
+
 
                             className={cls.box__item_logo}>
                             <div className={cls.box__item_logo_img}>
@@ -213,7 +220,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <Form onSubmit={handleSubmit(onCreate)} extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
@@ -229,7 +236,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <Form extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
