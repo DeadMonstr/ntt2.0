@@ -28,7 +28,7 @@ export const HomeNews = () => {
 
 
                 <div className={cls.news__header}>
-                    <h1>So’ngi yangiliklar % Trendlar</h1>
+                    <h1>So’ngi yangiliklar  Trendlar</h1>
                     <h3>Hamasini ko’rish</h3>
                 </div>
 

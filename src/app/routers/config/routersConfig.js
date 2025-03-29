@@ -2,7 +2,7 @@ import {
     getRouteApplications,
     getRouteApplicationsProfile, getRouteCreteTest,
     getRouteDashboard,
-    getRouteMain, getRouteNews,
+    getRouteMain, getRouteNews, getRouteNotification,
     getRouteOrganizationProfile,
     getRouteOrganizations,
     getRouteOrganizationTypes, getRouteTest, getRouteTestPage,
@@ -27,6 +27,7 @@ import {OrganizationTypesPage} from "pages/organizationTypesPage";
 import {SubjectsTestsPage} from "pages/subjectsTestsPage";
 import {CreateTest} from "pages/createTest";
 import {NewsPage} from "pages/newsPage";
+import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
 import {TestPage} from "pages/testPage";
 
 
@@ -116,6 +117,10 @@ export const routersConfig = [
     {
         path: getRouteNews(":id"),
         element: <NewsPage/>
+    },
+    {
+        path: "notification/*",
+        element: <NotificationPage/>
     },
 
 

@@ -5,6 +5,7 @@ import  { ReactComponent as Applications }   from "shared/assets/images/Vector-1
 import  { ReactComponent as CourseApplications }   from "shared/assets/images/Vector-2.svg";
 import { ReactComponent as Settings }   from "shared/assets/images/Vector-3.svg";
 import { ReactComponent as News }   from "shared/assets/icons/fluent_news-16-regular.svg";
+import { ReactComponent as Notification }   from "shared/assets/icons/ion_mail-notification.svg";
 
 export const menuConfig = [
     {
@@ -23,7 +24,7 @@ export const menuConfig = [
         to: "organizationTypes",
         label: "Tashkilotlar",
         img: <CourseApplications/>,
-        roles: [ROLES.admin ]
+        roles: [ROLES.admin]
     },
     {
         to: "organizationProfile",
@@ -45,7 +46,7 @@ export const menuConfig = [
         label: "Fan Testlari",
         img: <Settings/>,
         back: true,
-        roles: [ROLES.admin , ROLES.organization_admin]
+        roles: [ROLES.admin]
     },
     {
         to: "news",
@@ -54,6 +55,13 @@ export const menuConfig = [
         back: true,
         roles: [ROLES.organization_admin]
     },
+    {
+        to: "notification",
+        label: "Bildirishnomalar",
+        img: <Notification/>,
+        roles: [ROLES.organization_admin]
+    },
+
 
 
 

@@ -35,7 +35,7 @@ export const OrganizationProfileGrants = ({isChange, setIsChange}) => {
 
 
     useEffect(() => {
-        if (data?.desc) {
+        if (data) {
             setText(data?.grand_text)
             setEditorState(data?.grand_json)
         }

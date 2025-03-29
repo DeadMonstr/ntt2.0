@@ -160,14 +160,14 @@ function OnSetEditorState({oldEditorState}) {
 
 
 
-const TextEditor = React.memo(({onSubmit,editorState,text,title,isSubmit}) => {
+const TextEditor = React.memo(({onSubmit,editorState,text,title,isSubmit ,extraClass}) => {
 
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
 
 
-            <div className={"editor"}>
+            <div className={`editor  ${extraClass}`}>
                 <h2>{title}</h2>
                 <div className="editor-container">
                     <ToolbarPlugin />

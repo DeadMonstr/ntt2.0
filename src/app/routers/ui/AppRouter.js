@@ -18,7 +18,7 @@ export const AppRouter = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
-                <Route path={"/*"} element={<Home/>}/>
+
 
                 <Route
                     path={"/login"}
@@ -26,7 +26,7 @@ export const AppRouter = () => {
                 />
 
                 <Route
-                    // element={<RequireAuth/>}
+                    element={<RequireAuth/>}
                 >
                     <Route
                         path={"admin/*"}
@@ -52,10 +52,10 @@ export const AppRouter = () => {
                 </Route>
 
 
-                {/*<Route*/}
-                {/*    index*/}
-                {/*    element={<Navigate to={"/"}/>}*/}
-                {/*/>*/}
+                <Route
+                    index
+                    element={<Navigate to={"/login"}/>}
+                />
 
             </>
         )

@@ -17,6 +17,7 @@ import {alertSlice} from "../features/alert";
 import {homeNewsSlice} from "entities/home";
 import {subjectsTests} from "entities/subjectsTests";
 import homeSlice from "entities/home/model/slice/homeSlice";
+import {notificationSlice} from "entities/notification";
 import {createTestSlice} from "pages/createTest";
 
 
@@ -50,7 +51,8 @@ export const store = configureStore({
         homeNewsSlice,
         subjectsTests,
         homeSlice,
-        createTestSlice
+        createTestSlice,
+        notificationSlice
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(

@@ -30,6 +30,7 @@ const userProfileSlice = createSlice({
                 state.userJob = action.payload?.role
                 state.userOrganizationName = action.payload?.organization_name
                 state.userOrganizationId = action.payload?.organization_id
+                localStorage.setItem("organization_id", action.payload?.organization_id)
                 localStorage.setItem("role", action.payload?.role)
 
                 localStorage.setItem("phone",  action.payload.phone)
