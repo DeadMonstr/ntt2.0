@@ -1,0 +1,78 @@
+@import "app/styles/abstracts/variables"
+
+.test
+  padding: 10rem 0
+  display: flex
+  justify-content: space-between
+  &__container
+    width: 48%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    gap: 4rem
+    .title
+      font-size: 3.2rem
+    .image
+      object-fit: cover
+      width: fit-content
+    .info
+      display: flex
+      flex-direction: column
+      gap: 3rem
+      &__title
+        font-size: 2.4rem
+      &__text
+        font-size: 1.6rem
+      &__list
+        display: flex
+        justify-content: space-between
+        gap: 4rem
+        .percent
+          display: flex
+          flex-direction: column
+          gap: .3rem
+          font-size: 3.2rem
+          &__inner
+            font-size: 1.6rem
+            color: #000000 !important
+    .form
+      display: flex
+      flex-direction: column
+      gap: 3rem
+      &__title
+        display: flex
+        justify-content: space-between
+        font-size: 2.4rem
+      &__lan
+        display: flex
+        gap: 2rem
+        .selectLan
+          padding: 1.2rem 4.5rem
+          border: 1px solid #C7C7CC
+          border-radius: .8rem
+          color: #C7C7CC
+          display: flex
+          align-items: center
+          gap: .5rem
+          font-size: 1.6rem
+          transition: .2s
+          &.active
+            color: $main-color
+            border: 1px solid $main-color
+      &__sub
+        display: flex
+        flex-direction: column
+        gap: 2rem
+        .subs
+          width: fit-content
+          min-width: 30rem
+          display: flex
+          justify-content: space-between
+          font-size: 1.6rem
+    .btn
+      width: 100%
+      margin: 0
+    .reverse
+      color: $main-color
+      border: 1px solid $main-color
+      background: #fff

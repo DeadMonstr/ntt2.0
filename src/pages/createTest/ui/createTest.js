@@ -1,11 +1,15 @@
-import React, {useCallback, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDropzone} from "react-dropzone";
 import classNames from "classnames";
+import {useDispatch, useSelector} from "react-redux";
 
+import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {Select} from "shared/ui/select";
 import {Radio} from "shared/ui/radio";
 import {Input} from "shared/ui/input";
 import {Button} from "shared/ui/button/button";
+import {createQuestion, createTest} from "../model/createTestThunk";
+import {getCreateTestData} from "../model/createTestSelector";
 
 import cls from "./createTest.module.sass"
 
@@ -16,15 +20,46 @@ const types = [
 
 export const CreateTest = () => {
 
+    const dispatch = useDispatch()
     const {getInputProps, getRootProps} = useDropzone()
+    const testData = useSelector(getCreateTestData)
+
+    // useEffect(() => {
+    //     dispatch(createTest({
+    //         name: null,
+    //         field: null,
+    //         subject: null,
+    //         duration: null,
+    //         blocks: [
+    //             {
+    //                 text: null,
+    //                 to_json: {},
+    //                 questions: [
+    //                     {
+    //                         isTrue: true,
+    //                         answer: null,
+    //                         to_json: {}
+    //                     },
+    //                     {
+    //                         isTrue: false,
+    //                         answer: null,
+    //                         to_json: {}
+    //                     }
+    //                 ]
+    //             }
+    //         ]
+    //     }))
+    // }, [])
 
     const [questionList, setQuestionList] = useState([
         {
             id: "custom1",
             type: "text",
-            variantList: [{id: "custom1", type: "text", checked: true}]
+            variantList: [{id: "custom1", type: "text", checked: true}],
+            isChange: false
         }
     ])
+    const [isError, setIsError] = useState("")
 
     const onAddVariant = (questionId) => {
         setQuestionList(prevState =>
@@ -87,27 +122,63 @@ export const CreateTest = () => {
     }
 
     const onChangeTrueVersion = (questionId, variantId) => {
-        // setTrueVariant(prev =>
-        // [
-        //     {questionId, variantId},
-        //     ...prev.filter(item => item.questionId !== questionId)
-        // ],
-        // )
-    }
-
-    const onAddQuestion = () => {
-        const ID = Number(questionList[questionList.length - 1].id.slice(6, 7)) + 1
-        setQuestionList(prevState => [...prevState, {
-            id: `custom${ID}`,
-            type: "text",
-            variantList: [{id: "custom1", type: "text", checked: true}]
-        }])
+        setQuestionList(prevState =>
+            prevState.map(item => ({
+                id: item.id,
+                type: item.type,
+                variantList: item.variantList.map(inner => {
+                    if (inner.id === variantId) {
+                        return {
+                            id: inner.id,
+                            type: inner.type,
+                            checked: true
+                        }
+                    } else return {
+                        id: inner.id,
+                        type: inner.type,
+                        checked: false
+                    }
+                })
+            }))
+        )
     }
 
     const onRemoveQuestion = (id) => {
         setQuestionList(prevState =>
             prevState.filter(item => item.id !== id)
         )
+    }
+
+    const onSaveQuestion = () => {
+        if (questionList[questionList.length - 1].variantList.length < 2) {
+            dispatch(onAddAlertOptions({
+                type: "error",
+                status: true,
+                msg: "Yana javoblar qoshing"
+            }))
+            setIsError("Yana javoblar qoshing")
+            return null
+        }
+        dispatch(createQuestion({
+            id: 14,
+            data: questionList.map(item => {
+                return {
+                    text: item.value ?? null,
+                    questions: item.variantList.map(inner => {
+                        return {
+                            isTrue: !!inner.checked,
+                            answer: inner.value ?? null
+                        }
+                    })
+                }
+            })[0]
+        }))
+        const ID = Number(questionList[questionList.length - 1].id.slice(6, 7)) + 1
+        setQuestionList(prevState => [...prevState, {
+            id: `custom${ID}`,
+            type: "text",
+            variantList: [{id: "custom1", type: "text", checked: true}]
+        }])
     }
 
     console.log(questionList, "questionList")
@@ -117,7 +188,7 @@ export const CreateTest = () => {
             return (
                 <div className={cls.variant}>
                     <Radio
-                        name={item.id}
+                        name={ID}
                         extraClasses={cls.variant__correct}
                         checked={item.checked}
                         onChange={() => onChangeTrueVersion(ID, item.id)}
@@ -133,7 +204,7 @@ export const CreateTest = () => {
                         {
                             item.type === "text"
                                 ? <Input
-                                    placeholder={"Savolni yozing"}
+                                    placeholder={"Javobni yozing"}
                                 />
                                 : item.type === "image"
                                     ? <div
@@ -161,10 +232,14 @@ export const CreateTest = () => {
                         <i
                             className={classNames("fa-solid fa-pen", cls.change)}
                         />
-                        <i
-                            className={classNames("fa-solid fa-trash", cls.trash)}
-                            onClick={() => onRemoveVariant(item.id, ID)}
-                        />
+                        {
+                            list.length > 1 ?
+                                !item.checked ?
+                                    <i
+                                        className={classNames("fa-solid fa-trash", cls.trash)}
+                                        onClick={() => onRemoveVariant(item.id, ID)}
+                                    /> : null : null
+                        }
                     </div>
                 </div>
             )
@@ -182,6 +257,7 @@ export const CreateTest = () => {
                             title={"Savol turi"}
                             onChangeOption={(data) => selectQuestionType(data, item.id)}
                             defaultValue={item.type}
+                            status={item.isChange ? "" : "disabled"}
                         />
                         <div className={cls.innerWrapper}>
                             <i
@@ -202,8 +278,10 @@ export const CreateTest = () => {
                             item.type === "text"
                                 ? <Input
                                     placeholder={"Savolni yozing"}
+                                    disabled={!item.isChange}
                                 />
                                 : <div
+                                    aria-disabled={!item.isChange}
                                     className={cls.imageArea}
                                     {...getRootProps()}
                                 >
@@ -234,13 +312,19 @@ export const CreateTest = () => {
                 <h2 className={cls.title}>Test yaratish</h2>
                 <div className={cls.wrapper}>
                     {renderQuestions()}
+                    <Button
+                        onClick={onSaveQuestion}
+                        extraClass={cls.wrapper__btn}
+                    >
+                        Savolni saqlash
+                    </Button>
                 </div>
-                <div className={cls.plusQuestion}>
-                    <i
-                        className={classNames("fa-solid fa-plus", cls.plusQuestion__icon)}
-                        onClick={onAddQuestion}
-                    />
-                </div>
+                {/*<div className={cls.plusQuestion}>*/}
+                {/*    <i*/}
+                {/*        className={classNames("fa-solid fa-plus", cls.plusQuestion__icon)}*/}
+                {/*        onClick={onAddQuestion}*/}
+                {/*    />*/}
+                {/*</div>*/}
             </div>
         </div>
     );

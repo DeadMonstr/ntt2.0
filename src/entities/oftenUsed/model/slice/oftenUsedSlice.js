@@ -1,11 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchAcademicYear, fetchEducationLanguage, fetchRegionsData, fetchShifts} from "../thunk/oftenUsedThunk";
+import {
+    fetchEducationLanguage,
+    fetchAcademicYear,
+    fetchRegionsData,
+    fetchSubjects,
+    fetchFields,
+    fetchShifts
+} from "../thunk/oftenUsedThunk";
 
 const initialState = {
     regions: null,
     educationLanguages: [],
     academicYears: [],
     shifts: [],
+    subjects: [],
+    fields: [],
     loading: null,
     error: null
 }
@@ -67,6 +76,34 @@ const oftenUsedSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchShifts.rejected, (state) => {
+                state.loading = null
+                state.error = "error"
+            })
+
+            .addCase(fetchSubjects.pending, (state) => {
+                state.loading = "subjectsLoading"
+                state.error = null
+            })
+            .addCase(fetchSubjects.fulfilled, (state, action) => {
+                state.shifts = action.payload?.results
+                state.loading = "subjectsSuccess"
+                state.error = null
+            })
+            .addCase(fetchSubjects.rejected, (state) => {
+                state.loading = null
+                state.error = "error"
+            })
+
+            .addCase(fetchFields.pending, (state) => {
+                state.loading = "fieldsLoading"
+                state.error = null
+            })
+            .addCase(fetchFields.fulfilled, (state, action) => {
+                state.shifts = action.payload?.results
+                state.loading = "fieldsSuccess"
+                state.error = null
+            })
+            .addCase(fetchFields.rejected, (state) => {
                 state.loading = null
                 state.error = "error"
             })

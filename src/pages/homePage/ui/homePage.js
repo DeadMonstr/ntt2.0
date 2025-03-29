@@ -1,4 +1,4 @@
-import {HomeHeader, HomeNewsProfile, HomePage, OnlineTestEnter} from "entities/home";
+import {HomeHeader, HomeNewsProfile, HomePage, HomeTest, OnlineTestEnter, TestRating, TestSolving} from "entities/home";
 
 
 import cls from "./homePage.module.sass"
@@ -20,6 +20,9 @@ export const Home = () => {
                 <Route path={"news/:id"} element={<HomeNewsProfile/>}/>
                 <Route path={"onlineTest"} element={<OnlineTestEnter/>}/>
                 <Route path={"onlineTest/onlineTestEnter"} element={<OnlineTestEnterFeature/>}/>
+                <Route path={"test"} element={<HomeTest/>}/>
+                <Route path={"testSolving"} element={<TestSolving/>}/>
+                <Route path={"testRating"} element={<TestRating/>}/>
 
             </Routes>
 

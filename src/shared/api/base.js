@@ -1,8 +1,8 @@
 
 
 // export const API_URL_DOC = `http://26.12.122.72:8000/`
-// export const API_URL_DOC = `http://26.12.122.72:8000/`
-export const API_URL_DOC = `https://ntt.avotra.ru/`
+export const API_URL_DOC = `http://26.246.101.91:8000/`
+// export const API_URL_DOC = `https://ntt.avotra.ru/`
 export const API_URL = `${API_URL_DOC}api/`
 
 
