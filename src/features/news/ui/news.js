@@ -17,6 +17,7 @@ import TextEditor from "entities/textEditor/TextEditor";
 import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
 import {fetchNews} from "entities/home/model/thunk/newsThunk";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {getUserOrganizationId} from "entities/userProfile";
 
 export const News = () => {
     const homeNewsData = useSelector(getHomeNews)
@@ -27,8 +28,10 @@ export const News = () => {
     const [activeEditItem, setActiveEditItem] = useState(false)
     const dispatch = useDispatch()
 
+
+    const orgId = localStorage.getItem("organization_id")
     useEffect(() => {
-        dispatch(fetchNews())
+        dispatch(fetchNews(orgId))
     }, [])
 
     return (
@@ -70,6 +73,9 @@ const AddHomeNews = ({active, setActive}) => {
     const [editor, setEditor] = useState(null)
     const [newImageFile, setNewImageFile] = useState(null)
 
+    const organization = useSelector(getUserOrganizationId)
+
+
     const {request} = useHttp()
     const dispatch = useDispatch()
 
@@ -78,12 +84,12 @@ const AddHomeNews = ({active, setActive}) => {
             setNewImageFile(acceptedFiles[0])
         }
     })
-    console.log(editor)
     const onPostData = (data) => {
 
 
         if (newImageFile) formData.append("img", newImageFile)
         formData.append("date", data?.date)
+        formData.append("organization", organization)
         formData.append("desc_json", JSON.stringify(editor))
 
 

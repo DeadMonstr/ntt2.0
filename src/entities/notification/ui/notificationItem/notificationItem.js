@@ -23,7 +23,7 @@ export const NotificationItem = () => {
     const {request} = useHttp()
     useEffect(() => {
         dispatch(fetchNotificationProfile({id, orgId}))
-    }, [])
+    }, [id , orgId])
 
     const onPostMsg = (e) => {
 

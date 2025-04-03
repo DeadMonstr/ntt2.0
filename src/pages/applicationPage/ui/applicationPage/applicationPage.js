@@ -14,6 +14,7 @@ import {
     applicationTypeSelectors
 } from "../../model/selectors/applicationSelectors";
 import {Navigate, Outlet, Route, Routes} from "react-router";
+import {getUserOrganizationId} from "entities/userProfile";
 
 
 const listData = [
@@ -41,22 +42,26 @@ export const ApplicationPage = () => {
     const field = useSelector(applicationFieldSelectors)
     const shift = useSelector(applicationShiftSelectors)
     const language = useSelector(applicationLanguageSelectors)
+    const organization = useSelector(getUserOrganizationId)
 
 
     useEffect(() => {
+        if (!organization) return;
+
         const data = {
             type_id: type,
             degree_id: degree,
             field_id: field,
             shift_id: shift,
             language_id: language,
+            organization: organization,
             search,
             status: active
 
         }
 
         dispatch(fetchApplicationData(data))
-    }, [type, degree, field, shift, language, search, active])
+    }, [type, degree, field, shift, language, search, active,organization])
 
     const role = localStorage.getItem("role")
     return (
