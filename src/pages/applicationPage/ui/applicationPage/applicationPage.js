@@ -35,6 +35,7 @@ export const ApplicationPage = () => {
     const requests = useSelector(applicationRequestsSelectors)
 
 
+
     const [active, setActive] = useState(listData[0].name)
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
