@@ -19,17 +19,24 @@ export const SettingsLists = ({data, activeFilter}) => {
     const [activeItem, setActiveItem] = useState(null)
 
     const renderData = () => {
-        return data?.map(item => (
+        return data?.map((item,index) => (
             <div className={cls.box}>
-                <div style={{display: 'flex' , flexDirection: 'column'}}>
-                    <div className={cls.box__title}>
-                        {item?.name}
 
-                    </div>
-                    <div className={cls.box__desc}>
-                        {item?.desc}
+                <div>
+                    <h1 className={cls.index}>
+                        {index+1}
+                    </h1>
+
+                    <div style={{display: 'flex' , flexDirection: 'column'}}>
+                        <div className={cls.box__title}>
+                            {item?.name}
+                        </div>
+                        <div className={cls.box__desc}>
+                            {item?.desc}
+                        </div>
                     </div>
                 </div>
+
 
                 <i className={`fa-regular fa-pen-to-square ${cls.pen}`} onClick={() => {
                     setActiveEdit(true)
@@ -74,22 +81,21 @@ export const SettingsListEdit = ({active, setActive, activeItem, activeFilter}) 
             request(`${API_URL}organization-degrees/organization-degree/crud/update/${activeItem.id}/`, "PUT", JSON.stringify(data), headers())
                 .then(res => {
                     dispatch(onEditDegree({id: activeItem.id, data}))
-
                 })
         }
     }
+
+
     const onDelete = (data) => {
         if (activeFilter === 1) {
             request(`${API_URL}organization_fields/crud/delete/${activeItem.id}/`, "DELETE", null, headers())
                 .then(res => {
                     dispatch(onDeleteDirection(activeItem.id))
-
                 })
         } else {
             request(`${API_URL}organization-degrees/organization-degree/crud/delete/${activeItem.id}/`, "DELETE", null, headers())
                 .then(res => {
                     dispatch(onDeleteDegree(activeItem.id))
-
                 })
 
         }
@@ -114,7 +120,6 @@ export const SettingsListEdit = ({active, setActive, activeItem, activeFilter}) 
                         Delete
                     </Button>
                 </div>
-
             </Form>
             <ConfirmModal
                 onClick={handleSubmit(onDelete)}

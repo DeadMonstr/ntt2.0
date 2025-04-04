@@ -51,9 +51,8 @@ export const routersConfig = [
         element: <OrganizationsPage/>
     },
     {
-        path: "settings",
+        path: "settings/:id",
         element: <SettingsPage/>,
-
     },
     // {
     //     path: "organizationProfile/:id",

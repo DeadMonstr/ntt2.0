@@ -12,18 +12,10 @@ import {API_URL, headers, useHttp} from "shared/api/base";
 import {Radio} from "shared/ui/radio";
 import classNames from "classnames";
 
-export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, active, filterData, setActive}) => {
+export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, organizationType,}) => {
 
     const [activeAdd, setActiveAdd] = useState(false)
 
-    const [activeItem, setActiveItem] = useState("")
-    const [activeElem, setActiveElem] = useState(false)
-
-
-    useEffect(() => {
-        setActiveItem(filterData[0]?.name)
-        setActive(filterData[0]?.id)
-    }, [filterData])
     const renderItem = () => {
         return filterItem.map(item => (
             // <li className={activeFilter === item.id ? cls.active : ""} onClick={() => setActiveFilter(item.id)}>
@@ -50,28 +42,28 @@ export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, activ
                 </div>
 
 
-                <AddDirection active={active} activeFilter={activeFilter} activeAdd={activeAdd}
+                <AddDirection organizationType={organizationType} activeFilter={activeFilter} activeAdd={activeAdd}
                               setActive={setActiveAdd}/>
             </div>
-            <div onClick={() => setActiveElem(!activeElem)} className={cls.filter__filter}>
+            {/*<div onClick={() => setActiveElem(!activeElem)} className={cls.filter__filter}>*/}
 
-                <div className={cls.filter__filter_item}>
-                    {activeItem} <i className="fa-solid fa-up-down"></i>
-                </div>
-                <div className={`${cls.filter__hidden} ${activeElem ? cls.filter__active : ""}`}>
-                    {filterData?.map(item => (
-                        <div
-                            className={classNames(cls.filter__hidden_item, {[cls.filter__hidden_active]: item.name === activeItem})}
-                            onClick={() => {
-                                setActiveItem(item.name)
-                                setActive(item.id)
-                                setActiveElem(false)
-                            }}>
-                            {item.name}
-                        </div>
-                    ))}
-                </div>
-            </div>
+            {/*    <div className={cls.filter__filter_item}>*/}
+            {/*        {activeItem} <i className="fa-solid fa-up-down"></i>*/}
+            {/*    </div>*/}
+            {/*    <div className={`${cls.filter__hidden} ${activeElem ? cls.filter__active : ""}`}>*/}
+            {/*        /!*{filterData?.map(item => (*!/*/}
+            {/*        /!*    <div*!/*/}
+            {/*        /!*        className={classNames(cls.filter__hidden_item, {[cls.filter__hidden_active]: item.name === activeItem})}*!/*/}
+            {/*        /!*        onClick={() => {*!/*/}
+            {/*        /!*            setActiveItem(item.name)*!/*/}
+            {/*        /!*            setActive(item.id)*!/*/}
+            {/*        /!*            setActiveElem(false)*!/*/}
+            {/*        /!*        }}>*!/*/}
+            {/*        /!*        {item.name}*!/*/}
+            {/*        /!*    </div>*!/*/}
+            {/*        /!*))}*!/*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
         </>
 
@@ -80,7 +72,7 @@ export const SettingsFilter = ({activeFilter, filterItem, setActiveFilter, activ
 };
 
 
-export const AddDirection = ({active, setActive, activeFilter, activeAdd}) => {
+export const AddDirection = ({organizationType, setActive, activeFilter, activeAdd}) => {
 
     const {register, setValue, handleSubmit} = useForm()
 
@@ -89,7 +81,7 @@ export const AddDirection = ({active, setActive, activeFilter, activeAdd}) => {
     const onClick = (data) => {
         const res = {
             ...data,
-            organization_type: active
+            organization_type: organizationType
         }
         if (activeFilter === 1) {
             request(`${API_URL}organization_fields/crud/create/`, "POST", JSON.stringify(res), headers())
