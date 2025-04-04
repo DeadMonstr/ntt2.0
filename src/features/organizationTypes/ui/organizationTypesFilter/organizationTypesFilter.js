@@ -31,6 +31,8 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const [activeConfirm, setActiveConfirm] = useState(false)
     const [changeRegion, setChangeRegion] = useState(false)
 
+
+
     useEffect(() => {
         if (region) setChangeRegion(region[0].id)
     } , [region])
@@ -100,7 +102,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const onCreate = (data) => {
         const res = {
             ...data,
-            region: changeRegion,
+            region: selectRegion,
             organization_type: selectType
         }
         request(`${API_URL}organizations/organization/crud/create/`, "POST", JSON.stringify(res), headers())
@@ -112,6 +114,9 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                     status: true,
                     msg: "Tashkilot qo'shildi"
                 }))
+                setValue("name" , "")
+                setValue("inn" , "")
+                setValue("phone" , "")
             })
 
     }
@@ -220,7 +225,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <Form onSubmit={handleSubmit(onCreate)} extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
                            placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={selectRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}

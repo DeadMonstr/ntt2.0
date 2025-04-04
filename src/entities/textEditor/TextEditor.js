@@ -143,8 +143,6 @@ function OnSetEditorState({oldEditorState}) {
 
 
     useEffect(() => {
-        console.log(oldEditorState, "oldddddddd")
-
 
         if (oldEditorState && !isChanged) {
             console.log(oldEditorState)
@@ -165,8 +163,6 @@ const TextEditor = React.memo(({onSubmit,editorState,text,title,isSubmit ,extraC
 
     return (
         <LexicalComposer initialConfig={editorConfig}>
-
-
             <div className={`editor  ${extraClass}`}>
                 <h2>{title}</h2>
                 <div className="editor-container">

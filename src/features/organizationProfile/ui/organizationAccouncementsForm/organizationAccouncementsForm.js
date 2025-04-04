@@ -188,7 +188,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         <>
 
             <Form extraClassname={cls.create} id={"createForm"} isChange={false} onSubmit={onSubmit}>
-                <Button onClick={() => setIsChange(false)}>Back</Button>
+                <Button onClick={() => setIsChange(false)}>Ortga</Button>
 
                 <div className={cls.create__change}>
                     <Select defaultValue={degree} required onChangeOption={setDegree} options={degrees}
@@ -199,18 +199,18 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                             title={"Soha"}/>
                     <Select defaultValue={shift} required onChangeOption={setShift} options={shifts}
                             extraClass={cls.create__select}
-                            title={"Shift"}/>
+                            title={"Talim shakli"}/>
                     <Select defaultValue={lang} required onChangeOption={setLang} options={languages}
                             extraClass={cls.create__select}
-                            title={"Education Langage"}/>
+                            title={"Talim tili"}/>
                     <Select defaultValue={year} required onChangeOption={setYear} options={academicYears}
                             extraClass={cls.create__select}
-                            title={"Academic year"}/>
-                    <Input value={price} required onChange={onChangedPrice} type={"number"} title={"Price"}
+                            title={"O'quv yili"}/>
+                    <Input value={price} required onChange={onChangedPrice} type={"number"} title={"Kantrakt narxi"}
                            extraClass={cls.create__input}/>
-                    <Input value={start} required onChange={onChangedStartTime} type={"date"} title={"Start date"}
+                    <Input value={start} required onChange={onChangedStartTime} type={"date"} title={"Boshlanish sanasi"}
                            extraClass={cls.create__input}/>
-                    <Input value={end} required onChange={onChangedEndTime} type={"date"} title={"End date"}
+                    <Input value={end} required onChange={onChangedEndTime} type={"date"} title={"Tugash sanasi"}
                            extraClass={cls.create__input}/>
                     <Input
                         // required
@@ -224,7 +224,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
             </Form>
             <div className={cls.item}>
-                <TextEditor editorState={editorDesc?.editorState} required isSubmit={false} title={"Description"}
+                <TextEditor editorState={editorDesc?.editorState} required isSubmit={false} title={"Tavsif"}
                             onSubmit={onSubmitDesc}/>
                 <TextEditor editorState={editorDemand?.editorState} isSubmit={false} title={"Talablar"}
                             onSubmit={onSubmitTalablar}/>
