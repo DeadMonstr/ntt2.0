@@ -6,11 +6,13 @@ import logOut from "shared/assets/icons/Log out.svg"
 
 
 import cls from "./MenuBar.module.sass"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
 import {menuConfig} from "../model/config/menuConfig";
 import userLogo from "shared/assets/images/userLogo.svg";
 import {useNavigate} from "react-router";
+import {menuBarList} from "../model/selector/menuBarSelector";
+import {fetchMenuSettingsTypes} from "widgets/menuBar/model/thunk/menuBarThunk";
 
 export const MenuBar = () => {
 
@@ -19,12 +21,25 @@ export const MenuBar = () => {
     const userRole = useSelector(getUserJob)
     const userOrganizationName = useSelector(getUserOrganizationName)
     const userOrganizationId = useSelector(getUserOrganizationId)
+    const menuList = useSelector(menuBarList)
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchMenuSettingsTypes())
+    },[])
+
+
 
     const renderMenuList = useCallback(() => {
-        return menuConfig?.map(item => {
+
+
+        return menuList?.map(item => {
             if (item.roles?.includes(userRole?.toLowerCase())) {
+                if (item?.isMultiLink) {
+                    return <MultipleMenuItem item={item}/>
+                }
 
 
                 return (
@@ -39,12 +54,11 @@ export const MenuBar = () => {
                     >
                         {item.img}
                         <h1>{item?.isOrganization ? userOrganizationName : item.label}</h1>
-
                     </NavLink>
                 )
             }
         })
-    }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole, menuConfig])
+    }, [activeMultiLink, userOrganizationId, userOrganizationName, userRole, menuList])
 
     const onLogOut = () => {
         localStorage.clear()
@@ -60,18 +74,17 @@ export const MenuBar = () => {
                     <h2>Shahzod Omonboyev</h2>
                 </div>
                 <div className={cls.options}>
-                    {
-                        renderMenuList()
-                    }
-                    <div onClick={onLogOut} className={cls.menubar__logout}>
+                    <div className={cls.options__list}>
+                        {
+                            renderMenuList()
+                        }
+                    </div>
 
+                    <div onClick={onLogOut} className={cls.menubar__logout}>
                         <img src={logOut} alt=""/>
                         <h2>Chiqish</h2>
-
                     </div>
                 </div>
-
-
 
 
 
@@ -79,4 +92,68 @@ export const MenuBar = () => {
         </>
     );
 };
+
+
+
+
+const MultipleMenuItem = ({item}) => {
+    const [activeMultiLink, setActiveMultiLink] = useState(false)
+
+    console.log(item, "item")
+
+    const onChange = (e) => {
+        e.preventDefault()
+
+        setActiveMultiLink(prev => !prev)
+    }
+
+    return (
+        <div
+            className={classNames(cls.options__multipleItem)}
+        >
+            <NavLink
+                key={item.to}
+                className={
+                    ({isActive}) =>
+                        isActive ? classNames(cls.item, cls.active) : cls.item
+                }
+                onClick={onChange}
+                to={item.to}
+            >
+                {item.img}
+                <h1>{item.label}</h1>
+                <i className={classNames("fas fa-chevron-down", {
+                    [cls.active]: activeMultiLink
+                })}/>
+            </NavLink>
+            <div
+                className={classNames(cls.list, {
+                    [cls.active]: activeMultiLink
+                })}
+            >
+                <div className={cls.container}>
+                    {
+                        item?.types?.map(link => {
+                            return (
+                                <NavLink
+                                    key={link.to}
+                                    className={
+                                        ({isActive}) =>
+                                            isActive ? classNames(cls.list__item, cls.active) : cls.list__item
+                                    }
+                                    to={`${item.to}/${link.id}`}
+                                >
+                                    {/*<i className={classNames(item.icon)}/>*/}
+                                    {link.name}
+                                </NavLink>
+                            )
+                        })
+                    }
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
 

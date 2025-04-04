@@ -14,15 +14,13 @@ export const Notification = () => {
 
     const id = localStorage.getItem("organization_id")
 
-    console.log("org" , id)
-
     useEffect(() => {
         dispatch(fetchNotificationData(id))
     }, [])
-    console.log(data)
+
+
     return (
         <div className={cls.notification}>
-
             <h1 className={cls.notification__title}>Messaging</h1>
 
             <Input name={"search"}/>

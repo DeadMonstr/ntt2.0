@@ -15,6 +15,7 @@ import {
     fetchOrganizationTypeList
 } from "entities/settings/model/settingsThunk";
 import {Pagination} from "features/pagination";
+import {useParams} from "react-router";
 
 const filter = [
     {name: "Yo’nalishlar", id: 1},
@@ -22,12 +23,14 @@ const filter = [
 ]
 
 export const SettingsPage = () => {
+
+    const {id} = useParams()
+
     const [currentPage, setCurrentPage] = useState(1)
     const pageSize = useMemo(() => 10, [])
     const settingsDirection = useSelector(getSettingsDirection)
     const settingsDegree = useSelector(getSettingsDegree)
     const settingsHeader = useSelector(getSettingsHeader)
-    const [active, setActive] = useState(settingsHeader[0]?.id)
     const [activeFilter, setActiveFilter] = useState(filter[0]?.id)
 
     const dispatch = useDispatch()
@@ -37,14 +40,14 @@ export const SettingsPage = () => {
     }, [])
 
     useEffect(() => {
-        if (active && currentPage) {
+        if (id && currentPage) {
             if (activeFilter === 1) {
-                dispatch(fetchOrganizationTypeList({id: active, currentPage, pageSize}))
+                dispatch(fetchOrganizationTypeList({id: id, currentPage, pageSize}))
             } else {
-                dispatch(fetchOrganizationTypeDegree({id: active, currentPage, pageSize}))
+                dispatch(fetchOrganizationTypeDegree({id: id, currentPage, pageSize}))
             }
         }
-    }, [active, currentPage, dispatch, activeFilter])
+    }, [id, currentPage, dispatch, activeFilter])
 
 
     return (
@@ -53,16 +56,16 @@ export const SettingsPage = () => {
 
             {/*<SettingsHeader/>*/}
 
-            <SettingsFilter filterData={settingsHeader} active={active} setActive={setActive}
+            <SettingsFilter filterData={settingsHeader} organizationType={id}
                             activeFilter={activeFilter} setActiveFilter={setActiveFilter}
                             filterItem={filter}/>
 
 
             <div style={{maxHeight: "calc(100vh - 33rem)", overflow: "auto"}}>
                 <SettingsLists
-
                     activeFilter={activeFilter}
-                    data={activeFilter === 1 ? settingsDirection?.results : settingsDegree?.results}/>
+                    data={activeFilter === 1 ? settingsDirection?.results : settingsDegree?.results}
+                />
             </div>
 
             {
