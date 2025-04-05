@@ -25,6 +25,7 @@ import {
 import {set} from "react-hook-form";
 import {useNavigate} from "react-router";
 import {onAddAlertOptions, onDeleteAlert} from "features/alert/model/slice/alertSlice";
+import {MultiSelect} from "shared/ui/multiSelect";
 
 export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
@@ -41,7 +42,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
 
     const [year, setYear] = useState(null)
-    const [lang, setLang] = useState(null)
+    const [lang, setLang] = useState([])
     const [degree, setDegree] = useState(null)
     const [field, setField] = useState(null)
     const [shift, setShift] = useState(null)
@@ -115,11 +116,21 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         setEnd(e.target.value)
     }, [])
 
+    const onChangeLang = (value) => {
+        setLang(value)
+    }
+
+    const onChangeShift = (value) => {
+        setShift(value)
+    }
+
 
     const {request} = useHttp()
 
     const navigate = useNavigate()
 
+
+    console.log(lang)
     const onSubmit = (e) => {
 
         e.preventDefault()
@@ -144,8 +155,6 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         if (changedItem?.id) {
             request(`${API_URL}organizations/organization_landing_page/crud/update/${changedItem?.id}/`, "PUT", JSON.stringify(data), headers())
                 .then(res => {
-
-
                     dispatch(onAddAlertOptions({
                         status: true,
                         type: "success",
@@ -184,9 +193,10 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
             })
     }
 
+
+
     return (
         <>
-
             <Form extraClassname={cls.create} id={"createForm"} isChange={false} onSubmit={onSubmit}>
                 <Button onClick={() => setIsChange(false)}>Ortga</Button>
 
@@ -197,15 +207,34 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                     <Select defaultValue={field} required onChangeOption={setField} options={fields}
                             extraClass={cls.create__select}
                             title={"Soha"}/>
-                    <Select defaultValue={shift} required onChangeOption={setShift} options={shifts}
-                            extraClass={cls.create__select}
-                            title={"Talim shakli"}/>
-                    <Select defaultValue={lang} required onChangeOption={setLang} options={languages}
-                            extraClass={cls.create__select}
-                            title={"Talim tili"}/>
+
+                    <MultiSelect
+                        title={"Talim shakli"}
+                        defaultValue={shift}
+                        required
+                        onChange={onChangeShift}
+                        value={shift}
+                        options={shifts.map((item) => ({label: item.name, value: item.id}))}
+                    />
+                    {/*<Select defaultValue={shift} required onChangeOption={setShift} options={shifts}*/}
+                    {/*        extraClass={cls.create__select}*/}
+                    {/*        title={"Talim shakli"}/>*/}
+
+
+                    <MultiSelect
+                        title={"Talim tili"}
+                        defaultValue={lang}
+                        required
+                        onChange={onChangeLang}
+                        value={lang}
+                        options={languages.map((item) => ({label: item.name, value: item.id}))}
+                    />
+
                     <Select defaultValue={year} required onChangeOption={setYear} options={academicYears}
                             extraClass={cls.create__select}
                             title={"O'quv yili"}/>
+
+
                     <Input value={price} required onChange={onChangedPrice} type={"number"} title={"Kantrakt narxi"}
                            extraClass={cls.create__input}/>
                     <Input value={start} required onChange={onChangedStartTime} type={"date"} title={"Boshlanish sanasi"}
