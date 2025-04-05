@@ -43,11 +43,12 @@ export const OrganizationProfileApplications = memo(() => {
         }
     }, [dispatch, organization?.organization_type?.id])
 
+
     useEffect(() => {
         dispatch(fetchOrganizationProfileApplications({
-            organization_id: id, field_id, degree_id,shift_id,language_id
+            organization_id: id, field_id, degree_id, shift_id, language_id
         }))
-    }, [id,field_id,degree_id,shift_id,language_id])
+    }, [id, field_id, degree_id, shift_id, language_id])
 
     const renderApplicationsList = useCallback(() => {
         return data?.map(item => {

@@ -24,7 +24,7 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
             bgColor: "#C5D1DC80"
         },
         {
-            name: "Gallereya",
+            name: "Galereya",
             image: gallery,
             bgColor: "#E7EFFF"
         },

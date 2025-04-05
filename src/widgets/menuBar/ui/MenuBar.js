@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import classNames from "classnames";
-import {isMobile} from "react-device-detect";
+
 import {NavLink} from "react-router-dom";
 import logOut from "shared/assets/icons/Log out.svg"
 
 
 import cls from "./MenuBar.module.sass"
 import {useDispatch, useSelector} from "react-redux";
-import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
-import {menuConfig} from "../model/config/menuConfig";
+import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "entities/userProfile";
+
 import userLogo from "shared/assets/images/userLogo.svg";
 import {useNavigate} from "react-router";
 import {menuBarList} from "../model/selector/menuBarSelector";
@@ -17,7 +17,6 @@ import {fetchMenuSettingsTypes} from "widgets/menuBar/model/thunk/menuBarThunk";
 export const MenuBar = () => {
 
     const [activeMultiLink, setActiveMultiLink] = useState(false)
-    const [activeMenu, setActiveMenu] = useState(false)
     const userRole = useSelector(getUserJob)
     const userOrganizationName = useSelector(getUserOrganizationName)
     const userOrganizationId = useSelector(getUserOrganizationId)

@@ -20,7 +20,7 @@ export const Textarea = React.memo((
         maxLength
     }) => {
 
-    const [silk, setSilk] = useState("")
+    const [ setSilk] = useState("")
 
 
     return register ? (

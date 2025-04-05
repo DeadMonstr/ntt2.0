@@ -78,7 +78,7 @@ export const OrganizationProfilePage = () => {
                         <OrganizationProfileAnnouncementsModal seasonId={currentSeason?.id}
                                                                userRole={userRole === "organization"}
                                                                isChange={isChange} setIsChange={setIsChange}/>}
-                    {activeLink === "Gallereya" &&
+                    {activeLink === "Galereya" &&
                         <OrganizationProfileGalleryModal userRole={userRole === "organization"}
                                                          setAddActiveModal={setAddActiveModal}
                                                          addActiveModal={addActiveModal}/>}
@@ -112,7 +112,7 @@ const RenderHeaderIcon =({
             }
             break;
 
-        case "Gallereya":
+        case "Galereya":
             if (userRole === "organization") {
                 return (
                     <div

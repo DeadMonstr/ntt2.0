@@ -73,7 +73,15 @@ export const AnnouncementsItem = memo(({userRole,onChange, item}) => {
                     <h3 className={cls.info__title}>{item.price}</h3>
 
                 </div>
-
+                <div className={cls.info}>
+                    <div className={cls.info__header}>
+                        <div className={cls.info__icon}>
+                            <img src={image3} alt=""/>
+                        </div>
+                        <p className={cls.info__subTitle}>Qabul muddati</p>
+                    </div>
+                    <h3 className={cls.info__title}>{item.start_date} - {item.expire_date}</h3>
+                </div>
             </div>
             <div className={cls.announcementsItem__text}>
                 <div className={cls.header}>

@@ -1,4 +1,4 @@
-import  React, {useRef, useState, useEffect} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import cls from "./organizationTypesFilter.module.sass";
 import {Button} from "shared/ui/button/button";
 import mapIcon from 'shared/assets/icons/map.png'
@@ -21,7 +21,7 @@ import {useNavigate} from "react-router";
 import logo from "shared/assets/logo/logo.png"
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 
-export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelectType, selectType}) => {
+export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelectType, selectType}) => {
 
     const filter = useSelector(organizationTypeFilter)
     const cards = useSelector(organizationTypeCard)
@@ -32,10 +32,9 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     const [changeRegion, setChangeRegion] = useState(false)
 
 
-
     useEffect(() => {
         if (region) setChangeRegion(region[0].id)
-    } , [region])
+    }, [region])
     const [changeType, setChangeType] = useState(false)
 
 
@@ -62,9 +61,11 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
         setValue("name", activeItem?.name)
         setValue("request", activeItem?.request)
         setValue("phone", activeItem?.phone)
+        setValue("inn", activeItem?.inn)
         setChangeRegion(activeItem?.region.id)
         setChangeType(activeItem?.organization_type.id)
     }, [activeItem])
+    console.log(activeItem, "activeItem")
 
 
     useEffect(() => {
@@ -79,13 +80,12 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
     // }, [selectType, selectRegion])
 
 
-
     // const renderItem = () => {
     //     return filter?.map(item => (
     //         <Button
     //             extraClass={active === item.id ? cls.active : cls.mainBox__extraBox__typeBox__handlerBox}
     //             onClick={() => {
-    //                 setCategory(item?.category)
+    //                 // setCategory(item?.category)
     //                 setActive(item?.id)
     //             }}
     //         >
@@ -114,9 +114,9 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                     status: true,
                     msg: "Tashkilot qo'shildi"
                 }))
-                setValue("name" , "")
-                setValue("inn" , "")
-                setValue("phone" , "")
+                setValue("name", "")
+                setValue("inn", "")
+                setValue("phone", "")
             })
 
     }
@@ -156,8 +156,10 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
                 <h1>Tashkilotlar</h1>
                 <div className={cls.box__buttonPanel__container}>
                     <div className={cls.box__buttonPanel__wrapper}>
-                        <Select defaultValue={selectType} title={"Tashkilot turlari"} onChangeOption={setSelectType} options={filter}/>
-                        <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion} options={region}/>
+                        <Select defaultValue={selectType} title={"Tashkilot turlari"} onChangeOption={setSelectType}
+                                options={filter}/>
+                        <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion}
+                                options={region}/>
 
                     </div>
                     <Button onClick={() => setPortal(!portal)} extraClass={cls.box__buttonPanel__container__btn}>
@@ -168,86 +170,97 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion,setSelect
 
                 </div>
             </div>
+
             <div className={cls.box__container}>
                 {cards?.results?.map(card => (
-                <div
-                    onClick={() => navigate(`../organizationProfile/${card.id}`)}
-                    className={cls.box__item}
-                    // key={card.id}
-                >
-                    <div className={cls.box__item_header}>
+                    <div className={cls.box__container_item}>
+                        <i onClick={() => {
+                            setActiveEdit(true)
+                            setActiveItem(card)
+                        }} className={"fa fa-pen"}/>
                         <div
+                            onClick={() => navigate(`../organizationProfile/${card.id}`)}
+                            className={cls.box__item}
+                            // key={card.id}
+                        >
+                            <div className={cls.box__item_header}>
+                                <div
 
 
-                            className={cls.box__item_logo}>
-                            <div className={cls.box__item_logo_img}>
-                                <img
-                                    src={card?.img?.length ? card.img : logo}
-                                    alt=""
-                                />
-                            </div>
-                            <h2>{card.name.substring(0 , 14)}</h2>
-                            <div className={cls.popupName}>
-                                {card.name}
-                            </div>
-                        </div>
-                        <div className={cls.box__item_request}>
-                            <div className={cls.box__item_request_number}>
-                                {`${card.request_count}`.substring(0, 4)}
-                                <div className={cls.popup}>
-                                    {card.request_count}
+                                    className={cls.box__item_logo}>
+                                    <div className={cls.box__item_logo_img}>
+                                        <img
+                                            src={card?.img?.length ? card.img : logo}
+                                            alt=""
+                                        />
+                                    </div>
+                                    <h2>{card.name.substring(0, 14)}</h2>
+                                    <div className={cls.popupName}>
+                                        {card.name}
+                                    </div>
+                                </div>
+                                <div className={cls.box__item_request}>
+                                    <div className={cls.box__item_request_number}>
+                                        {`${card.request_count}`.substring(0, 4)}
+                                        <div className={cls.popup}>
+                                            {card.request_count}
+                                        </div>
+                                    </div>
+                                    <h2>Arizalar Soni</h2>
                                 </div>
                             </div>
-                            <h2>Arizalar Soni</h2>
-                        </div>
-                    </div>
 
-                    <div className={cls.box__item_body}>
-                        <div className={cls.box__item_body_info}>
-                            <h2>Location</h2>
-                            <span>{card.region.name}</span>
-                        </div>
-                        <div className={cls.box__item_body_info}>
-                            <h2>Phone</h2>
-                            <span>{card.phone}</span>
-                        </div>
-                        <div className={cls.box__item_body_info}>
-                            <h2>INN</h2>
-                            <span>{card.inn}</span>
-                        </div>
-                    </div>
+                            <div className={cls.box__item_body}>
+                                <div className={cls.box__item_body_info}>
+                                    <h2>Location</h2>
+                                    <span>{card.region.name}</span>
+                                </div>
+                                <div className={cls.box__item_body_info}>
+                                    <h2>Phone</h2>
+                                    <span>{card.phone}</span>
+                                </div>
+                                <div className={cls.box__item_body_info}>
+                                    <h2>INN</h2>
+                                    <span>{card.inn}</span>
+                                </div>
+                            </div>
 
-                </div>
+                        </div>
+                    </div >
                 ))}
             </div>
             <Modal extraClass={cls.box__portal} active={portal} setActive={setPortal}>
                 <h1>Add</h1>
                 <Form onSubmit={handleSubmit(onCreate)} extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
-                           placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={selectRegion}/>
+                           placeholder={"Name"}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}
+                            defaultValue={selectRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
 
-                    <Input name={"inn"} register={register} placeholder={`INN`} extraClass={cls.box__portal__form__input}/>
+                    <Input name={"inn"} register={register} placeholder={`INN`}
+                           extraClass={cls.box__portal__form__input}/>
 
                     <Button extraClass={cls.box__portal__form__btn}>Add</Button>
                 </Form>
             </Modal>
 
             <Modal extraClass={cls.box__portal} active={activeEdit} setActive={setActiveEdit}>
-                <h1>Add</h1>
+                <h1>Edit</h1>
                 <Form extraClassname={cls.box__portal__form} isChange={false}>
                     <Input register={register} name={"name"} extraClass={cls.box__portal__form__input}
-                           placeholder={"Name"} />
-                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion} defaultValue={changeRegion}/>
+                           placeholder={"Name"}/>
+                    <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}
+                            defaultValue={changeRegion}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
 
-                    <Input extraClass={cls.box__portal__form__input} placeholder={`Arizalar soni`}/>
-                    <Input placeholder={`INN`} extraClass={cls.box__portal__form__input}/>
+                    {/*<Input register={register} extraClass={cls.box__portal__form__input} placeholder={`Arizalar soni`}/>*/}
+                    <Input register={register} name={"inn"} placeholder={`INN`}
+                           extraClass={cls.box__portal__form__input}/>
 
                     <div style={{display: "flex", gap: "1rem"}}>
                         <Button onClick={handleSubmit(onEdit)} extraClass={cls.box__portal__form__btn}>Edit</Button>
