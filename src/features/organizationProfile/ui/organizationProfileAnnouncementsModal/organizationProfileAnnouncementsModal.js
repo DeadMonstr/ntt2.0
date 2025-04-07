@@ -34,12 +34,13 @@ export const OrganizationProfileAnnouncementsModal = memo(({seasonId,userRole , 
     return (
         <div className={cls.announcements}>
             {
-                isChange ? <OrganizationAccouncementsForm changedItem={changedItem} setIsChange={setIsChange}/>
+                isChange ?
+                    <OrganizationAccouncementsForm changedItem={changedItem} setIsChange={setIsChange}/>
                     :
                 <div className={cls.announcements__content}>
                     <AnnouncementsHeader userRole={userRole} setIsChange={setIsChange}/>
-                    <AnnouncementsList userRole={userRole} seasonId={seasonId} setIsChange={onChangedItem}/>
-                </div>
+                     <AnnouncementsList userRole={userRole} seasonId={seasonId} setIsChange={onChangedItem}/>
+                 </div>
             }
         </div>
     );
