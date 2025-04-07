@@ -67,10 +67,10 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                 editorState: changedItem.requirements_json
             })
             setYear(changedItem.year.id)
-            setLang(changedItem.education_language.id)
+            setLang(changedItem.education_language.map((item) => ({label: item.name, value: item.id})))
             setDegree(changedItem.degree.id)
             setField(changedItem.field.id)
-            setShift(changedItem.shift.id)
+            setShift(changedItem.shift.map((item) => ({label: item.name, value: item.id})))
             setPrice(changedItem.price)
             setGrant(changedItem.grant)
 
@@ -130,7 +130,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
     const navigate = useNavigate()
 
 
-    console.log(lang)
+    console.log(lang , "dasdsa")
     const onSubmit = (e) => {
 
         e.preventDefault()
@@ -155,6 +155,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         if (changedItem?.id) {
             request(`${API_URL}organizations/organization_landing_page/crud/update/${changedItem?.id}/`, "PUT", JSON.stringify(data), headers())
                 .then(res => {
+                    setIsChange(false)
                     dispatch(onAddAlertOptions({
                         status: true,
                         type: "success",
@@ -165,6 +166,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         } else{
             request(`${API_URL}organizations/organization_landing_page/crud/create/`, "POST", JSON.stringify(data), headers())
                 .then(res => {
+                    setIsChange(false)
 
                     dispatch(onAddAlertOptions({
                         status: true,
@@ -175,7 +177,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         }
 
 
-        setIsChange(false)
+
     }
 
 
