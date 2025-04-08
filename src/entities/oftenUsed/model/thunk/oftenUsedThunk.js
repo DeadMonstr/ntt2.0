@@ -35,3 +35,19 @@ export const fetchShifts = createAsyncThunk(
     }
 )
 
+export const fetchSubjects = createAsyncThunk(
+    "oftenUsedSlice/fetchSubjects",
+    () => {
+        const {request} = useHttp()
+        return request(`${API_URL}students/shift/`, "GET", null, headers())
+    }
+)
+
+export const fetchFields = createAsyncThunk(
+    "oftenUsedSlice/fetchFields",
+    () => {
+        const {request} = useHttp()
+        return request(`${API_URL}students/shift/`, "GET", null, headers())
+    }
+)
+
