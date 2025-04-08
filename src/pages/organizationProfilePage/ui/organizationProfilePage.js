@@ -74,7 +74,7 @@ export const OrganizationProfilePage = () => {
                     {activeLink === "Grantlar" &&
                         <OrganizationProfileGrants userRole={userRole === "organization"} isChange={isChangeGarants}
                                                    setIsChange={setIsChangeGarants}/>}
-                    {activeLink === "E’lonlar" &&
+                    {activeLink === "Talim yo’nalishi" &&
                         <OrganizationProfileAnnouncementsModal seasonId={currentSeason?.id}
                                                                userRole={userRole === "organization"}
                                                                isChange={isChange} setIsChange={setIsChange}/>}
@@ -99,7 +99,7 @@ const RenderHeaderIcon =({
     isChangeAbout,
 }) => {
     switch (activeLink) {
-        case "E’lonlar":
+        case "Talim yo’nalishi":
             if (userRole === "organization") {
                 return (
                     <div className={cls.announcementsHeader__icon}>

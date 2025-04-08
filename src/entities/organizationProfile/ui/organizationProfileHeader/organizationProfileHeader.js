@@ -19,7 +19,7 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
             bgColor: "#E7EFFF"
         },
         {
-            name: "E’lonlar",
+            name: "Talim yo’nalishi",
             image: announcements,
             bgColor: "#C5D1DC80"
         },
