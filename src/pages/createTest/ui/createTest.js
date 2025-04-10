@@ -349,7 +349,7 @@ export const CreateTest = () => {
                         onClick={onSaveQuestion}
                         extraClass={cls.wrapper__btn}
                     >
-                        Savolni saqlash
+                        Savol qo'shish
                     </Button>
                 </div>
                 {/*<div className={cls.plusQuestion}>*/}

@@ -53,6 +53,7 @@ export const CreateTestVariants = ({
     return (
         <div className={cls.variant}>
             <Radio
+                disabled={!isChange}
                 name={ID}
                 extraClasses={cls.variant__correct}
                 checked={item.isTrue}
