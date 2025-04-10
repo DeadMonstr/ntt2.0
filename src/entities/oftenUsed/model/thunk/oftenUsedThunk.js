@@ -39,7 +39,7 @@ export const fetchSubjects = createAsyncThunk(
     "oftenUsedSlice/fetchSubjects",
     () => {
         const {request} = useHttp()
-        return request(`${API_URL}students/shift/`, "GET", null, headers())
+        return request(`${API_URL}test/subject/get/subjects/`, "GET", null, headers())
     }
 )
 

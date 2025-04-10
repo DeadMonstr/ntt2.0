@@ -31,7 +31,7 @@ const notificationSlice = createSlice({
                 state.error = undefined
             })
             .addCase(fetchNotificationData.fulfilled, (state, action) => {
-                state.data = action.payload
+                state.data = action.payload.results
                 state.loading = false
                 state.error = undefined
             })

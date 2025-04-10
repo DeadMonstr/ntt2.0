@@ -5,7 +5,7 @@ import {Button} from "shared/ui/button/button";
 
 import cls from "./testHeader.module.sass";
 
-export const TestHeader = () => {
+export const TestHeader = ({onCreateTest}) => {
 
     const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ export const TestHeader = () => {
             <h1>Testlar</h1>
             <div className={cls.header__btn}>
                 <Button
-                    onClick={() => navigate("/admin/createTest")}
+                    onClick={onCreateTest}
                 >
                     Test qo'shish
                 </Button>
