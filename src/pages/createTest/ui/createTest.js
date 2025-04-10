@@ -167,6 +167,14 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
+        if (currentList.blocks[currentList.blocks.length - 1].text.length > 1) {
+            dispatch(onAddAlertOptions({
+                status: true,
+                type: "error",
+                msg: "oldingi savol bo'sh"
+            }))
+            return null;
+        }
         const li = {
             blocks: [{
                 text: "",
@@ -285,7 +293,7 @@ export const CreateTest = () => {
                     setIsChange={setIsChange}
                     onAddVariant={() => onAddVariant(item.id)}
                     isDelete={profile?.blocks?.length > 1}
-                    index={index+1}
+                    index={index + 1}
                     onRemoveQuestion={onRemoveQuestion}
                 >
                     {renderVariants(item.questions, item.id)}
