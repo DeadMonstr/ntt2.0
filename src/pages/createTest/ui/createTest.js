@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDropzone} from "react-dropzone";
 import classNames from "classnames";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,10 +8,25 @@ import {Select} from "shared/ui/select";
 import {Radio} from "shared/ui/radio";
 import {Input} from "shared/ui/input";
 import {Button} from "shared/ui/button/button";
-import {createQuestion, createTest} from "../model/createTestThunk";
-import {getCreateTestData} from "../model/createTestSelector";
+import {
+    getCreateTestData,
+    getCreateTestFields,
+    getCreateTestProfile,
+    createQuestion,
+    createTest,
+    fetchOrganizationFields,
+    fetchTestProfile, deleteQuestion
+} from "entities/createTest";
 
 import cls from "./createTest.module.sass"
+import {fetchOrganizationList, fetchOrganizationTypeList} from "entities/settings/model/settingsThunk";
+import {getSettingsHeader} from "entities/settings/model/settingsSelector";
+import {fetchSubjects} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
+import {API_URL, useHttp} from "shared/api/base";
+import {useParams} from "react-router";
+import {Form} from "shared/ui/form";
+import {useForm} from "react-hook-form";
+import {CreateTestQuestions, CreateTestVariants} from "features/createTest";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -20,36 +35,62 @@ const types = [
 
 export const CreateTest = () => {
 
+    const {id} = useParams()
+    const {request} = useHttp()
+    const formData = new FormData()
     const dispatch = useDispatch()
-    const {getInputProps, getRootProps} = useDropzone()
+    const {register, handleSubmit} = useForm()
+
+    const {getInputProps, getRootProps} = useDropzone({
+        onDrop: (acceptedFiles) => {
+            formData.append("res", JSON.stringify({
+                answer: "hello",
+                to_json: {}
+            }))
+            // image: acceptedFiles[0],
+            formData.append("image", acceptedFiles[0])
+            // request(`${API_URL}test/question/crud/update_delete/16/`, "PATCH", formData, {})
+            // request(`${API_URL}test/question/crud/update_delete/15/`, "DELETE")
+
+            request(`${API_URL}test/block/crud/update/8/`, "PATCH", formData, {})
+                .then(res => console.log(res, "patch"))
+            //     .catch(err => console.log(err, "patch err"))
+        }
+    })
+
     const testData = useSelector(getCreateTestData)
+    const organizationTypes = useSelector(getSettingsHeader)
+    const fields = useSelector(getCreateTestFields)
+    const profile = useSelector(getCreateTestProfile)
+
+    const [currentList, setCurrentList] = useState([])
+    const [isChange, setIsChange] = useState()
+
+    useEffect(() => {
+        dispatch(fetchOrganizationList())
+        dispatch(fetchSubjects())
+    }, [])
+
+    useEffect(() => {
+        if (id)
+            dispatch(fetchTestProfile({id}))
+    }, [id])
+
+    useEffect(() => {
+        if (profile)
+            setCurrentList(profile)
+    }, [profile])
 
     // useEffect(() => {
-    //     dispatch(createTest({
-    //         name: null,
-    //         field: null,
-    //         subject: null,
-    //         duration: null,
-    //         blocks: [
-    //             {
-    //                 text: null,
-    //                 to_json: {},
-    //                 questions: [
-    //                     {
-    //                         isTrue: true,
-    //                         answer: null,
-    //                         to_json: {}
-    //                     },
-    //                     {
-    //                         isTrue: false,
-    //                         answer: null,
-    //                         to_json: {}
-    //                     }
-    //                 ]
-    //             }
-    //         ]
-    //     }))
+    //     request(`${API_URL}test/test/crud/delete/17/`, "DELETE")
+    //         .then(res => console.log(res, "red"))
     // }, [])
+
+    useEffect(() => {
+        // /test/block/crud/update/{id}/
+        // formData.append("image", )
+        //
+    }, [])
 
     const [questionList, setQuestionList] = useState([
         {
@@ -61,19 +102,14 @@ export const CreateTest = () => {
     ])
     const [isError, setIsError] = useState("")
 
-    const onAddVariant = (questionId) => {
-        setQuestionList(prevState =>
-            prevState.map(item => {
-                if (item.id === questionId) {
-                    const ID = Number(item.variantList[item.variantList.length - 1].id.slice(6, 7)) + 1
-                    return {
-                        id: item.id,
-                        type: item.type,
-                        variantList: [...item.variantList, {id: `custom${ID}`, type: "text"}]
-                    }
-                } else return item
-            })
-        )
+    const onChangeType = (id) => {
+        dispatch(fetchOrganizationFields({id}))
+    }
+
+    const onRemoveQuestion = (id) => {
+        request(`${API_URL}test/block/crud/delete/${id}/`, "DELETE")
+            .then(res => console.log(res, "HELLO"))
+        dispatch(deleteQuestion(id))
     }
 
     const onRemoveVariant = (id, questionId) => {
@@ -108,19 +144,6 @@ export const CreateTest = () => {
         )
     }
 
-    const selectQuestionType = (type, id) => {
-        setQuestionList(prevState =>
-            prevState.map(item => {
-                if (item.id === id) {
-                    return {
-                        id: item.id, type,
-                        variantList: item.variantList
-                    }
-                } else return item
-            })
-        )
-    }
-
     const onChangeTrueVersion = (questionId, variantId) => {
         setQuestionList(prevState =>
             prevState.map(item => ({
@@ -143,180 +166,198 @@ export const CreateTest = () => {
         )
     }
 
-    const onRemoveQuestion = (id) => {
-        setQuestionList(prevState =>
-            prevState.filter(item => item.id !== id)
-        )
-    }
-
     const onSaveQuestion = () => {
-        if (questionList[questionList.length - 1].variantList.length < 2) {
+        if (currentList.blocks[currentList.blocks.length - 1].text.length > 1) {
             dispatch(onAddAlertOptions({
-                type: "error",
                 status: true,
-                msg: "Yana javoblar qoshing"
+                type: "error",
+                msg: "oldingi savol bo'sh"
             }))
-            setIsError("Yana javoblar qoshing")
-            return null
+            return null;
         }
-        dispatch(createQuestion({
-            id: 14,
-            data: questionList.map(item => {
-                return {
-                    text: item.value ?? null,
-                    questions: item.variantList.map(inner => {
-                        return {
-                            isTrue: !!inner.checked,
-                            answer: inner.value ?? null
+        const li = {
+            blocks: [{
+                text: "",
+                to_json: {
+                    type: "text"
+                },
+                questions: [
+                    {
+                        answer: "",
+                        isTrue: true,
+                        to_json: {
+                            type: "text"
                         }
-                    })
-                }
-            })[0]
-        }))
-        const ID = Number(questionList[questionList.length - 1].id.slice(6, 7)) + 1
-        setQuestionList(prevState => [...prevState, {
-            id: `custom${ID}`,
-            type: "text",
-            variantList: [{id: "custom1", type: "text", checked: true}]
-        }])
+                    },
+                    {
+                        answer: "",
+                        isTrue: false,
+                        to_json: {
+                            type: "text"
+                        }
+                    }
+                ]
+            }]
+        }
+        request(`${API_URL}test/test/crud/add_block/${id}/`, "PATCH", JSON.stringify(li))
+            .then(res => console.log(res))
     }
 
-    console.log(questionList, "questionList")
+    const onAddVariant = (questionId) => {
+        setCurrentList(prevState => ({
+            ...prevState,
+            blocks: prevState.blocks.map(item => {
+                if (item.id === questionId) {
+                    // const ID = Number(item.variantList[item.variantList.length - 1].id.slice(6, 7)) + 1
+                    return {
+                        ...item,
+                        questions: [
+                            ...item.questions,
+                            {
+                                questionId: item.id,
+                                type: "text",
+                                value: "",
+                                id: item.questions[item.questions.length - 1]?.id + 1 ?? 1,
+                                checked: !(item.questions.length >= 1)
+                            }
+                        ]
+                    }
+                } else return item
+            })
+        }))
+    }
+
+    const onSaveSingleQuestion = (id) => {
+        const res = currentList.blocks
+            .filter(item => item.id === id)
+            .map(item => ({
+                text: item.text,
+                to_json: {type: item.to_json.type},
+                // questions: item.questions
+                //     .map(item => ({
+                //         answer: item.value,
+                //         isTrue: item.checked,
+                //         to_json: {type: item.type}
+                //     }))
+            }))[0]
+        console.log(res)
+        request(`${API_URL}test/block/crud/update/${id}/`, "PATCH", JSON.stringify(res))
+            .then(res => console.log(res, "patch"))
+        // currentList.blocks
+        //     .filter(item => item.id === id)[0]?.questions
+        //     .map(item => ({
+        //         answer: item.value,
+        //         isTrue: item.checked,
+        //         to_json: {type: item.type}
+        //     }))
+        //     .map(item => {
+        //         request(`${API_URL}test/question/crud/update_delete/${id}/`, "PATCH", JSON.stringify(item))
+        //             .then(res => console.log(res, "res"))
+        //     })
+    }
+
+    // const onChangeField = (field) => {
+    //     console.log(id, "id")
+    //     dispatch(createQuestion({
+    //         id,
+    //         data: {field}
+    //     }))
+    // }
+    //
+    // const onChangeSubject = (subject) => {
+    //     console.log(id, "id")
+    //     dispatch(createQuestion({
+    //         id,
+    //         data: {subject}
+    //     }))
+    // }
+
+    const onSubmitTest = (data) => {
+        dispatch(createQuestion({id, data}))
+    }
 
     const renderVariants = (list, ID) => {
         return list.map(item => {
             return (
-                <div className={cls.variant}>
-                    <Radio
-                        name={ID}
-                        extraClasses={cls.variant__correct}
-                        checked={item.checked}
-                        onChange={() => onChangeTrueVersion(ID, item.id)}
-                    />
-                    <Select
-                        options={[...types, {id: "textImage", name: "Matn va rasm"}]}
-                        extraClass={cls.variant__type}
-                        titleOption={"Javob turi"}
-                        onChangeOption={(data) => selectVariantType(item.id, data, ID)}
-                        defaultValue={item.type}
-                    />
-                    <div className={cls.variant__title}>
-                        {
-                            item.type === "text"
-                                ? <Input
-                                    placeholder={"Javobni yozing"}
-                                />
-                                : item.type === "image"
-                                    ? <div
-                                        className={cls.imageArea}
-                                        {...getRootProps()}
-                                    >
-                                        <h2 className={cls.imageArea__title}>Rasm tanlang</h2>
-                                        <input {...getInputProps()} type="file"/>
-                                    </div>
-                                    : <div className={cls.imageWrapper}>
-                                        <Input
-                                            placeholder={"Savolni yozing"}
-                                        />
-                                        <div
-                                            className={cls.imageArea}
-                                            {...getRootProps()}
-                                        >
-                                            <h2 className={cls.imageArea__title}>Rasm tanlang</h2>
-                                            <input {...getInputProps()} type="file"/>
-                                        </div>
-                                    </div>
-                        }
-                    </div>
-                    <div className={cls.variant__options}>
-                        <i
-                            className={classNames("fa-solid fa-pen", cls.change)}
-                        />
-                        {
-                            list.length > 1 ?
-                                !item.checked ?
-                                    <i
-                                        className={classNames("fa-solid fa-trash", cls.trash)}
-                                        onClick={() => onRemoveVariant(item.id, ID)}
-                                    /> : null : null
-                        }
-                    </div>
-                </div>
+                <CreateTestVariants/>
             )
         })
     }
 
     const renderQuestions = () => {
-        return questionList.map(item => {
+        return currentList?.blocks?.map((item, index) => {
             return (
-                <div className={cls.question}>
-                    <div className={cls.question__header}>
-                        <Select
-                            options={types}
-                            extraClass={cls.question__type}
-                            title={"Savol turi"}
-                            onChangeOption={(data) => selectQuestionType(data, item.id)}
-                            defaultValue={item.type}
-                            status={item.isChange ? "" : "disabled"}
-                        />
-                        <div className={cls.innerWrapper}>
-                            <i
-                                className={classNames("fa-solid fa-pen", cls.change)}
-                            />
-                            {
-                                questionList.length > 1 ?
-                                    <i
-                                        className={classNames("fa-solid fa-trash", cls.trash)}
-                                        onClick={() => onRemoveQuestion(item.id)}
-                                    />
-                                    : null
-                            }
-                        </div>
-                    </div>
-                    <div className={cls.question__title}>
-                        {
-                            item.type === "text"
-                                ? <Input
-                                    placeholder={"Savolni yozing"}
-                                    disabled={!item.isChange}
-                                />
-                                : <div
-                                    aria-disabled={!item.isChange}
-                                    className={cls.imageArea}
-                                    {...getRootProps()}
-                                >
-                                    <h2 className={cls.imageArea__title}>Rasm tanlang</h2>
-                                    <input {...getInputProps()} type="file"/>
-                                </div>
-                        }
-                    </div>
-                    <div className={cls.question__container}>
-                        {renderVariants(item.variantList, item.id)}
-                    </div>
-                    <i
-                        className={classNames("fa-solid fa-plus", cls.plusVariant)}
-                        onClick={() => onAddVariant(item.id)}
-                    />
-                </div>
+                <CreateTestQuestions
+                    data={item}
+                    isChange={isChange}
+                    setIsChange={setIsChange}
+                    onAddVariant={() => onAddVariant(item.id)}
+                    isDelete={profile?.blocks?.length > 1}
+                    index={index + 1}
+                    onRemoveQuestion={onRemoveQuestion}
+                >
+                    {renderVariants(item.questions, item.id)}
+                </CreateTestQuestions>
             )
         })
     }
 
     return (
         <div className={cls.createTest}>
-            <Select
-                extraClass={cls.createTest__select}
-                titleOption={"Fan tanlang"}
-            />
+            <Form
+                extraClassname={cls.createTest__header}
+                onSubmit={handleSubmit(onSubmitTest)}
+            >
+                <div className={cls.wrapper}>
+                    <Input
+                        placeholder={"Test nomi"}
+                        name={"name"}
+                        register={register}
+                        defaultValue={profile?.name}
+                    />
+                    <Input
+                        type={"number"}
+                        name={"duration"}
+                        register={register}
+                        placeholder={"Test vaqti"}
+                        defaultValue={profile?.duration}
+                    />
+                </div>
+                <div className={cls.selects}>
+                    <Select
+                        options={organizationTypes}
+                        extraClass={cls.createTest__select}
+                        titleOption={"Tashkilot turi"}
+                        onChangeOption={onChangeType}
+                        defaultValue={profile?.field?.organization_type}
+                    />
+                    <Select
+                        options={fields}
+                        extraClass={cls.createTest__select}
+                        titleOption={"Soha turi"}
+                        // onChangeOption={onChangeField}
+                        name={"field"}
+                        register={register}
+                        defaultValue={profile?.field?.id}
+                    />
+                    <Select
+                        extraClass={cls.createTest__select}
+                        titleOption={"Fan tanlang"}
+                        name={"subject"}
+                        register={register}
+                        // onChangeOption={onChangeSubject}
+                    />
+                </div>
+            </Form>
             <div className={cls.createTest__container}>
-                <h2 className={cls.title}>Test yaratish</h2>
+                <h2 className={cls.title}>{"Test yaratish"}</h2>
                 <div className={cls.wrapper}>
                     {renderQuestions()}
                     <Button
                         onClick={onSaveQuestion}
                         extraClass={cls.wrapper__btn}
                     >
-                        Savolni saqlash
+                        Savol qo'shish
                     </Button>
                 </div>
                 {/*<div className={cls.plusQuestion}>*/}

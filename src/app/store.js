@@ -20,6 +20,7 @@ import homeSlice from "entities/home/model/slice/homeSlice";
 import {createTestSlice} from "pages/createTest";
 import {notificationSlice} from "entities/notification";
 import {menuBarSlice} from "widgets/menuBar";
+import {testSlice} from "entities/test";
 
 
 const stringMiddleware = () => (next) => (action) => {
@@ -54,6 +55,7 @@ export const store = configureStore({
         homeSlice,
         createTestSlice,
         notificationSlice,
+        testSlice,
         menuBarSlice
     },
     middleware: getDefaultMiddleware =>

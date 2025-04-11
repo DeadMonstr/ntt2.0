@@ -5,7 +5,7 @@ import {
     getRouteMain, getRouteNews, getRouteNotification,
     getRouteOrganizationProfile,
     getRouteOrganizations,
-    getRouteOrganizationTypes, getRouteTest, getRouteTestPage,
+    getRouteOrganizationTypes, getRouteTest, getRouteTestPage, getRouteTestProfile,
 } from "shared/const/routers";
 import {DashboardPage} from "pages/dashboardPage";
 
@@ -107,6 +107,10 @@ export const routersConfig = [
     },
     {
         path: getRouteCreteTest(),
+        element: <CreateTest/>
+    },
+    {
+        path: getRouteTestProfile(":id"),
         element: <CreateTest/>
     },
     {
