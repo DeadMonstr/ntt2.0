@@ -37,6 +37,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
     const orgData = useSelector(getOrganizationProfileData)
     const shifts = useSelector(getOrganizationProfileShifts)
 
+    console.log(fields , "filed")
 
     const dispatch = useDispatch()
 
@@ -90,6 +91,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
             dispatch(fetchEducationLanguage())
         }
     }, [orgData])
+
 
 
     const onSubmitDesc = useCallback((e) => {

@@ -46,8 +46,8 @@ export const ApplicationProfileInfoDocument = () => {
                 <ul className={cls.application__info_infos}>
                     <li>Yo'nalish nomi <span>Matematika</span></li>
                     <li>Daraja <span>{data?.degree}</span></li>
-                    <li>Ta'lim turi <span>{data?.shift}</span></li>
-                    <li>Ta'lim tili <span>{data?.language}</span></li>
+                    <li>Ta'lim turi <span>{data?.shift?.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</span></li>
+                    <li>Ta'lim tili <span>{data?.language?.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</span></li>
                 </ul>
                 <Select
                     defaultValue={status ?? "newRequest"}

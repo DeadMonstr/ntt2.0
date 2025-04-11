@@ -44,6 +44,7 @@ export const OrganizationProfileApplications = memo(() => {
     }, [dispatch, organization?.organization_type?.id])
 
 
+
     useEffect(() => {
         dispatch(fetchOrganizationProfileApplications({
             organization_id: id, field_id, degree_id, shift_id, language_id
@@ -58,8 +59,8 @@ export const OrganizationProfileApplications = memo(() => {
                     <td>{item?.phone}</td>
                     <td>{item?.degree}</td>
                     <td>{item?.field}</td>
-                    <td>{item?.shift}</td>
-                    <td>{item?.language}</td>
+                    <td>{item?.shift.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
+                    <td>{item?.language.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
                     <td>{item?.date}</td>
                 </tr>
             )
