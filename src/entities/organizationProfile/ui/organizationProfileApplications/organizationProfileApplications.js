@@ -50,6 +50,8 @@ export const OrganizationProfileApplications = memo(() => {
         }))
     }, [id, field_id, degree_id, shift_id, language_id])
 
+
+
     const renderApplicationsList = useCallback(() => {
         return data?.map(item => {
             return (
@@ -58,8 +60,8 @@ export const OrganizationProfileApplications = memo(() => {
                     <td>{item?.phone}</td>
                     <td>{item?.degree}</td>
                     <td>{item?.field}</td>
-                    <td>{item?.shift}</td>
-                    <td>{item?.language}</td>
+                    <td>{item?.shift.map(item => item.name).join(", ")}</td>
+                    <td>{item?.language.map(item => item.name).join(", ")}</td>
                     <td>{item?.date}</td>
                 </tr>
             )

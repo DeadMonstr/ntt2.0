@@ -1,11 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ROLES} from "shared/const/roles";
-import { ReactComponent as Dashboard } from  "shared/assets/images/Vector.svg" ;
-import { ReactComponent as Applications }  from "shared/assets/images/Vector-1.svg";
-import { ReactComponent as CourseApplications }  from "shared/assets/images/Vector-2.svg";
-import { ReactComponent as Settings }  from "shared/assets/images/Vector-3.svg";
-import { ReactComponent as News }  from "shared/assets/icons/fluent_news-16-regular.svg";
-import { ReactComponent as Notification }  from "shared/assets/icons/ion_mail-notification.svg";
+
 import {fetchMenuSettingsTypes} from "widgets/menuBar/model/thunk/menuBarThunk";
 
 const initialState = {
@@ -15,25 +10,25 @@ const initialState = {
         {
             to: "dashboard",
             label: "Dashboard",
-            img: <Dashboard/>,
+            // img: <Dashboard/>,
             roles: [ROLES.admin, ROLES.organization_admin]
         },
         {
             to: "applications",
             label: "Arizalar",
-            img: <Applications/>,
+            // img: <Applications/>,
             roles: [ROLES.admin, ROLES.organization_admin]
         },
         {
             to: "organizationTypes",
             label: "Tashkilotlar",
-            img: <CourseApplications/>,
+            // img: <CourseApplications/>,
             roles: [ROLES.admin]
         },
         {
             to: "organizationProfile",
             label: "",
-            img: <CourseApplications/>,
+            // img: <CourseApplications/>,
             back: true,
             isOrganization: true,
             roles: [ROLES.organization_admin]
@@ -41,7 +36,7 @@ const initialState = {
         {
             to: "settings",
             label: "Sozlamalar",
-            img: <Settings/>,
+            // img: <Settings/>,
             back: true,
             roles: [ROLES.admin],
             isMultiLink: true,
@@ -50,21 +45,21 @@ const initialState = {
         {
             to: "subjectsTests",
             label: "Fan Testlari",
-            img: <Settings/>,
+            // img: <Settings/>,
             back: true,
             roles: [ROLES.admin]
         },
         {
             to: "news",
             label: "Yangiliklar",
-            img: <News/>,
+            // img: <News/>,
             back: true,
             roles: [ROLES.organization_admin]
         },
         {
             to: "notification",
             label: "Bildirishnomalar",
-            img: <Notification/>,
+            // img: <Notification/>,
             roles: [ROLES.organization_admin]
         },
     ]
