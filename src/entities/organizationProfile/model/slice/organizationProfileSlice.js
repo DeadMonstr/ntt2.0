@@ -175,7 +175,7 @@ const OrganizationProfileSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchOrganizationProfileFields.fulfilled, (state, action) => {
-                state.fields = action.payload?.results
+                state.fields = action.payload
                 state.loading = false
                 state.error = null
             })

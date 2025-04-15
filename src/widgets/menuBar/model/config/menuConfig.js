@@ -6,6 +6,7 @@ import  { ReactComponent as CourseApplications }   from "shared/assets/images/Ve
 import { ReactComponent as Settings }   from "shared/assets/images/Vector-3.svg";
 import { ReactComponent as News }   from "shared/assets/icons/fluent_news-16-regular.svg";
 import { ReactComponent as Notification }   from "shared/assets/icons/ion_mail-notification.svg";
+import {TestPage} from "pages/testPage";
 
 export const menuConfig = [
     {
@@ -49,7 +50,7 @@ export const menuConfig = [
         ],
     },
     {
-        to: "subjectsTests",
+        to: "testListPage",
         label: "Fan Testlari",
         img: <Settings/>,
         back: true,

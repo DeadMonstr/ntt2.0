@@ -1,0 +1,36 @@
+.timerContainer
+  position: relative
+  width: 22rem
+  height: 22rem
+
+.svgTimer
+  width: 100%
+  height: 100%
+  transform: rotate(-90deg)
+
+.circleBackground
+  stroke: #e5e7eb
+  stroke-width: 10
+  fill: transparent
+
+.circleProgress
+  stroke: #2563eb
+  stroke-width: 10
+  stroke-linecap: round
+  fill: transparent
+  transition: stroke-dashoffset 1s linear
+
+.timeText
+  position: absolute
+  inset: 0
+  display: flex
+  align-items: center
+  justify-content: center
+  font-size: 3.2rem
+  font-weight: bold
+
+.label
+  text-align: center
+  margin-top: 0.5rem
+  font-size: 1.8rem
+  color: #6b7280

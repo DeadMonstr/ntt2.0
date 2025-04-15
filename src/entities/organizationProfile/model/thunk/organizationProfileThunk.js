@@ -69,7 +69,7 @@ export const fetchOrganizationProfileFields =
         "OrganizationProfileSlice/fetchOrganizationProfileFields",
         (id) => {
             const {request} = useHttp()
-            return request(`${API_URL}organization_fields/get/organization-fields/${id}`)
+            return request(`${API_URL}organization_fields/get/organization-fields2/${id}/`)
         }
     )
 

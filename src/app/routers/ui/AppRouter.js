@@ -25,9 +25,9 @@ export const AppRouter = () => {
                     element={<Login/>}
                 />
 
-                <Route
-                    element={<RequireAuth/>}
-                >
+                {/*<Route*/}
+                {/*    element={<RequireAuth/>}*/}
+                {/*>*/}
                     <Route
                         path={"admin/*"}
                         element={<Layout/>}
@@ -49,7 +49,7 @@ export const AppRouter = () => {
                             )
                         }
                     </Route>
-                </Route>
+                {/*</Route>*/}
 
 
                 <Route

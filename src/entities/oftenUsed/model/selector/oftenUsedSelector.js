@@ -9,6 +9,10 @@ export const getAcademicYears = (state) =>
 
 export const getShifts = (state) =>
     state.oftenUsedSlice.shifts
+export const getSubjects = (state) =>
+    state.oftenUsedSlice.subjects
+export const getFields = (state) =>
+    state.oftenUsedSlice.fields
 
 export const getOftenUsedLoading = (state) =>
     state.oftenUsedSlice.loading

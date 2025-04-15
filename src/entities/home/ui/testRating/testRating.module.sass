@@ -1,0 +1,46 @@
+@import "app/styles/abstracts/variables"
+
+.rating
+  width: 100%
+  padding: 10rem 0
+  display: flex
+  flex-direction: column
+  align-items: center
+  gap: 3rem
+  &__title
+    font-size: 3.2rem
+  .user
+    color: $main-color
+    font-size: 2rem
+    &__inner
+      color: black
+  &__static
+    display: flex
+    gap: 7rem
+    .rate
+      font-size: 3.2rem
+      color: #34C759
+      display: flex
+      flex-direction: column
+      gap: .5rem
+      text-align: center
+      &__inner
+        color: black
+        font-size: 1.6rem
+  &__container
+    display: flex
+    flex-direction: column
+    gap: 3rem
+    .btn
+      align-self: flex-end
+    .list
+      display: flex
+      flex-direction: column
+      gap: 3rem
+      &__item
+        display: flex
+        gap: 15rem
+        font-size: 1.6rem
+      &__title
+        font-size: 1.6rem
+        color: grey

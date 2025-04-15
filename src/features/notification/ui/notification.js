@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchNotificationData, getNotificationData} from "entities/notification";
 
@@ -13,21 +13,44 @@ export const Notification = () => {
     const dispatch = useDispatch()
 
     const id = localStorage.getItem("organization_id")
+    const [list, setList] = useState([])
+    const [search, setSearch] = useState("")
+
+    useEffect(() => {
+        if (data)
+            setList(data)
+    }, [data])
+
+    useEffect(() => {
+        if (search) {
+            setList(
+                data.filter(item =>
+                    item?.name?.includes(search.toLowerCase()) ||
+                    item?.phone?.toLowerCase().includes(search?.toLowerCase())
+                )
+            )
+        } else setList(data)
+    }, [search])
+
+    console.log("org", id)
 
     useEffect(() => {
         dispatch(fetchNotificationData(id))
     }, [])
-
-
+    console.log(data)
     return (
         <div className={cls.notification}>
+
             <h1 className={cls.notification__title}>Messaging</h1>
 
-            <Input name={"search"}/>
+            <Input
+                name={"search"}
+                onChange={(e) => setSearch(e.target.value)}
+            />
 
             <div className={cls.notification__list}>
                 {
-                    data?.results?.map(item => (
+                    list?.map(item => (
                         <Link to={`/admin/notification/item/${item.student_id}`}>
                             <div className={cls.notification__list_item}>
                                 <img src={img} alt=""/>

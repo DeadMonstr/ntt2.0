@@ -17,8 +17,11 @@ import {alertSlice} from "../features/alert";
 import {homeNewsSlice} from "entities/home";
 import {subjectsTests} from "entities/subjectsTests";
 import homeSlice from "entities/home/model/slice/homeSlice";
+
 import {notificationSlice} from "entities/notification";
 import {menuBarSlice} from "widgets/menuBar";
+import {testSlice} from "entities/test";
+import {createTestSlice} from "entities/createTest";
 
 
 const stringMiddleware = () => (next) => (action) => {
@@ -51,7 +54,9 @@ export const store = configureStore({
         homeNewsSlice,
         subjectsTests,
         homeSlice,
+        createTestSlice,
         notificationSlice,
+        testSlice,
         menuBarSlice
     },
     middleware: getDefaultMiddleware =>
