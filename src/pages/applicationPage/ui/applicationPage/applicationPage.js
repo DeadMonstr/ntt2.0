@@ -30,13 +30,11 @@ const listData = [
 export const ApplicationPage = () => {
 
     const dispatch = useDispatch()
-
-
     const requests = useSelector(applicationRequestsSelectors)
 
-
-
     const [active, setActive] = useState(listData[0].name)
+
+
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
     const degree = useSelector(applicationDegreeSelectors)
@@ -45,9 +43,7 @@ export const ApplicationPage = () => {
     const language = useSelector(applicationLanguageSelectors)
     const organization = useSelector(getUserOrganizationId)
 
-
     useEffect(() => {
-        if (!organization) return;
 
         const data = {
             type_id: type,
@@ -58,10 +54,11 @@ export const ApplicationPage = () => {
             organization: organization,
             search,
             status: active
-
         }
 
         dispatch(fetchApplicationData(data))
+
+
     }, [type, degree, field, shift, language, search, active,organization])
 
     const role = localStorage.getItem("role")
