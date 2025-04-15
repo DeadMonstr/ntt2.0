@@ -167,7 +167,7 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
-        if (currentList.blocks[currentList.blocks.length - 1].text.length > 1) {
+        if (currentList?.blocks[currentList?.blocks?.length - 1]?.text?.length > 1) {
             dispatch(onAddAlertOptions({
                 status: true,
                 type: "error",

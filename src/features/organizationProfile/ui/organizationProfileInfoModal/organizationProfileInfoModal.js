@@ -104,6 +104,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         formData.delete("locations")
         formData.delete("img")
     }
+    console.log(userProfile)
 
     const onCreate = (data) => {
         console.log(data)
@@ -185,6 +186,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 {}
             )
                 .then(res => {
+                    console.log(res)
                     dispatch(getOrganizationImage(res))
                     let obj;
                     if (data?.username !== userProfile?.user?.username) obj = {username: data?.username}

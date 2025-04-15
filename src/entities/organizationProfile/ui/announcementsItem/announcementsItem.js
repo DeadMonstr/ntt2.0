@@ -7,10 +7,12 @@ import image1 from "shared/assets/icons/languages.png";
 import image2 from "shared/assets/icons/type.png";
 import image3 from "shared/assets/icons/prime_dollar.png";
 import image4 from "shared/assets/icons/star.png";
+import {useSelector} from "react-redux";
+import {getOrganizationProfileData} from "entities/organizationProfile/model/selector/organizationProfileSelector";
 
 export const AnnouncementsItem = memo(({userRole, onChange, item}) => {
 
-
+    const data = useSelector(getOrganizationProfileData)
     return (
         <div className={cls.announcementsItem}>
             {userRole &&
@@ -22,7 +24,7 @@ export const AnnouncementsItem = memo(({userRole, onChange, item}) => {
                     )}
                 />}
             <div className={cls.announcementsItem__header}>
-                <img className={cls.announcementsItem__ava} src={image} alt=""/>
+                <img className={cls.announcementsItem__ava} src={`${data?.img ? data?.img : image}`} alt=""/>
                 <h2 className={cls.announcementsItem__title}>
                     {item.field.name}
                 </h2>
