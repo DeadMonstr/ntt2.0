@@ -85,6 +85,14 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
     const onSubmit = (data) => {
         formData.append("name", data?.name_organization)
+        formData.append("phone", data?.phone)
+        formData.append("email", data?.email)
+        formData.append("address", data?.address)
+        formData.append("website_link", data?.website_link)
+        formData.append("youtube_link", data?.youtube_link)
+        formData.append("telegram_link", data?.telegram_link)
+        formData.append("instagram_link", data?.instagram_link)
+        formData.append("facebook_link", data?.facebook_link)
         formData.append("desc", data?.desc)
         // formData.append("phone", data?.phone)
         formData.append("locations", JSON.stringify(data?.locations))
@@ -103,6 +111,14 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         formData.delete("desc")
         formData.delete("locations")
         formData.delete("img")
+        formData.delete("phone")
+        formData.delete("email")
+        formData.delete("address")
+        formData.delete("website_link")
+        formData.delete("youtube_link")
+        formData.delete("telegram_link")
+        formData.delete("instagram_link")
+        formData.delete("facebook_link")
     }
 
     const onCreate = (data) => {
@@ -345,6 +361,70 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         register={register}
                         extraClass={cls.info__input}
                         placeholder={"Location"}
+                    />
+                    <Input
+                        // required
+                        name={"phone"}
+                        value={data?.phone}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Telefon raqam"}
+                    />
+                    <Input
+                        // required
+                        name={"email"}
+                        value={data?.email}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Email"}
+                    />
+                    <Input
+                        // required
+                        name={"address"}
+                        value={data?.address}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Addres"}
+                    />
+                    <Input
+                        // required
+                        name={"website_link"}
+                        value={data?.website_link}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Website Linki"}
+                    />
+                    <Input
+                        // required
+                        name={"youtube_link"}
+                        value={data?.youtube_link}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Youtube Linki"}
+                    />
+                    <Input
+                        // required
+                        name={"telegram_link"}
+                        value={data?.telegram_link}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Telegram Linki"}
+                    />
+                    <Input
+                        // required
+                        name={"instagram_link"}
+                        value={data?.instagram_link}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Instagram Linki"}
+                    />
+                    <Input
+                        // required
+                        name={"facebook_link"}
+                        value={data?.facebook_link}
+                        register={register}
+                        extraClass={cls.info__input}
+                        placeholder={"Facebook Linki"}
                     />
                 </Form>
             </Modal>

@@ -57,8 +57,22 @@ export const OrganizationProfileApplications = memo(() => {
                     <td>{item?.phone}</td>
                     <td>{item?.degree}</td>
                     <td>{item?.field}</td>
-                    <td>{item?.shift}</td>
-                    <td>{item?.language}</td>
+                    <td>
+                        {
+                            item?.shift
+                                .map((inner, index) => (
+                                    index === (item?.shift?.length - 1) ? inner?.name : `${inner?.name} / `
+                                ))
+                        }
+                    </td>
+                    <td>
+                        {
+                            item?.language
+                                .map((inner, index) => (
+                                    index === (item?.language?.length - 1) ? inner?.name : `${inner?.name} / `
+                                ))
+                        }
+                    </td>
                     <td>{item?.date}</td>
                 </tr>
             )

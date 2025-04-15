@@ -66,7 +66,9 @@ export const ApplicationPage = () => {
             <ApplicationHeader data={listData} active={active} setActive={setActive}/>
 
             <div className={cls.applicationPage__header}>
-                <h1 className={cls.applicationPage__title}>{listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}</h1>
+                <h1 className={cls.applicationPage__title}>
+                    {listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}
+                </h1>
                 <ApplicationFilters/>
 
 
