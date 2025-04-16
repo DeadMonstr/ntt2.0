@@ -5,7 +5,7 @@ import {Button} from "shared/ui/button/button";
 
 import cls from "./testHeader.module.sass";
 
-export const TestHeader = ({onCreateTest}) => {
+export const TestHeader = ({onCreateTest, setActive}) => {
 
     const navigate = useNavigate()
 
@@ -18,7 +18,7 @@ export const TestHeader = ({onCreateTest}) => {
                 >
                     Test qo'shish
                 </Button>
-                <Button type={"filter"}>Filter</Button>
+                <Button onClick={() => setActive(true)} type={"filter"}>Filter</Button>
             </div>
         </div>
     );
