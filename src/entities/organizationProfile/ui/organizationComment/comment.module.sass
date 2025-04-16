@@ -1,0 +1,43 @@
+.comment
+  display: flex
+  flex-direction: column
+  gap: 2rem
+  &__add
+    align-self: flex-end
+  &__box
+    padding: 1rem
+
+    display: flex
+    flex-direction: column
+    gap: 1rem
+    border-radius: 10px
+    border: 1px solid rgba(209, 209, 214, 1)
+    &_header
+      align-items: center
+      justify-content: space-between
+      gap: 1rem
+      font-weight: normal
+      font-size: 1.4rem
+      display: flex
+      img
+        width: 5rem
+        height: 5rem
+        object-fit: cover
+    &_text
+      font-size: 1.6rem
+    &_date
+      align-self: flex-end
+      font-size: 1.2rem
+.form
+  margin-top: 1rem
+  gap: 2rem!important
+  input
+    background-color: white
+    color: rgba(0, 74, 173, 1)
+.modal
+  background-color: rgba(0, 74, 173, 1) !important
+  color: white!important
+  &__star
+    display: flex
+    gap: 1rem
+    flex-direction: column

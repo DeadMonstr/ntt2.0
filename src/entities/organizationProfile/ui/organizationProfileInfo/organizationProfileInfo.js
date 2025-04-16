@@ -20,6 +20,7 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
     const userProfileImage = useSelector(getOrganizationProfileUserImageData)
 
 
+
     return (
         <div className={cls.info}>
             {/*{userRole && userProfile?.id && (*/}

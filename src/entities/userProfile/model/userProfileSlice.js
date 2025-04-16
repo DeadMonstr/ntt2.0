@@ -7,7 +7,8 @@ const initialState = {
     userOrganizationName: null,
     userOrganizationId: null,
     loading: false,
-    error: null
+    error: null,
+    userData: null
 }
 
 const userProfileSlice = createSlice({
