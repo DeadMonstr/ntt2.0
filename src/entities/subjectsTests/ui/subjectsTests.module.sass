@@ -1,0 +1,17 @@
+@import "app/styles/abstracts/mixins"
+.schoolList__filter
+    background: #FFFFFF
+    position: fixed
+    bottom: 2rem
+    right: 5rem
+    height: fit-content
+    width: fit-content
+    border-radius: 50%
+    padding: 2rem
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3)
+    i
+      font-size: 2rem
+    @include btn-active
+    &.active
+      i
+        color: #0F40D8

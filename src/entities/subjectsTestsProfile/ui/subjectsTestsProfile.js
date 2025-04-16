@@ -5,17 +5,18 @@ import {fetchSubjectsTest} from "entities/subjectsTests/model/thunk/subjectsTest
 import {getSubjectsTests} from "entities/subjectsTests/model/selectors/subjectsTestsSelectors";
 import {useNavigate} from "react-router";
 import classNames from "classnames";
-import cls from './subjectsTests.module.sass'
+import cls from 'entities/subjectsTestsProfile/ui/subjectsTestsProfile.module.sass'
 
-export const SubjectsTests = ({setActive,active}) => {
+export const SubjectsTestsProfile = ({setActive,active}) => {
 
     const tests = [
         {
             id:1,
+            user_name: "Shaha",
             name: "Test1",
-            duration: "2 soat",
             type: "o'qituvchi",
-            subject: "Matematika"
+            subject: "Matematika",
+            score: "100 ball"
 
         }
     ]
@@ -28,9 +29,8 @@ export const SubjectsTests = ({setActive,active}) => {
 
 
 
-
-
     const navigate = useNavigate()
+
 
 
     return (
@@ -39,22 +39,24 @@ export const SubjectsTests = ({setActive,active}) => {
                 <thead>
                 <tr>
                     <th>№</th>
+                    <th>Ism-familiya</th>
                     <th>Test nomi</th>
-                    <th>Davomiyligi</th>
                     <th>Soha</th>
                     <th>Fan</th>
+                    <th>Ball</th>
                 </tr>
                 </thead>
                 <tbody>
                 {
                     tests.map((item,index) => {
                         return (
-                            <tr onClick={() => navigate(`${item.id}`)}  style={{cursor: 'pointer'}}>
+                            <tr style={{cursor: 'pointer'}}>
                                 <td>{index+1}</td>
+                                <td>{item.user_name}</td>
                                 <td>{item.name}</td>
-                                <td>{item.duration}</td>
                                 <td>{item.type}</td>
                                 <td>{item.subject}</td>
+                                <td>{item.score}</td>
                             </tr>
                         )
                     })
