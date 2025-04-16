@@ -6,6 +6,8 @@ import { ReactComponent as CourseApplications }  from "shared/assets/images/Vect
 import { ReactComponent as Settings }  from "shared/assets/images/Vector-3.svg";
 import { ReactComponent as News }  from "shared/assets/icons/fluent_news-16-regular.svg";
 import { ReactComponent as Notification }  from "shared/assets/icons/ion_mail-notification.svg";
+import {ReactComponent as TestIcon} from "shared/assets/icons/test.svg";
+import {ReactComponent as ResultIcon}  from "shared/assets/icons/result.svg";
 import {fetchMenuSettingsTypes} from "widgets/menuBar/model/thunk/menuBarThunk";
 
 const initialState = {
@@ -49,8 +51,15 @@ const initialState = {
         },
         {
             to: "subjectsTests",
-            label: "Fan Testlari",
-            img: <Settings/>,
+            label: "Testlar",
+            img: <TestIcon/>,
+            back: true,
+            roles: [ROLES.admin]
+        },
+        {
+            to: "testsResults",
+            label: "Test natijalari",
+            img: <ResultIcon/>,
             back: true,
             roles: [ROLES.admin]
         },

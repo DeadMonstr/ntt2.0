@@ -49,7 +49,7 @@ export const SubjectsTests = ({setActive,active}) => {
                 {
                     tests.map((item,index) => {
                         return (
-                            <tr onClick={() => navigate(`${item.id}`)}  style={{cursor: 'pointer'}}>
+                            <tr style={{cursor: 'pointer'}}>
                                 <td>{index+1}</td>
                                 <td>{item.name}</td>
                                 <td>{item.duration}</td>
