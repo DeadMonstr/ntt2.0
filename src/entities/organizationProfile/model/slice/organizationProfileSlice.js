@@ -245,7 +245,7 @@ export const {
     getOrganizationImage,
     updateSelectedDegree,
     updateAdminInfo,
-    deleteGallery
+    deleteGallery,
     onAddComment
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer
