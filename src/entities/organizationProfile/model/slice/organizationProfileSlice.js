@@ -39,6 +39,10 @@ const OrganizationProfileSlice = createSlice({
         addGallery: (state, action) => {
             state.gallery = [...state.gallery, action.payload]
         },
+
+        deleteGallery: (state, action) => {
+            state.gallery = state.gallery.filter(item => item.id !== action.payload)
+        },
         updateGallery: (state, action) => {
             state.gallery = state.gallery.map(
                 item => item.id === action.payload.id
@@ -210,6 +214,8 @@ export const {
     deleteAnnouncements,
     getOrganizationImage,
     updateSelectedDegree,
-    updateAdminInfo
+    updateAdminInfo,
+    deleteGallery
+
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer
