@@ -4,9 +4,14 @@ import {
     fetchOrganizationProfileAnnouncements,
     fetchOrganizationProfileApplications,
     fetchOrganizationProfileData,
-    fetchOrganizationProfileDegrees, fetchOrganizationProfileFields,
+    fetchOrganizationProfileDegrees,
+    fetchOrganizationProfileFields,
     fetchOrganizationProfileGallery,
-    fetchOrganizationProfileReadMore, fetchOrganizationProfileShifts, trueAnnouncementsDelete
+    fetchOrganizationProfileReadMore,
+    fetchOrganizationProfileShifts,
+
+    fetchUserComment,
+    trueAnnouncementsDelete
 } from "../thunk/organizationProfileThunk";
 
 const initialState = {
@@ -24,6 +29,15 @@ const initialState = {
     error: null,
 
     selectedDegree: null,
+    comment: [
+        {
+            name: "Sardor",
+            surname: "Ikromov",
+            img: null,
+            comment: "KaiB was amazing with our cats!! 🌟🌟🌟 This was our first time using a pet-sitting service, so we were naturally quite anxious. We took a chance on Kai and completely lucked out! We booked Kai to come twice a day for three days. Kai spent a considerable amount of time playing and engaging with our cats. She also sent us very funny and detailed reports at the end of each session. She truly gave us peace of mind while on holiday, knowing our furbabies were in go",
+            date: '22.22.22'
+        }
+    ]
 }
 
 const OrganizationProfileSlice = createSlice({
@@ -75,8 +89,11 @@ const OrganizationProfileSlice = createSlice({
         updateSelectedDegree: (state, action) => {
             state.selectedDegree = action.payload
         },
-        updateAdminInfo: (state , action) => {
+        updateAdminInfo: (state, action) => {
             state.userData = action.payload
+        },
+        onAddComment: (state , action) => {
+            state.comment = [...state.comment , action.payload]
         }
     },
     extraReducers: builder =>
@@ -201,6 +218,19 @@ const OrganizationProfileSlice = createSlice({
                 state.loading = false
                 state.error = "error"
             })
+            .addCase(fetchUserComment.pending, (state) => {
+                state.loading = true
+                state.error = null
+            })
+            .addCase(fetchUserComment.fulfilled, (state, action) => {
+                state.comment = action.payload?.results
+                state.loading = false
+                state.error = null
+            })
+            .addCase(fetchUserComment.rejected, (state) => {
+                state.loading = false
+                state.error = "error"
+            })
 })
 
 
@@ -216,6 +246,6 @@ export const {
     updateSelectedDegree,
     updateAdminInfo,
     deleteGallery
-
+    onAddComment
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer

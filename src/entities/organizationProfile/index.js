@@ -5,6 +5,7 @@ export {AnnouncementsList} from "./ui/announcementsList/announcementsList";
 export {OrganizationProfileGallery} from "./ui/organizationProfileGallery/organizationProfileGallery";
 export {OrganizationProfileApplications} from "./ui/organizationProfileApplications/organizationProfileApplications";
 export {AnnouncementsHeader} from "./ui/announcementsHeader/announcementsHeader";
+export {OrganizationComment} from "./ui/organizationComment/organizationComment"
 
 export {
     default as OrganizationProfileSlice,

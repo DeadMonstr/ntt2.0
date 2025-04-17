@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {API_URL, ParamUrls, useHttp} from "shared/api/base";
+import {API_URL, headers, ParamUrls, useHttp} from "shared/api/base";
 
 export const fetchOrganizationProfileData =
     createAsyncThunk(
@@ -101,4 +101,13 @@ export const falseAnnouncementsDelete =
         }
     )
 
+
+export const fetchUserComment =
+    createAsyncThunk(
+        "OrganizationProfileSlice/fetchUserComment",
+        (id) => {
+            const {request} = useHttp()
+            return request(`${API_URL}comments/list/?organization_id=${id}`, "GET" , null ,  headers())
+        }
+    )
 

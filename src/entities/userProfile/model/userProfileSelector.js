@@ -1,3 +1,5 @@
+export const getUserData = (state) =>
+    state.userProfileSlice.userData
 export const getUserJob = (state) =>
     state.userProfileSlice.userJob
 export const getUserOrganizationName = (state) =>

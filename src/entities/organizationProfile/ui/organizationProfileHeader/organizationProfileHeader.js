@@ -39,6 +39,11 @@ export const OrganizationProfileHeader = memo(({setActive}) => {
             bgColor: "#E7EFFF"
         },
 
+        {
+            name: "Izohlar",
+            image: info,
+            bgColor: "#E7EFFF"
+        },
 
 
 

@@ -1,4 +1,5 @@
 @import "app/styles/abstracts/mixins"
+@import "app/styles/abstracts/variables"
 
 .info
   padding: 2.8rem 1.7rem 5.6rem 1.7rem
@@ -72,6 +73,14 @@
     display: flex
     flex-direction: column
     gap: 2rem
+    .links
+      display: flex
+      gap: 2rem
+      &__item
+        font-size: 2.4rem
+        color: $main-color
+        &.notActive
+          color: grey
   &__input
     width: 100% !important
     border-top: none
