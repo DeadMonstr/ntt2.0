@@ -20,7 +20,6 @@ export const Textarea = React.memo((
         maxLength
     }) => {
 
-    const [ setSilk] = useState("")
 
 
     return register ? (
@@ -45,7 +44,6 @@ export const Textarea = React.memo((
                     value:value,
                     defaultValue: defaultValue,
                     placeholder: placeholder,
-                    onChange: setSilk
                 })}
             />
             <div className={cls.message}>
@@ -72,7 +70,7 @@ export const Textarea = React.memo((
                 required={required}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
-                onChange={setSilk}
+                onChange={onChange}
             />
         </label>
     );
