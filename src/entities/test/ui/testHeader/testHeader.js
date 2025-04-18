@@ -1,13 +1,10 @@
 import React from 'react';
-import {useNavigate} from "react-router";
 
 import {Button} from "shared/ui/button/button";
 
 import cls from "./testHeader.module.sass";
 
 export const TestHeader = ({onCreateTest, setActive}) => {
-
-    const navigate = useNavigate()
 
     return (
         <div className={cls.header}>
