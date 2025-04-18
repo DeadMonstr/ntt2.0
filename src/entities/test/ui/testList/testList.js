@@ -1,13 +1,17 @@
 import React from 'react';
 import {Table} from "shared/ui/table";
 import classNames from "classnames";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getTestListData} from "entities/test/model/testSelector";
 import cls from "pages/createTest/ui/createTest.module.sass";
 import {useNavigate} from "react-router";
+import {API_URL, useHttp} from "../../../../shared/api/base";
+import {deleteTest} from "../../model/testSlice";
 
 export const TestList = () => {
 
+    const {request} = useHttp()
+    const dispatch = useDispatch()
     const testList = useSelector(getTestListData)
     const navigate = useNavigate()
 
@@ -15,17 +19,27 @@ export const TestList = () => {
         return a.id - b.id;
     }
 
+    const onDelete = (id) => {
+        request(`${API_URL}test/test/crud/delete/${id}/`, "DELETE")
+            .then(res => console.log(res, "red"))
+        dispatch(deleteTest(id))
+    }
+
     const renderTests = () => {
         return [...testList].sort(compareById).map((item, index) => {
             return (
                 <tr
-                    onClick={() => navigate(`/admin/testProfile/${item.id}`)}
+                    onClick={(e) => {
+                        if (!e.target?.classList?.contains("fa-solid"))
+                            navigate(`/admin/testProfile/${item.id}`)
+                        else onDelete(item.id)
+                    }}
                 >
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{item.subject?.name}</td>
                     <td>{item.field?.name}</td>
-                    <td>15</td>
-                    <td>90 minut</td>
+                    <td>{item.number_questions}</td>
+                    <td>{item.duration} minut</td>
                     <td>
                         <i
                             className={classNames("fa-solid fa-trash")}

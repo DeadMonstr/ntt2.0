@@ -27,6 +27,7 @@ import {useParams} from "react-router";
 import {Form} from "shared/ui/form";
 import {useForm} from "react-hook-form";
 import {CreateTestQuestions, CreateTestVariants} from "features/createTest";
+import {getSubjects} from "../../../entities/oftenUsed/model/selector/oftenUsedSelector";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -62,6 +63,9 @@ export const CreateTest = () => {
     const organizationTypes = useSelector(getSettingsHeader)
     const fields = useSelector(getCreateTestFields)
     const profile = useSelector(getCreateTestProfile)
+    const subjects = useSelector(getSubjects)
+
+    console.log(subjects, "subjects")
 
     const [currentList, setCurrentList] = useState([])
     const [isChange, setIsChange] = useState()
@@ -341,11 +345,13 @@ export const CreateTest = () => {
                         defaultValue={profile?.field?.id}
                     />
                     <Select
+                        options={subjects}
                         extraClass={cls.createTest__select}
                         titleOption={"Fan tanlang"}
                         name={"subject"}
                         register={register}
                         // onChangeOption={onChangeSubject}
+                        defaultValue={profile?.subject?.id}
                     />
                 </div>
             </Form>
