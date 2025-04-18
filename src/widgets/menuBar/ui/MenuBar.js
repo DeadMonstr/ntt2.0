@@ -7,7 +7,7 @@ import logOut from "shared/assets/icons/Log out.svg"
 
 import cls from "./MenuBar.module.sass"
 import {useSelector} from "react-redux";
-import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
+import {getUserData, getUserJob, getUserOrganizationId, getUserOrganizationName} from "../../../entities/userProfile";
 import {menuConfig} from "../model/config/menuConfig";
 import userLogo from "shared/assets/images/userLogo.svg";
 import {useNavigate} from "react-router";
@@ -19,6 +19,7 @@ export const MenuBar = () => {
     const userRole = useSelector(getUserJob)
     const userOrganizationName = useSelector(getUserOrganizationName)
     const userOrganizationId = useSelector(getUserOrganizationId)
+    const userData = useSelector(getUserData)
 
     const navigate = useNavigate()
 
@@ -50,14 +51,20 @@ export const MenuBar = () => {
         localStorage.clear()
         navigate("/login")
     }
+
+    console.log(userData, "userData")
+
     return (
         <>
             <div className={cls.menubar}>
-                <div className={cls.profile}>
+                <div
+                    className={cls.profile}
+                    onClick={() => navigate("/admin/profile")}
+                >
 
-                    <img className={cls.profile__img} src={userLogo} alt="Logo"/>
+                    <img className={cls.profile__img} src={userData?.image} alt="Logo"/>
 
-                    <h2>Shahzod Omonboyev</h2>
+                    <h2>{userData?.name} {userData?.surname}</h2>
                 </div>
                 <div className={cls.options}>
                     {
