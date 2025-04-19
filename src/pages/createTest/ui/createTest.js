@@ -353,6 +353,7 @@ export const CreateTest = () => {
                         // onChangeOption={onChangeSubject}
                         defaultValue={profile?.subject?.id}
                     />
+                    <div style={{display: "flex"  , alignItems: "center"}}><Input checked={profile?.is_mandatory} register={register} name={"is_mandatory"} type={"checkbox"}/> <h2>Majburiy fan</h2></div>
                 </div>
             </Form>
             <div className={cls.createTest__container}>

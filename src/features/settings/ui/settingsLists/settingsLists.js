@@ -19,7 +19,6 @@ export const SettingsLists = ({data, activeFilter}) => {
     const [activeItem, setActiveItem] = useState(null)
 
 
-    console.log(data,"dasdta")
     const renderData = () => {
         return data?.map((item,index) => (
             <div className={cls.box}>

@@ -94,6 +94,10 @@ const OrganizationProfileSlice = createSlice({
         },
         onAddComment: (state , action) => {
             state.comment = [...state.comment , action.payload]
+        },
+        onDeleteLanding : (state , action) => {
+            console.log('sdasd')
+            state.announcements = state.announcements.filter(item => item.id !== action.payload)
         }
     },
     extraReducers: builder =>
@@ -246,6 +250,7 @@ export const {
     updateSelectedDegree,
     updateAdminInfo,
     deleteGallery,
-    onAddComment
+    onAddComment,
+    onDeleteLanding
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer

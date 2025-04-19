@@ -89,16 +89,17 @@ export const OrganizationProfileGalleryModal = memo(({userRole  , addActiveModal
     }
 
 
+    console.log(changedImage)
     const onDelete = () => {
 
-        request(`${API_URL}organizations/organization_gallery/crud/delete/${changedImage?.file?.id}/`, "DELETE", null, headers())
+        request(`${API_URL}organizations/organization_gallery/crud/delete/${changedImage?.id}/`, "DELETE", null, headers())
             .then(res => {
-                console.log(res, "resssssssssssssssssssss")
-                dispatch(deleteGallery(changedImage?.file?.id))
+                setActiveConfirm(false)
+                setActiveModal(false)
+                dispatch(deleteGallery(changedImage?.id))
             })
 
-        setActiveConfirm(false)
-        setActiveModal(false)
+
     }
     const onChangedModalOpen = (e) => {
         setChangedImage(e)

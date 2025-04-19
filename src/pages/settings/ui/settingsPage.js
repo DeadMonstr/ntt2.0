@@ -68,14 +68,13 @@ export const SettingsPage = () => {
                 />
             </div>
 
-            {
-                settingsDirection?.results?.length > 2 ? <Pagination
+             <Pagination
                     totalCount={activeFilter === 1 ? settingsDirection?.count : settingsDegree?.count}
                     onPageChange={setCurrentPage}
                     currentPage={currentPage}
                     pageSize={pageSize}
-                /> : null
-            }
+                />
+
         </div>
     );
 };
