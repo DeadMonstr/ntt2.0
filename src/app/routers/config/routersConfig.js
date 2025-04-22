@@ -29,6 +29,7 @@ import {CreateTest} from "pages/createTest";
 import {NewsPage} from "pages/newsPage";
 import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
 import {TestPage} from "pages/testPage";
+import {UserProfilePage} from "../../../pages/userProfilePage";
 
 
 export const routersConfig = [
@@ -126,6 +127,9 @@ export const routersConfig = [
         path: "notification/*",
         element: <NotificationPage/>
     },
-
+    {
+        path: "profile",
+        element: <UserProfilePage/>
+    }
 
 ]
