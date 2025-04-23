@@ -47,7 +47,7 @@ export const Alert = () => {
     // const continueDeleting = () => {
     //     setCanDelete(true)
     // }
-    console.log(alertsData)
+
 
 
     return (

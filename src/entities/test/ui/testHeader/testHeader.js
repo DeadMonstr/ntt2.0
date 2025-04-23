@@ -1,13 +1,10 @@
 import React from 'react';
-import {useNavigate} from "react-router";
 
 import {Button} from "shared/ui/button/button";
 
 import cls from "./testHeader.module.sass";
 
-export const TestHeader = ({onCreateTest}) => {
-
-    const navigate = useNavigate()
+export const TestHeader = ({onCreateTest, setActive}) => {
 
     return (
         <div className={cls.header}>
@@ -18,7 +15,7 @@ export const TestHeader = ({onCreateTest}) => {
                 >
                     Test qo'shish
                 </Button>
-                <Button type={"filter"}>Filter</Button>
+                <Button onClick={() => setActive(true)} type={"filter"}>Filter</Button>
             </div>
         </div>
     );

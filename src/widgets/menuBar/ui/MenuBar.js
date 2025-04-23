@@ -1,3 +1,4 @@
+
 import React, {useCallback, useEffect, useState} from 'react';
 import classNames from "classnames";
 
@@ -13,6 +14,53 @@ import userLogo from "shared/assets/images/userLogo.svg";
 import {useNavigate} from "react-router";
 import {menuBarList} from "../model/selector/menuBarSelector";
 import {fetchMenuSettingsTypes} from "widgets/menuBar/model/thunk/menuBarThunk";
+
+
+import { ReactComponent as Dashboard } from  "shared/assets/images/Vector.svg" ;
+import { ReactComponent as Applications }  from "shared/assets/images/Vector-1.svg";
+import { ReactComponent as CourseApplications }  from "shared/assets/images/Vector-2.svg";
+import { ReactComponent as Settings }  from "shared/assets/images/Vector-3.svg";
+import { ReactComponent as News }  from "shared/assets/icons/fluent_news-16-regular.svg";
+import { ReactComponent as Notification }  from "shared/assets/icons/ion_mail-notification.svg";
+
+
+const icons = [
+    {
+        to: "dashboard",
+        img: <Dashboard/>,
+    },
+    {
+        to: "applications",
+        img: <Applications/>,
+    },
+    {
+        to: "organizationTypes",
+        img: <CourseApplications/>,
+    },
+    {
+        to: "organizationProfile",
+        img: <CourseApplications/>,
+    },
+    {
+        to: "settings",
+        img: <Settings/>,
+    },
+    {
+        to: "subjectsTests",
+        img: <Settings/>,
+    },
+    {
+        to: "news",
+        img: <News/>,
+    },
+    {
+        to: "notification",
+        img: <Notification/>,
+    },
+]
+
+
+
 
 export const MenuBar = () => {
 
@@ -51,7 +99,7 @@ export const MenuBar = () => {
                         }
                         to={item?.isOrganization ? `${item.to}/${userOrganizationId}` : item.to}
                     >
-                        {item.img}
+                        {icons.filter(icon => icon.to === item.to)[0]?.img}
                         <h1>{item?.isOrganization ? userOrganizationName : item.label}</h1>
                     </NavLink>
                 )
@@ -119,7 +167,7 @@ const MultipleMenuItem = ({item}) => {
                 onClick={onChange}
                 to={item.to}
             >
-                {item.img}
+                {icons.filter(icon => icon.to === item.to)[0]?.img}
                 <h1>{item.label}</h1>
                 <i className={classNames("fas fa-chevron-down", {
                     [cls.active]: activeMultiLink
@@ -154,5 +202,3 @@ const MultipleMenuItem = ({item}) => {
         </div>
     )
 }
-
-

@@ -10,7 +10,12 @@ const initialState = {
 const testSlice = createSlice({
     name: "testSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        deleteTest: (state, action) => {
+            state.data = state.data
+                .filter(item => item.id !== action.payload)
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(fetchTestList.pending, (state) => {
@@ -29,4 +34,4 @@ const testSlice = createSlice({
 })
 
 export default testSlice.reducer
-export const {} = testSlice.actions
+export const {deleteTest} = testSlice.actions

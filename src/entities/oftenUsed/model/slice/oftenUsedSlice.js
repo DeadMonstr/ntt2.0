@@ -85,7 +85,7 @@ const oftenUsedSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchSubjects.fulfilled, (state, action) => {
-                state.shifts = action.payload?.results
+                state.subjects = action.payload?.results
                 state.loading = "subjectsSuccess"
                 state.error = null
             })

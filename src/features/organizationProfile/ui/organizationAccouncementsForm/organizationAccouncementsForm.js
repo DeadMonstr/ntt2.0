@@ -26,6 +26,7 @@ import {set} from "react-hook-form";
 import {useNavigate} from "react-router";
 import {onAddAlertOptions, onDeleteAlert} from "features/alert/model/slice/alertSlice";
 import {MultiSelect} from "shared/ui/multiSelect";
+import {onDeleteLanding} from "entities/organizationProfile/model/slice/organizationProfileSlice";
 
 export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
@@ -37,7 +38,6 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
     const orgData = useSelector(getOrganizationProfileData)
     const shifts = useSelector(getOrganizationProfileShifts)
 
-    console.log(fields , "filed")
 
     const dispatch = useDispatch()
 
@@ -193,6 +193,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                 }))
                 // navigate(-1)
                 setIsChange(false)
+                dispatch(onDeleteLanding(changedItem.id))
 
             })
     }

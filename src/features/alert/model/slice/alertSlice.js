@@ -21,7 +21,7 @@ const AlertSlice = createSlice({
             state.alert = [action.payload]
         },
         onDeleteAlert: (state, action) => {
-            console.log(action.payload)
+
             state.alert = state.alert.map((item, index) => {
                 if (index === action.payload.index) {
                     return {

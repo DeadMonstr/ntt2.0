@@ -51,6 +51,8 @@ export const OrganizationProfileApplications = memo(() => {
         }))
     }, [id, field_id, degree_id, shift_id, language_id])
 
+
+
     const renderApplicationsList = useCallback(() => {
         return data?.map(item => {
             return (

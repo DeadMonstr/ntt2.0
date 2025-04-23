@@ -17,26 +17,25 @@ import {Navigate, Outlet, Route, Routes} from "react-router";
 import {getUserOrganizationId} from "entities/userProfile";
 
 
-const listData = [
 
+
+const listData = [
     {name: "allRequest", label: "Hamma arizalar"},
-    {name: "newRequest", label: "Yangi arizalar"},
-    {name: "acceptRequest", label: "Qabul qilinganlar"},
-    {name: "rejectRequest", label: "Rad etilganlar"},
-    {name: "returnRequest", label: "Tahrirlashga qaytarilganlar"},
-    {name: "invitedRequest", label: "Imtihonga chaqirilganlar"}
+    {name: "newRequest", label: "Yangi ariza"},
+    {name: "acceptedRequest", label: "Qabul qilingan"},
+    {name: "rejectedRequest", label: "Rad etilgan"},
+    {name: "returnRequest", label: "Tahrirlashga qaytarilgan"},
+    {name: "invitedRequest", label: "Imtihonga chaqirilgan"}
 ]
 
 export const ApplicationPage = () => {
 
     const dispatch = useDispatch()
-
-
     const requests = useSelector(applicationRequestsSelectors)
 
-
-
     const [active, setActive] = useState(listData[0].name)
+
+
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
     const degree = useSelector(applicationDegreeSelectors)
@@ -45,9 +44,7 @@ export const ApplicationPage = () => {
     const language = useSelector(applicationLanguageSelectors)
     const organization = useSelector(getUserOrganizationId)
 
-
     useEffect(() => {
-        if (!organization) return;
 
         const data = {
             type_id: type,
@@ -58,10 +55,11 @@ export const ApplicationPage = () => {
             organization: organization,
             search,
             status: active
-
         }
 
         dispatch(fetchApplicationData(data))
+
+
     }, [type, degree, field, shift, language, search, active,organization])
 
     const role = localStorage.getItem("role")
