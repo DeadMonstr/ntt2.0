@@ -1,6 +1,12 @@
-export {default as userProfileSlice} from "./model/userProfileSlice"
+export {
+    default as userProfileSlice,
+    updateUser,
+    updateUserImage
+} from "./model/userProfileSlice"
 
 export {
+    getUserData,
+    getUserImageData,
     getUserJob,
     getUserOrganizationName,
     getUserOrganizationId

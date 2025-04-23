@@ -5,7 +5,7 @@ import {
     getRouteMain, getRouteNews, getRouteNotification,
     getRouteOrganizationProfile,
     getRouteOrganizations,
-    getRouteOrganizationTypes, getRouteTest, getRouteTestPage, getRouteTestProfile, getSubjectsTestsProfile,
+    getRouteOrganizationTypes, getRouteTest, getRouteTestPage, getRouteTestProfile,
 } from "shared/const/routers";
 import {DashboardPage} from "pages/dashboardPage";
 
@@ -27,9 +27,9 @@ import {OrganizationTypesPage} from "pages/organizationTypesPage";
 import {SubjectsTestsPage} from "pages/subjectsTestsPage";
 import {CreateTest} from "pages/createTest";
 import {NewsPage} from "pages/newsPage";
-import {TestPage} from "pages/testPage";
 import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
-import {SubjectsTestsProfilePage} from "pages/subjectsTestsProfilePage";
+import {TestPage} from "pages/testPage";
+import {UserProfilePage} from "../../../pages/userProfilePage";
 
 
 export const routersConfig = [
@@ -53,8 +53,9 @@ export const routersConfig = [
         element: <OrganizationsPage/>
     },
     {
-        path: "settings/:id",
+        path: "settings",
         element: <SettingsPage/>,
+
     },
     // {
     //     path: "organizationProfile/:id",
@@ -127,9 +128,8 @@ export const routersConfig = [
         element: <NotificationPage/>
     },
     {
-        path: getSubjectsTestsProfile(":id"),
-        element: <SubjectsTestsProfilePage/>
+        path: "profile",
+        element: <UserProfilePage/>
     }
-
 
 ]

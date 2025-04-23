@@ -71,6 +71,4 @@ export const menuConfig = [
     },
 
 
-
-
 ]
