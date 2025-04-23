@@ -195,7 +195,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                                         />
                                     </div>
                                     <h2>{card.name.substring(0, 14)}</h2>
-                                    <div className={cls.popupName}>
+                                      <div className={cls.popupName}>
                                         {card.name}
                                     </div>
                                 </div>
