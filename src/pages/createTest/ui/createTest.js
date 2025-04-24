@@ -15,7 +15,7 @@ import {
     createQuestion,
     createTest,
     fetchOrganizationFields,
-    fetchTestProfile, deleteQuestion
+    fetchTestProfile, deleteQuestion, addQuestion
 } from "entities/createTest";
 
 import cls from "./createTest.module.sass"
@@ -171,7 +171,7 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
-        if (currentList.blocks[currentList.blocks.length - 1].text.length > 1) {
+        if (currentList.blocks[currentList.blocks.length - 1].text.length < 1) {
             dispatch(onAddAlertOptions({
                 status: true,
                 type: "error",
@@ -204,7 +204,14 @@ export const CreateTest = () => {
             }]
         }
         request(`${API_URL}test/test/crud/add_block/${id}/`, "PATCH", JSON.stringify(li))
-            .then(res => console.log(res))
+            .then(res => {
+                dispatch(addQuestion(res))
+                dispatch(onAddAlertOptions({
+                    status: true,
+                    type: "success",
+                    msg: `savol qo'shildi`
+                }))
+            })
     }
 
     const onAddVariant = (questionId) => {
