@@ -326,6 +326,7 @@ export const CreateTest = () => {
                         placeholder={"Test vaqti"}
                         defaultValue={profile?.duration}
                     />
+
                 </div>
                 <div className={cls.selects}>
                     <Select

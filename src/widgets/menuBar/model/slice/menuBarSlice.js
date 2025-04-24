@@ -43,7 +43,7 @@ const initialState = {
             types: [],
         },
         {
-            to: "subjectsTests",
+            to: "testListPage",
             label: "Fan Testlari",
             // img: <Settings/>,
             back: true,
