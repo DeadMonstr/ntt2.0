@@ -15,7 +15,7 @@ import {
     createQuestion,
     createTest,
     fetchOrganizationFields,
-    fetchTestProfile, deleteQuestion
+    fetchTestProfile, deleteQuestion, addQuestion
 } from "entities/createTest";
 
 import cls from "./createTest.module.sass"
@@ -171,7 +171,7 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
-        if (currentList?.blocks[currentList?.blocks?.length - 1]?.text?.length > 1) {
+        if (currentList.blocks[currentList.blocks.length - 1].text.length < 1) {
             dispatch(onAddAlertOptions({
                 status: true,
                 type: "error",
@@ -204,7 +204,14 @@ export const CreateTest = () => {
             }]
         }
         request(`${API_URL}test/test/crud/add_block/${id}/`, "PATCH", JSON.stringify(li))
-            .then(res => console.log(res))
+            .then(res => {
+                dispatch(addQuestion(res))
+                dispatch(onAddAlertOptions({
+                    status: true,
+                    type: "success",
+                    msg: `savol qo'shildi`
+                }))
+            })
     }
 
     const onAddVariant = (questionId) => {
@@ -326,7 +333,6 @@ export const CreateTest = () => {
                         placeholder={"Test vaqti"}
                         defaultValue={profile?.duration}
                     />
-
                 </div>
                 <div className={cls.selects}>
                     <Select
@@ -354,7 +360,6 @@ export const CreateTest = () => {
                         // onChangeOption={onChangeSubject}
                         defaultValue={profile?.subject?.id}
                     />
-                    <div style={{display: "flex"  , alignItems: "center"}}><Input checked={profile?.is_mandatory} register={register} name={"is_mandatory"} type={"checkbox"}/> <h2>Majburiy fan</h2></div>
                 </div>
             </Form>
             <div className={cls.createTest__container}>
