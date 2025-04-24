@@ -7,13 +7,13 @@ import {API_URL, useHttp} from "shared/api/base";
 
 import cls from "./testPage.module.sass";
 import {useNavigate} from "react-router";
-import {Modal} from "../../../shared/ui/modal";
-import {Select} from "../../../shared/ui/select";
-import {getSettingsHeader} from "../../../entities/settings/model/settingsSelector";
-import {fetchOrganizationFields, getCreateTestFields} from "../../../entities/createTest";
-import {getSubjects} from "../../../entities/oftenUsed/model/selector/oftenUsedSelector";
-import {fetchOrganizationList} from "../../../entities/settings/model/settingsThunk";
-import {fetchSubjects} from "../../../entities/oftenUsed/model/thunk/oftenUsedThunk";
+import {Modal} from "shared/ui/modal";
+import {Select} from "shared/ui/select";
+import {getSettingsHeader} from "entities/settings/model/settingsSelector";
+import {fetchOrganizationFields, getCreateTestFields} from "entities/createTest";
+import {getSubjects} from "entities/oftenUsed/model/selector/oftenUsedSelector";
+import {fetchOrganizationList} from "entities/settings/model/settingsThunk";
+import {fetchSubjects} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
 
 export const TestPage = () => {
 

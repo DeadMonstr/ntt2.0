@@ -17,14 +17,15 @@ import {Navigate, Outlet, Route, Routes} from "react-router";
 import {getUserOrganizationId} from "entities/userProfile";
 
 
-const listData = [
 
+
+const listData = [
     {name: "allRequest", label: "Hamma arizalar"},
-    {name: "newRequest", label: "Yangi arizalar"},
-    {name: "acceptRequest", label: "Qabul qilinganlar"},
-    {name: "rejectRequest", label: "Rad etilganlar"},
-    {name: "returnRequest", label: "Tahrirlashga qaytarilganlar"},
-    {name: "invitedRequest", label: "Imtihonga chaqirilganlar"}
+    {name: "newRequest", label: "Yangi ariza"},
+    {name: "acceptedRequest", label: "Qabul qilingan"},
+    {name: "rejectedRequest", label: "Rad etilgan"},
+    {name: "returnRequest", label: "Tahrirlashga qaytarilgan"},
+    {name: "invitedRequest", label: "Imtihonga chaqirilgan"}
 ]
 
 export const ApplicationPage = () => {

@@ -7,7 +7,7 @@ import {getOrganizationProfileGallery} from "../../model/selector/organizationPr
 import cls from "./organizationProfileGallery.module.sass";
 import image from "shared/assets/images/Rectangle 640.png";
 
-export const OrganizationProfileGallery = memo(({userRole, setActive, isAdd}) => {
+export const OrganizationProfileGallery = memo(({userRole, setChangedImage, isAdd}) => {
 
     const data = useSelector(getOrganizationProfileGallery)
 
@@ -21,7 +21,7 @@ export const OrganizationProfileGallery = memo(({userRole, setActive, isAdd}) =>
                 >
                     {userRole && <div
                         className={cls.images__edit}
-                        onClick={() => setActive(item)}
+                        onClick={() => setChangedImage(item)}
                     >
                         <i className={classNames("fas fa-pen", cls.images__editIcon)}/>
                     </div>}
@@ -29,7 +29,7 @@ export const OrganizationProfileGallery = memo(({userRole, setActive, isAdd}) =>
                 </div>
             )
         })
-    }, [setActive, data])
+    }, [setChangedImage, data])
 
     return (
         <div

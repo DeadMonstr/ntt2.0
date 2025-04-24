@@ -53,6 +53,10 @@ const OrganizationProfileSlice = createSlice({
         addGallery: (state, action) => {
             state.gallery = [...state.gallery, action.payload]
         },
+
+        deleteGallery: (state, action) => {
+            state.gallery = state.gallery.filter(item => item.id !== action.payload)
+        },
         updateGallery: (state, action) => {
             state.gallery = state.gallery.map(
                 item => item.id === action.payload.id
@@ -90,6 +94,10 @@ const OrganizationProfileSlice = createSlice({
         },
         onAddComment: (state , action) => {
             state.comment = [...state.comment , action.payload]
+        },
+        onDeleteLanding : (state , action) => {
+            console.log('sdasd')
+            state.announcements = state.announcements.filter(item => item.id !== action.payload)
         }
     },
     extraReducers: builder =>
@@ -241,6 +249,8 @@ export const {
     getOrganizationImage,
     updateSelectedDegree,
     updateAdminInfo,
-    onAddComment
+    deleteGallery,
+    onAddComment,
+    onDeleteLanding
 } = OrganizationProfileSlice.actions
 export default OrganizationProfileSlice.reducer
