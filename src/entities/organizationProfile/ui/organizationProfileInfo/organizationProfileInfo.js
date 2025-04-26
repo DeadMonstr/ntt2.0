@@ -102,6 +102,12 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
                         disabled
                     />
                     <Input
+                        value={data?.district?.name}
+                        extraClass={cls.info__input}
+                        placeholder={"Region"}
+                        disabled
+                    />
+                    <Input
                         value={data?.phone}
                         extraClass={cls.info__input}
                         placeholder={"Telefon raqam"}

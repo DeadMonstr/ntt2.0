@@ -1,7 +1,10 @@
 //
 //
 //
-export const API_URL_DOC = `http://192.168.1.39:8000/`
+export const API_URL_DOC = `http://192.168.1.15:8000/`
+// export const API_URL_DOC = `https://api.xususiytalim.uz`
+//
+
 export const API_URL = `${API_URL_DOC}api/`
 
 //

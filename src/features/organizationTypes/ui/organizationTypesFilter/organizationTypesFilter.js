@@ -20,10 +20,13 @@ import {Textarea} from "../../../../shared/ui/textArea";
 import {useNavigate} from "react-router";
 import logo from "shared/assets/logo/logo.png"
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
+import {getOftenUsedDistrict} from "entities/oftenUsed/model/selector/oftenUsedSelector";
 
-export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelectType, selectType}) => {
+export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelectType, selectType , selectedDistrict , setSelectedDistrict}) => {
 
     const filter = useSelector(organizationTypeFilter)
+    const district = useSelector(getOftenUsedDistrict)
     const cards = useSelector(organizationTypeCard)
     const region = useSelector(getRegions)
     const [active, setActive] = useState(filter[0]?.id)
@@ -32,10 +35,17 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
     const [changeRegion, setChangeRegion] = useState(false)
 
 
+
+    useEffect(() => {
+       if (district) setSelectedDistrict(district[0]?.id)
+    } , [district])
+
     useEffect(() => {
         if (region) setChangeRegion(region[0].id)
     }, [region])
     const [changeType, setChangeType] = useState(false)
+
+
 
 
     const navigate = useNavigate()
@@ -103,7 +113,8 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
         const res = {
             ...data,
             region: selectRegion,
-            organization_type: selectType
+            organization_type: selectType,
+            district: selectedDistrict
         }
         request(`${API_URL}organizations/organization/crud/create/`, "POST", JSON.stringify(res), headers())
             .then(res => {
@@ -160,6 +171,8 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                                 options={filter}/>
                         <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion}
                                 options={region}/>
+                        <Select defaultValue={selectedDistrict} title={"Location"} onChangeOption={setSelectedDistrict}
+                                options={district}/>
 
                     </div>
                     <Button onClick={() => setPortal(!portal)} extraClass={cls.box__buttonPanel__container__btn}>
@@ -236,6 +249,9 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                            placeholder={"Name"}/>
                     <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}
                             defaultValue={selectRegion}/>
+
+                    <Select options={district} extraClass={cls.select} onChangeOption={setSelectedDistrict}
+                            defaultValue={selectedDistrict}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}
@@ -254,6 +270,8 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                            placeholder={"Name"}/>
                     <Select options={region} extraClass={cls.select} onChangeOption={setChangeRegion}
                             defaultValue={changeRegion}/>
+                    <Select options={district} extraClass={cls.select} onChangeOption={setSelectedDistrict}
+                            defaultValue={selectedDistrict}/>
                     <Input register={register} name={"phone"} type={"number"} extraClass={cls.box__portal__form__input}
                            placeholder={"Phone"}/>
                     {/*<Select options={filter} extraClass={cls.select} onChangeOption={setChangeType}/>*/}

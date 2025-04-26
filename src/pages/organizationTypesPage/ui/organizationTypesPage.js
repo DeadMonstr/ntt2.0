@@ -10,6 +10,7 @@ import {Pagination} from "features/pagination";
 import {Box} from "shared/ui/box/box";
 
 import cls from './organizationTypesPage.module.sass'
+import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
 
 
 export const OrganizationTypesPage = () => {
@@ -23,6 +24,9 @@ export const OrganizationTypesPage = () => {
     const pageSize = useMemo(() => 9, [])
     const [selectRegion, setSelectRegion] = useState(regionLocal ? regionLocal : 1)
     const [selectType, setSelectType] = useState(typeLocal ? typeLocal : 1)
+
+
+    const [selectedDistrict , setSelectedDistrict] = useState(null)
 
     localStorage.setItem("regionLocal", selectRegion)
     localStorage.setItem("typeLocal", selectType)
@@ -40,10 +44,19 @@ export const OrganizationTypesPage = () => {
                 id: selectType,
                 region: selectRegion,
                 currentPage: currentPage,
-                pageSize: pageSize
+                pageSize: pageSize,
+                district: selectedDistrict
             }))
         }
-    }, [currentPage, dispatch, pageSize, selectRegion, selectType])
+    }, [currentPage, dispatch, pageSize, selectRegion, selectType , selectedDistrict])
+
+
+    useEffect(() => {
+        if (selectRegion)
+            dispatch(fetchRegionDistrict(selectRegion))
+    } , [selectRegion])
+
+
 
     return (
         <Box extraClass={cls.mainBox}>
@@ -53,7 +66,9 @@ export const OrganizationTypesPage = () => {
                         setSelectRegion={setSelectRegion}
                         selectRegion={selectRegion}
                         setSelectType={setSelectType}
+                        setSelectedDistrict={setSelectedDistrict}
                         selectType={selectType}
+                        selectedDistrict={selectedDistrict}
                     />
                 </div>
                 {cards.length >= pageSize && <Pagination

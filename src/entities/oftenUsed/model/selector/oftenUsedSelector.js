@@ -18,3 +18,6 @@ export const getOftenUsedLoading = (state) =>
     state.oftenUsedSlice.loading
 export const getOftenUsedError = (state) =>
     state.oftenUsedSlice.error
+
+export const getOftenUsedDistrict = (state) =>
+    state.oftenUsedSlice.district
