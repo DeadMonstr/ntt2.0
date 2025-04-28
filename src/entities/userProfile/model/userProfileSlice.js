@@ -3,6 +3,8 @@ import {fetchUserProfileData} from "./userProfileThunk";
 
 
 const initialState = {
+    userData: null,
+    userImage: null,
     userJob: null,
     userOrganizationName: null,
     userOrganizationId: null,
@@ -14,7 +16,14 @@ const initialState = {
 const userProfileSlice = createSlice({
     name: "userProfile",
     initialState,
-    reducers: {},
+    reducers: {
+        updateUser: (state, action) => {
+            state.userData = action.payload
+        },
+        updateUserImage: (state, action) => {
+            state.userImage = action.payload
+        }
+    },
     extraReducers: builder =>
         builder
             .addCase(fetchUserProfileData.pending, state => {
@@ -24,7 +33,7 @@ const userProfileSlice = createSlice({
             .addCase(fetchUserProfileData.fulfilled, (state, action) => {
 
 
-                console.log(action.payload,"action.payload")
+                console.log(action.payload, "action.payload")
 
                 state.userData = action.payload
                 state.userBranchId = action.payload?.branch?.id
@@ -34,7 +43,7 @@ const userProfileSlice = createSlice({
                 localStorage.setItem("organization_id", action.payload?.organization_id)
                 localStorage.setItem("role", action.payload?.role)
 
-                localStorage.setItem("phone",  action.payload.phone)
+                localStorage.setItem("phone", action.payload.phone)
 
                 // state.userSystemId = action.payload.user.branch.location.system.id
                 state.loading = false
@@ -47,4 +56,5 @@ const userProfileSlice = createSlice({
 
 })
 
+export const {updateUser, updateUserImage} = userProfileSlice.actions
 export default userProfileSlice.reducer
