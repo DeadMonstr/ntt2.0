@@ -12,12 +12,11 @@ import {Table} from "shared/ui/table";
 import {useHref, useNavigate} from "react-router";
 import {headers, useHttp} from "shared/api/base";
 import {SubjectsTests} from "entities/subjectsTests/ui/subjectsTests";
+import {SubjectsTestsFilter} from "../../../features/filters/ui/subjectsTestsFilter/subjectsTestsFilter";
 
 export const SubjectsTestsPage = () => {
 
-    const [subjects,setSubjects] = useState([])
-    const [search,setSearch] = useState("")
-    const [selectedSubject,setSelectedSubject] = useState(null)
+    const [isSchoolFilter, setIsSchoolFilter] = useState(false)
 
 
     const navigate = useNavigate()
@@ -29,21 +28,15 @@ export const SubjectsTestsPage = () => {
     return (
         <div className={cls.subjectsTests}>
             <div className={cls.header}>
+                <h1>Testlar</h1>
                 <div>
-                    <Input
-                        placeholder={"Qidiruv"}
-                        onChange={(e) => setSearch(e.target.value)}
-                        value={search}
-                    />
-                    <Select options={subjects} onChangeOption={setSelectedSubject}/>
-                </div>
-                <div>
-                    <Button onClick={onClickBtn}>Qo'shmoq</Button>
+                    <Button onClick={onClickBtn}> Test yaratish</Button>
                 </div>
             </div>
 
             <div className={cls.container}>
-                <SubjectsTests search={search} selectedSubject={selectedSubject}/>
+                <SubjectsTests active={isSchoolFilter} setActive={setIsSchoolFilter}/>
+                <SubjectsTestsFilter active={isSchoolFilter} setActive={setIsSchoolFilter}/>
             </div>
 
 

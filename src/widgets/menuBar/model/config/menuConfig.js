@@ -40,7 +40,14 @@ export const menuConfig = [
         label: "Sozlamalar",
         img: <Settings/>,
         back: true,
-        roles: [ROLES.admin]
+        roles: [ROLES.admin],
+        isMultiLink: true,
+        types: [
+            {
+                label: "Maktab",
+                to: "school"
+            },
+        ],
     },
     {
         to: "testListPage",

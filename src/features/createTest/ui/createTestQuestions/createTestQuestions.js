@@ -30,6 +30,9 @@ export const CreateTestQuestions = ({data, isChange, setIsChange, isDelete, inde
     const [currentData, setCurrentData] = useState()
     const [currentImage, setCurrentImage] = useState()
     const [variantImages, setVariantImages] = useState([])
+
+
+
     // const [isChangeVariant, setIsChangeVariant] = useState()
 
     useEffect(() => {
@@ -98,7 +101,7 @@ export const CreateTestQuestions = ({data, isChange, setIsChange, isDelete, inde
                 formData.delete("text")
                 res?.questions?.map(item => {
                     const image = variantImages.filter(inner => item.to_json.prevId === inner.id)[0]?.image
-                    if (item.to_json.type === "image" && !!item.to_json.prevId && !!image) {
+                    if ((item.to_json.type === "image" || "textImage") && !!item.to_json.prevId && !!image) {
                         console.log(item, "item")
                         formData.append("image", image)
                         formData.append("to_json", JSON.stringify({type: item.to_json.type, prevId: null}))

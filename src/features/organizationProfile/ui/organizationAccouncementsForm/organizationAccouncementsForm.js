@@ -25,6 +25,8 @@ import {
 import {set} from "react-hook-form";
 import {useNavigate} from "react-router";
 import {onAddAlertOptions, onDeleteAlert} from "features/alert/model/slice/alertSlice";
+import {MultiSelect} from "shared/ui/multiSelect";
+import {onDeleteLanding} from "entities/organizationProfile/model/slice/organizationProfileSlice";
 
 export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
@@ -41,7 +43,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
 
     const [year, setYear] = useState(null)
-    const [lang, setLang] = useState(null)
+    const [lang, setLang] = useState([])
     const [degree, setDegree] = useState(null)
     const [field, setField] = useState(null)
     const [shift, setShift] = useState(null)
@@ -66,10 +68,10 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                 editorState: changedItem.requirements_json
             })
             setYear(changedItem.year.id)
-            setLang(changedItem.education_language.id)
+            setLang(changedItem.education_language.map((item) => ({label: item.name, value: item.id})))
             setDegree(changedItem.degree.id)
             setField(changedItem.field.id)
-            setShift(changedItem.shift.id)
+            setShift(changedItem.shift.map((item) => ({label: item.name, value: item.id})))
             setPrice(changedItem.price)
             setGrant(changedItem.grant)
 
@@ -89,6 +91,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
             dispatch(fetchEducationLanguage())
         }
     }, [orgData])
+
 
 
     const onSubmitDesc = useCallback((e) => {
@@ -115,11 +118,21 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         setEnd(e.target.value)
     }, [])
 
+    const onChangeLang = (value) => {
+        setLang(value)
+    }
+
+    const onChangeShift = (value) => {
+        setShift(value)
+    }
+
 
     const {request} = useHttp()
 
     const navigate = useNavigate()
 
+
+    console.log(lang , "dasdsa")
     const onSubmit = (e) => {
 
         e.preventDefault()
@@ -144,8 +157,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         if (changedItem?.id) {
             request(`${API_URL}organizations/organization_landing_page/crud/update/${changedItem?.id}/`, "PUT", JSON.stringify(data), headers())
                 .then(res => {
-
-
+                    setIsChange(false)
                     dispatch(onAddAlertOptions({
                         status: true,
                         type: "success",
@@ -156,6 +168,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         } else{
             request(`${API_URL}organizations/organization_landing_page/crud/create/`, "POST", JSON.stringify(data), headers())
                 .then(res => {
+                    setIsChange(false)
 
                     dispatch(onAddAlertOptions({
                         status: true,
@@ -166,7 +179,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
         }
 
 
-        setIsChange(false)
+
     }
 
 
@@ -180,15 +193,17 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                 }))
                 // navigate(-1)
                 setIsChange(false)
+                dispatch(onDeleteLanding(changedItem.id))
 
             })
     }
 
+
+
     return (
         <>
-
             <Form extraClassname={cls.create} id={"createForm"} isChange={false} onSubmit={onSubmit}>
-                <Button onClick={() => setIsChange(false)}>Back</Button>
+                <Button onClick={() => setIsChange(false)}>Ortga</Button>
 
                 <div className={cls.create__change}>
                     <Select defaultValue={degree} required onChangeOption={setDegree} options={degrees}
@@ -197,20 +212,39 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
                     <Select defaultValue={field} required onChangeOption={setField} options={fields}
                             extraClass={cls.create__select}
                             title={"Soha"}/>
-                    <Select defaultValue={shift} required onChangeOption={setShift} options={shifts}
-                            extraClass={cls.create__select}
-                            title={"Shift"}/>
-                    <Select defaultValue={lang} required onChangeOption={setLang} options={languages}
-                            extraClass={cls.create__select}
-                            title={"Education Langage"}/>
+
+                    <MultiSelect
+                        title={"Talim shakli"}
+                        defaultValue={shift}
+                        required
+                        onChange={onChangeShift}
+                        value={shift}
+                        options={shifts.map((item) => ({label: item.name, value: item.id}))}
+                    />
+                    {/*<Select defaultValue={shift} required onChangeOption={setShift} options={shifts}*/}
+                    {/*        extraClass={cls.create__select}*/}
+                    {/*        title={"Talim shakli"}/>*/}
+
+
+                    <MultiSelect
+                        title={"Talim tili"}
+                        defaultValue={lang}
+                        required
+                        onChange={onChangeLang}
+                        value={lang}
+                        options={languages.map((item) => ({label: item.name, value: item.id}))}
+                    />
+
                     <Select defaultValue={year} required onChangeOption={setYear} options={academicYears}
                             extraClass={cls.create__select}
-                            title={"Academic year"}/>
-                    <Input value={price} required onChange={onChangedPrice} type={"number"} title={"Price"}
+                            title={"O'quv yili"}/>
+
+
+                    <Input value={price} required onChange={onChangedPrice} type={"number"} title={"Kantrakt narxi"}
                            extraClass={cls.create__input}/>
-                    <Input value={start} required onChange={onChangedStartTime} type={"date"} title={"Start date"}
+                    <Input value={start} required onChange={onChangedStartTime} type={"date"} title={"Boshlanish sanasi"}
                            extraClass={cls.create__input}/>
-                    <Input value={end} required onChange={onChangedEndTime} type={"date"} title={"End date"}
+                    <Input value={end} required onChange={onChangedEndTime} type={"date"} title={"Tugash sanasi"}
                            extraClass={cls.create__input}/>
                     <Input
                         // required
@@ -224,7 +258,7 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
             </Form>
             <div className={cls.item}>
-                <TextEditor editorState={editorDesc?.editorState} required isSubmit={false} title={"Description"}
+                <TextEditor editorState={editorDesc?.editorState} required isSubmit={false} title={"Tavsif"}
                             onSubmit={onSubmitDesc}/>
                 <TextEditor editorState={editorDemand?.editorState} isSubmit={false} title={"Talablar"}
                             onSubmit={onSubmitTalablar}/>

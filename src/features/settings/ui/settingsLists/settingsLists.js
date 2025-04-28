@@ -18,18 +18,26 @@ export const SettingsLists = ({data, activeFilter}) => {
 
     const [activeItem, setActiveItem] = useState(null)
 
-    const renderData = () => {
-        return data?.map(item => (
-            <div className={cls.box}>
-                <div style={{display: 'flex' , flexDirection: 'column'}}>
-                    <div className={cls.box__title}>
-                        {item?.name}
 
-                    </div>
-                    <div className={cls.box__desc}>
-                        {item?.desc}
+    const renderData = () => {
+        return data?.map((item,index) => (
+            <div className={cls.box}>
+
+                <div>
+                    <h1 className={cls.index}>
+                        {index+1}
+                    </h1>
+
+                    <div style={{display: 'flex' , flexDirection: 'column'}}>
+                        <div className={cls.box__title}>
+                            {item?.name}
+                        </div>
+                        <div className={cls.box__desc}>
+                            {item?.desc}
+                        </div>
                     </div>
                 </div>
+
 
                 <i className={`fa-regular fa-pen-to-square ${cls.pen}`} onClick={() => {
                     setActiveEdit(true)
@@ -51,19 +59,27 @@ export const SettingsLists = ({data, activeFilter}) => {
 
 
 export const SettingsListEdit = ({active, setActive, activeItem, activeFilter}) => {
-    const {register, setValue, handleSubmit} = useForm()
     const [activeConfirm, setActiveConfirm] = useState(false)
 
+
+    const [name,setName] = useState("")
+    const [desc,setDesc] = useState("")
+
     const {request} = useHttp()
+
     useEffect(() => {
-        setValue('name', activeItem?.name)
-        setValue('desc', activeItem?.desc)
-    }, [active, activeItem])
+        setName(activeItem?.name)
+        setDesc(activeItem?.desc)
+    }, [ activeItem])
+
     const dispatch = useDispatch()
 
-    const onClick = (data) => {
-        setValue("name", "")
-        setValue("desc", "")
+    const onClick = () => {
+
+        const data ={
+            name,
+            desc
+        }
         setActive(false)
         if (activeFilter === 1) {
             request(`${API_URL}organization_fields/crud/update/${activeItem.id}/`, "PUT", JSON.stringify(data), headers())
@@ -74,22 +90,25 @@ export const SettingsListEdit = ({active, setActive, activeItem, activeFilter}) 
             request(`${API_URL}organization-degrees/organization-degree/crud/update/${activeItem.id}/`, "PUT", JSON.stringify(data), headers())
                 .then(res => {
                     dispatch(onEditDegree({id: activeItem.id, data}))
-
                 })
         }
+
+        setDesc("")
+        setName("")
+
     }
-    const onDelete = (data) => {
+
+
+    const onDelete = () => {
         if (activeFilter === 1) {
             request(`${API_URL}organization_fields/crud/delete/${activeItem.id}/`, "DELETE", null, headers())
                 .then(res => {
                     dispatch(onDeleteDirection(activeItem.id))
-
                 })
         } else {
             request(`${API_URL}organization-degrees/organization-degree/crud/delete/${activeItem.id}/`, "DELETE", null, headers())
                 .then(res => {
                     dispatch(onDeleteDegree(activeItem.id))
-
                 })
 
         }
@@ -101,23 +120,23 @@ export const SettingsListEdit = ({active, setActive, activeItem, activeFilter}) 
             <h1>Edit {activeFilter === 1 ? "Direction" : "Degree"}</h1>
 
 
-            <Form isChange={false}>
-                <Input extraClass={cls.filter__input} name={"name"} register={register}/>
-                <Textarea maxLength={140} name={"desc"} register={register}/>
-                <div className={cls.filter__buttons}>
-                    <Button onClick={handleSubmit(onClick)} extraClass={cls.filter__btn}>Edit</Button>
-                    <Button
-                        onClick={handleSubmit(() => setActiveConfirm(true))}
-                        type={"danger"}
-                        extraClass={cls.filter__btn}
-                    >
-                        Delete
-                    </Button>
-                </div>
+            <div >
+                <Input value={name} onChange={(e) => setName(e.target.value)} extraClass={cls.filter__input} name={"name"} />
+                <Textarea value={desc} onChange={(e) => setDesc(e.target.value)} maxLength={140} name={"desc"} />
 
-            </Form>
+            </div>
+            <div className={cls.filter__buttons}>
+                <Button onClick={onClick} id={"formId"} extraClass={cls.filter__btn}>Edit</Button>
+                <Button
+                    onClick={() => setActiveConfirm(true)}
+                    type={"danger"}
+                    extraClass={cls.filter__btn}
+                >
+                    Delete
+                </Button>
+            </div>
             <ConfirmModal
-                onClick={handleSubmit(onDelete)}
+                onClick={onDelete}
                 active={activeConfirm}
                 setActive={setActiveConfirm}
             />

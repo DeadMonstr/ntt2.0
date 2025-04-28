@@ -3,9 +3,7 @@ import {fetchOrganizationList, fetchOrganizationTypeDegree, fetchOrganizationTyp
 
 
 const initialState = {
-
     list: [],
-
     direction: [],
     degree: [],
     loading: false,
@@ -26,7 +24,6 @@ const settingsSlice = createSlice({
             } : item)
         },
         onDeleteHeaderItem: (state, action) => {
-            console.log(action.payload)
             state.list = state.list.filter(item => item.id !== action.payload)
         },
 

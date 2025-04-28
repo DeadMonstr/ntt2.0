@@ -7,7 +7,7 @@ import cls from "./applicationList.module.sass";
 
 
 export const ApplicationList = memo(({list = []}) => {
-
+        
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 1268);
 
@@ -20,6 +20,9 @@ export const ApplicationList = memo(({list = []}) => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+
+
 
 
     return (
@@ -49,7 +52,7 @@ export const ApplicationList = memo(({list = []}) => {
                                 onClick={() => {
                                     navigate(`profile/${item.id}`)
                                 }
-                                }
+                            }
                                 className={classNames(cls.applicationList__list, {
                                     [cls.debt]: !item?.accepted
                                 })}
@@ -60,22 +63,8 @@ export const ApplicationList = memo(({list = []}) => {
                                 <td>{item?.degree}</td>
                                 {!isMobile ? <>
                                     <td>{item?.field}</td>
-                                    <td>
-                                        {
-                                            item?.shift
-                                                .map((inner, index) => (
-                                                    index === (item?.shift?.length - 1) ? inner?.name : `${inner?.name} / `
-                                                ))
-                                        }
-                                    </td>
-                                    <td>
-                                        {
-                                            item?.language
-                                                .map((inner, index) => (
-                                                    index === (item?.language?.length - 1) ? inner?.name : `${inner?.name} / `
-                                                ))
-                                        }
-                                    </td>
+                                    <td>{item?.shift.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
+                                    <td>{item?.language.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
                                     <td>{item?.date}</td>
                                 </> : null}
                             </tr>

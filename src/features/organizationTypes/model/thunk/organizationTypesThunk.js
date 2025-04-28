@@ -15,10 +15,10 @@ export const fetchOrganizationTypesFilter = createAsyncThunk(
 
 export const fetchOrganizationTypesCards = createAsyncThunk(
     "organizationTypes/fetchOrganizationTypesCards",
-    async ({id, region,currentPage,pageSize}) => {
+    async ({id, region,currentPage,pageSize , district}) => {
         const {request} = useHttp()
         return await request(
-            `${API_URL}organizations/organization/get/filter_for_type/?offset=${(currentPage-1)*pageSize}&limit=${pageSize}${id ? `&organization_type=${id}&` : "?"}${region ? `region=${region}` : ""}`,
+            `${API_URL}organizations/organization/get/filter_for_type/?offset=${(currentPage-1)*pageSize}&limit=${pageSize}${id ? `&organization_type=${id}&` : "?"}${region ? `region=${region}&` : ""}${district ? `district=${district}` : ""}`,
             "GET",
             null,
             headers()

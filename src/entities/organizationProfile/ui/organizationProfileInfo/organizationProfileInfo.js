@@ -20,6 +20,7 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
     const userProfileImage = useSelector(getOrganizationProfileUserImageData)
 
 
+
     return (
         <div className={cls.info}>
             {/*{userRole && userProfile?.id && (*/}
@@ -96,6 +97,12 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
                     />
                     <Input
                         value={data?.region?.name}
+                        extraClass={cls.info__input}
+                        placeholder={"Region"}
+                        disabled
+                    />
+                    <Input
+                        value={data?.district?.name}
                         extraClass={cls.info__input}
                         placeholder={"Region"}
                         disabled

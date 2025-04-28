@@ -43,11 +43,15 @@ export const OrganizationProfileApplications = memo(() => {
         }
     }, [dispatch, organization?.organization_type?.id])
 
+
+
     useEffect(() => {
         dispatch(fetchOrganizationProfileApplications({
-            organization_id: id, field_id, degree_id,shift_id,language_id
+            organization_id: id, field_id, degree_id, shift_id, language_id
         }))
-    }, [id,field_id,degree_id,shift_id,language_id])
+    }, [id, field_id, degree_id, shift_id, language_id])
+
+
 
     const renderApplicationsList = useCallback(() => {
         return data?.map(item => {
@@ -57,22 +61,8 @@ export const OrganizationProfileApplications = memo(() => {
                     <td>{item?.phone}</td>
                     <td>{item?.degree}</td>
                     <td>{item?.field}</td>
-                    <td>
-                        {
-                            item?.shift
-                                .map((inner, index) => (
-                                    index === (item?.shift?.length - 1) ? inner?.name : `${inner?.name} / `
-                                ))
-                        }
-                    </td>
-                    <td>
-                        {
-                            item?.language
-                                .map((inner, index) => (
-                                    index === (item?.language?.length - 1) ? inner?.name : `${inner?.name} / `
-                                ))
-                        }
-                    </td>
+                    <td>{item?.shift.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
+                    <td>{item?.language.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
                     <td>{item?.date}</td>
                 </tr>
             )

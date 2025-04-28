@@ -5,7 +5,7 @@ import {
     fetchRegionsData,
     fetchSubjects,
     fetchFields,
-    fetchShifts
+    fetchShifts, fetchRegionDistrict
 } from "../thunk/oftenUsedThunk";
 
 const initialState = {
@@ -15,6 +15,7 @@ const initialState = {
     shifts: [],
     subjects: [],
     fields: [],
+    district: [],
     loading: null,
     error: null
 }
@@ -104,6 +105,19 @@ const oftenUsedSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchFields.rejected, (state) => {
+                state.loading = null
+                state.error = "error"
+            })
+            .addCase(fetchRegionDistrict.pending, (state) => {
+                state.loading = "fieldsLoading"
+                state.error = null
+            })
+            .addCase(fetchRegionDistrict.fulfilled, (state, action) => {
+                state.district = action.payload?.results
+                state.loading = "fieldsSuccess"
+                state.error = null
+            })
+            .addCase(fetchRegionDistrict.rejected, (state) => {
                 state.loading = null
                 state.error = "error"
             })

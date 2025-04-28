@@ -33,6 +33,8 @@ export const CreateTestVariants = ({
 
     const [currentImage, setCurrentImage] = useState(undefined)
 
+
+
     useEffect(() => {
         if (currentImage)
             getImage(item.id, currentImage)

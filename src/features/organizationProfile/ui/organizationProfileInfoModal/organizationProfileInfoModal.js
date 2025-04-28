@@ -35,6 +35,8 @@ import {
 import {fetchOrganizationTypesFilter} from "../../../organizationTypes/model/thunk/organizationTypesThunk";
 import {organizationTypeFilter} from "../../../organizationTypes/model/selector/organizationTypesSelector";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {getOftenUsedDistrict} from "entities/oftenUsed/model/selector/oftenUsedSelector";
+import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
 
 export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
@@ -57,6 +59,8 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
     const userProfile = useSelector(getOrganizationProfileUserData)
     const userProfileImage = useSelector(getOrganizationProfileUserImageData)
     const regionsData = useSelector(getRegions)
+    const district = useSelector(getOftenUsedDistrict)
+
     const typesData = useSelector(organizationTypeFilter)
     const loading = useSelector(getOrganizationProfileLoading)
     const error = useSelector(getOrganizationProfileError)
@@ -64,6 +68,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
     const [activeAddModal, setActiveAddModal] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
     const [selectedRegion, setSelectedRegion] = useState(null)
+    const [selectedDistrict, setSelectedDistrict] = useState(null)
     const [checkUsername, setCheckUserName] = useState(null)
     const [selectedType, setSelectedType] = useState(null)
     const [newImageFile, setNewImageFile] = useState(null)
@@ -80,6 +85,12 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
             setNewImageFile(null)
         }
     }, [activeAddModal, activeModal])
+
+    console.log(selectedRegion , "reg")
+
+    useEffect(() => {
+        if (selectedRegion) dispatch(fetchRegionDistrict(selectedRegion))
+    } , [selectedRegion])
 
     const onActiveModal = useCallback(() => setActiveModal(true), [])
 
@@ -98,6 +109,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         formData.append("locations", JSON.stringify(data?.locations))
         if (newImageFile) formData.append("img", newImageFile)
         if (selectedRegion) formData.append("region", selectedRegion)
+        if (selectedDistrict) formData.append("district", selectedDistrict)
         if (selectedType) formData.append("organization_type", selectedType)
         request(`${API_URL}organizations/organization/crud/update/${id}/`, "PATCH", formData, {})
             .then(res => {
@@ -120,6 +132,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         formData.delete("instagram_link")
         formData.delete("facebook_link")
     }
+    console.log(userProfile)
 
     const onCreate = (data) => {
         console.log(data)
@@ -201,6 +214,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 {}
             )
                 .then(res => {
+                    console.log(res)
                     dispatch(getOrganizationImage(res))
                     let obj;
                     if (data?.username !== userProfile?.user?.username) obj = {username: data?.username}
@@ -353,6 +367,13 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         options={regionsData}
                         extraClass={cls.info__input}
                         titleOption={"Region"}
+                    />
+                    <Select
+                        defaultValue={data?.district?.id}
+                        onChangeOption={setSelectedDistrict}
+                        options={district}
+                        extraClass={cls.info__input}
+                        titleOption={"District"}
                     />
                     <Input
                         // required

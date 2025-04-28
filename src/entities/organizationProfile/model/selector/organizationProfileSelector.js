@@ -28,3 +28,6 @@ export const getOrganizationProfileError = (state) =>
 
 export const getOrganizationProfileSelectedDegree = (state) =>
     state.OrganizationProfileSlice.selectedDegree
+
+export const getOrganizationProfileComment= (state) =>
+    state.OrganizationProfileSlice.comment

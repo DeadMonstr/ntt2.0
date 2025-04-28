@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {
     AnnouncementsHeader,
-    fetchOrganizationProfileData,
+    fetchOrganizationProfileData, OrganizationComment,
     OrganizationProfileApplications,
     OrganizationProfileHeader,
 } from "entities/organizationProfile";
@@ -21,6 +21,7 @@ import {useParams} from "react-router";
 import {getSeasonSwitcherData} from "features/seasonSwitcher";
 import {getUserJob} from "entities/userProfile";
 import classNames from "classnames";
+import {fetchUserComment} from "entities/organizationProfile/model/thunk/organizationProfileThunk";
 
 export const OrganizationProfilePage = () => {
 
@@ -32,8 +33,10 @@ export const OrganizationProfilePage = () => {
 
     const [activeLink, setActiveLink] = useState("")
 
+    console.log(id , "id")
     useEffect(() => {
         dispatch(fetchOrganizationProfileData(id))
+        dispatch(fetchUserComment(id))
     }, [])
 
     const [addActiveModal, setAddActiveModal] = useState(false)
@@ -74,16 +77,17 @@ export const OrganizationProfilePage = () => {
                     {activeLink === "Grantlar" &&
                         <OrganizationProfileGrants userRole={userRole === "organization"} isChange={isChangeGarants}
                                                    setIsChange={setIsChangeGarants}/>}
-                    {activeLink === "E’lonlar" &&
+                    {activeLink === "Talim yo’nalishi" &&
                         <OrganizationProfileAnnouncementsModal seasonId={currentSeason?.id}
                                                                userRole={userRole === "organization"}
                                                                isChange={isChange} setIsChange={setIsChange}/>}
-                    {activeLink === "Gallereya" &&
+                    {activeLink === "Galereya" &&
                         <OrganizationProfileGalleryModal userRole={userRole === "organization"}
                                                          setAddActiveModal={setAddActiveModal}
                                                          addActiveModal={addActiveModal}/>}
                     {activeLink === "Arizalar" &&
                         <OrganizationProfileApplications/>}
+                    {activeLink === "Izohlar" && <OrganizationComment/>}
                 </div>
             </div>
         </div>
@@ -99,7 +103,7 @@ const RenderHeaderIcon =({
     isChangeAbout,
 }) => {
     switch (activeLink) {
-        case "E’lonlar":
+        case "Talim yo’nalishi":
             if (userRole === "organization") {
                 return (
                     <div className={cls.announcementsHeader__icon}>
@@ -112,7 +116,7 @@ const RenderHeaderIcon =({
             }
             break;
 
-        case "Gallereya":
+        case "Galereya":
             if (userRole === "organization") {
                 return (
                     <div

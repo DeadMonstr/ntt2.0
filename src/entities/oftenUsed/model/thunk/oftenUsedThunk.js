@@ -9,6 +9,17 @@ export const fetchRegionsData = createAsyncThunk(
     }
 )
 
+
+export const fetchRegionDistrict = createAsyncThunk(
+    "oftenUsedSlice/fetchRegionDistrict",
+    (id) => {
+        const {request} = useHttp()
+        return request(`${API_URL}region/get/list_district/?region_id=${id}` , "GET" , null , headers())
+    }
+)
+
+
+
 export const fetchEducationLanguage = createAsyncThunk(
     "oftenUsedSlice/fetchEducationLanguage",
     () => {

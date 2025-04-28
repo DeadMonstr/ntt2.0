@@ -1,4 +1,3 @@
-
 import {ApplicationHeader, ApplicationList} from "entities/application";
 
 import cls from "./applicationPage.module.sass";
@@ -15,64 +14,65 @@ import {
     applicationTypeSelectors
 } from "../../model/selectors/applicationSelectors";
 import {Navigate, Outlet, Route, Routes} from "react-router";
+import {getUserOrganizationId} from "entities/userProfile";
+
 
 
 
 const listData = [
-
     {name: "allRequest", label: "Hamma arizalar"},
-    {name: "newRequest", label: "Yangi arizalar"},
-    {name: "acceptRequest", label: "Qabul qilinganlar"},
-    {name: "rejectRequest", label: "Rad etilganlar"},
-    {name: "returnRequest", label: "Tahrirlashga qaytarilganlar"},
-    {name: "invitedRequest", label: "Imtihonga chaqirilganlar"}
+    {name: "newRequest", label: "Yangi ariza"},
+    {name: "acceptedRequest", label: "Qabul qilingan"},
+    {name: "rejectedRequest", label: "Rad etilgan"},
+    {name: "returnRequest", label: "Tahrirlashga qaytarilgan"},
+    {name: "invitedRequest", label: "Imtihonga chaqirilgan"}
 ]
 
 export const ApplicationPage = () => {
 
     const dispatch = useDispatch()
-
-
     const requests = useSelector(applicationRequestsSelectors)
 
+    const [active, setActive] = useState(listData[0].name)
 
-    const [active , setActive] = useState(listData[0].name)
+
     const search = useSelector(applicationSearchSelectors)
     const type = useSelector(applicationTypeSelectors)
     const degree = useSelector(applicationDegreeSelectors)
     const field = useSelector(applicationFieldSelectors)
     const shift = useSelector(applicationShiftSelectors)
     const language = useSelector(applicationLanguageSelectors)
-
+    const organization = useSelector(getUserOrganizationId)
 
     useEffect(() => {
+
         const data = {
             type_id: type,
             degree_id: degree,
-            field_id:field,
+            field_id: field,
             shift_id: shift,
             language_id: language,
+            organization: organization,
             search,
             status: active
-
         }
 
         dispatch(fetchApplicationData(data))
-    },[type, degree, field, shift, language,search , active])
 
 
+    }, [type, degree, field, shift, language, search, active,organization])
+
+    const role = localStorage.getItem("role")
     return (
         <div className={cls.applicationPage}>
             <ApplicationHeader data={listData} active={active} setActive={setActive}/>
 
-            <div className={cls.applicationPage__header}>
-                <h1 className={cls.applicationPage__title}>
-                    {listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}
-                </h1>
+            {role !== "organization" && <div className={cls.applicationPage__header}>
+                <h1 className={cls.applicationPage__title}>{listData.filter(item => item.name === active)[0]?.label || "Hamma arizalar"}</h1>
                 <ApplicationFilters/>
 
 
-            </div>
+            </div>}
             <ApplicationList list={requests?.results || []}/>
         </div>
     )
