@@ -229,6 +229,10 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                                     <span>{card.region.name}</span>
                                 </div>
                                 <div className={cls.box__item_body_info}>
+                                    <h2>Region</h2>
+                                    <span>{card?.district?.name}</span>
+                                </div>
+                                <div className={cls.box__item_body_info}>
                                     <h2>Phone</h2>
                                     <span>{card.phone}</span>
                                 </div>
