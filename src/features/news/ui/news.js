@@ -17,9 +17,11 @@ import TextEditor from "entities/textEditor/TextEditor";
 import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
 import {fetchNews} from "entities/home/model/thunk/newsThunk";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {getUserData} from "../../../entities/userProfile";
 
 export const News = () => {
     const homeNewsData = useSelector(getHomeNews)
+    const userData = useSelector(getUserData)
 
 
     const [activeModal, setActiveModal] = useState(false)
@@ -28,8 +30,9 @@ export const News = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchNews())
-    }, [])
+        if (userData?.organization_id)
+            dispatch(fetchNews({id: userData?.organization_id}))
+    }, [userData?.organization_id])
 
     return (
         <div className={cls.news}>
@@ -40,7 +43,8 @@ export const News = () => {
             </div>
 
             <div className={cls.news__btns}>
-                {!activeModal ? <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-plus"}/> : <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-times"}/>}
+                {!activeModal ? <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-plus"}/> :
+                    <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-times"}/>}
             </div>
             {!activeModal ? <div className={cls.news__list}>
 
@@ -65,6 +69,7 @@ export const News = () => {
 
 const AddHomeNews = ({active, setActive}) => {
     const {register, setValue, handleSubmit} = useForm()
+    const userData = useSelector(getUserData)
 
     const formData = new FormData()
     const [editor, setEditor] = useState(null)
@@ -84,6 +89,8 @@ const AddHomeNews = ({active, setActive}) => {
 
         if (newImageFile) formData.append("img", newImageFile)
         formData.append("date", data?.date)
+        formData.append("title", data?.title)
+        formData.append("organization", userData?.organization_id)
         formData.append("desc_json", JSON.stringify(editor))
 
 
@@ -109,6 +116,7 @@ const AddHomeNews = ({active, setActive}) => {
                         : <i className={classNames("fas fa-image", cls.gallery__icon)}/>
                 }
             </div>
+            <Input extraClass={cls.gallery__input} name={"title"} placeholder={"Title"} register={register}/>
             <Input extraClass={cls.gallery__input} name={"date"} type={"date"} register={register}/>
             <TextEditor onSubmit={(e) => setEditor(e)}/>
             <Button onClick={handleSubmit(onPostData)}>Add</Button>

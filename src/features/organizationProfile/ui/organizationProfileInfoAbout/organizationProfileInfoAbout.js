@@ -79,7 +79,7 @@ export const OrganizationProfileInfoAbout = ({isChange , setIsChange}) => {
                     isChange ?
                         <TextEditor isSubmit={true}  editorState={editorState} onSubmit={onSubmit}/>
                         :
-                        <p dangerouslySetInnerHTML={{__html: text}}></p>
+                        <p dangerouslySetInnerHTML={{__html: text}}/>
                 }
 
 
