@@ -2,6 +2,7 @@ import cls from "../applicationProfile.module.sass";
 import defImage from "../../../../shared/assets/images/Rectangle 89.svg";
 import {useSelector} from "react-redux";
 import {applicationProfileSelectors} from "entities/applicationProfile/model/selectors/applicationProfileSelectors";
+import {API_URL_DOC, API_URL_IMG} from "../../../../shared/api/base";
 
 
 export const ApplicationProfileInfoEducation = () => {
@@ -28,7 +29,7 @@ export const ApplicationProfileInfoEducation = () => {
                     <li>Diplom, shahodatnoma yoki ma’lumotnoma nusxasi
                         <div className={cls.application__info_infos_images}>
 
-                            <img src={defImage} alt=""/>
+                            <img className={cls.book} src={`${API_URL_IMG}${data?.certificate}`} alt=""/>
                             {/*<img src={defImage} alt=""/>*/}
                         </div>
                     </li>

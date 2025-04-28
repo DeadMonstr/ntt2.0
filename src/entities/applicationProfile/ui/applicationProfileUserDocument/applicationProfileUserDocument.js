@@ -3,6 +3,7 @@ import cls from "../applicationProfile.module.sass";
 import defImage from "../../../../shared/assets/images/Rectangle 89.svg"
 import {useSelector} from "react-redux";
 import {applicationProfileSelectors} from "entities/applicationProfile/model/selectors/applicationProfileSelectors";
+import {API_URL_IMG} from "../../../../shared/api/base";
 export const ApplicationProfileUserDocument = () => {
 
     const data = useSelector(applicationProfileSelectors)
@@ -25,8 +26,8 @@ export const ApplicationProfileUserDocument = () => {
                     <li>Passport nusxasi
                         <div className={cls.application__info_infos_images}>
 
-                            <img src={defImage} alt=""/>
-                            <img src={defImage} alt=""/>
+                            <img className={cls.book} src={`${API_URL_IMG}${data?.passport_pdf1}`} alt=""/>
+                            <img className={cls.book} src={`${API_URL_IMG}${data?.passport_pdf2}`} alt=""/>
                         </div>
                     </li>
                 </ul>
