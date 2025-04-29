@@ -3,7 +3,7 @@
  * 2 | @import "app/styles/abstracts/mixins"
  *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *   '
- *   button.module.sass 2:9  root stylesheet */
+ *   button.model.sass 2:9  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",

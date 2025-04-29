@@ -3,7 +3,7 @@
  * 1 | @import "app/styles/abstracts/variables"
  *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  *   '
- *   Layout.module.sass 1:9  root stylesheet */
+ *   Layout.model.sass 1:9  root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",

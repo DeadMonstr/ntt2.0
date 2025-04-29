@@ -17,6 +17,7 @@ import {alertSlice} from "../features/alert";
 import {homeNewsSlice} from "entities/home";
 import {subjectsTests} from "entities/subjectsTests";
 import homeSlice from "entities/home/model/slice/homeSlice";
+import {newsProfileSlice} from "entities/newsProfile";
 
 import {notificationSlice} from "entities/notification";
 import {menuBarSlice} from "widgets/menuBar";
@@ -57,7 +58,8 @@ export const store = configureStore({
         createTestSlice,
         notificationSlice,
         testSlice,
-        menuBarSlice
+        menuBarSlice,
+        newsProfileSlice
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(

@@ -1,20 +1,17 @@
 import cls from "entities/news/ui/news.module.sass"
 import itemImg from "shared/assets/images/Rectangle 1001.svg"
+import {useSelector} from "react-redux";
 
 
-export const NewsList = ({item , setActiveEditItem , setActiveEditModal}) => {
+export const NewsList = () => {
+
+    const data = useSelector()
+
 
     const renderData = () => {
 
         return item?.results?.map(item => (
             <div className={cls.box}>
-
-                <div onClick={() => {
-                    setActiveEditModal(true)
-                    setActiveEditItem(item)
-                }} className={cls.box__icons}>
-                    <i className={"fa fa-pen"}/>
-                </div>
 
                 <div className={cls.box__img}>
                     <img src={item.img ? item.img : itemImg} alt=""/>

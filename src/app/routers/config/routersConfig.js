@@ -30,6 +30,7 @@ import {NewsPage} from "pages/newsPage";
 import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
 import {TestPage} from "pages/testPage";
 import {UserProfilePage} from "../../../pages/userProfilePage";
+import NewsProfilePage from "pages/newsProfilePage/ui/newsProfilePage";
 
 
 export const routersConfig = [
@@ -39,7 +40,6 @@ export const routersConfig = [
         // element: <HomePage/>,
         element: null,
     },
-
     {
         path: getRouteDashboard(),
         element: <DashboardPage/>,
@@ -120,8 +120,12 @@ export const routersConfig = [
         element: <TestPage/>
     },
     {
-        path: getRouteNews(":id"),
+        path: getRouteNews(),
         element: <NewsPage/>
+    },
+    {
+        path: "news/profile/:id",
+        element: <NewsProfilePage/>
     },
     {
         path: "notification/*",
