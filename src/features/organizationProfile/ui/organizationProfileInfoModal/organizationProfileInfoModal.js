@@ -37,6 +37,7 @@ import {organizationTypeFilter} from "../../../organizationTypes/model/selector/
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {getOftenUsedDistrict} from "entities/oftenUsed/model/selector/oftenUsedSelector";
 import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
+import {Button} from "../../../../shared/ui/button/button";
 
 export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
@@ -345,6 +346,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 <Form
                     onSubmit={handleSubmit(onSubmit)}
                     extraClassname={cls.info__form}
+                    // isChange={false}
                 >
                     <Input
                         required
@@ -447,6 +449,9 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         extraClass={cls.info__input}
                         placeholder={"Facebook Linki"}
                     />
+                    {/*<div className={cls.btn}>*/}
+                    {/*    <Button>Tasdiqlash</Button>*/}
+                    {/*</div>*/}
                 </Form>
             </Modal>
             <Modal
