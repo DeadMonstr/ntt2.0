@@ -16,7 +16,7 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
 
                 <div onClick={() => {
                     setActiveEditModal(true)
-                    setActiveEditItem(item)
+                    setActiveEditItem(item    )
                 }} className={cls.box__pen}>
                     <i className={"fa fa-pen"}/>
                 </div>
