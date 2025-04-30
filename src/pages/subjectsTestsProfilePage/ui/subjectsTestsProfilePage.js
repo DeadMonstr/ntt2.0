@@ -29,7 +29,7 @@ export const SubjectsTestsProfilePage = () => {
     return (
         <div className={cls.subjectsTests}>
             <div className={cls.header}>
-                <h1>Testlar</h1>
+                <h1>Test natijalari</h1>
             </div>
 
             <div className={cls.container}>

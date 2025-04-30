@@ -15,4 +15,4 @@ export const getRouteOrganizations = () => "organizations"
 export const getRouteOrganizationTypes = () => "organizationTypes"
 export const getRouteNews = () => "news"
 export const getRouteNotification = () => "news"
-export const getSubjectsTestsProfile = (id) => `subjectsTests/${id}`
+export const getSubjectsTestsProfile = (id) => `testsResults`
