@@ -11,13 +11,14 @@ import {Input} from "shared/ui/input";
 import {Button} from "shared/ui/button/button";
 
 import {Modal} from "shared/ui/modal";
+import TextEditor from "entities/textEditor/TextEditor";
 
 
 export const AddNews = ({active, setActive}) => {
 
     const {register , handleSubmit , setValue} = useForm()
     const id = localStorage.getItem("organization_id")
-
+    const [editor, setEditor] = useState(null)
     const {request} = useHttp()
     const dispatch = useDispatch()
 
@@ -36,6 +37,7 @@ export const AddNews = ({active, setActive}) => {
         formData.append("date", data?.date)
         formData.append("title", data?.title)
         formData.append("organization", id)
+        formData.append("desc_json", JSON.stringify(editor))
 
 
 
@@ -65,6 +67,7 @@ export const AddNews = ({active, setActive}) => {
                 </div>
                 <Input name={"title"} register={register} placeholder={"Nomi"}/>
                 <Input register={register} name={"date"} type={"date"}/>
+                <TextEditor extraClass={cls.news__editor} onSubmit={(e) => setEditor(e)}/>
                 <Button onClick={handleSubmit(onPost)} extraClass={cls.news__btn}>Add</Button>
             </div>
         </Modal>

@@ -14,12 +14,12 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
         return data?.results?.map(item => (
             <div className={cls.box}>
 
-                <div onClick={() => {
-                    setActiveEditModal(true)
-                    setActiveEditItem(item    )
-                }} className={cls.box__pen}>
-                    <i className={"fa fa-pen"}/>
-                </div>
+                {/*<div onClick={() => {*/}
+                {/*    setActiveEditModal(true)*/}
+                {/*    setActiveEditItem(item    )*/}
+                {/*}} className={cls.box__pen}>*/}
+                {/*    <i className={"fa fa-pen"}/>*/}
+                {/*</div>*/}
                 <div className={cls.box__img}>
                     <img src={item.img ? item.img : itemImg} alt=""/>
                     <h2>Yangilik</h2>
@@ -35,9 +35,9 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
                     <div className={cls.box__info_title}>
                         {item.title}
                     </div>
-                    {/*<div dangerouslySetInnerHTML={{__html: item.desc_json.text}} className={cls.box__info_text}>*/}
+                    <div dangerouslySetInnerHTML={{__html: item?.desc_json?.text}} className={cls.box__info_text}>
 
-                    {/*</div>*/}
+                    </div>
 
 
                 </div>

@@ -8,6 +8,14 @@
   gap: 2rem
   &__btn
     align-self: flex-end
+  &__editor
+    width: 60rem
+    overflow: auto
+
+  & > label
+    input
+      width: 100%!important
+      max-width: 100%
 .gallery
   display: flex
   //align-items: center
@@ -17,9 +25,12 @@
     border: 1px solid
   &__image
     width: 100%
+    //max-width: 90%
     max-width: 350px
     height: 15rem
     background: #E5E7EB
+    object-fit: cover
+    align-self: center
     display: flex
     justify-content: center
     align-items: center
