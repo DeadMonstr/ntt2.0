@@ -9,6 +9,4 @@ export {TestRating} from "./ui/testRating/testRating";
 
 export {OnlineTestEnter} from "./ui/onlineTest/onlineTestEnter/onlineTestEnter"
 
-export {default as homeNewsSlice} from "./model/slice/homeNewsSlice"
-export {onAddHomeNews} from "./model/slice/homeNewsSlice"
-export {getHomeNews} from "./model/selector/homeNewsSelector"
+export {default as homeNewsSlice} from "entities/news/model/newsSlice"

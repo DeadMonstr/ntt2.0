@@ -1,16 +1,16 @@
 import cls from "./homeNewsProfile.module.sass"
-import {getHomeNewsProfileItem} from "entities/home/model/selector/homeNewsSelector";
+import {getProfileItem} from "entities/news/model/newsSelector";
 import {useDispatch, useSelector} from "react-redux";
 import profileImg from "shared/assets/images/profileImg.svg"
 import {Button} from "shared/ui/button/button";
 import {useNavigate, useParams} from "react-router";
 import univerImg from "shared/assets/images/Ellipse 118.png"
 import {useEffect, useState} from "react";
-import {fetchProfileItem} from "entities/home/model/thunk/newsThunk";
+import {fetchProfileItem} from "entities/news/model/newsThunk";
 
 
 export const HomeNewsProfile = () => {
-    const data = useSelector(getHomeNewsProfileItem)
+    const data = useSelector(getProfileItem)
 
     const {id} = useParams()
     const navigate = useNavigate()

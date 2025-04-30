@@ -1,13 +1,14 @@
 import cls from "features/homePage/ui/homeNews/homeNews.module.sass";
 import {useDispatch, useSelector} from "react-redux";
-import {getHomeNews, HomeNewsList} from "entities/home";
+import { HomeNewsList} from "entities/home";
 import {useEffect} from "react";
-import {fetchNews} from "entities/home/model/thunk/newsThunk";
+import {fetchNews} from "entities/news/model/newsThunk";
 import {Helmet} from "react-helmet-async";
+import {getProfileItem} from "entities/news/model/newsSelector";
 
 
 export const HomeNews = () => {
-    const homeNewsData = useSelector(getHomeNews);
+    const homeNewsData = useSelector(getProfileItem);
     const dispatch = useDispatch();
 
     useEffect(() => {

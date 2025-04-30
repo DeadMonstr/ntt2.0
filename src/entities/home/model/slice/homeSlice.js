@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchNews, fetchProfileItem} from "entities/home/model/thunk/newsThunk";
+import {fetchNews, fetchProfileItem} from "entities/news/model/newsThunk";
 import {fetchHomeItem} from "entities/home/model/thunk/homeThunk";
 
 const initialState = {

@@ -3,7 +3,7 @@ import {API_URL, headers, headersImg, headersView, useHttp} from "shared/api/bas
 
 export const fetchNews = createAsyncThunk(
     "homeSlice/fetchNews",
-    async ({id}) => {
+    async (id) => {
         const {request} = useHttp()
        return await request(`${API_URL}organizations/news_list/?organization_id=${id}`, "GET", null, headers())
 })

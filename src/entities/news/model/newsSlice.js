@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchNews, fetchProfileItem} from "entities/home/model/thunk/newsThunk";
+import {fetchNews, fetchProfileItem} from "entities/news/model/newsThunk";
 
 const initialState = {
     loading: false,
@@ -47,14 +47,14 @@ const initialState = {
 }
 
 
-const homeNewsSlice = createSlice({
+const newsSlice = createSlice({
     name: "homeNewsSlice",
     initialState,
     reducers: {
-        onAddHomeNews: (state, action) => {
+        onAddNews: (state, action) => {
             state.data.results = [...state.data.results, action.payload]
         },
-        onEditHomeNews: (state, action) => {
+        onEditNews: (state, action) => {
             state.data.results = state.data.results.map(item => {
                 if (item.id === action.payload.id) {
                     return action.payload.data
@@ -62,7 +62,7 @@ const homeNewsSlice = createSlice({
                 return item
             })
         },
-        onDeleteHomeNews: (state, action) => {
+        onDeleteNews: (state, action) => {
             state.data.results = state.data.results.filter(item => item.id !== action.payload)
         }
     },
@@ -99,5 +99,5 @@ const homeNewsSlice = createSlice({
 
 })
 
-export const {onAddHomeNews, onEditHomeNews, onDeleteHomeNews} = homeNewsSlice.actions
-export default homeNewsSlice.reducer
+export const {onAddNews , onDeleteNews , onEditNews} = newsSlice.actions
+export default newsSlice.reducer

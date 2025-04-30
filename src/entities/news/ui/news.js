@@ -1,18 +1,25 @@
-import cls from "entities/news/ui/news.module.sass"
+import cls from "./news.module.sass"
 import itemImg from "shared/assets/images/Rectangle 1001.svg"
 import {useSelector} from "react-redux";
+import {getNews} from "entities/news/model/newsSelector";
 
 
-export const NewsList = () => {
+export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
 
-    const data = useSelector()
+    const data = useSelector(getNews)
 
 
     const renderData = () => {
 
-        return item?.results?.map(item => (
+        return data?.results?.map(item => (
             <div className={cls.box}>
 
+                <div onClick={() => {
+                    setActiveEditModal(true)
+                    setActiveEditItem(item)
+                }} className={cls.box__pen}>
+                    <i className={"fa fa-pen"}/>
+                </div>
                 <div className={cls.box__img}>
                     <img src={item.img ? item.img : itemImg} alt=""/>
                     <h2>Yangilik</h2>
@@ -26,11 +33,11 @@ export const NewsList = () => {
                         </div>
                     </div>
                     <div className={cls.box__info_title}>
-                        {item.name}
+                        {item.title}
                     </div>
-                    <div dangerouslySetInnerHTML={{__html: item.desc_json.text}} className={cls.box__info_text}>
+                    {/*<div dangerouslySetInnerHTML={{__html: item.desc_json.text}} className={cls.box__info_text}>*/}
 
-                    </div>
+                    {/*</div>*/}
 
 
                 </div>
@@ -42,9 +49,9 @@ export const NewsList = () => {
         ))
     }
     return (
-        <>
+        <div className={cls.boxes}>
             {renderData()}
-        </>
+        </div>
     );
 };
 

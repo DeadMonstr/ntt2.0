@@ -1,16 +1,26 @@
-import {News} from "features/news";
-import cls from "features/news/ui/news.module.sass";
+import cls from "./news.module.sass";
 import {NewsList} from "entities/news";
-import {useState} from "react";
-import {AddNews} from "features/news/ui/addNews/addNews";
+import {useEffect, useState} from "react";
+
+import {useDispatch} from "react-redux";
+
+import {fetchNews} from "entities/news/model/newsThunk";
+import {AddNews, EditNews} from "features/news";
 
 export const NewsPage = () => {
 
 
     const [activeModal, setActiveModal] = useState(false)
+    const [activeEditModal, setActiveEditModal] = useState(false)
+    const [activeItem, setActiveEditItem] = useState({})
 
 
+    const dispatch = useDispatch()
+    const id = localStorage.getItem("organization_id")
 
+    useEffect(() => {
+        dispatch(fetchNews(id))
+    }, [])
 
 
     return (
@@ -28,9 +38,10 @@ export const NewsPage = () => {
             </div>
 
             <NewsList
-                item={homeNewsData}
                 setActiveEditModal={setActiveEditModal}
                 setActiveEditItem={setActiveEditItem}
+                // setActiveEditModal={setActiveEditModal}
+                // setActiveEditItem={setActiveEditItem}
             />
 
             <AddNews
@@ -38,6 +49,11 @@ export const NewsPage = () => {
                 setActive={setActiveModal}
             />
 
+            <EditNews
+                active={activeEditModal}
+                setActive={setActiveEditModal}
+                item={activeItem}
+            />
 
             {/*<AddHomeNews active={activeModal} setActive={setActiveModal}/>*/}
 
