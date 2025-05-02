@@ -1,0 +1,60 @@
+@import "app/styles/abstracts/variables"
+@import "app/styles/abstracts/mixins"
+
+
+.image
+  width: 100%
+
+
+
+.view
+  width: 100%
+  height: 35rem
+  position: relative
+  .change
+    width: 5rem
+    height: 5rem
+    position: absolute
+    right: 1rem
+    top: 1rem
+    flex-grow: 1
+    font-size: 2rem
+    color: #ffffff
+    background-color: black
+    border-radius: 50%
+    display: flex
+    align-items: center
+    justify-content: center
+  img
+    width: 100%
+    height: 100%
+    object-fit: contain
+
+
+.create
+  width: 100%
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  position: relative
+  .delete
+    position: absolute
+    right: 1rem
+    top: 1rem
+    font-size: 2rem
+    color: red
+
+  &__image
+    width: 100%
+    height: 30rem
+    border: 1px solid #b4b4b4
+    display: flex
+    align-items: center
+    justify-content: center
+    i
+      font-size: 5rem
+    img
+      width: 100%
+      height: 100%
+      object-fit: contain

@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 
 import cls from "features/organizationProfile/ui/organizationProfileInfoAbout/organizationProfileInfoAbout.module.sass"
 import classNames from "classnames";
-import TextEditor from "entities/textEditor/TextEditor";
 import {API_URL, headers, useHttp} from "shared/api/base";
 import {useParams} from "react-router";
 import {useSelector} from "react-redux";
 import {getOrganizationProfileData} from "entities/organizationProfile";
+import TextEditor from "shared/ui/textEditor/TextEditor";
 
 
 export const OrganizationProfileInfoAbout = ({isChange , setIsChange}) => {

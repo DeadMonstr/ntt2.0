@@ -5,7 +5,7 @@ export const fetchNewsProfileData = createAsyncThunk(
     "newsProfileSlice/fetchNewsProfileData",
     async (id) => {
         const {request} = useHttp()
-        return await request(`${API_URL}${id}`, "GET", null, headers())
+        return await request(`${API_URL}organizations/news/${id}`, "GET", null, headers())
     }
 )
 

@@ -30,7 +30,7 @@ import {NewsPage} from "pages/newsPage";
 import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
 import {TestPage} from "pages/testPage";
 import {UserProfilePage} from "../../../pages/userProfilePage";
-import NewsProfilePage from "pages/newsProfilePage/ui/newsProfilePage";
+import {NewsProfilePage} from "pages/newsProfilePage";
 
 
 export const routersConfig = [

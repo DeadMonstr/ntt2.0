@@ -2,6 +2,7 @@ import cls from "./news.module.sass"
 import itemImg from "shared/assets/images/Rectangle 1001.svg"
 import {useSelector} from "react-redux";
 import {getNews} from "entities/news/model/newsSelector";
+import {useNavigate} from "react-router";
 
 
 export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
@@ -9,10 +10,16 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
     const data = useSelector(getNews)
 
 
+    const navigate = useNavigate()
+
+    const onLink = (id) => {
+        navigate(`profile/${id}`)
+    }
+
     const renderData = () => {
 
         return data?.results?.map(item => (
-            <div className={cls.box}>
+            <div onClick={() => onLink(item.id)} className={cls.box}>
 
                 <div onClick={() => {
                     setActiveEditModal(true)

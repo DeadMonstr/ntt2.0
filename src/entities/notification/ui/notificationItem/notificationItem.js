@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import cls from "./notificationItem.module.sass";
-import TextEditor from "entities/textEditor/TextEditor";
+
 import {useDispatch, useSelector} from "react-redux";
 import {fetchNotificationProfile} from "entities/notification/module/notificationThunk";
 import {useParams} from "react-router";
@@ -9,6 +9,7 @@ import {API_URL, headers, useHttp} from "shared/api/base";
 import {Button} from "shared/ui/button/button";
 import {getNotificationProfile} from "entities/notification/module/notificationSelector";
 import {onAddMsg} from "entities/notification/module/notificationSlice";
+import TextEditor from "shared/ui/textEditor/TextEditor";
 
 export const NotificationItem = () => {
 
@@ -19,7 +20,7 @@ export const NotificationItem = () => {
 
 
     const data = useSelector(getNotificationProfile)
-    console.log(data)
+
     const {request} = useHttp()
     useEffect(() => {
         dispatch(fetchNotificationProfile({id, orgId}))
