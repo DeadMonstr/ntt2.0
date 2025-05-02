@@ -58,7 +58,6 @@ export const OrganizationProfileReadMoreModal = memo(() => {
         )
             .then(res => {
                 dispatch(updateReadMore(res))
-                console.log(res)
             })
             .catch(err => console.log(err))
         formData.delete("name_optional")

@@ -16,13 +16,14 @@ export const  Select = React.memo(({
                                        register,
                                        name,
                                        titleOption
-
                                    }) => {
 
     const [selectOption, setSelectOption] = useState("");
     const [optionsData, setOptionsData] = useState([]);
     const [isChanged, setIsChanged] = useState(false);
 
+    // console.log(defaultValue, "defaultValue")
+    // console.log(selectOption, "selectOption")
 
     useEffect(() => {
         setOptionsData(options);
@@ -88,9 +89,10 @@ export const  Select = React.memo(({
                 })}
                 required={required}
                 value={selectOption}
+                defaultValue={defaultValue}
                 {...register(name, {
                     value: selectOption,
-                    defaultValue: selectOption,
+                    defaultValue: defaultValue,
                     onChange: onChangeOption ? (e) => {
                         setSelectOption(e.target.value)
                         setIsChanged(true)

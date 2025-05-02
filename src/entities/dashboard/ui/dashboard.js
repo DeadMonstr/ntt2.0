@@ -8,7 +8,6 @@ export const Dashboard = ({data}) => {
     const renderTable = () => {
         const mappedData = data?.map(item => {
             const key = Object.keys(item)[0];
-            console.log(item[key], "key")
             return {
                 text: item[key].text,
                 count: item[key].count,

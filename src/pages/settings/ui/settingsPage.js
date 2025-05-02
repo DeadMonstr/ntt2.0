@@ -24,6 +24,7 @@ const filter = [
 
 export const SettingsPage = () => {
 
+
     const {id} = useParams()
 
     const [currentPage, setCurrentPage] = useState(1)

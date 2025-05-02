@@ -12,7 +12,6 @@ export const AddDirections = () => {
     const {register, handleSubmit} = useForm()
 
     const onAdd = (data) => {
-        console.log(data)
     }
 
     return (

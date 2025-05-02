@@ -80,7 +80,6 @@ export const CreateTestQuestions = ({data, isChange, setIsChange, isDelete, inde
         }));
         formData.append("questions_list", JSON.stringify(res.questions));
         if (currentImage) {
-            console.log(currentImage, "currentImage")
             formData.append("image", currentImage);
         }
         if (res.text)
@@ -102,7 +101,6 @@ export const CreateTestQuestions = ({data, isChange, setIsChange, isDelete, inde
                 res?.questions?.map(item => {
                     const image = variantImages.filter(inner => item.to_json.prevId === inner.id)[0]?.image
                     if ((item.to_json.type === "image" || "textImage") && !!item.to_json.prevId && !!image) {
-                        console.log(item, "item")
                         formData.append("image", image)
                         formData.append("to_json", JSON.stringify({type: item.to_json.type, prevId: null}))
                         if (item.to_json.type === "textImage")

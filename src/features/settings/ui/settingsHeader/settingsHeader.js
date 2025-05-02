@@ -122,7 +122,6 @@ export const Add = ({active, setActive}) => {
 
 export const Edit = ({active, setActive, activeItem}) => {
 
-    console.log(activeItem , "active")
     const {request} = useHttp()
     const {setValue, register, handleSubmit} = useForm()
 

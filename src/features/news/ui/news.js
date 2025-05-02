@@ -259,7 +259,6 @@ const EditHomeNews = ({setActive, active, activeItem}) => {
         setEditorState(activeItem.desc_json.editorState)
     }, [activeItem, active])
 
-    console.log(editorState, "editr")
     const {getRootProps, getInputProps} = useDropzone({
         onDrop: (acceptedFiles) => {
             setNewImageFile(acceptedFiles[0])
@@ -297,7 +296,6 @@ const EditHomeNews = ({setActive, active, activeItem}) => {
             })
 
     }
-    console.log(activeItem)
     return (
         <div className={cls.gallery}>
             <Button onClick={() => setActive(false)}>Ortga</Button>

@@ -14,13 +14,13 @@ import {Home} from "pages/homePage";
 export const AppRouter = () => {
 
 
-
     const router = createBrowserRouter(
         createRoutesFromElements(
             <>
 
 
                 <Route
+                    key={"admin/*"}
                     path={"/login"}
                     element={<Login/>}
                 />
@@ -29,21 +29,18 @@ export const AppRouter = () => {
                     element={<RequireAuth/>}
                 >
                     <Route
+                        key={"admin/*"}
                         path={"admin/*"}
                         element={<Layout/>}
                     >
                         {
                             routersConfig.map(item => {
-
                                     return (
-                                        <>
-                                            <Route
-                                                key={item.path}
-                                                path={item.path}
-                                                element={item.element}
-                                            />
-                                            {/*{item.back ? setBackBtn(true) : setBackBtn(false)}*/}
-                                        </>
+                                        <Route
+                                            key={item.path}
+                                            path={item.path}
+                                            element={item.element}
+                                        />
                                     )
                                 }
                             )
@@ -53,6 +50,7 @@ export const AppRouter = () => {
 
 
                 <Route
+                    key={"/login"}
                     index
                     element={<Navigate to={"/login"}/>}
                 />

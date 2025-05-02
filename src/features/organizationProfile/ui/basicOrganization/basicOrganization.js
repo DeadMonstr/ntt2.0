@@ -13,7 +13,6 @@ export const BasicOrganization = () => {
     const {register, handleSubmit} = useForm()
     const [dropzones, setDropzones] = useState([{id: Date.now(), files: []}])
     const onAdd = (data) => {
-        console.log(data)
     }
 
 

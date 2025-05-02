@@ -14,7 +14,6 @@ import {useParams} from "react-router";
 
 export const ApplicationProfile = ({getId}) => {
     const {id} = useParams()
-    console.log(id, 'dsdds')
     const dispatch = useDispatch()
 
     useEffect(() => {

@@ -26,7 +26,6 @@ export const loginSlice =createSlice({
                 const decodedToken = jwtDecode(action.payload.access);
                 state.userId = decodedToken.user_id; // Bu yerda user_id ni olasiz
                 const oldUserId  = localStorage.getItem('user_id');
-                console.log(oldUserId, decodedToken.user_id, "hellllllllo")
                 localStorage.setItem('user_id', decodedToken.user_id);
 
             }

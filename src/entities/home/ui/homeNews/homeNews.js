@@ -5,12 +5,10 @@ import {useState} from "react";
 import {Modal} from "shared/ui/modal";
 
 export const HomeNewsList = ({item}) => {
-    console.log(item)
     const navigate = useNavigate()
 
     const [activeItem, setActiveItem] = useState(null)
 
-    console.log(activeItem)
     const [activeModal, setActiveModal] = useState(false)
     const renderData = () => {
 

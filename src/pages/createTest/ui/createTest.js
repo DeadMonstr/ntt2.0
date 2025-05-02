@@ -36,11 +36,23 @@ const types = [
 
 export const CreateTest = () => {
 
+    const profile = useSelector(getCreateTestProfile)
     const {id} = useParams()
     const {request} = useHttp()
     const formData = new FormData()
     const dispatch = useDispatch()
-    const {register, handleSubmit} = useForm()
+    const {
+        register,
+        handleSubmit
+    } = useForm({
+        defaultValues: {
+            name: profile?.name,
+            duration: profile?.duration,
+            field: profile?.field?.id,
+            subject: profile?.subject?.id,
+            is_mandatory: profile?.is_mandatory,
+        }
+    })
 
     const {getInputProps, getRootProps} = useDropzone({
         onDrop: (acceptedFiles) => {
@@ -62,10 +74,8 @@ export const CreateTest = () => {
     const testData = useSelector(getCreateTestData)
     const organizationTypes = useSelector(getSettingsHeader)
     const fields = useSelector(getCreateTestFields)
-    const profile = useSelector(getCreateTestProfile)
     const subjects = useSelector(getSubjects)
 
-    console.log(subjects, "subjects")
 
     const [currentList, setCurrentList] = useState([])
     const [isChange, setIsChange] = useState()
@@ -251,7 +261,6 @@ export const CreateTest = () => {
                 //         to_json: {type: item.type}
                 //     }))
             }))[0]
-        console.log(res)
         request(`${API_URL}test/block/crud/update/${id}/`, "PATCH", JSON.stringify(res))
             .then(res => console.log(res, "patch"))
         // currentList.blocks

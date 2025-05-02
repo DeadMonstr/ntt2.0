@@ -19,7 +19,6 @@ const notificationSlice = createSlice({
     initialState,
     reducers: {
         onAddMsg: (state , action )=>{
-            console.log(action.payload)
             state.profileItem.results = [...state.profileItem.results , action.payload]
     }
 

@@ -32,12 +32,10 @@ export const Notification = () => {
         } else setList(data)
     }, [search])
 
-    console.log("org", id)
 
     useEffect(() => {
         dispatch(fetchNotificationData(id))
     }, [])
-    console.log(data)
     return (
         <div className={cls.notification}>
 

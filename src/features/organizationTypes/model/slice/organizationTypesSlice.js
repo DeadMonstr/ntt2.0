@@ -39,7 +39,6 @@ const organizationTypesSlice = createSlice({
             .addCase(fetchOrganizationTypesFilter.fulfilled, (state, action) => {
                 state.filter = action.payload.results
                 state.loading = false
-                console.log(action.payload)
                 state.error = null
             })
             .addCase(fetchOrganizationTypesFilter.rejected, state => {
@@ -55,7 +54,6 @@ const organizationTypesSlice = createSlice({
             .addCase(fetchOrganizationTypesCards.fulfilled, (state, action) => {
                 state.cards = action.payload
                 state.loading = false
-                console.log(action.payload)
                 state.error = null
             })
             .addCase(fetchOrganizationTypesCards.rejected, state => {

@@ -33,7 +33,6 @@ export const OrganizationProfilePage = () => {
 
     const [activeLink, setActiveLink] = useState("")
 
-    console.log(id , "id")
     useEffect(() => {
         dispatch(fetchOrganizationProfileData(id))
         dispatch(fetchUserComment(id))

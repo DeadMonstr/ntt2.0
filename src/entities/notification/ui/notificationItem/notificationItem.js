@@ -19,7 +19,6 @@ export const NotificationItem = () => {
 
 
     const data = useSelector(getNotificationProfile)
-    console.log(data)
     const {request} = useHttp()
     useEffect(() => {
         dispatch(fetchNotificationProfile({id, orgId}))
@@ -36,7 +35,6 @@ export const NotificationItem = () => {
 
         request(`${API_URL}students/notification/create/`, "POST", JSON.stringify(res), headers())
             .then(res => {
-                console.log(res)
                 dispatch(onAddMsg(res))
             })
     }
