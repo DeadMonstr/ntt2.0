@@ -328,8 +328,8 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 active={activeModal}
                 setActive={setActiveModal}
                 extraClass={cls.info}
+                title={"Ma’lumotni o’zgartirish"}
             >
-                <h1 className={cls.info__title}>Ma’lumotni o’zgartirish</h1>
                 <div {...getRootProps()}
                      className={cls.info__imageArea}
                 >

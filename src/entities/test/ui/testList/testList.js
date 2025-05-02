@@ -36,8 +36,9 @@ export const TestList = () => {
                     }}
                 >
                     <td>{index + 1}</td>
-                    <td>{item.subject?.name}</td>
                     <td>{item.field?.name}</td>
+                    <td>{item.subject?.name}</td>
+
                     <td>{item.number_questions}</td>
                     <td>{item.duration} minut</td>
                     <td>
