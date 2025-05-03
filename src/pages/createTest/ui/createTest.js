@@ -36,11 +36,23 @@ const types = [
 
 export const CreateTest = () => {
 
+    const profile = useSelector(getCreateTestProfile)
     const {id} = useParams()
     const {request} = useHttp()
     const formData = new FormData()
     const dispatch = useDispatch()
-    const {register, handleSubmit} = useForm()
+    const {
+        register,
+        handleSubmit
+    } = useForm({
+        defaultValues: {
+            name: profile?.name,
+            duration: profile?.duration,
+            field: profile?.field?.id,
+            subject: profile?.subject?.id,
+            is_mandatory: profile?.is_mandatory,
+        }
+    })
 
     const {getInputProps, getRootProps} = useDropzone({
         onDrop: (acceptedFiles) => {
@@ -62,10 +74,8 @@ export const CreateTest = () => {
     const testData = useSelector(getCreateTestData)
     const organizationTypes = useSelector(getSettingsHeader)
     const fields = useSelector(getCreateTestFields)
-    const profile = useSelector(getCreateTestProfile)
     const subjects = useSelector(getSubjects)
 
-    console.log(subjects, "subjects")
 
     const [currentList, setCurrentList] = useState([])
     const [isChange, setIsChange] = useState()
@@ -79,6 +89,11 @@ export const CreateTest = () => {
         if (id)
             dispatch(fetchTestProfile({id}))
     }, [id])
+
+    useEffect(() => {
+        if (profile?.field?.organization_type)
+            dispatch(fetchOrganizationFields({id: profile?.field?.organization_type}))
+    }, [profile?.field?.organization_type])
 
     useEffect(() => {
         if (profile)
@@ -251,7 +266,6 @@ export const CreateTest = () => {
                 //         to_json: {type: item.type}
                 //     }))
             }))[0]
-        console.log(res)
         request(`${API_URL}test/block/crud/update/${id}/`, "PATCH", JSON.stringify(res))
             .then(res => console.log(res, "patch"))
         // currentList.blocks
@@ -360,7 +374,11 @@ export const CreateTest = () => {
                         // onChangeOption={onChangeSubject}
                         defaultValue={profile?.subject?.id}
                     />
-                    <div style={{display: "flex"  , alignItems: "center"}}><Input checked={profile?.is_mandatory} register={register} name={"is_mandatory"} type={"checkbox"}/> <h2>Majburiy fan</h2></div>
+                    <div style={{display: "flex", alignItems: "center"}}><Input checked={profile?.is_mandatory}
+                                                                                register={register}
+                                                                                name={"is_mandatory"}
+                                                                                type={"checkbox"}/> <h2>Majburiy
+                        fan</h2></div>
 
                 </div>
             </Form>
@@ -378,7 +396,7 @@ export const CreateTest = () => {
                 {/*<div className={cls.plusQuestion}>*/}
                 {/*    <i*/}
                 {/*        className={classNames("fa-solid fa-plus", cls.plusQuestion__icon)}*/}
-                {/*        onClick={onAddQuestion}*/}                {/*    />*/}
+                {/*        onClick={onAddQuestion}*/} {/*    />*/}
                 {/*</div>*/}
             </div>
         </div>

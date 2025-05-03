@@ -145,7 +145,6 @@ export const MenuBar = () => {
 const MultipleMenuItem = ({item}) => {
     const [activeMultiLink, setActiveMultiLink] = useState(false)
 
-    console.log(item, "item")
 
     const onChange = (e) => {
         e.preventDefault()

@@ -10,7 +10,6 @@ import {dashboardSelector} from "../model/selectors/dashboardSelector";
 export const DashboardPage = () => {
     const response = useSelector(dashboardSelector)
 
-    console.log(response)
 
 
     const dispatch = useDispatch()

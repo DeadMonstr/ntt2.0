@@ -23,7 +23,6 @@ export const OrganizationComment = () => {
 
     const [active, setActive] = useState(false)
 
-    console.log(data)
     const renderData = () => {
         return data.map(item => (
             <div className={cls.comment__box}>
@@ -73,14 +72,12 @@ const AddComment = ({active, setActive }) => {
 
     const dispatch = useDispatch()
     const [rating, setRating] = useState(0);
-    const handleStarClick = (index: number) => {
+    const handleStarClick = (index) => {
         setRating(index + 1);
     };
-    console.log(rating)
 
     const {request} = useHttp()
     const dataUser = useSelector(getUserData)
-    console.log(dataUser , "log")
 
     const {id} = useParams()
     const onAdd = (data) => {

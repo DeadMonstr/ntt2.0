@@ -15,7 +15,6 @@ export const applicationProfileSlice = createSlice({
         builder
             .addCase(fetchApplicationProfileData.pending, (state) => {state.loading = true})
             .addCase(fetchApplicationProfileData.fulfilled, (state, action) => {
-                console.log(action.payload)
                 state.data = action.payload
                 state.loading = false
             })
@@ -24,7 +23,6 @@ export const applicationProfileSlice = createSlice({
             })
             .addCase(fetchApplicationStatus.pending, (state) => {state.loading = true})
             .addCase(fetchApplicationStatus.fulfilled, (state, action) => {
-                console.log(action.payload, "action.payload")
                 state.status = action.payload.request_status.request_status
                 state.loading = false
             })

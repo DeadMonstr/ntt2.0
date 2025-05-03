@@ -17,7 +17,6 @@ const settingsSlice = createSlice({
             state.list = [...state.list, action.payload]
         },
         onEditHeaderItem: (state, action) => {
-            console.log(action.payload)
             state.list = state.list.map(item => item.id === action.payload.id ? {
                 ...item,
                 name: action.payload.data
@@ -33,7 +32,6 @@ const settingsSlice = createSlice({
         },
 
         onEditDirection: (state, action) => {
-            console.log(action.payload)
             state.direction.results = state.direction.results.map(item => {
                 if (item.id === action.payload.id) {
                     return {

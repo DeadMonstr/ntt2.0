@@ -37,6 +37,7 @@ import {organizationTypeFilter} from "../../../organizationTypes/model/selector/
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {getOftenUsedDistrict} from "entities/oftenUsed/model/selector/oftenUsedSelector";
 import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
+import {Button} from "../../../../shared/ui/button/button";
 
 export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
@@ -75,7 +76,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
     const {getInputProps, getRootProps} = useDropzone({
         onDrop: (acceptedFiles) => {
-            console.log(acceptedFiles[0])
             setNewImageFile(acceptedFiles[0])
         }
     })
@@ -86,7 +86,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         }
     }, [activeAddModal, activeModal])
 
-    console.log(selectedRegion , "reg")
 
     useEffect(() => {
         if (selectedRegion) dispatch(fetchRegionDistrict(selectedRegion))
@@ -114,7 +113,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         request(`${API_URL}organizations/organization/crud/update/${id}/`, "PATCH", formData, {})
             .then(res => {
                 dispatch(updateData(res))
-                console.log(res, "update")
                 setActiveModal(false)
                 dispatch(updateAdminInfo(res))
             })
@@ -132,10 +130,8 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         formData.delete("instagram_link")
         formData.delete("facebook_link")
     }
-    console.log(userProfile)
 
     const onCreate = (data) => {
-        console.log(data)
         if (newImageFile) {
             formData.append("url", newImageFile)
             formData.append("type", "img")
@@ -203,7 +199,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
         }
     }
 
-    console.log(userProfileImage , "dasd")
     const onChange = (data) => {
         if (newImageFile) {
             formData.append("url", newImageFile)
@@ -214,7 +209,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 {}
             )
                 .then(res => {
-                    console.log(res)
                     dispatch(getOrganizationImage(res))
                     let obj;
                     if (data?.username !== userProfile?.user?.username) obj = {username: data?.username}
@@ -270,7 +264,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                     JSON.stringify(res)
                 )
                     .then(res => {
-                        console.log(res)
                         dispatch(createUserData(res))
                         setActiveAddModal(false)
                         dispatch(onAddAlertOptions({
@@ -290,7 +283,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
             "DELETE"
         )
             .then(res => {
-                console.log(res)
                 dispatch(onAddAlertOptions({
                     status: true,
                     type: "success",
@@ -314,7 +306,6 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
             setCheckUserName(null)
         }
     }
-    console.log(checkUsername)
 
     return (
         <>
@@ -345,6 +336,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 <Form
                     onSubmit={handleSubmit(onSubmit)}
                     extraClassname={cls.info__form}
+                    // isChange={false}
                 >
                     <Input
                         required
@@ -447,6 +439,9 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                         extraClass={cls.info__input}
                         placeholder={"Facebook Linki"}
                     />
+                    {/*<div className={cls.btn}>*/}
+                    {/*    <Button>Tasdiqlash</Button>*/}
+                    {/*</div>*/}
                 </Form>
             </Modal>
             <Modal

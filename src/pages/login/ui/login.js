@@ -22,7 +22,6 @@ export const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const onPost = (data) => {
-        console.log(data, "data")
         request(`${API_URL}token/`, "POST", JSON.stringify(data))
             .then(res => {
                 dispatch(getUserData(res))

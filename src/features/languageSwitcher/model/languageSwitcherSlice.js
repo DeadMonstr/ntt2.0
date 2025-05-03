@@ -11,7 +11,6 @@ const languageSwitcherSlice = createSlice({
     initialState,
     reducers: {
         fetchCurrentLanguage: (state, action) => {
-            console.log(action.payload)
             state.language = action.payload
             state.loading = false
             state.error = null

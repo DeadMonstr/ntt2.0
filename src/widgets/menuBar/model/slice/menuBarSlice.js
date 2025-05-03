@@ -74,7 +74,6 @@ const menuBarSlice = createSlice({
         builder
             .addCase(fetchMenuSettingsTypes.pending, (state) => {state.loading = true})
             .addCase(fetchMenuSettingsTypes.fulfilled, (state, action) => {
-                console.log("hellloooosdoasodaosdoasdasd")
                 state.list = state.list.map(item => {
                     if (item.to === "settings") {
                         return {

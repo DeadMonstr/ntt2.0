@@ -132,7 +132,6 @@ export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
     const navigate = useNavigate()
 
 
-    console.log(lang , "dasdsa")
     const onSubmit = (e) => {
 
         e.preventDefault()

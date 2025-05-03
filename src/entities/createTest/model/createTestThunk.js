@@ -21,7 +21,7 @@ export const fetchOrganizationFields = createAsyncThunk(
     "createTestSlice/fetchOrganizationFields",
     ({id}) => {
         const {request} = useHttp()
-        return request(`${API_URL}organizations/organization_fields/get/organization-fields/${id}/`, "GET")
+        return request(`${API_URL}organizations/organization_fields/get/organization-fields2/${id}/`, "GET")
     }
 )
 

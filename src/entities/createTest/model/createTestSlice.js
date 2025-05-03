@@ -60,7 +60,7 @@ const createTestSlice = createSlice({
                 state.errpr = false
             })
             .addCase(fetchOrganizationFields.fulfilled, (state, action) => {
-                state.fields = action.payload.results
+                state.fields = action.payload
                 state.loading = false
                 state.errpr = false
             })

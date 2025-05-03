@@ -132,10 +132,8 @@ export class ExtendedTextNode extends TextNode {
     }
 
     exportDOM(editor) {
-        console.log(editor)
         const {element} = super.exportDOM(editor);
 
-        console.log(element)
         // if (element.getAttribute("input"))
         //***do whatever magic you want in here***
 

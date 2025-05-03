@@ -11,7 +11,6 @@ const seasonSwitcherSlice = createSlice({
     initialState,
     reducers: {
         fetchCurrentSeason: (state, action) => {
-            console.log(action.payload , "action payload 2")
             state.season = action.payload
             state.loading = false
             state.error = null

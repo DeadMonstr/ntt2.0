@@ -42,7 +42,6 @@ export const SeasonSwitcher = ({active, setActive}) => {
         dispatch(fetchAcademicYear())
     }, [])
 
-    console.log(years, "dasd")
 
     useEffect(() => {
 
@@ -60,7 +59,6 @@ export const SeasonSwitcher = ({active, setActive}) => {
     }
     const onToggle = () => setActive(active === "season" ? "" : "season")
 
-    console.log(currentYear, "das")
     return (
         <div className={cls.switcher}>
             <h2 className={cls.subtitle}>Mavsumni o'zgartirish</h2>

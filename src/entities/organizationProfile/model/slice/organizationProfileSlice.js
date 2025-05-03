@@ -96,7 +96,6 @@ const OrganizationProfileSlice = createSlice({
             state.comment = [...state.comment , action.payload]
         },
         onDeleteLanding : (state , action) => {
-            console.log('sdasd')
             state.announcements = state.announcements.filter(item => item.id !== action.payload)
         }
     },

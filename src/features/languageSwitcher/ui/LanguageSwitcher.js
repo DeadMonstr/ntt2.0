@@ -28,7 +28,6 @@ export const LanguageSwitcher = () => {
         setActive(false)
     }
 
-    console.log(active)
     return (
         <div className={cls.switcher}>
             <img

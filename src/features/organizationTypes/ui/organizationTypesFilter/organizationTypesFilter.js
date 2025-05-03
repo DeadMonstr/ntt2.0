@@ -75,7 +75,6 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
         setChangeRegion(activeItem?.region.id)
         setChangeType(activeItem?.organization_type.id)
     }, [activeItem])
-    console.log(activeItem, "activeItem")
 
 
     useEffect(() => {
@@ -149,7 +148,6 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
             organization_type: changeType
         }
 
-        console.log(res)
         request(`${API_URL}organizations/organization/crud/update/${activeItem.id}/`, "PUT", JSON.stringify(res), headers())
             .then(res => {
                 dispatch(onEditOrganization({id: activeItem.id, data: res}))

@@ -11,7 +11,6 @@ export const DirectionProfile = () => {
     const {register, handleSubmit} = useForm()
 
     const onAdd = (data) => {
-        console.log(data)
     }
 
     return (
