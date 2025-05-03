@@ -22,7 +22,7 @@ const newsProfileSlice = createSlice({
                 state.error = undefined
             })
             .addCase(fetchNewsProfileData.fulfilled, (state, action) => {
-                state.data = action.payload.results
+                state.data = action.payload
                 state.loading = false
                 state.error = undefined
             })

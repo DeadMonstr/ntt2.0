@@ -5,13 +5,13 @@ import {getOrganizationProfileData} from "entities/organizationProfile/model/sel
 import {API_URL, headers, useHttp} from "shared/api/base";
 import cls from "features/organizationProfile/ui/organizationProfileInfoAbout/organizationProfileInfoAbout.module.sass";
 import classNames from "classnames";
-import TextEditor from "entities/textEditor/TextEditor";
 import {Modal} from "shared/ui/modal";
 import {useDropzone} from "react-dropzone";
 import {Input} from "shared/ui/input";
 import {Textarea} from "shared/ui/textArea";
 import {Button} from "shared/ui/button/button";
 import {useForm} from "react-hook-form";
+import TextEditor from "shared/ui/textEditor/TextEditor";
 
 export const OrganizationProfileGrants = ({isChange, setIsChange}) => {
     const {id} = useParams()

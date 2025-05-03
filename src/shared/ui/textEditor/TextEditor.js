@@ -30,7 +30,7 @@ import "./textEditor.sass"
 
 import exampleTheme from "./themes/ExampleTheme";
 import {Button} from "shared/ui/button/button";
-import ToolbarPlugin from "entities/textEditor/plugins/Toolbar";
+import ToolbarPlugin from "./plugins/Toolbar";
 
 
 const editorConfig = {

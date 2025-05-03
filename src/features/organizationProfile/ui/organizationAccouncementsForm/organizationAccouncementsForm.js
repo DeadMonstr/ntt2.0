@@ -3,7 +3,6 @@ import cls from "./organizationAccouncementsForm.module.sass";
 import {Button} from "shared/ui/button/button";
 import {Select} from "shared/ui/select";
 import {Input} from "shared/ui/input";
-import TextEditor from "entities/textEditor/TextEditor";
 import {Form} from "shared/ui/form";
 import {API_URL, headers, useHttp} from "shared/api/base";
 import {useDispatch, useSelector} from "react-redux";
@@ -27,6 +26,7 @@ import {useNavigate} from "react-router";
 import {onAddAlertOptions, onDeleteAlert} from "features/alert/model/slice/alertSlice";
 import {MultiSelect} from "shared/ui/multiSelect";
 import {onDeleteLanding} from "entities/organizationProfile/model/slice/organizationProfileSlice";
+import TextEditor from "shared/ui/textEditor/TextEditor";
 
 export const OrganizationAccouncementsForm = ({setIsChange, changedItem}) => {
 
