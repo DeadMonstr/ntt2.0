@@ -4,7 +4,9 @@ import cls from "./crudComponents.module.sass"
 import classNames from "classnames";
 import {Image, Text} from "entities/newsProfile";
 import {set} from "react-hook-form";
-import {useHttp} from "shared/api/base";
+import {API_URL, headers, useHttp} from "shared/api/base";
+import {useSelector} from "react-redux";
+import {getNewsProfileData} from "entities/newsProfile/model/selector/newsProfileSelector";
 
 
 const types = [
@@ -18,6 +20,14 @@ export const CrudComponents = () => {
     const [activeChange, setActiveChange] = useState(false)
     const [components, setComponents] = useState([])
     const [canAdd, setCanAdd] = useState(true)
+    const data = useSelector(getNewsProfileData)
+
+    // //
+    // useEffect(() => {
+    //     setComponents(data.blocks)
+    // } , [data.blocks])
+    //
+    // console.log(components)
 
 
     useEffect(() => {
@@ -26,14 +36,15 @@ export const CrudComponents = () => {
         } else {
             setCanAdd(true)
         }
-    },[components])
+    }, [components])
 
 
     const switchChange = () => {
         setActiveChange(state => !state)
     }
 
-    console.log(components)
+
+
     const onCreateComponent = (type) => {
 
         let data
@@ -43,7 +54,7 @@ export const CrudComponents = () => {
 
                 data = {
                     index: components.length + 1,
-                    text: "",
+                    desc_json: "",
                     completed: false,
                     type,
                 }
@@ -55,7 +66,7 @@ export const CrudComponents = () => {
 
                 data = {
                     index: components.length + 1,
-                    image: "",
+                    img: "",
                     completed: false,
                     type,
                 }
@@ -68,15 +79,14 @@ export const CrudComponents = () => {
     const renderComponents = () => {
         return components.map(item => {
             switch (item.type) {
-                case "text":
+                case `text`:
                     return <Text
-
                         component={item}
                         onDelete={onDeleteComponent}
                         onComplete={onCompleteComponent}
                         onEdit={onEditComplete}
                     />
-                case "image":
+                case `image`:
                     return <Image
                         component={item}
                         onDelete={onDeleteComponent}
@@ -90,10 +100,18 @@ export const CrudComponents = () => {
     const {request} = useHttp()
 
     const onDeleteComponent = (data) => {
-        const {index} = data
-        setComponents(components => components.filter(item => item.index !== index))
 
-        // request()
+
+        const {index} = data
+        setComponents(components => components.filter(item => item.id !== index))
+
+        request(`${API_URL}organizations/news_block/${index}/`, "DELETE", null, headers())
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => {
+                console.log(err)
+            })
 
     }
 
@@ -109,8 +127,9 @@ export const CrudComponents = () => {
             }
             return item
         }))
+
     }
-    
+
     const onEditComplete = (index) => {
         if (components.every(item => item.completed)) {
             setComponents(state => state.map((item, i) => {
@@ -125,6 +144,8 @@ export const CrudComponents = () => {
 
     return (
         <div className={cls.create}>
+
+
 
             {renderComponents()}
 
@@ -148,7 +169,6 @@ export const CrudComponents = () => {
                     </div>
                 </>
             }
-
 
 
         </div>

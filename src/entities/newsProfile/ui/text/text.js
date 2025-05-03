@@ -4,13 +4,17 @@ import cls from "./text.module.sass"
 import TextEditor from "shared/ui/textEditor/TextEditor";
 import {Button} from "shared/ui/button/button";
 import {API_URL, headers, useHttp} from "shared/api/base";
+import {useParams} from "react-router";
 
 
 export const Text = ({component,onDelete,onComplete,onEdit,isView}) => {
 
 
 
+
+
     return <div className={cls.text}>
+
         {component.completed ?
             <View component={component} onEdit={onEdit} isView={isView}/>
             :
@@ -30,14 +34,15 @@ const View = ({component,onEdit,isView}) => {
 
 
     useEffect(() => {
-        setText(component.text)
+        setText(component?.desc_json?.text)
     },[component])
 
 
     const onChangeComponent = () => {
-        console.log("clickssssssssssssssss")
         onEdit(component.index)
     }
+
+
 
 
     return (
@@ -61,9 +66,15 @@ const Create = ({onDelete,component,onComplete}) => {
     const [editorState,setEditorState] = useState(null)
 
 
+    const {id} = useParams()
+
+
+
+
+
 
     useEffect(() => {
-        setEditorState(component.editorState)
+        setEditorState(component?.desc_json?.editorState)
     },[component])
 
 
@@ -72,14 +83,26 @@ const Create = ({onDelete,component,onComplete}) => {
     const onSubmit = (data) => {
 
 
-        console.log(data)
+        const res = {
+            desc_json: data,
+            // ...data,
+            news: id
+        }
+
+        request(`${API_URL}organizations/news_block/${component.id ? `${component.id}/` : ""}`, `${component.id ? "PATCH" : "POST"}`, JSON.stringify(res), headers())
+            .then(res => {
+                console.log(res)
+
+                const data = {
+                    ...res,
+                    // complete: false
+                }
+
+                onComplete({index: component.index, ...component, ...data })
+            })
 
 
-        // request(`${API_URL}`,"POST",data,headers())
-        //     .then(res => console.log(res))
 
-
-        onComplete({index: component.index, ...component, ...data})
     }
 
     const onCLickDelete = () => {
@@ -92,6 +115,7 @@ const Create = ({onDelete,component,onComplete}) => {
             <div className={cls.delete} onClick={onCLickDelete}>
                 <i className={"fa fa-trash"}></i>
             </div>
+
 
             <TextEditor onSubmit={onSubmit} isSubmit={true}  editorState={editorState} setEditorState={setEditorState}  />
 

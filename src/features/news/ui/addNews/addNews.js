@@ -11,7 +11,8 @@ import {Input} from "shared/ui/input";
 import {Button} from "shared/ui/button/button";
 
 import {Modal} from "shared/ui/modal";
-import TextEditor from "entities/textEditor/TextEditor";
+import TextEditor from "shared/ui/textEditor/TextEditor";
+
 
 
 export const AddNews = ({active, setActive}) => {

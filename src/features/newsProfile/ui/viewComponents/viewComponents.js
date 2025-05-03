@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Image, Text} from "entities/newsProfile";
 import cls from "features/newsProfile/ui/crudComponents/crudComponents.module.sass";
+import {useSelector} from "react-redux";
+import {getNewsProfileData} from "entities/newsProfile/model/selector/newsProfileSelector";
 
 
 
@@ -14,26 +16,51 @@ export const ViewComponents = () => {
     const [components, setComponents] = useState([])
 
 
+    const data = useSelector(getNewsProfileData)
+
+
+
     useEffect(() => {
+        setComponents(data.blocks)
+    } , [data])
 
-
-        // data = {
-        //     index: components.length + 1,
-        //     text: "",
-        //     completed: false,
-        //     type,
-        // }
-
-
-
-
-    },[])
-
-
+    // useEffect(() => {
+    //
+    //     let data
+    //
+    //     switch (types) {
+    //         case "text":
+    //
+    //             data = {
+    //                 index: components.length + 1,
+    //                 text: "",
+    //                 completed: false,
+    //                 type : "text",
+    //             }
+    //
+    //             setComponents(state => [...state, data])
+    //
+    //             break;
+    //         case "image":
+    //
+    //             data = {
+    //                 index: components.length + 1,
+    //                 img: "",
+    //                 completed: false,
+    //                 type : "image",
+    //             }
+    //
+    //             setComponents(state => [...state, data])
+    //             break;
+    //     }
+    //
+    //
+    //
+    // },[])
 
 
     const renderComponents = () => {
-        return components.map(item => {
+        return components?.map(item => {
             switch (item.type) {
                 case "text":
                     return <Text
@@ -55,6 +82,8 @@ export const ViewComponents = () => {
 
     return (
         <div className={cls.create}>
+
+
 
             {renderComponents()}
         </div>

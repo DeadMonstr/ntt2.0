@@ -1,40 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import cls from "./image.module.sass";
-import {useHttp} from "shared/api/base";
+import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
 import TextEditor from "shared/ui/textEditor/TextEditor";
 import {useDropzone} from "react-dropzone";
 import classNames from "classnames";
 import {Button} from "shared/ui/button/button";
+import {useParams} from "react-router";
 
 export const Image = ({component, onDelete, onComplete, onEdit, isView}) => {
 
 
+    console.log(component, "log")
     return <div className={cls.image}>
         {component.completed ?
             <View component={component} onEdit={onEdit} isView={isView}/>
             :
-            <Create component={component} onDelete={onDelete} onComplete={onComplete}/>
+            <Create component={component} isView={isView} onDelete={onDelete} onComplete={onComplete}/>
         }
     </div>
 };
 
 
+const View = ({component, onEdit, isView}) => {
 
-const View = ({component,onEdit,isView}) => {
-
-    const [image,setImage] = useState(null)
+    const [image, setImage] = useState(null)
 
 
     const onChangeComponent = () => {
-        console.log("clickssssssssssssssss")
+
         onEdit(component.index)
     }
 
     useEffect(() => {
-        setImage(component.image)
+        setImage(component.img)
     }, [component])
 
-    console.log(image,"asdasdas")
+
     return (
         <div className={cls.view}>
 
@@ -50,59 +51,63 @@ const View = ({component,onEdit,isView}) => {
                 <>
                     {
                         typeof image === 'string'
-                        ? <img className={cls.view__image} src={image} alt="uploaded"/>
-                        : <img className={cls.view__image} src={URL.createObjectURL(image)} alt="preview"/>
+                            ? <img className={cls.view__image} src={image} alt="uploaded"/>
+                            : <img className={cls.view__image} src={URL?.createObjectURL(image)} alt="preview"/>
                     }
                 </>
             }
-
 
 
         </div>
     )
 }
 
-const Create = ({onDelete,component,onComplete}) => {
+const Create = ({onDelete, component, onComplete, isView}) => {
 
     const {request} = useHttp()
     const [image, setImage] = useState(null)
+
+    const {id} = useParams()
+
+
+    useEffect(() => {
+        setImage(component.img)
+    }, [component])
 
 
     const {getRootProps, getInputProps} = useDropzone({
         onDrop: (acceptedFiles) => {
             const file = acceptedFiles[0];
             if (file) {
-                // Rasmni ko‘rsatish uchun file saqlaymiz
                 setImage(file);
             }
         }
     });
     const onSubmit = () => {
+        const formData = new FormData();
+        if (image) formData.append("img", image)
+        formData.append("news", id)
 
 
-        const data = {
-            image
-        }
+        request(`${API_URL}organizations/news_block/${component.id ? `${component.id}/` : ''}`, `${component.img ? "PATCH" : "POST"}`, formData, headersImg())
+            .then(res => {
+                console.log(res)
+                onComplete({index: component.id, ...component, ...res})
+            })
 
 
-        // request(`${API_URL}`,"POST",data,headers())
-        //     .then(res => console.log(res))
-
-
-        onComplete({index: component.index, ...component, ...data})
     }
 
     const onCLickDelete = () => {
-        onDelete({index: component.index})
+        onDelete({index: component.id})
     }
 
 
     return (
-        <div className={cls.create} >
+        <div className={cls.create}>
             <div className={cls.delete} onClick={onCLickDelete}>
                 <i className={"fa fa-trash"}></i>
             </div>
-
 
 
             <div {...getRootProps()} className={cls.create__image}>
@@ -118,8 +123,12 @@ const Create = ({onDelete,component,onComplete}) => {
                 }
 
             </div>
+            <div className={cls.create__btn}>
 
-            <Button onClick={onSubmit}>Tasdiqlash</Button>
+                {component.img && <Button onClick={() => isView(false)}>Bekor qilish</Button>}
+
+                <Button onClick={onSubmit}>Tasdiqlash</Button>
+            </div>
 
         </div>
     )
