@@ -5,6 +5,7 @@ import TextEditor from "shared/ui/textEditor/TextEditor";
 import {Button} from "shared/ui/button/button";
 import {API_URL, headers, useHttp} from "shared/api/base";
 import {useParams} from "react-router";
+import {type} from "@testing-library/user-event/dist/type";
 
 
 export const Text = ({component,onDelete,onComplete,onEdit,isView}) => {
@@ -85,13 +86,13 @@ const Create = ({onDelete,component,onComplete}) => {
 
         const res = {
             desc_json: data,
+            type_block: component.type,
             // ...data,
             news: id
         }
 
         request(`${API_URL}organizations/news_block/${component.id ? `${component.id}/` : ""}`, `${component.id ? "PATCH" : "POST"}`, JSON.stringify(res), headers())
             .then(res => {
-                console.log(res)
 
 
 

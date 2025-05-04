@@ -82,6 +82,8 @@ export const CrudComponents = () => {
         }
     }
 
+
+    console.log(components)
     const renderComponents = () => {
         return components.map(item => {
             switch (item.type) {
@@ -121,10 +123,9 @@ export const CrudComponents = () => {
 
     }
 
-    console.log(data)
     const dispatch = useDispatch()
     const onCompleteComponent = (data) => {
-
+        console.log(data.index)
         setComponents(components => components.map(item => {
             if (item.index === data.index) {
 
@@ -148,6 +149,7 @@ export const CrudComponents = () => {
     }
 
     const onEditComplete = (index) => {
+        console.log(index,"indexx")
         if (components.every(item => item.completed)) {
             setComponents(state => state.map((item, i) => {
                 if (item.index === index) {

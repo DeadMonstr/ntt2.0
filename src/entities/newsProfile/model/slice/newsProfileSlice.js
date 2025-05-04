@@ -44,7 +44,7 @@ const newsProfileSlice = createSlice({
             .addCase(fetchNewsProfileData.fulfilled, (state, action) => {
                 state.data = action.payload
                 state.data.blocks = action.payload.blocks.map((item,index) => {
-                    if (item.desc_json) {
+                    if (item.type_block === "text") {
                         return {
                             news: item.news,
                             id: item.id,
@@ -55,17 +55,16 @@ const newsProfileSlice = createSlice({
                             completed: true
                         }
                     }
-                    else if (item.img) {
+                    else if (item.type_block ===  "image") {
                         return {
                             news: item.news,
                             id: item.id,
                             index: index,
-                            img: item.img,
+                            img: item.img_url,
                             type: "image",
                             completed: true
                         }
                     }
-                    return item
                 })
 
                 state.loading = false

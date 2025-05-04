@@ -86,12 +86,13 @@ const Create = ({onDelete, component, onComplete, isView}) => {
         const formData = new FormData();
         if (image) formData.append("img", image)
         formData.append("news", id)
+        formData.append("type_block", component.type)
 
 
         request(`${API_URL}organizations/news_block/${component.id ? `${component.id}/` : ''}`, `${component.img ? "PATCH" : "POST"}`, formData, headersImg())
             .then(res => {
 
-                onComplete({...component, news: id, id: res.id, img: res.img})
+                onComplete({...component, news: id, id: res.id, img: res.img_url})
             })
 
 
