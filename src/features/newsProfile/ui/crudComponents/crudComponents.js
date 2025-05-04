@@ -5,8 +5,9 @@ import classNames from "classnames";
 import {Image, Text} from "entities/newsProfile";
 import {set} from "react-hook-form";
 import {API_URL, headers, useHttp} from "shared/api/base";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getNewsProfileData} from "entities/newsProfile/model/selector/newsProfileSelector";
+import {onChangeBlock, onDeleteBlock} from "entities/newsProfile/model/slice/newsProfileSlice";
 
 
 const types = [
@@ -28,6 +29,12 @@ export const CrudComponents = () => {
     // } , [data.blocks])
     //
     // console.log(components)
+
+    useEffect(() => {
+        if (data.blocks)
+
+        setComponents(data.blocks)
+    },[data.blocks])
 
 
     useEffect(() => {
@@ -54,7 +61,6 @@ export const CrudComponents = () => {
 
                 data = {
                     index: components.length + 1,
-                    desc_json: "",
                     completed: false,
                     type,
                 }
@@ -102,10 +108,10 @@ export const CrudComponents = () => {
     const onDeleteComponent = (data) => {
 
 
-        const {index} = data
-        setComponents(components => components.filter(item => item.id !== index))
-
-        request(`${API_URL}organizations/news_block/${index}/`, "DELETE", null, headers())
+        const {index,id} = data
+        setComponents(components => components.filter(item => item.index !== index))
+        dispatch(onDeleteBlock(id))
+        request(`${API_URL}organizations/news_block/${id}/`, "DELETE", null, headers())
             .then(res => {
                 console.log(res)
             })
@@ -115,18 +121,29 @@ export const CrudComponents = () => {
 
     }
 
+    console.log(data)
+    const dispatch = useDispatch()
     const onCompleteComponent = (data) => {
 
         setComponents(components => components.map(item => {
             if (item.index === data.index) {
-                return {
+
+                const newData = {
                     ...item,
                     ...data,
                     completed: true
                 }
+
+                dispatch(onChangeBlock(newData))
+                return newData
             }
             return item
         }))
+
+
+
+
+
 
     }
 

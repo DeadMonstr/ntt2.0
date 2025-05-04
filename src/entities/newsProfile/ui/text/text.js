@@ -34,7 +34,7 @@ const View = ({component,onEdit,isView}) => {
 
 
     useEffect(() => {
-        setText(component?.desc_json?.text)
+        setText(component?.text)
     },[component])
 
 
@@ -74,7 +74,7 @@ const Create = ({onDelete,component,onComplete}) => {
 
 
     useEffect(() => {
-        setEditorState(component?.desc_json?.editorState)
+        setEditorState(component?.editorState)
     },[component])
 
 
@@ -93,12 +93,9 @@ const Create = ({onDelete,component,onComplete}) => {
             .then(res => {
                 console.log(res)
 
-                const data = {
-                    ...res,
-                    // complete: false
-                }
 
-                onComplete({index: component.index, ...component, ...data })
+
+                onComplete({index: component.index, ...component, ...data,news: id,id: res.id })
             })
 
 
@@ -106,7 +103,7 @@ const Create = ({onDelete,component,onComplete}) => {
     }
 
     const onCLickDelete = () => {
-        onDelete({index: component.index})
+        onDelete({index: component.index,id: component.id})
     }
 
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, Text} from "entities/newsProfile";
 import cls from "features/newsProfile/ui/crudComponents/crudComponents.module.sass";
 import {useSelector} from "react-redux";
@@ -19,10 +19,13 @@ export const ViewComponents = () => {
     const data = useSelector(getNewsProfileData)
 
 
-
     useEffect(() => {
+        if (data.blocks)
+
         setComponents(data.blocks)
     } , [data])
+
+
 
     // useEffect(() => {
     //
@@ -59,7 +62,7 @@ export const ViewComponents = () => {
     // },[])
 
 
-    const renderComponents = () => {
+    const renderComponents = useCallback(() => {
         return components?.map(item => {
             switch (item.type) {
                 case "text":
@@ -75,7 +78,7 @@ export const ViewComponents = () => {
                     />
             }
         })
-    }
+    },[components])
 
 
 

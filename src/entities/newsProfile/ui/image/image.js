@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import cls from "./image.module.sass";
-import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
+import {API_URL, API_URL_DOC, headers, headersImg, useHttp} from "shared/api/base";
 import TextEditor from "shared/ui/textEditor/TextEditor";
 import {useDropzone} from "react-dropzone";
 import classNames from "classnames";
@@ -10,7 +10,6 @@ import {useParams} from "react-router";
 export const Image = ({component, onDelete, onComplete, onEdit, isView}) => {
 
 
-    console.log(component, "log")
     return <div className={cls.image}>
         {component.completed ?
             <View component={component} onEdit={onEdit} isView={isView}/>
@@ -51,7 +50,7 @@ const View = ({component, onEdit, isView}) => {
                 <>
                     {
                         typeof image === 'string'
-                            ? <img className={cls.view__image} src={image} alt="uploaded"/>
+                            ? <img className={cls.view__image} src={API_URL_DOC+image} alt="uploaded"/>
                             : <img className={cls.view__image} src={URL?.createObjectURL(image)} alt="preview"/>
                     }
                 </>
@@ -91,15 +90,15 @@ const Create = ({onDelete, component, onComplete, isView}) => {
 
         request(`${API_URL}organizations/news_block/${component.id ? `${component.id}/` : ''}`, `${component.img ? "PATCH" : "POST"}`, formData, headersImg())
             .then(res => {
-                console.log(res)
-                onComplete({index: component.id, ...component, ...res})
+
+                onComplete({...component, news: id, id: res.id, img: res.img})
             })
 
 
     }
 
     const onCLickDelete = () => {
-        onDelete({index: component.id})
+        onDelete({index: component.index, id: component.id})
     }
 
 
@@ -116,7 +115,7 @@ const Create = ({onDelete, component, onComplete, isView}) => {
                     image
                         ? (
                             typeof image === 'string'
-                                ? <img className={cls.create__inner} src={image} alt="uploaded"/>
+                                ? <img className={cls.create__inner} src={API_URL_DOC+image} alt="uploaded"/>
                                 : <img className={cls.create__inner} src={URL.createObjectURL(image)} alt="preview"/>
                         )
                         : <i className={classNames("fas fa-image", cls.create__icon)}/>
@@ -125,7 +124,6 @@ const Create = ({onDelete, component, onComplete, isView}) => {
             </div>
             <div className={cls.create__btn}>
 
-                {component.img && <Button onClick={() => isView(false)}>Bekor qilish</Button>}
 
                 <Button onClick={onSubmit}>Tasdiqlash</Button>
             </div>
