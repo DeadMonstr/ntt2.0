@@ -23,11 +23,13 @@ import {fetchOrganizationList, fetchOrganizationTypeList} from "entities/setting
 import {getSettingsHeader} from "entities/settings/model/settingsSelector";
 import {fetchSubjects} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
 import {API_URL, useHttp} from "shared/api/base";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {Form} from "shared/ui/form";
 import {useForm} from "react-hook-form";
 import {CreateTestQuestions, CreateTestVariants} from "features/createTest";
 import {getSubjects} from "../../../entities/oftenUsed/model/selector/oftenUsedSelector";
+import {deleteTest} from "../../../entities/test/model/testSlice";
+import {ConfirmModal} from "../../../shared/ui/confirmModal";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -36,6 +38,7 @@ const types = [
 
 export const CreateTest = () => {
 
+    const navigate = useNavigate()
     const profile = useSelector(getCreateTestProfile)
     const {id} = useParams()
     const {request} = useHttp()
@@ -79,6 +82,7 @@ export const CreateTest = () => {
 
     const [currentList, setCurrentList] = useState([])
     const [isChange, setIsChange] = useState()
+    const [activeConfirm, setActiveConfirm] = useState(false)
 
     useEffect(() => {
         dispatch(fetchOrganizationList())
@@ -297,6 +301,24 @@ export const CreateTest = () => {
     //     }))
     // }
 
+    const onConfirmDelete = () => {
+        setActiveConfirm(true)
+    }
+
+    const onDelete = () => {
+        request(`${API_URL}test/test/crud/delete/${id}/`, "DELETE")
+            .then(res => {
+                setActiveConfirm(false)
+                dispatch(onAddAlertOptions({
+                    type: "success",
+                    status: true,
+                    msg: "Test o'chirildi"
+                }))
+                dispatch(deleteTest(id))
+                navigate(-1)
+            })
+    }
+
     const onSubmitTest = (data) => {
         dispatch(createQuestion({id, data}))
     }
@@ -346,6 +368,13 @@ export const CreateTest = () => {
                         register={register}
                         placeholder={"Test vaqti"}
                         defaultValue={profile?.duration}
+                    />
+                    <i
+                        onClick={onConfirmDelete}
+                        className={classNames(
+                            "fa-solid fa-trash",
+                            cls.wrapper__icon
+                        )}
                     />
                 </div>
                 <div className={cls.selects}>
@@ -399,6 +428,11 @@ export const CreateTest = () => {
                 {/*        onClick={onAddQuestion}*/} {/*    />*/}
                 {/*</div>*/}
             </div>
+            <ConfirmModal
+                onClick={onDelete}
+                active={activeConfirm}
+                setActive={setActiveConfirm}
+            />
         </div>
     );
 };

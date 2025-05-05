@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Table} from "shared/ui/table";
 import classNames from "classnames";
 import {useDispatch, useSelector} from "react-redux";
@@ -7,6 +7,8 @@ import cls from "pages/createTest/ui/createTest.module.sass";
 import {useNavigate} from "react-router";
 import {API_URL, useHttp} from "../../../../shared/api/base";
 import {deleteTest} from "../../model/testSlice";
+import {onAddAlertOptions} from "../../../../features/alert/model/slice/alertSlice";
+import {ConfirmModal} from "../../../../shared/ui/confirmModal";
 
 export const TestList = () => {
 
@@ -19,20 +21,14 @@ export const TestList = () => {
         return a.id - b.id;
     }
 
-    const onDelete = (id) => {
-        request(`${API_URL}test/test/crud/delete/${id}/`, "DELETE")
-            .then(res => console.log(res, "red"))
-        dispatch(deleteTest(id))
-    }
-
     const renderTests = () => {
         return [...testList].sort(compareById).map((item, index) => {
             return (
                 <tr
                     onClick={(e) => {
-                        if (!e.target?.classList?.contains("fa-solid"))
+                        // if (!e.target?.classList?.contains("fa-solid"))
                             navigate(`/admin/testProfile/${item.id}`)
-                        else onDelete(item.id)
+                        // else onConfirmDelete(item.id)
                     }}
                 >
                     <td>{index + 1}</td>
@@ -41,11 +37,11 @@ export const TestList = () => {
 
                     <td>{item.number_questions}</td>
                     <td>{item.duration} minut</td>
-                    <td>
-                        <i
-                            className={classNames("fa-solid fa-trash")}
-                        />
-                    </td>
+                    {/*<td>*/}
+                    {/*    <i*/}
+                    {/*        className={classNames("fa-solid fa-trash")}*/}
+                    {/*    />*/}
+                    {/*</td>*/}
                 </tr>
             )
         })

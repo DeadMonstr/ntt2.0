@@ -49,12 +49,6 @@ export const NewsPage = () => {
                 setActive={setActiveModal}
             />
 
-            <EditNews
-                active={activeEditModal}
-                setActive={setActiveEditModal}
-                item={activeItem}
-            />
-
             {/*<AddHomeNews active={activeModal} setActive={setActiveModal}/>*/}
 
 

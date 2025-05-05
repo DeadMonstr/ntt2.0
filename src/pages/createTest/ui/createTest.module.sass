@@ -15,6 +15,15 @@
     .wrapper
       display: flex
       gap: 2rem
+      position: relative
+      &__icon
+        top: 0
+        right: 0
+        position: absolute
+        color: red
+        font-size: 2rem
+        //transition: .1s
+        @include btn-active
     .selects
       display: flex
       align-items: center

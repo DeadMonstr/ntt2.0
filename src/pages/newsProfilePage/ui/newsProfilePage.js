@@ -7,6 +7,7 @@ import cls from "./newsProfilePage.module.sass"
 import {useDispatch, useSelector} from "react-redux";
 import {getNewsProfileData} from "entities/newsProfile/model/selector/newsProfileSelector";
 import {CrudComponents} from "features/newsProfile";
+import {EditNews} from "../../../features/news";
 
 
 
@@ -15,7 +16,10 @@ export const NewsProfilePage = () => {
     const {id} = useParams()
     const data = useSelector(getNewsProfileData)
 
+    console.log(data, "data")
+
     const [activeChange,setActiveChange] = useState(false)
+    const [activeEdit,setActiveEdit] = useState(false)
 
     const onClickChange = () => {
         setActiveChange(state => !state)
@@ -30,7 +34,7 @@ export const NewsProfilePage = () => {
 
     return (
         <div className={cls.profile}>
-            <InfoCard/>
+            <InfoCard setActiveEdit={setActiveEdit}/>
 
             <div className={cls.container}>
                 <div className={cls.header}>
@@ -57,6 +61,12 @@ export const NewsProfilePage = () => {
 
 
             </div>
+
+            <EditNews
+                active={activeEdit}
+                setActive={setActiveEdit}
+                item={data}
+            />
         </div>
     );
 };

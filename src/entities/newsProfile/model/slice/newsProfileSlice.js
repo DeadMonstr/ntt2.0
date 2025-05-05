@@ -33,7 +33,9 @@ const newsProfileSlice = createSlice({
         onDeleteBlock: (state, action) => {
             state.data.blocks = state.data.blocks.filter(item => item.id !== action.payload)
         },
-
+        onChangeData: (state, action) => {
+            state.data = action.payload
+        }
     },
     extraReducers: builder =>
         builder
@@ -43,7 +45,7 @@ const newsProfileSlice = createSlice({
             })
             .addCase(fetchNewsProfileData.fulfilled, (state, action) => {
                 state.data = action.payload
-                state.data.blocks = action.payload.blocks.map((item,index) => {
+                state.data.blocks = action.payload.blocks.map((item, index) => {
                     if (item.type_block === "text") {
                         return {
                             news: item.news,
@@ -54,8 +56,7 @@ const newsProfileSlice = createSlice({
                             type: "text",
                             completed: true
                         }
-                    }
-                    else if (item.type_block ===  "image") {
+                    } else if (item.type_block === "image") {
                         return {
                             news: item.news,
                             id: item.id,
@@ -78,6 +79,10 @@ const newsProfileSlice = createSlice({
 
 })
 
-export const {onChangeBlock,onDeleteBlock} = newsProfileSlice.actions
+export const {
+    onChangeBlock,
+    onDeleteBlock,
+    onChangeData
+} = newsProfileSlice.actions
 export default newsProfileSlice.reducer
 

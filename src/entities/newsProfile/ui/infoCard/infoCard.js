@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {getNewsProfileData} from "entities/newsProfile/model/selector/newsProfileSelector";
 
 
-export const InfoCard = () => {
+export const InfoCard = ({setActiveEdit}) => {
 
     const data = useSelector(getNewsProfileData)
 
@@ -13,8 +13,13 @@ export const InfoCard = () => {
     return (
         <div className={cls.card}>
 
-            <div className={cls.change}>
-                <i className={"fa fa-pen"}></i>
+            <div
+                onClick={() => setActiveEdit(true)}
+                className={cls.change}
+            >
+                <i
+                    className={"fa fa-pen"}
+                />
             </div>
 
 

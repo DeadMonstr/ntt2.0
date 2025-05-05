@@ -7,7 +7,12 @@ export {Image} from "./ui/image/image"
 
 
 export {ViewComponents} from "../../features/newsProfile/ui/viewComponents/viewComponents"
-export {default as newsProfileSlice} from "./model/slice/newsProfileSlice"
+export {
+    default as newsProfileSlice,
+    onChangeData,
+    onChangeBlock,
+    onDeleteBlock
+} from "./model/slice/newsProfileSlice"
 export {fetchNewsProfileData} from "./model/thunk/newsProfileThunk"
 
 
