@@ -43,6 +43,7 @@ export const Input = memo((
                             placeholder={placeholder}
                             disabled={disabled}
                             defaultValue={defaultValue}
+                            checked={checked}
                             required={required}
                             {...register(name, {
                                 checked: checked,

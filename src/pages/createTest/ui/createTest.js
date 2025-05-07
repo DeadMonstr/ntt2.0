@@ -83,6 +83,8 @@ export const CreateTest = () => {
     const [currentList, setCurrentList] = useState([])
     const [isChange, setIsChange] = useState()
     const [activeConfirm, setActiveConfirm] = useState(false)
+    const [activeConfirmQuestion, setActiveConfirmQuestion] = useState(false)
+    const [isDeletedQuestion, setIsDeletedQuestion] = useState(false)
 
     useEffect(() => {
         dispatch(fetchOrganizationList())
@@ -129,10 +131,22 @@ export const CreateTest = () => {
         dispatch(fetchOrganizationFields({id}))
     }
 
-    const onRemoveQuestion = (id) => {
-        request(`${API_URL}test/block/crud/delete/${id}/`, "DELETE")
-            .then(res => console.log(res, "HELLO"))
-        dispatch(deleteQuestion(id))
+    const onConfirmQuestion = (id) => {
+        setIsDeletedQuestion(id)
+        setActiveConfirmQuestion(true)
+    }
+
+    const onRemoveQuestion = () => {
+        request(`${API_URL}test/block/crud/delete/${isDeletedQuestion}/`, "DELETE")
+            .then(res => {
+                dispatch(onAddAlertOptions({
+                    status: true,
+                    type: "error",
+                    msg: "Savol o'chirildi"
+                }))
+                dispatch(deleteQuestion(isDeletedQuestion))
+                setActiveConfirmQuestion(false)
+            })
     }
 
     const onRemoveVariant = (id, questionId) => {
@@ -341,7 +355,7 @@ export const CreateTest = () => {
                     onAddVariant={() => onAddVariant(item.id)}
                     isDelete={profile?.blocks?.length > 1}
                     index={index + 1}
-                    onRemoveQuestion={onRemoveQuestion}
+                    onRemoveQuestion={onConfirmQuestion}
                 >
                     {renderVariants(item.questions, item.id)}
                 </CreateTestQuestions>
@@ -403,11 +417,17 @@ export const CreateTest = () => {
                         // onChangeOption={onChangeSubject}
                         defaultValue={profile?.subject?.id}
                     />
-                    <div style={{display: "flex", alignItems: "center"}}><Input checked={profile?.is_mandatory}
-                                                                                register={register}
-                                                                                name={"is_mandatory"}
-                                                                                type={"checkbox"}/> <h2>Majburiy
-                        fan</h2></div>
+                    <div
+                        style={{display: "flex", alignItems: "center"}}
+                    >
+                        <Input
+                            checked={profile?.is_mandatory}
+                            register={register}
+                            name={"is_mandatory"}
+                            type={"checkbox"}
+                        />
+                        <h2>Majburiy fan</h2>
+                    </div>
 
                 </div>
             </Form>
@@ -432,6 +452,11 @@ export const CreateTest = () => {
                 onClick={onDelete}
                 active={activeConfirm}
                 setActive={setActiveConfirm}
+            />
+            <ConfirmModal
+                onClick={onRemoveQuestion}
+                active={activeConfirmQuestion}
+                setActive={setActiveConfirmQuestion}
             />
         </div>
     );

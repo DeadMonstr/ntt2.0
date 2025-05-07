@@ -10,6 +10,8 @@ import {Select} from "shared/ui/select";
 import {API_URL, useHttp} from "shared/api/base";
 
 import cls from "./createTestVariants.module.sass";
+import {onAddAlertOptions} from "../../../alert/model/slice/alertSlice";
+import {ConfirmModal} from "../../../../shared/ui/confirmModal";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -32,7 +34,7 @@ export const CreateTestVariants = ({
     const dispatch = useDispatch()
 
     const [currentImage, setCurrentImage] = useState(undefined)
-
+    const [activeConfirm, setActiveConfirm] = useState(false)
 
 
     useEffect(() => {
@@ -41,9 +43,26 @@ export const CreateTestVariants = ({
     }, [currentImage])
 
     const onRemoveVariant = () => {
-        request(`${API_URL}test/question/crud/update_delete/${item.id}/`, "DELETE")
-            .then(res => console.log(res, "HELLO"))
-        dispatch(deleteVariant({questionId: ID, variantId: item.id}))
+        console.log(item, "item")
+        if (!item.isNew) {
+            request(`${API_URL}test/question/crud/update_delete/${item.id}/`, "DELETE")
+                .then(res => {
+                    dispatch(onAddAlertOptions({
+                        status: true,
+                        type: "error",
+                        msg: "Variant o'chirildi"
+                    }))
+                    dispatch(deleteVariant({questionId: ID, variantId: item.id}))
+                })
+        } else {
+            dispatch(onAddAlertOptions({
+                status: true,
+                type: "error",
+                msg: "Variant o'chirildi"
+            }))
+            dispatch(deleteVariant({questionId: ID, variantId: item.id}))
+        }
+        setActiveConfirm(false)
     }
 
     const {getInputProps, getRootProps} = useDropzone({
@@ -132,10 +151,15 @@ export const CreateTestVariants = ({
                         !item.checked ?
                             <i
                                 className={classNames("fa-solid fa-trash", cls.trash)}
-                                onClick={() => onRemoveVariant(item.id, ID)}
+                                onClick={() => setActiveConfirm(true)}
                             /> : null : null
                 }
             </div>
+            <ConfirmModal
+                onClick={onRemoveVariant}
+                active={activeConfirm}
+                setActive={setActiveConfirm}
+            />
         </div>
     );
 }
