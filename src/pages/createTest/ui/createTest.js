@@ -49,9 +49,8 @@ export const CreateTest = () => {
         handleSubmit
     } = useForm({
         defaultValues: {
-            name: profile?.name,
             duration: profile?.duration,
-            field: profile?.field?.id,
+            field: profile?.field,
             subject: profile?.subject?.id,
             is_mandatory: profile?.is_mandatory,
         }
@@ -97,9 +96,9 @@ export const CreateTest = () => {
     }, [id])
 
     useEffect(() => {
-        if (profile?.field?.organization_type)
-            dispatch(fetchOrganizationFields({id: profile?.field?.organization_type}))
-    }, [profile?.field?.organization_type])
+        if (profile?.field_data?.organization_type?.id)
+            dispatch(fetchOrganizationFields({id: profile?.field_data?.organization_type?.id}))
+    }, [profile?.field_data?.organization_type?.id])
 
     useEffect(() => {
         if (profile)
@@ -335,6 +334,11 @@ export const CreateTest = () => {
 
     const onSubmitTest = (data) => {
         dispatch(createQuestion({id, data}))
+        dispatch(onAddAlertOptions({
+            status: true,
+            type: "success",
+            msg: "Test malumotlari o'zgartirildi"
+        }))
     }
 
     const renderVariants = (list, ID) => {
@@ -370,18 +374,18 @@ export const CreateTest = () => {
                 onSubmit={handleSubmit(onSubmitTest)}
             >
                 <div className={cls.wrapper}>
-                    <Input
-                        placeholder={"Test nomi"}
-                        name={"name"}
-                        register={register}
-                        defaultValue={profile?.name}
-                    />
+                    {/*<Input*/}
+                    {/*    placeholder={"Test nomi"}*/}
+                    {/*    name={"name"}*/}
+                    {/*    register={register}*/}
+                    {/*    defaultValue={profile?.name}*/}
+                    {/*/>*/}
                     <Input
                         type={"number"}
                         name={"duration"}
                         register={register}
                         placeholder={"Test vaqti"}
-                        defaultValue={profile?.duration}
+                        // defaultValue={profile?.duration}
                     />
                     <i
                         onClick={onConfirmDelete}
@@ -397,7 +401,7 @@ export const CreateTest = () => {
                         extraClass={cls.createTest__select}
                         titleOption={"Tashkilot turi"}
                         onChangeOption={onChangeType}
-                        defaultValue={profile?.field?.organization_type}
+                        defaultValue={profile?.field_data?.organization_type?.id}
                     />
                     <Select
                         options={fields}
@@ -406,7 +410,7 @@ export const CreateTest = () => {
                         // onChangeOption={onChangeField}
                         name={"field"}
                         register={register}
-                        defaultValue={profile?.field?.id}
+                        defaultValue={profile?.field}
                     />
                     <Select
                         options={subjects}

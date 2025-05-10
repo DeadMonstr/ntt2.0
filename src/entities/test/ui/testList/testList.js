@@ -57,7 +57,7 @@ export const TestList = () => {
                     <th>Fan nomi</th>
                     <th>Savollar soni</th>
                     <th>Berilgan vaqt</th>
-                    <th/>
+                    {/*<th/>*/}
                 </tr>
                 </thead>
                 <tbody>
