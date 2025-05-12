@@ -23,6 +23,7 @@ import {notificationSlice} from "entities/notification";
 import {menuBarSlice} from "widgets/menuBar";
 import {testSlice} from "entities/test";
 import {createTestSlice} from "entities/createTest";
+import {testResultSlice} from "entities/testResult";
 
 
 const stringMiddleware = () => (next) => (action) => {
@@ -59,7 +60,8 @@ export const store = configureStore({
         notificationSlice,
         testSlice,
         menuBarSlice,
-        newsProfileSlice
+        newsProfileSlice,
+        testResultSlice
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(

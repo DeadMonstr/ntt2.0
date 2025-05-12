@@ -50,6 +50,13 @@ const initialState = {
             roles: [ROLES.admin]
         },
         {
+            to: "testResultList",
+            label: "Test natijalari",
+            // img: <Settings/>,
+            back: true,
+            roles: [ROLES.admin]
+        },
+        {
             to: "news",
             label: "Yangiliklar",
             // img: <News/>,

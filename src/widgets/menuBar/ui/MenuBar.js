@@ -49,6 +49,10 @@ const icons = [
         img: <Settings/>,
     },
     {
+        to: "testResultList",
+        img: <Dashboard/>,
+    },
+    {
         to: "news",
         img: <News/>,
     },

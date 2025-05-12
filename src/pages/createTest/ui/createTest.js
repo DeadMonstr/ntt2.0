@@ -46,7 +46,8 @@ export const CreateTest = () => {
     const dispatch = useDispatch()
     const {
         register,
-        handleSubmit
+        handleSubmit,
+        setValue
     } = useForm({
         defaultValues: {
             duration: profile?.duration,
@@ -89,6 +90,10 @@ export const CreateTest = () => {
         dispatch(fetchOrganizationList())
         dispatch(fetchSubjects())
     }, [])
+
+    useEffect(() => {
+        if (profile?.duration) setValue("duration", profile?.duration)
+    }, [profile?.duration])
 
     useEffect(() => {
         if (id)
@@ -386,6 +391,7 @@ export const CreateTest = () => {
                         register={register}
                         placeholder={"Test vaqti"}
                         // defaultValue={profile?.duration}
+                        value={profile?.duration}
                     />
                     <i
                         onClick={onConfirmDelete}

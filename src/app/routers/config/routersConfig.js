@@ -31,6 +31,7 @@ import {NotificationPage} from "pages/notificationPage/ui/notificationPage";
 import {TestPage} from "pages/testPage";
 import {UserProfilePage} from "../../../pages/userProfilePage";
 import {NewsProfilePage} from "pages/newsProfilePage";
+import {TestResultPage} from "../../../pages/testResultPage";
 
 
 export const routersConfig = [
@@ -134,6 +135,10 @@ export const routersConfig = [
     {
         path: "profile",
         element: <UserProfilePage/>
+    },
+    {
+        path: "testResultList",
+        element: <TestResultPage/>
     }
 
 ]
