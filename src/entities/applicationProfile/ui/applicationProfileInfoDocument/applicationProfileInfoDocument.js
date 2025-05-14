@@ -27,6 +27,8 @@ export const ApplicationProfileInfoDocument = () => {
     const status = useSelector(applicationProfileStatus)
     const [selectedStatus, setSelectedStatus] = useState()
 
+    console.log(status, "status")
+
     useEffect(() => {
         if (id)
             dispatch(fetchApplicationStatus({id}))

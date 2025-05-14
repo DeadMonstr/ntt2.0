@@ -23,7 +23,7 @@ export const applicationProfileSlice = createSlice({
             })
             .addCase(fetchApplicationStatus.pending, (state) => {state.loading = true})
             .addCase(fetchApplicationStatus.fulfilled, (state, action) => {
-                state.status = action.payload.request_status.request_status
+                state.status = action.payload?.request_status
                 state.loading = false
             })
             .addCase(fetchApplicationStatus.rejected, (state) => {
