@@ -20,7 +20,7 @@ import {getUserOrganizationId} from "entities/userProfile";
 
 
 const listData = [
-    {name: "allRequest", label: "Hamma arizalar"},
+    // {name: "allRequest", label: "Hamma arizalar"},
     {name: "newRequest", label: "Yangi ariza"},
     {name: "acceptedRequest", label: "Qabul qilingan"},
     {name: "rejectedRequest", label: "Rad etilgan"},

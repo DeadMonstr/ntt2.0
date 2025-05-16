@@ -7,20 +7,20 @@ export const Dashboard = ({data}) => {
     };
     const renderTable = () => {
         const mappedData = data?.map(item => {
-            const key = Object.keys(item)[0];
+            const key = Object?.keys(item)[0];
             return {
-                text: item[key].text,
-                count: item[key].count,
-                color: item[key].color
+                text: item[key]?.text,
+                count: item[key]?.count,
+                color: item[key]?.color
             };
         });
 
         return mappedData?.map(item => (
             <div className={cls.box}>
-                <h2>{item.text}</h2>
+                <h2>{item?.text}</h2>
                 <span>Barcha yo’nalishlar bo’yichar</span>
-                <div style={{color: item.color}} className={cls.div}>
-                    {formatNumber(item.count)}
+                <div style={{color: item?.color}} className={cls.div}>
+                    {formatNumber(item?.count)}
                 </div>
             </div>
         ))

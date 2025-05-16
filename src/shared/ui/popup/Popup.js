@@ -34,7 +34,7 @@ const Popup = ({type = "auto", options, children, extraClass, defaultActive, onC
 
 
     const renderOptions = useCallback(() => {
-        return options.map(item => {
+        return options?.map(item => {
             return <div
                 key={item.title}
                 className={classNames(cls.item, {
