@@ -10,7 +10,12 @@ const initialState = {
 const testResultSlice = createSlice({
     name: "testResultSlice",
     initialState,
-    reducers: {},
+    reducers: {
+        onDeleteResult: (state, action) => {
+            state.data = state.data.filter(item => item.id !== action.payload)
+        }
+
+    },
     extraReducers: builder =>
         builder
             .addCase(fetchTestResults.pending, (state) => {
@@ -27,6 +32,8 @@ const testResultSlice = createSlice({
                 state.error = "error"
             })
 })
+
+export const {onDeleteResult} = testResultSlice.actions
 
 export default testResultSlice.reducer
 
