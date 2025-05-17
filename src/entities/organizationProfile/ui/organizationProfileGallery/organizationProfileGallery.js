@@ -6,6 +6,7 @@ import {getOrganizationProfileGallery} from "../../model/selector/organizationPr
 
 import cls from "./organizationProfileGallery.module.sass";
 import image from "shared/assets/images/Rectangle 640.png";
+import {API_URL_IMG} from "../../../../shared/api/base";
 
 export const OrganizationProfileGallery = memo(({userRole, setChangedImage, isAdd}) => {
 
@@ -25,7 +26,7 @@ export const OrganizationProfileGallery = memo(({userRole, setChangedImage, isAd
                     >
                         <i className={classNames("fas fa-pen", cls.images__editIcon)}/>
                     </div>}
-                    <img src={item?.file?.url ?? image} alt=""/>
+                    <img src={item?.file ? `${API_URL_IMG}${item?.file}` : image} alt=""/>
                 </div>
             )
         })
