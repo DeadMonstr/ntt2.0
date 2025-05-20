@@ -3,13 +3,13 @@ import Select from "react-select";
 import cls from "./multiSelect.module.sass"
 
 
-export const MultiSelect = ({onChange,value,options,defaultValue,title}) => {
+export const MultiSelect = ({onChange, value, options, defaultValue, title, placeholder}) => {
 
-
+    console.log(defaultValue, "defaultValue")
 
     return (
         <div className={cls.multiSelectWrapper}>
-            <h1>{title}</h1>
+            {title && <h1>{title}</h1>}
             <Select
                 defaultValue={defaultValue}
                 isMulti
@@ -17,7 +17,7 @@ export const MultiSelect = ({onChange,value,options,defaultValue,title}) => {
                 value={value}
                 options={options}
                 className={cls.multiSelect}
-                placeholder={"Tanlang"}
+                placeholder={placeholder ?? "Tanlang"}
                 styles={{
                     placeholder: (base) => ({
                         ...base,

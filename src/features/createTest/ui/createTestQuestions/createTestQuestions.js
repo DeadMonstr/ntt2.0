@@ -14,6 +14,7 @@ import cls from "./createTestQuestions.module.sass";
 import {useDispatch} from "react-redux";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {changeQuestion} from "entities/createTest";
+import {Textarea} from "../../../../shared/ui/textArea";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -285,13 +286,21 @@ export const CreateTestQuestions = ({data, isChange, setIsChange, isDelete, inde
             <div className={cls.question__title}>
                 {
                     currentData?.to_json?.type === "text"
-                        ? <Input
-                            placeholder={"Savolni yozing"}
+                        ?
+                        <Textarea
                             disabled={!(isChange === currentData?.id)}
-                            name={String(currentData?.id)}
                             register={register}
+                            name={String(currentData?.id)}
+                            placeholder={"Savolni yozing"}
                             value={currentData?.text}
                         />
+                        // <Input
+                        //     placeholder={"Savolni yozing"}
+                        //     disabled={!(isChange === currentData?.id)}
+                        //     name={String(currentData?.id)}
+                        //     register={register}
+                        //     value={currentData?.text}
+                        // />
                         : <div
                             aria-disabled={!isChange === currentData?.id}
                             className={cls.imageArea}

@@ -30,6 +30,7 @@ import {CreateTestQuestions, CreateTestVariants} from "features/createTest";
 import {getSubjects} from "../../../entities/oftenUsed/model/selector/oftenUsedSelector";
 import {deleteTest} from "../../../entities/test/model/testSlice";
 import {ConfirmModal} from "../../../shared/ui/confirmModal";
+import {MultiSelect} from "../../../shared/ui/multiSelect";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -51,7 +52,7 @@ export const CreateTest = () => {
     } = useForm({
         defaultValues: {
             duration: profile?.duration,
-            field: profile?.field,
+            // field: profile?.field,
             subject: profile?.subject?.id,
             is_mandatory: profile?.is_mandatory,
         }
@@ -85,6 +86,7 @@ export const CreateTest = () => {
     const [activeConfirm, setActiveConfirm] = useState(false)
     const [activeConfirmQuestion, setActiveConfirmQuestion] = useState(false)
     const [isDeletedQuestion, setIsDeletedQuestion] = useState(false)
+    const [selectedFields, setSelectedFields] = useState([])
 
     useEffect(() => {
         dispatch(fetchOrganizationList())
@@ -101,14 +103,24 @@ export const CreateTest = () => {
     }, [id])
 
     useEffect(() => {
-        if (profile?.field_data?.organization_type?.id)
-            dispatch(fetchOrganizationFields({id: profile?.field_data?.organization_type?.id}))
-    }, [profile?.field_data?.organization_type?.id])
+        if (!!profile?.field_data?.length) {
+            dispatch(fetchOrganizationFields({id: profile?.field_data[0]?.organization_type?.id}))
+        }
+    }, [profile?.field_data?.length])
 
     useEffect(() => {
         if (profile)
             setCurrentList(profile)
     }, [profile])
+
+    useEffect(() => {
+        if (!!profile?.field_data?.length) {
+            setSelectedFields(
+                profile?.field_data
+                    .map(item => ({label: item.name, value: item.id}))
+            )
+        }
+    }, [profile?.field_data?.length])
 
     // useEffect(() => {
     //     request(`${API_URL}test/test/crud/delete/17/`, "DELETE")
@@ -337,8 +349,21 @@ export const CreateTest = () => {
             })
     }
 
+    const onChangeSelect = (data) => {
+        console.log(data, "data")
+        setSelectedFields(data)
+    }
+
     const onSubmitTest = (data) => {
-        dispatch(createQuestion({id, data}))
+        const res = {
+            ...data,
+            field: selectedFields
+                .map(item => (
+                    item.value
+                    // name: item.label
+                ))
+        }
+        dispatch(createQuestion({id, data: res}))
         dispatch(onAddAlertOptions({
             status: true,
             type: "success",
@@ -402,42 +427,47 @@ export const CreateTest = () => {
                     />
                 </div>
                 <div className={cls.selects}>
-                    <Select
-                        options={organizationTypes}
-                        extraClass={cls.createTest__select}
-                        titleOption={"Tashkilot turi"}
-                        onChangeOption={onChangeType}
-                        defaultValue={profile?.field_data?.organization_type?.id}
-                    />
-                    <Select
-                        options={fields}
-                        extraClass={cls.createTest__select}
-                        titleOption={"Soha turi"}
-                        // onChangeOption={onChangeField}
-                        name={"field"}
-                        register={register}
-                        defaultValue={profile?.field}
-                    />
-                    <Select
-                        options={subjects}
-                        extraClass={cls.createTest__select}
-                        titleOption={"Fan tanlang"}
-                        name={"subject"}
-                        register={register}
-                        // onChangeOption={onChangeSubject}
-                        defaultValue={profile?.subject?.id}
-                    />
-                    <div
-                        style={{display: "flex", alignItems: "center"}}
-                    >
-                        <Input
-                            checked={profile?.is_mandatory}
-                            register={register}
-                            name={"is_mandatory"}
-                            type={"checkbox"}
+                    <div className={cls.selects__container}>
+                        <Select
+                            options={organizationTypes}
+                            extraClass={cls.createTest__select}
+                            titleOption={"Tashkilot turi"}
+                            onChangeOption={onChangeType}
+                            defaultValue={profile?.field_data && profile?.field_data[0]?.organization_type?.id}
                         />
-                        <h2>Majburiy fan</h2>
+                        <Select
+                            options={subjects}
+                            extraClass={cls.createTest__select}
+                            titleOption={"Fan tanlang"}
+                            name={"subject"}
+                            register={register}
+                            // onChangeOption={onChangeSubject}
+                            defaultValue={profile?.subject?.id}
+                        />
+                        <div
+                            style={{display: "flex", alignItems: "center"}}
+                        >
+                            <Input
+                                checked={profile?.is_mandatory}
+                                register={register}
+                                name={"is_mandatory"}
+                                type={"checkbox"}
+                            />
+                            <h2>Majburiy fan</h2>
+                        </div>
                     </div>
+                    <MultiSelect
+                        options={fields.map(item => ({label: item.name, value: item.id}))}
+                        extraClass={cls.createTest__select}
+                        placeholder={"Soha turi"}
+                        onChange={onChangeSelect}
+                        value={selectedFields}
+                        // onChangeOption={onChangeField}
+                        // name={"field"}
+                        // register={register}
+                        // defaultValue={[{value: profile?.field_data?.id, label: profile?.field_data?.name}]}
+                        defaultValue={selectedFields}
+                    />
 
                 </div>
             </Form>

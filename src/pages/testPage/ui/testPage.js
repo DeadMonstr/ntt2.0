@@ -51,7 +51,7 @@ export const TestPage = () => {
 
         const res = {
             name: null,
-            field: null,
+            field: [],
             subject: null,
             duration: null,
             blocks: [

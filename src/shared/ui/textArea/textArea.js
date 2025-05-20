@@ -17,7 +17,8 @@ export const Textarea = React.memo((
         style,
         extraClassName,
         value,
-        maxLength
+        maxLength,
+        disabled
     }) => {
 
 
@@ -33,6 +34,7 @@ export const Textarea = React.memo((
             }
 
             <textarea
+                disabled={disabled}
                 id={name}
                 className={classNames(cls.textarea,extraClassName,{
                     [`${cls?.error}`] : errors?.[name]

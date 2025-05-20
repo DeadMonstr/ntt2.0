@@ -26,8 +26,12 @@
         @include btn-active
     .selects
       display: flex
-      align-items: center
+      flex-direction: column
       gap: 2rem
+      &__container
+        display: flex
+        align-items: center
+        gap: 2rem
   &__select
     width: 20rem !important
   &__container

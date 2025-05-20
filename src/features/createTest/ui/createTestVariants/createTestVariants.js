@@ -12,6 +12,7 @@ import {API_URL, useHttp} from "shared/api/base";
 import cls from "./createTestVariants.module.sass";
 import {onAddAlertOptions} from "../../../alert/model/slice/alertSlice";
 import {ConfirmModal} from "../../../../shared/ui/confirmModal";
+import {Textarea} from "../../../../shared/ui/textArea";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -91,13 +92,21 @@ export const CreateTestVariants = ({
             <div className={cls.variant__title}>
                 {
                     item.to_json.type === "text"
-                        ? <Input
+                        ?
+                        <Textarea
                             placeholder={"Javobni yozing"}
                             register={register}
                             name={String(`${item.id}-${ID}`)}
                             value={item.answer}
                             disabled={!isChange}
                         />
+                        // <Input
+                        //     placeholder={"Javobni yozing"}
+                        //     register={register}
+                        //     name={String(`${item.id}-${ID}`)}
+                        //     value={item.answer}
+                        //     disabled={!isChange}
+                        // />
                         : item.to_json.type === "image"
                             ? <div
                                 aria-disabled={!isChange}
@@ -116,13 +125,20 @@ export const CreateTestVariants = ({
                                 <input {...getInputProps()} type="file"/>
                             </div>
                             : <div className={cls.imageWrapper}>
-                                <Input
+                                <Textarea
                                     placeholder={"Savolni yozing"}
                                     register={register}
                                     name={String(`${item.id}-${ID}`)}
                                     value={item.answer}
                                     disabled={!isChange}
                                 />
+                                {/*<Input*/}
+                                {/*    placeholder={"Savolni yozing"}*/}
+                                {/*    register={register}*/}
+                                {/*    name={String(`${item.id}-${ID}`)}*/}
+                                {/*    value={item.answer}*/}
+                                {/*    disabled={!isChange}*/}
+                                {/*/>*/}
                                 <div
                                     aria-disabled={!isChange}
                                     className={cls.imageArea}
