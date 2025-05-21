@@ -52,7 +52,6 @@ export const CreateTest = () => {
     } = useForm({
         defaultValues: {
             duration: profile?.duration,
-            // field: profile?.field,
             subject: profile?.subject?.id,
             is_mandatory: profile?.is_mandatory,
         }
@@ -350,19 +349,21 @@ export const CreateTest = () => {
     }
 
     const onChangeSelect = (data) => {
-        console.log(data, "data")
         setSelectedFields(data)
     }
 
     const onSubmitTest = (data) => {
         const res = {
             ...data,
+            subject: !!data.subject ? data.subject : profile?.subject?.id,
             field: selectedFields
                 .map(item => (
                     item.value
                     // name: item.label
                 ))
         }
+        console.log(data, "data")
+        console.log(res, "res")
         dispatch(createQuestion({id, data: res}))
         dispatch(onAddAlertOptions({
             status: true,
@@ -462,10 +463,6 @@ export const CreateTest = () => {
                         placeholder={"Soha turi"}
                         onChange={onChangeSelect}
                         value={selectedFields}
-                        // onChangeOption={onChangeField}
-                        // name={"field"}
-                        // register={register}
-                        // defaultValue={[{value: profile?.field_data?.id, label: profile?.field_data?.name}]}
                         defaultValue={selectedFields}
                     />
 

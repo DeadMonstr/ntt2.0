@@ -5,8 +5,6 @@ import cls from "./multiSelect.module.sass"
 
 export const MultiSelect = ({onChange, value, options, defaultValue, title, placeholder}) => {
 
-    console.log(defaultValue, "defaultValue")
-
     return (
         <div className={cls.multiSelectWrapper}>
             {title && <h1>{title}</h1>}

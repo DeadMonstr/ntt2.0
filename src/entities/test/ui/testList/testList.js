@@ -3,7 +3,7 @@ import {Table} from "shared/ui/table";
 import classNames from "classnames";
 import {useDispatch, useSelector} from "react-redux";
 import {getTestListData} from "entities/test/model/testSelector";
-import cls from "pages/createTest/ui/createTest.module.sass";
+import cls from "./testList.module.sass";
 import {useNavigate} from "react-router";
 import {API_URL, useHttp} from "../../../../shared/api/base";
 import {deleteTest} from "../../model/testSlice";
@@ -32,7 +32,15 @@ export const TestList = () => {
                     }}
                 >
                     <td>{index + 1}</td>
-                    <td>{item.field?.name}</td>
+                    <td>
+                        <div className={cls.item}>
+                            {item?.field_data?.map(item => {
+                                return (
+                                    <span>{item?.name}</span>
+                                )
+                            })}
+                        </div>
+                    </td>
                     <td>{item.subject?.name}</td>
 
                     <td>{item.number_questions}</td>
