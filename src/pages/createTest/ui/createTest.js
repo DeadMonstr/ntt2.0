@@ -54,6 +54,7 @@ export const CreateTest = () => {
             duration: profile?.duration,
             subject: profile?.subject?.id,
             is_mandatory: profile?.is_mandatory,
+            status: profile?.status,
         }
     })
 
@@ -455,6 +456,17 @@ export const CreateTest = () => {
                                 type={"checkbox"}
                             />
                             <h2>Majburiy fan</h2>
+                        </div>
+                        <div
+                            style={{display: "flex", alignItems: "center"}}
+                        >
+                            <Input
+                                checked={profile?.status}
+                                register={register}
+                                name={"status"}
+                                type={"checkbox"}
+                            />
+                            <h2>Status</h2>
                         </div>
                     </div>
                     <MultiSelect
