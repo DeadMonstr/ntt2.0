@@ -399,6 +399,9 @@ export const CreateTest = () => {
         })
     }
 
+
+    console.log(profile)
+
     return (
         <div className={cls.createTest}>
             <Form
@@ -446,9 +449,7 @@ export const CreateTest = () => {
                             // onChangeOption={onChangeSubject}
                             defaultValue={profile?.subject?.id}
                         />
-                        <div
-                            style={{display: "flex", alignItems: "center"}}
-                        >
+                        <div style={{display: "flex",alignItems: "center"}}>
                             <Input
                                 checked={profile?.is_mandatory}
                                 register={register}
