@@ -7,7 +7,7 @@ import logOut from "shared/assets/icons/Log out.svg"
 
 import cls from "./MenuBar.module.sass"
 import {useDispatch, useSelector} from "react-redux";
-import {getUserJob, getUserOrganizationId, getUserOrganizationName} from "entities/userProfile";
+import {getUserData, getUserJob, getUserOrganizationId, getUserOrganizationName} from "entities/userProfile";
 
 import userLogo from "shared/assets/images/userLogo.svg";
 import {useNavigate} from "react-router";
@@ -31,6 +31,10 @@ const icons = [
     {
         to: "applications",
         img: <Applications/>,
+    },
+    {
+        to: "organizationTypes",
+        img: <CourseApplications/>,
     },
     {
         to: "organizationTypes",
@@ -69,6 +73,7 @@ export const MenuBar = () => {
 
     const [activeMultiLink, setActiveMultiLink] = useState(false)
     const userRole = useSelector(getUserJob)
+    const userData = useSelector(getUserData)
     const userOrganizationName = useSelector(getUserOrganizationName)
     const userOrganizationId = useSelector(getUserOrganizationId)
     const menuList = useSelector(menuBarList)
@@ -117,11 +122,11 @@ export const MenuBar = () => {
     return (
         <>
             <div className={cls.menubar}>
-                <div className={cls.profile}>
+                <div onClick={() => navigate("profile")} className={cls.profile}>
 
-                    <img className={cls.profile__img} src={userLogo} alt="Logo"/>
+                    <img className={cls.profile__img} src={userData?.image} alt="Logo"/>
 
-                    <h2>Shahzod Omonboyev</h2>
+                    <h2>{userData?.name} {userData?.surname}</h2>
                 </div>
                 <div className={cls.options}>
                     <div className={cls.options__list}>

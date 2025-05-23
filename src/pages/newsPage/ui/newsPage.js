@@ -1,26 +1,38 @@
 import cls from "./news.module.sass";
 import {NewsList} from "entities/news";
-import {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {fetchNews} from "entities/news/model/newsThunk";
 import {AddNews, EditNews} from "features/news";
+import {Pagination} from "../../../features/pagination";
+import {getNews} from "../../../entities/news/model/newsSelector";
+import {getUserJob} from "../../../entities/userProfile";
 
 export const NewsPage = () => {
 
 
+    const userRole = useSelector(getUserJob)
+    const data = useSelector(getNews)
     const [activeModal, setActiveModal] = useState(false)
     const [activeEditModal, setActiveEditModal] = useState(false)
     const [activeItem, setActiveEditItem] = useState({})
+    const [currentPage, setCurrentPage] = useState(1)
+    const pageSize = useMemo(() => 6, [])
 
 
     const dispatch = useDispatch()
     const id = localStorage.getItem("organization_id")
 
     useEffect(() => {
-        dispatch(fetchNews(id))
-    }, [])
+        if (pageSize && currentPage)
+            dispatch(fetchNews({
+                organization_id: id,
+                offset: (currentPage - 1) * pageSize,
+                limit: pageSize,
+            }))
+    }, [id, currentPage, pageSize])
 
 
     return (
@@ -31,11 +43,11 @@ export const NewsPage = () => {
 
             </div>
 
-            <div className={cls.news__btns}>
+            {userRole?.toLowerCase() !== "admin" && <div className={cls.news__btns}>
                 {!activeModal ? <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-plus"}/> :
                     <i onClick={() => setActiveModal(!activeModal)} className={"fa fa-times"}/>
                 }
-            </div>
+            </div>}
 
             <NewsList
                 setActiveEditModal={setActiveEditModal}
@@ -51,6 +63,12 @@ export const NewsPage = () => {
 
             {/*<AddHomeNews active={activeModal} setActive={setActiveModal}/>*/}
 
+            <Pagination
+                totalCount={data?.count}
+                onPageChange={setCurrentPage}
+                currentPage={currentPage}
+                pageSize={pageSize}
+            />
 
         </div>
     );

@@ -24,7 +24,7 @@ import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
 import cls from "./organizationProfileInfoModal.module.sass";
 import {fetchRegionsData, getRegions} from "entities/oftenUsed";
 import {ConfirmModal} from "../../../../shared/ui/confirmModal";
-import {useParams} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {
     getOrganizationProfileUserImageData
 } from "../../../../entities/organizationProfile/model/selector/organizationProfileSelector";
@@ -38,6 +38,7 @@ import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
 import {getOftenUsedDistrict} from "entities/oftenUsed/model/selector/oftenUsedSelector";
 import {fetchRegionDistrict} from "entities/oftenUsed/model/thunk/oftenUsedThunk";
 import {Button} from "../../../../shared/ui/button/button";
+import {onDeleteOrganization} from "../../../organizationTypes/model/slice/organizationTypesSlice";
 
 export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
@@ -56,6 +57,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
     const {request} = useHttp()
     const dispatch = useDispatch()
     const formData = new FormData()
+    const navigate = useNavigate()
     const data = useSelector(getOrganizationProfileData)
     const userProfile = useSelector(getOrganizationProfileUserData)
     const userProfileImage = useSelector(getOrganizationProfileUserImageData)
@@ -68,6 +70,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
     const [activeModal, setActiveModal] = useState(false)
     const [activeAddModal, setActiveAddModal] = useState(false)
     const [isDelete, setIsDelete] = useState(false)
+    const [isDeleteOrg, setIsDeleteOrg] = useState(false)
     const [selectedRegion, setSelectedRegion] = useState(null)
     const [selectedDistrict, setSelectedDistrict] = useState(null)
     const [checkUsername, setCheckUserName] = useState(null)
@@ -89,7 +92,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
     useEffect(() => {
         if (selectedRegion) dispatch(fetchRegionDistrict(selectedRegion))
-    } , [selectedRegion])
+    }, [selectedRegion])
 
     const onActiveModal = useCallback(() => setActiveModal(true), [])
 
@@ -212,7 +215,10 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                     dispatch(getOrganizationImage(res))
                     let obj;
                     if (data?.username !== userProfile?.user?.username) obj = {username: data?.username}
-                    if (data?.phone_extra !== userProfile?.user?.phone_extra) obj = {...obj, phone_extra: data?.phone_extra}
+                    if (data?.phone_extra !== userProfile?.user?.phone_extra) obj = {
+                        ...obj,
+                        phone_extra: data?.phone_extra
+                    }
                     if (data?.password === data?.confirm_password && data?.password?.length <= 8) {
                         const createData = {
                             user: {
@@ -295,6 +301,27 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
 
     }
 
+    const onDeleteOrg = () => {
+        request(
+            `${API_URL}organizations/organization/crud/delete/${id}/`,
+            "DELETE",
+            null,
+            headers()
+        )
+            .then(res => {
+                dispatch(onAddAlertOptions({
+                    status: true,
+                    type: "success",
+                    msg: "Tashkilot muvaffaqiyatli o'chirildi"
+                }))
+                dispatch(onDeleteOrganization(id))
+                setIsDeleteOrg(false)
+                navigate(-1)
+            })
+            .catch(err => console.log(err))
+
+    }
+
     const onChangeUserName = (e) => {
 
         if (e.length >= 0) {
@@ -313,7 +340,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 userRole={userRole}
                 setActive={setActiveModal}
                 isAdd={setActiveAddModal}
-                isDel={setIsDelete}
+                // isDel={setIsDelete}
             />
             <Modal
                 active={activeModal}
@@ -334,9 +361,9 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                     }
                 </div>
                 <Form
-                    onSubmit={handleSubmit(onSubmit)}
+                    // onSubmit={handleSubmit(onSubmit)}
                     extraClassname={cls.info__form}
-                    // isChange={false}
+                    isChange={false}
                 >
                     <Input
                         required
@@ -442,6 +469,19 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                     {/*<div className={cls.btn}>*/}
                     {/*    <Button>Tasdiqlash</Button>*/}
                     {/*</div>*/}
+                    <div className={cls.btns}>
+                        <Button
+                            onClick={handleSubmit(() => setIsDeleteOrg(true))}
+                            type={"danger"}
+                        >
+                            O'chirish
+                        </Button>
+                        <Button
+                            onClick={handleSubmit(onSubmit)}
+                        >
+                            Tasdiqlash
+                        </Button>
+                    </div>
                 </Form>
             </Modal>
             <Modal
@@ -479,6 +519,7 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                             <Form
                                 extraClassname={cls.addModal__form}
                                 onSubmit={handleSubmit(onCreate)}
+                                // isChange={false}
                             >
                                 <Input
                                     required
@@ -508,16 +549,29 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                                     placeholder={"Phone"}
                                     extraClass={cls.addModal__input}
                                 />
+                                {/*<div className={cls.btns}>*/}
+                                {/*    <Button*/}
+                                {/*        onClick={handleSubmit(() => setIsDelete(true))}*/}
+                                {/*        type={"danger"}*/}
+                                {/*    >*/}
+                                {/*        O'chirish*/}
+                                {/*    </Button>*/}
+                                {/*    <Button*/}
+                                {/*        onClick={handleSubmit(onChange)}*/}
+                                {/*    >*/}
+                                {/*        Tasdiqlash*/}
+                                {/*    </Button>*/}
+                                {/*</div>*/}
                             </Form> :
                             activeAddModal === "change" ?
                                 <Form
                                     extraClassname={cls.addModal__form}
-                                    onSubmit={handleSubmit(onChange)}
+                                    isChange={false}
                                 >
-                                    <h3 style={{color: checkUsername ? checkUsername ? "green" : "red" : "black"}}>
+                                    {/*<h3 style={{color: checkUsername ? checkUsername ? "green" : "red" : "black"}}>*/}
 
-                                        {checkUsername ? checkUsername ? "foydalanuvchi nomi bo'sh" : "foydalanuvchi nomi allaqachon mavjud" : "foydalanuvchi nomini kiriting"}
-                                    </h3>
+                                    {/*    {checkUsername ? checkUsername ? "foydalanuvchi nomi bo'sh" : "foydalanuvchi nomi allaqachon mavjud" : "foydalanuvchi nomini kiriting"}*/}
+                                    {/*</h3>*/}
 
                                     <Input
                                         required
@@ -557,13 +611,28 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                                         placeholder={"Password"}
                                         name={"password"}
                                         register={register}
+                                        extraClass={cls.addModal__input}
                                     />
                                     <Input
                                         type={"password"}
                                         placeholder={"Confirm password"}
                                         name={"confirm_password"}
                                         register={register}
+                                        extraClass={cls.addModal__input}
                                     />
+                                    <div className={cls.btns}>
+                                        <Button
+                                            onClick={handleSubmit(() => setIsDelete(true))}
+                                            type={"danger"}
+                                        >
+                                            O'chirish
+                                        </Button>
+                                        <Button
+                                            onClick={handleSubmit(onChange)}
+                                        >
+                                            Tasdiqlash
+                                        </Button>
+                                    </div>
                                 </Form> : null
                     }
                 </div>
@@ -573,6 +642,12 @@ export const OrganizationProfileInfoModal = memo(({userRole}) => {
                 setActive={setIsDelete}
                 active={isDelete}
                 onClick={onDelete}
+            />
+            <ConfirmModal
+                type={"danger"}
+                setActive={setIsDeleteOrg}
+                active={isDeleteOrg}
+                onClick={onDeleteOrg}
             />
         </>
     );
