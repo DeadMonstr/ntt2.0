@@ -28,7 +28,6 @@ const newsProfileSlice = createSlice({
                 state.data.blocks = [...state.data.blocks, action.payload]
             }
 
-
         },
         onDeleteBlock: (state, action) => {
             state.data.blocks = state.data.blocks.filter(item => item.id !== action.payload)

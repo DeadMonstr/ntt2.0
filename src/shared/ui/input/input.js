@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import cls from "./input.module.sass";
 
-export const Input = memo((
+export const Input = (
     {
         type,
         defaultValue,
@@ -18,10 +18,15 @@ export const Input = memo((
         disabled,
         extraValues,
         checked,
-        title
+        title,
+        errors
     }
 ) => {
     const [showPassword, setShowPassword] = useState(false);
+
+
+    console.log(errors)
+
     return (
         <label style={style} className={cls.inputLabel} htmlFor={name}>
             {
@@ -35,40 +40,45 @@ export const Input = memo((
             }
             {
                 register ? (
-                    <div className={cls.field}>
-                        <input
-                            id={name}
-                            className={classNames(cls.input, extraClass)}
-                            type={showPassword ? "text" : type}
-                            placeholder={placeholder}
-                            disabled={disabled}
-                            defaultValue={defaultValue}
-                            // checked={checked}
-                            defaultChecked={checked}
-                            required={required}
-                            {...register(name, {
-                                checked: checked,
-                                defaultValue: defaultValue,
-                                value: value,
-                                onChange: onChange,
-                                ...extraValues
-                            })}
-                        />
+                    <>
+                        <div className={cls.field}>
+                            <input
+                                id={name}
+                                className={classNames(cls.input, extraClass)}
+                                type={showPassword ? "text" : type}
+                                placeholder={placeholder}
+                                disabled={disabled}
+                                defaultValue={defaultValue}
+                                // checked={checked}
+                                defaultChecked={checked}
+                                required={required}
+                                {...register(name, {
+                                    checked: checked,
+                                    defaultValue: defaultValue,
+                                    value: value,
+                                    onChange: onChange,
+                                    ...extraValues
+                                })}
+                            />
 
 
-                        {type === "password" && (
-                            <div className={cls.eye} onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? (
-                                    <i className="fas fa-eye" />
-                                ) : (
-                                    <i className="fa fa-eye-slash" />
-                                )}
-                            </div>
-                        )}
-                        {type === "checkbox" && (
-                            <p>{placeholder}</p>
-                        )}
-                    </div>
+                            {type === "password" && (
+                                <div className={cls.eye} onClick={() => setShowPassword(!showPassword)}>
+                                    {showPassword ? (
+                                        <i className="fas fa-eye" />
+                                    ) : (
+                                        <i className="fa fa-eye-slash" />
+                                    )}
+                                </div>
+                            )}
+                            {type === "checkbox" && (
+                                <p>{placeholder}</p>
+                            )}
+
+                        </div>
+
+                    </>
+
                 ) : (
                     <div className={cls.field}>
                         <input
@@ -100,6 +110,10 @@ export const Input = memo((
                     </div>
                 )
             }
+            {
+                ( errors?.[name]) && <p className={cls.error}>{errors?.[name].message}</p>
+            }
+
         </label>
     )
-})
+}
