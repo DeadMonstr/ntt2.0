@@ -29,7 +29,7 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
                 {/*</div>*/}
                 <div className={cls.box__img}>
                     <img src={item.img ? item.img : itemImg} alt=""/>
-                    <h2>Yangilik</h2>
+                    {/*<h2>Yangilik</h2>*/}
                 </div>
                 <div className={cls.box__info}>
                     <div className={cls.box__info_header}>

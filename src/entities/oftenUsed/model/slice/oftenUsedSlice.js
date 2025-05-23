@@ -9,7 +9,7 @@ import {
 } from "../thunk/oftenUsedThunk";
 
 const initialState = {
-    regions: null,
+    regions: [],
     educationLanguages: [],
     academicYears: [],
     shifts: [],

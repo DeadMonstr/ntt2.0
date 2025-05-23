@@ -49,8 +49,9 @@ export const branchQuery = () => {
 }
 
 export function ParamUrls(params) {
+    console.log(params, "params")
     return Object.entries(params)
-        .filter(([key, value]) => value !== undefined && value !== null && value !== "all")
+        .filter(([key, value]) => value !== undefined && value !== null && value !== "all" && value !== "null")
         .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
         .join('&');
 }
@@ -82,7 +83,7 @@ export const ParamUrl = (params) => {
 
 
     for (let i = 0; i < paramsList.length; i++) {
-        if (params[paramsList[i]]) {
+        if (params[paramsList[i]] && params[paramsList[i]] !== "all") {
 
 
             res += `${paramsList[i]}=${params[paramsList[i]]}&`

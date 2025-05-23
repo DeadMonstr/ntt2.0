@@ -24,6 +24,11 @@ const initialState = {
             label: "Tashkilotlar",
             // img: <CourseApplications/>,
             roles: [ROLES.admin]
+        },{
+            to: "news",
+            label: "Yangiliklar",
+            // img: <CourseApplications/>,
+            roles: [ROLES.admin]
         },
         {
             to: "organizationProfile",

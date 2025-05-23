@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {API_URL, headers, useHttp} from "../../../../shared/api/base";
+import {API_URL, headers, ParamUrl, ParamUrls, useHttp} from "../../../../shared/api/base";
 
 
 export const fetchOrganizationTypesFilter = createAsyncThunk(
@@ -15,10 +15,16 @@ export const fetchOrganizationTypesFilter = createAsyncThunk(
 
 export const fetchOrganizationTypesCards = createAsyncThunk(
     "organizationTypes/fetchOrganizationTypesCards",
-    async ({id, region,currentPage,pageSize , district}) => {
+    async ({organization_type, region, offset, limit, district}) => {
         const {request} = useHttp()
         return await request(
-            `${API_URL}organizations/organization/get/filter_for_type/?offset=${(currentPage-1)*pageSize}&limit=${pageSize}${id ? `&organization_type=${id}&` : "?"}${region ? `region=${region}&` : ""}${district ? `district=${district}` : ""}`,
+            `${API_URL}organizations/organization/get/filter_for_type/?${ParamUrls({
+                organization_type,
+                region,
+                offset,
+                limit,
+                district
+            })}`,
             "GET",
             null,
             headers()

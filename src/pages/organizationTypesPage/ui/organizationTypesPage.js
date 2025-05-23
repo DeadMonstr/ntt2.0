@@ -41,10 +41,11 @@ export const OrganizationTypesPage = () => {
     useEffect(() => {
         if (selectRegion && selectType) {
             dispatch(fetchOrganizationTypesCards({
-                id: selectType,
+                organization_type: selectType,
+                offset: (currentPage-1)*pageSize,
+                limit: pageSize,
+                // currentPage: currentPage,
                 region: selectRegion,
-                currentPage: currentPage,
-                pageSize: pageSize,
                 district: selectedDistrict
             }))
         }
@@ -71,12 +72,14 @@ export const OrganizationTypesPage = () => {
                         selectedDistrict={selectedDistrict}
                     />
                 </div>
-                {cards.length >= pageSize && <Pagination
+                {/*{cards.length >= pageSize && */}
+                <Pagination
                     totalCount={cards?.count}
                     onPageChange={setCurrentPage}
                     currentPage={currentPage}
                     pageSize={pageSize}
-                />}
+                />
+            {/*}*/}
             </div>
         </Box>
     );

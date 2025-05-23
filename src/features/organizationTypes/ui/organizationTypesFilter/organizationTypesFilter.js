@@ -36,12 +36,12 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
 
 
 
-    useEffect(() => {
-       if (district) setSelectedDistrict(district[0]?.id)
-    } , [district])
+    // useEffect(() => {
+    //    if (district) setSelectedDistrict(district[0]?.id)
+    // } , [district])
 
     useEffect(() => {
-        if (region) setChangeRegion(region[0].id)
+        if (region) setChangeRegion(region[0]?.id)
     }, [region])
     const [changeType, setChangeType] = useState(false)
 
@@ -167,10 +167,10 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                     <div className={cls.box__buttonPanel__wrapper}>
                         <Select defaultValue={selectType} title={"Tashkilot turlari"} onChangeOption={setSelectType}
                                 options={filter}/>
-                        <Select defaultValue={selectRegion} title={"Location"} onChangeOption={setSelectRegion}
-                                options={region}/>
-                        <Select defaultValue={selectedDistrict} title={"Location"} onChangeOption={setSelectedDistrict}
-                                options={district}/>
+                        <Select defaultValue={selectRegion} title={"Hudud"} onChangeOption={setSelectRegion}
+                                options={region} titleOption={"Hammasi"}/>
+                        <Select defaultValue={selectedDistrict} title={"Tuman"} onChangeOption={setSelectedDistrict}
+                                options={district} titleOption={"Hammasi"}/>
 
                     </div>
                     <Button onClick={() => setPortal(!portal)} extraClass={cls.box__buttonPanel__container__btn}>
@@ -185,10 +185,10 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
             <div className={cls.box__container}>
                 {cards?.results?.map(card => (
                     <div className={cls.box__container_item}>
-                        <i onClick={() => {
-                            setActiveEdit(true)
-                            setActiveItem(card)
-                        }} className={"fa fa-pen"}/>
+                        {/*<i onClick={() => {*/}
+                        {/*    setActiveEdit(true)*/}
+                        {/*    setActiveItem(card)*/}
+                        {/*}} className={"fa fa-pen"}/>*/}
                         <div
                             onClick={() => navigate(`../organizationProfile/${card.id}`)}
                             className={cls.box__item}
@@ -224,7 +224,7 @@ export const OrganizationTypesFilter = ({setSelectRegion, selectRegion, setSelec
                             <div className={cls.box__item_body}>
                                 <div className={cls.box__item_body_info}>
                                     <h2>Location</h2>
-                                    <span>{card.region.name}</span>
+                                    <span>{card.region?.name}</span>
                                 </div>
                                 <div className={cls.box__item_body_info}>
                                     <h2>Region</h2>

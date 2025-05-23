@@ -32,14 +32,14 @@ export const OrganizationProfileInfo = memo(({userRole, setActive, isAdd, isDel}
                     )}
                     onClick={() => isAdd("change")}
                 />
-                <i
-                    className={classNames(
-                        "fas fa-trash",
-                        cls.info__icon,
-                        cls.info__delIcon
-                    )}
-                    onClick={() => isDel(true)}
-                />
+                {/*<i*/}
+                {/*    className={classNames(*/}
+                {/*        "fas fa-trash",*/}
+                {/*        cls.info__icon,*/}
+                {/*        cls.info__delIcon*/}
+                {/*    )}*/}
+                {/*    onClick={() => isDel(true)}*/}
+                {/*/>*/}
             </>
             {/*)}*/}
             <div
