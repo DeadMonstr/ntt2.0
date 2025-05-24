@@ -1,14 +1,12 @@
 //
 //
 //
-export const API_URL_DOC = `http://26.253.30.50:8000`
-// export const API_URL_DOC = `https://api.xususiytalim.uz`
-
+// export const API_URL_DOC = `http://26.253.30.50:8000`
+export const API_URL_DOC = `https://api.xususiytalim.uz`
 export const API_URL_IMG= `https://api.xususiytalim.uz`
 // export const API_URL_DOC = `http://26.253.30.50:8000`
 export const API_URL = `${API_URL_DOC}/api/`
 
-//
 // export const API_URL_DOC = `https://ntt.avotra.ru/`
 // export const API_URL = `${API_URL_DOC}api/`
 
