@@ -14,10 +14,7 @@ const createTestSlice = createSlice({
     initialState,
     reducers: {
         addQuestion: (state, action) => {
-            state.profile.blocks = [
-                ...state.profile.blocks,
-                action.payload.blocks[action.payload.blocks.length - 1]
-            ]
+            state.profile = action.payload
         },
         deleteQuestion: (state, action) => {
             state.profile.blocks = state.profile.blocks
