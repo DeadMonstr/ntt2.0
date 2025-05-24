@@ -50,12 +50,12 @@ export const CreateTest = () => {
         handleSubmit,
         setValue
     } = useForm({
-        defaultValues: {
-            duration: profile?.duration,
-            subject: profile?.subject?.id,
-            is_mandatory: profile?.is_mandatory,
-            status: profile?.status,
-        }
+        // defaultValues: {
+        //     duration: profile?.duration,
+        //     subject: profile?.subject?.id,
+        //     is_mandatory: profile?.is_mandatory,
+        //     status: profile?.status,
+        // }
     })
 
     const {getInputProps, getRootProps} = useDropzone({
@@ -94,8 +94,13 @@ export const CreateTest = () => {
     }, [])
 
     useEffect(() => {
-        if (profile?.duration) setValue("duration", profile?.duration)
-    }, [profile?.duration])
+        if (profile) {
+            setValue("duration", profile?.duration)
+            setValue("subject", profile?.subject?.id)
+            setValue("is_mandatory", profile?.is_mandatory)
+            setValue("status", profile?.status)
+        }
+    }, [profile])
 
     useEffect(() => {
         if (id)
@@ -119,6 +124,8 @@ export const CreateTest = () => {
                 profile?.field_data
                     .map(item => ({label: item.name, value: item.id}))
             )
+        } else {
+            setSelectedFields([])
         }
     }, [profile?.field_data?.length])
 
