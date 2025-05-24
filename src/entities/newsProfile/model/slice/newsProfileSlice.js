@@ -44,7 +44,7 @@ const newsProfileSlice = createSlice({
             })
             .addCase(fetchNewsProfileData.fulfilled, (state, action) => {
                 state.data = action.payload
-                state.data.blocks = action.payload.blocks.map((item, index) => {
+                state.data.blocks = action.payload.blocks?.map((item, index) => {
                     if (item.type_block === "text") {
                         return {
                             news: item.news,

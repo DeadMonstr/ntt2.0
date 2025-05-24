@@ -50,16 +50,6 @@ export const NewsProfilePage = () => {
                     activeChange ? <CrudComponents/> : <ViewComponents/>
                 }
 
-
-
-
-
-
-
-
-
-
-
             </div>
 
             <EditNews

@@ -34,7 +34,7 @@ export const InfoCard = ({setActiveEdit}) => {
                 <span>{data.date}</span>
             </div>
 
-            <p dangerouslySetInnerHTML={{__html: data.desc_json?.text}}></p>
+            {/*<p dangerouslySetInnerHTML={{__html: data.desc_json?.text}}></p>*/}
 
         </div>
     );

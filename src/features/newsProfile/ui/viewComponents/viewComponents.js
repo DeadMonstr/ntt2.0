@@ -85,9 +85,6 @@ export const ViewComponents = () => {
 
     return (
         <div className={cls.create}>
-
-
-
             {renderComponents()}
         </div>
     );

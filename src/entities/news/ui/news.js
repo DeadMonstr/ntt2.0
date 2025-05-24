@@ -42,9 +42,9 @@ export const NewsList = ({setActiveEditItem, setActiveEditModal}) => {
                     <div className={cls.box__info_title}>
                         {item.title}
                     </div>
-                    <div dangerouslySetInnerHTML={{__html: item?.desc_json?.text}} className={cls.box__info_text}>
+                    {/*<div dangerouslySetInnerHTML={{__html: item?.desc_json?.text}} className={cls.box__info_text}>*/}
 
-                    </div>
+                    {/*</div>*/}
 
 
                 </div>

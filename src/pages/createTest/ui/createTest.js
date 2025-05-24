@@ -220,7 +220,7 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
-        if (currentList.blocks[currentList.blocks.length - 1].text.length < 1) {
+        if (currentList.blocks[currentList.blocks?.length - 1].text?.length < 1) {
             dispatch(onAddAlertOptions({
                 status: true,
                 type: "error",
@@ -277,8 +277,8 @@ export const CreateTest = () => {
                                 questionId: item.id,
                                 type: "text",
                                 value: "",
-                                id: item.questions[item.questions.length - 1]?.id + 1 ?? 1,
-                                checked: !(item.questions.length >= 1)
+                                id: item.questions[item.questions?.length - 1]?.id + 1 ?? 1,
+                                checked: !(item.questions?.length >= 1)
                             }
                         ]
                     }

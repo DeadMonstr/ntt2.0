@@ -125,7 +125,6 @@ export const CrudComponents = () => {
 
     const dispatch = useDispatch()
     const onCompleteComponent = (data) => {
-        console.log(data.index)
         setComponents(components => components.map(item => {
             if (item.index === data.index) {
 
@@ -149,7 +148,6 @@ export const CrudComponents = () => {
     }
 
     const onEditComplete = (index) => {
-        console.log(index,"indexx")
         if (components.every(item => item.completed)) {
             setComponents(state => state.map((item, i) => {
                 if (item.index === index) {

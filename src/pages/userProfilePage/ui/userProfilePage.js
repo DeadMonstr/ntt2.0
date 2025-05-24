@@ -15,14 +15,22 @@ import {API_URL, headers, headersImg, useHttp} from "shared/api/base";
 
 import cls from "./userProfilePage.module.sass";
 import {onAddAlertOptions} from "features/alert/model/slice/alertSlice";
+import {Button} from "shared/ui/button/button";
 
 export const UserProfilePage = () => {
 
     const {request} = useHttp()
     const dispatch = useDispatch()
     const formData = new FormData()
-    const {register, handleSubmit,setValue} = useForm()
-    const {register: registerPassword,handleSubmit: handleSubmitPassword,clearErrors,watch,formState: { errors },setError} = useForm()
+    const {register, handleSubmit, setValue} = useForm()
+    const {
+        register: registerPassword,
+        handleSubmit: handleSubmitPassword,
+        clearErrors,
+        watch,
+        formState: {errors},
+        setError
+    } = useForm()
     const userData = useSelector(getUserData)
 
 
@@ -31,7 +39,6 @@ export const UserProfilePage = () => {
 
 
 
-    console.log(userData)
 
     const [currentImage, setCurrentImage] = useState(undefined)
     const {getInputProps, getRootProps} = useDropzone({
@@ -49,33 +56,33 @@ export const UserProfilePage = () => {
             setValue("name", userData?.name)
             setValue("surname", userData?.surname)
             setValue("born_date", userData?.born_date)
+            setCurrentImage(userData.image)
         }
-    },[userData?.id])
+    }, [userData?.id])
 
     useEffect(() => {
-        console.log(password,confirm_password)
+        console.log(password, confirm_password)
         if (confirm_password !== password) {
-            setError("confirm_password", { type: "custom", message: "Parollar mos emas" })
+            setError("confirm_password", {type: "custom", message: "Parollar mos emas"})
         } else {
             // setError("password", { type: "custom", message: "Parollar mos emas" })
             clearErrors()
         }
-    },[password,confirm_password])
+    }, [password, confirm_password])
 
     const onSubmit = useCallback((data) => {
-        console.log(data)
         if (userData?.id)
 
-        request(`${API_URL}users/user/crud/${userData.id}/`, "PUT", JSON.stringify(data), headers())
-            .then(res => {
-                dispatch(onAddAlertOptions({
-                    type: "success",
-                    status: true,
-                    msg: "Muvaffaqiyatli o'zgartirildi"
-                }))
-                dispatch(updateUser(res))
-            })
-    },[userData?.id])
+            request(`${API_URL}users/user/crud/${userData.id}/`, "PUT", JSON.stringify(data), headers())
+                .then(res => {
+                    dispatch(onAddAlertOptions({
+                        type: "success",
+                        status: true,
+                        msg: "Muvaffaqiyatli o'zgartirildi"
+                    }))
+                    dispatch(updateUser(res))
+                })
+    }, [userData?.id])
 
     const onSubmitPassword = useCallback((data) => {
         if (userData?.id)
@@ -89,15 +96,17 @@ export const UserProfilePage = () => {
                     }))
                 })
 
-    },[userData?.id])
+    }, [userData?.id])
 
-    console.log(errors)
     return (
         <div className={cls.user}>
             <div className={cls.user__image}>
                 <div {...getRootProps()} className={cls.inner}>
                     {
                         !!currentImage ?
+                            typeof currentImage === "string" ?
+                            <img className={cls.inner__img} src={currentImage} alt=""/>
+                            :
                             <img className={cls.inner__img} src={URL.createObjectURL(currentImage)} alt=""/>
                             :
                             <i className={classNames("fa-solid fa-image", cls.inner__icon)}/>
@@ -105,8 +114,10 @@ export const UserProfilePage = () => {
                     <input {...getInputProps()} type="file"/>
                 </div>
             </div>
-            <Form onSubmit={handleSubmit(onSubmit)}>
-                <div className={cls.user__form}>
+
+
+            <div className={cls.user__form}>
+                <Form isChange={false} onSubmit={handleSubmit(onSubmit)} extraClassname={cls.form}>
                     <Input
                         register={register}
                         name={"name"}
@@ -127,10 +138,13 @@ export const UserProfilePage = () => {
                         // defaultValue={userData?.born_date}
                     />
 
-                </div>
-            </Form>
-            <Form onSubmit={handleSubmitPassword(onSubmitPassword)}>
-                <div className={cls.user__form}>
+                    <Button type={"submit"}>Tasdiqlash</Button>
+                </Form>
+            </div>
+
+
+            <div className={cls.user__form}>
+                <Form isChange={false} onSubmit={handleSubmitPassword(onSubmitPassword)} extraClassname={cls.form}>
                     <Input
                         register={registerPassword}
                         name={"password"}
@@ -148,9 +162,10 @@ export const UserProfilePage = () => {
                         // defaultValue={userData?.surname}
                     />
 
+                    <Button type={"submit"}>Tasdiqlash</Button>
+                </Form>
+            </div>
 
-                </div>
-            </Form>
         </div>
     );
 }
