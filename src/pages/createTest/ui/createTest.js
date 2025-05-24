@@ -220,7 +220,11 @@ export const CreateTest = () => {
     }
 
     const onSaveQuestion = () => {
-        if (currentList.blocks[currentList.blocks?.length - 1].text?.length < 1) {
+        if (
+            currentList?.blocks &&
+            [...currentList?.blocks]?.sort(compareById)[[...currentList?.blocks]?.sort(compareById)?.length - 1].text?.length < 1 &&
+            [...currentList?.blocks]?.sort(compareById)[[...currentList?.blocks]?.sort(compareById)?.length - 1].image?.length < 1
+        ) {
             dispatch(onAddAlertOptions({
                 status: true,
                 type: "error",
@@ -258,7 +262,7 @@ export const CreateTest = () => {
                 dispatch(onAddAlertOptions({
                     status: true,
                     type: "success",
-                    msg: `savol qo'shildi`
+                    msg: `Savol qo'shildi`
                 }))
             })
     }
@@ -381,8 +385,12 @@ export const CreateTest = () => {
         })
     }
 
+    function compareById(a, b) {
+        return a.id - b.id;
+    }
+
     const renderQuestions = () => {
-        return currentList?.blocks?.map((item, index) => {
+        return currentList?.blocks && [...currentList?.blocks]?.sort(compareById)?.map((item, index) => {
             return (
                 <CreateTestQuestions
                     data={item}
