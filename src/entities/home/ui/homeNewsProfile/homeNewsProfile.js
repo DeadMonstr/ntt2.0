@@ -21,6 +21,8 @@ export const HomeNewsProfile = () => {
     useEffect(() => {
         dispatch(fetchProfileItem(id))
     } , [])
+
+
     const renderData = () => {
         return data?.landing?.map(item => (
             <div className={cls.profile__footer_container_box}>
@@ -42,8 +44,6 @@ export const HomeNewsProfile = () => {
                     </h2>
                     <p dangerouslySetInnerHTML={{__html: item.desc}}></p>
                 </div>
-
-
             </div>
         ))
     }
