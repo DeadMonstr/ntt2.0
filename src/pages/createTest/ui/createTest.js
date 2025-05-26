@@ -41,6 +41,8 @@ export const CreateTest = () => {
 
     const navigate = useNavigate()
     const profile = useSelector(getCreateTestProfile)
+
+    console.log(profile,"profile")
     const {id} = useParams()
     const {request} = useHttp()
     const formData = new FormData()
@@ -374,8 +376,6 @@ export const CreateTest = () => {
                     // name: item.label
                 ))
         }
-        console.log(data, "data")
-        console.log(res, "res")
         dispatch(createQuestion({id, data: res}))
         dispatch(onAddAlertOptions({
             status: true,
@@ -415,7 +415,6 @@ export const CreateTest = () => {
     }
 
 
-    console.log(profile)
 
     return (
         <div className={cls.createTest}>

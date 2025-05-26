@@ -21,8 +21,11 @@ const createTestSlice = createSlice({
                 .filter(item => item.id !== action.payload)
         },
         changeQuestion: (state, action) => {
-            state.profile.blocks = state.profile.blocks
-                .map(item => item.id === action.payload.id ? action.payload : item)
+            state.profile = {
+                ...state.profile,
+                blocks: state.profile.blocks
+                    .map(item => item.id === action.payload.id ? action.payload : item)
+            }
         },
         deleteVariant: (state, action) => {
             state.profile.blocks = state.profile.blocks

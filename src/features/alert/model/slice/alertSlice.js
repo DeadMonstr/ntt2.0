@@ -13,7 +13,6 @@ const AlertSlice = createSlice({
     name: "AlertSlice",
     initialState,
     reducers: {
-
         onAddAlertOptions: (state, action) => {
             state.alert =  [...state.alert, action.payload]
         },
@@ -22,15 +21,7 @@ const AlertSlice = createSlice({
         },
         onDeleteAlert: (state, action) => {
 
-            state.alert = state.alert.map((item, index) => {
-                if (index === action.payload.index) {
-                    return {
-                        ...item,
-                        status: false
-                    }
-                }
-                return item
-            })
+            state.alert = state.alert.filter((item, index) => index !== action.payload.index)
         }
     },
 })

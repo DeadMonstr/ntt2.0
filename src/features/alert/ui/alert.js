@@ -49,7 +49,7 @@ export const Alert = () => {
     // }
 
 
-
+    console.log(alertsData)
     return (
         <div className={cls.alerts}>
 
@@ -89,7 +89,7 @@ const AlertItem = React.memo(({alert, index}) => {
 
     useEffect(() => {
         // Use setTimeout to update the message after 2000 milliseconds (2 seconds)
-
+        console.log("delete", alert,index)
 
         const timeoutId = setTimeout(() => {
             dispatch(onDeleteAlert({index}))
