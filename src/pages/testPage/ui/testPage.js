@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 
 import {Pagination} from "features/pagination";
-import {fetchTestList, TestHeader, TestList} from "entities/test";
+import {fetchTestList, getTestListDataCount, TestHeader, TestList} from "entities/test";
 import {API_URL, useHttp} from "shared/api/base";
 
 import cls from "./testPage.module.sass";
@@ -29,19 +29,27 @@ export const TestPage = () => {
     const organizationTypes = useSelector(getSettingsHeader)
     const fields = useSelector(getCreateTestFields)
     const subjects = useSelector(getSubjects)
+    const dataCount = useSelector(getTestListDataCount)
 
     const [active, setActive] = useState(false)
     const [selectedSub, setSelectedSub] = useState("all")
     const [selectedField, setSelectedField] = useState("all")
+    const [currentPage, setCurrentPage] = useState(1)
+    const pageSize = useMemo(() => 50, [])
 
     // useEffect(() => {
     //     dispatch(fetchTestList())
     // }, [])
 
     useEffect(() => {
-        if (selectedField || selectedSub)
-            dispatch(fetchTestList({subject: selectedSub, field: selectedField}))
-    }, [selectedField, selectedSub])
+        if (selectedField || selectedSub || pageSize || currentPage)
+            dispatch(fetchTestList({
+                subject: selectedSub,
+                field: selectedField,
+                offset: (currentPage - 1) * pageSize,
+                limit: pageSize,
+            }))
+    }, [selectedField, selectedSub, pageSize, currentPage])
 
     const onChangeType = (id) => {
         dispatch(fetchOrganizationFields({id}))
@@ -88,7 +96,12 @@ export const TestPage = () => {
         <div className={cls.test}>
             <TestHeader onCreateTest={onCreateTest} setActive={setActive}/>
             <TestList/>
-            <Pagination/>
+            <Pagination
+                totalCount={dataCount}
+                onPageChange={setCurrentPage}
+                currentPage={currentPage}
+                pageSize={pageSize}
+            />
             <Modal
                 setActive={setActive}
                 active={active}

@@ -56,7 +56,7 @@ export const TestList = () => {
     }
 
     return (
-        <div>
+        <div className={cls.testList}>
             <Table>
                 <thead>
                 <tr>

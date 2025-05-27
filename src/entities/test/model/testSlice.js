@@ -3,6 +3,7 @@ import {fetchTestList} from "entities/test/model/testThunk";
 
 const initialState = {
     data: [],
+    dataCount: 0,
     loading: false,
     error: false
 }
@@ -24,6 +25,7 @@ const testSlice = createSlice({
             })
             .addCase(fetchTestList.fulfilled, (state, action) => {
                 state.data = action.payload.results
+                state.dataCount = action.payload.count
                 state.loading = false
                 state.error = false
             })

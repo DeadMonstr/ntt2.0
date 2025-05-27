@@ -5,6 +5,7 @@ export {fetchTestList} from "./model/testThunk";
 export {default as testSlice} from "./model/testSlice";
 export {
     getTestListData,
+    getTestListDataCount,
     getTestListError,
     getTestListLoading
 } from "./model/testSelector";
