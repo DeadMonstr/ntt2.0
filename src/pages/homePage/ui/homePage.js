@@ -9,7 +9,6 @@ export const Home = () => {
     return (
         <div className={cls.header}>
             <HomeHeader/>
-
             <Outlet/>
             <Routes>
                 <Route path={"/"} element={

@@ -44,7 +44,6 @@ export const CreateTestVariants = ({
     }, [currentImage])
 
     const onRemoveVariant = () => {
-        console.log(item, "item")
         if (!item.isNew) {
             request(`${API_URL}test/question/crud/update_delete/${item.id}/`, "DELETE")
                 .then(res => {

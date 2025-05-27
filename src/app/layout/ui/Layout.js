@@ -32,7 +32,6 @@ export const Layout = ({back}) => {
         <>
             <Alert/>
             <div className={cls.layout}>
-
                 {!isMobile &&
                     <MenuBar/>
                 }
