@@ -31,6 +31,7 @@ import {getSubjects} from "../../../entities/oftenUsed/model/selector/oftenUsedS
 import {deleteTest} from "../../../entities/test/model/testSlice";
 import {ConfirmModal} from "../../../shared/ui/confirmModal";
 import {MultiSelect} from "../../../shared/ui/multiSelect";
+import {Switch} from "../../../shared/ui/switch";
 
 const types = [
     {id: "text", name: "Matn"},
@@ -42,7 +43,7 @@ export const CreateTest = () => {
     const navigate = useNavigate()
     const profile = useSelector(getCreateTestProfile)
 
-    console.log(profile,"profile")
+    console.log(profile, "profile")
     const {id} = useParams()
     const {request} = useHttp()
     const formData = new FormData()
@@ -89,6 +90,7 @@ export const CreateTest = () => {
     const [activeConfirmQuestion, setActiveConfirmQuestion] = useState(false)
     const [isDeletedQuestion, setIsDeletedQuestion] = useState(false)
     const [selectedFields, setSelectedFields] = useState([])
+    const [switchStatus, setSwitchStatus] = useState(false)
 
     useEffect(() => {
         dispatch(fetchOrganizationList())
@@ -101,6 +103,7 @@ export const CreateTest = () => {
             setValue("subject", profile?.subject?.id)
             setValue("is_mandatory", profile?.is_mandatory)
             setValue("status", profile?.status)
+            setValue("organization_type", profile?.field_data && profile?.field_data[0]?.organization_type?.id)
         }
     }, [profile])
 
@@ -415,103 +418,116 @@ export const CreateTest = () => {
     }
 
 
-
     return (
         <div className={cls.createTest}>
-            <Form
-                extraClassname={cls.createTest__header}
-                onSubmit={handleSubmit(onSubmitTest)}
-            >
-                <div className={cls.wrapper}>
-                    {/*<Input*/}
-                    {/*    placeholder={"Test nomi"}*/}
-                    {/*    name={"name"}*/}
-                    {/*    register={register}*/}
-                    {/*    defaultValue={profile?.name}*/}
-                    {/*/>*/}
-                    <Input
-                        type={"number"}
-                        name={"duration"}
-                        register={register}
-                        placeholder={"Test vaqti"}
-                        // defaultValue={profile?.duration}
-                        value={profile?.duration}
-                    />
-                    <i
-                        onClick={onConfirmDelete}
-                        className={classNames(
-                            "fa-solid fa-trash",
-                            cls.wrapper__icon
-                        )}
-                    />
-                </div>
-                <div className={cls.selects}>
-                    <div className={cls.selects__container}>
-                        <Select
-                            options={organizationTypes}
-                            extraClass={cls.createTest__select}
-                            titleOption={"Tashkilot turi"}
-                            onChangeOption={onChangeType}
-                            defaultValue={profile?.field_data && profile?.field_data[0]?.organization_type?.id}
-                        />
-                        <Select
-                            options={subjects}
-                            extraClass={cls.createTest__select}
-                            titleOption={"Fan tanlang"}
-                            name={"subject"}
-                            register={register}
-                            // onChangeOption={onChangeSubject}
-                            defaultValue={profile?.subject?.id}
-                        />
-                        <div style={{display: "flex",alignItems: "center"}}>
-                            <Input
-                                checked={profile?.is_mandatory}
-                                register={register}
-                                name={"is_mandatory"}
-                                type={"checkbox"}
-                            />
-                            <h2>Majburiy fan</h2>
-                        </div>
-                        <div
-                            style={{display: "flex", alignItems: "center"}}
-                        >
-                            <Input
-                                checked={profile?.status}
-                                register={register}
-                                name={"status"}
-                                type={"checkbox"}
-                            />
-                            <h2>Status</h2>
-                        </div>
-                    </div>
-                    <MultiSelect
-                        options={fields.map(item => ({label: item.name, value: item.id}))}
-                        extraClass={cls.createTest__select}
-                        placeholder={"Soha turi"}
-                        onChange={onChangeSelect}
-                        value={selectedFields}
-                        defaultValue={selectedFields}
-                    />
-
-                </div>
-            </Form>
-            <div className={cls.createTest__container}>
-                <h2 className={cls.title}>{"Test yaratish"}</h2>
-                <div className={cls.wrapper}>
-                    {renderQuestions()}
-                    <Button
-                        onClick={onSaveQuestion}
-                        extraClass={cls.wrapper__btn}
-                    >
-                        Savol qo'shish
-                    </Button>
-                </div>
-                {/*<div className={cls.plusQuestion}>*/}
-                {/*    <i*/}
-                {/*        className={classNames("fa-solid fa-plus", cls.plusQuestion__icon)}*/}
-                {/*        onClick={onAddQuestion}*/} {/*    />*/}
-                {/*</div>*/}
+            <div className={cls.createTest__switch}>
+                <Switch
+                    onChange={setSwitchStatus}
+                    checked={switchStatus}
+                />
+                <p>{switchStatus ? "Savollar" : "Ma'lumotlar"}</p>
             </div>
+            {
+                switchStatus
+                    ?
+                    <div className={cls.createTest__container}>
+                        <h2 className={cls.title}>{"Test yaratish"}</h2>
+                        <div className={cls.wrapper}>
+                            {renderQuestions()}
+                            <Button
+                                onClick={onSaveQuestion}
+                                extraClass={cls.wrapper__btn}
+                            >
+                                Savol qo'shish
+                            </Button>
+                        </div>
+                        {/*<div className={cls.plusQuestion}>*/}
+                        {/*    <i*/}
+                        {/*        className={classNames("fa-solid fa-plus", cls.plusQuestion__icon)}*/}
+                        {/*        onClick={onAddQuestion}*/} {/*    />*/}
+                        {/*</div>*/}
+                    </div>
+                    :
+                    <Form
+                        extraClassname={cls.createTest__header}
+                        onSubmit={handleSubmit(onSubmitTest)}
+                    >
+                        <div className={cls.wrapper}>
+                            {/*<Input*/}
+                            {/*    placeholder={"Test nomi"}*/}
+                            {/*    name={"name"}*/}
+                            {/*    register={register}*/}
+                            {/*    defaultValue={profile?.name}*/}
+                            {/*/>*/}
+                            <Input
+                                type={"number"}
+                                name={"duration"}
+                                register={register}
+                                placeholder={"Test vaqti"}
+                                // defaultValue={profile?.duration}
+                                value={profile?.duration}
+                            />
+                            <i
+                                onClick={onConfirmDelete}
+                                className={classNames(
+                                    "fa-solid fa-trash",
+                                    cls.wrapper__icon
+                                )}
+                            />
+                        </div>
+                        <div className={cls.selects}>
+                            <div className={cls.selects__container}>
+                                <Select
+                                    options={organizationTypes}
+                                    extraClass={cls.createTest__select}
+                                    titleOption={"Tashkilot turi"}
+                                    onChangeOption={onChangeType}
+                                    defaultValue={profile?.field_data && profile?.field_data[0]?.organization_type?.id}
+                                    register={register}
+                                    name={"organization_type"}
+                                />
+                                <Select
+                                    options={subjects}
+                                    extraClass={cls.createTest__select}
+                                    titleOption={"Fan tanlang"}
+                                    name={"subject"}
+                                    register={register}
+                                    // onChangeOption={onChangeSubject}
+                                    defaultValue={profile?.subject?.id}
+                                />
+                                <div style={{display: "flex", alignItems: "center"}}>
+                                    <Input
+                                        checked={profile?.is_mandatory}
+                                        register={register}
+                                        name={"is_mandatory"}
+                                        type={"checkbox"}
+                                    />
+                                    <h2>Majburiy fan</h2>
+                                </div>
+                                <div
+                                    style={{display: "flex", alignItems: "center"}}
+                                >
+                                    <Input
+                                        checked={profile?.status}
+                                        register={register}
+                                        name={"status"}
+                                        type={"checkbox"}
+                                    />
+                                    <h2>Status</h2>
+                                </div>
+                            </div>
+                            <MultiSelect
+                                options={fields.map(item => ({label: item.name, value: item.id}))}
+                                extraClass={cls.createTest__select}
+                                placeholder={"Soha turi"}
+                                onChange={onChangeSelect}
+                                value={selectedFields}
+                                defaultValue={selectedFields}
+                            />
+
+                        </div>
+                    </Form>
+            }
             <ConfirmModal
                 onClick={onDelete}
                 active={activeConfirm}

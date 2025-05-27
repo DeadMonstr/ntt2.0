@@ -13,7 +13,7 @@ export const createQuestion = createAsyncThunk(
     "createTestSlice/createQuestion",
     ({id, data}) => {
         const {request} = useHttp()
-        return request(`${API_URL}test/test/crud/add_block/${id}/`, "PATCH", JSON.stringify(data))
+        return request(`${API_URL}test/test/crud/update/${id}/`, "PATCH", JSON.stringify(data))
     }
 )
 

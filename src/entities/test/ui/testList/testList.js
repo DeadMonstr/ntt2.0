@@ -27,18 +27,20 @@ export const TestList = () => {
                 <tr
                     onClick={(e) => {
                         // if (!e.target?.classList?.contains("fa-solid"))
-                            navigate(`/admin/testProfile/${item.id}`)
+                        navigate(`/admin/testProfile/${item.id}`)
                         // else onConfirmDelete(item.id)
                     }}
                 >
                     <td>{index + 1}</td>
                     <td>
                         <div className={cls.item}>
-                            {item?.field_data?.map(item => {
-                                return (
-                                    <span>{item?.name}</span>
-                                )
-                            })}
+                            {
+                                item?.field_data?.slice(0, 3)?.map(item => {
+                                    return (
+                                        <span>{item?.name}</span>
+                                    )
+                                })
+                            }
                         </div>
                     </td>
                     <td>{item.subject?.name}</td>
