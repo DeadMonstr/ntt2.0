@@ -38,19 +38,19 @@ export const TestResultList = () => {
                 <tr>
                     <td>{index + 1}</td>
                     <td>{item?.name} {item?.surname}</td>
-                    <td>{item?.test.field.name}</td>
+                    <td>{item?.test?.field?.name}</td>
                     <td
                         style={{position: "relative"}}
                         onClick={() => handleClick(item.id)}
                     >
-                        {item?.test.subject.name}
+                        {item?.test?.subject?.name}
                         <div className={classNames(cls.popup, {
                             [cls.active]: active === item.id
                         })}>
                             <strong>Majburiy fanlar:</strong>
                             {Object.values(item?.true_answers?.mandatory || {}).map((subject, index) => (
                                 <div key={`mandatory-${index}`}>
-                                    <div style={{display: "flex" , justifyContent: "space-between"}}><strong>{subject.subject}</strong>   <div>Ball: {subject.score}</div></div>
+                                    <div style={{display: "flex" , justifyContent: "space-between"}}><strong>{subject?.subject}</strong>   <div>Ball: {subject?.score}</div></div>
 
 
                                 </div>
@@ -58,7 +58,7 @@ export const TestResultList = () => {
                             <strong style={{marginTop: '10px', display: 'block'}}>Ixtiyoriy fanlar:</strong>
                             {Object.values(item?.true_answers?.optional || {}).map((subject, index) => (
                                 <div key={`optional-${index}`}>
-                                    <div style={{display: "flex" , justifyContent: "space-between"}}><strong>{subject.subject}</strong>   <div>Ball: {subject.score}</div></div>
+                                    <div style={{display: "flex" , justifyContent: "space-between"}}><strong>{subject?.subject}</strong>   <div>Ball: {subject?.score}</div></div>
 
                                 </div>
                             ))}
