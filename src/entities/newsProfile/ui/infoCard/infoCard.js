@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import cls from "./infoCard.module.sass"
 import {useSelector} from "react-redux";
@@ -9,6 +9,15 @@ export const InfoCard = ({setActiveEdit}) => {
 
     const data = useSelector(getNewsProfileData)
 
+    const [formattedDate, setFormattedDate] = useState("")
+
+    useEffect(() => {
+        console.log(data?.date, "data?.date")
+        if (data?.date) {
+            const [year, month, day] = data?.date?.split("-");
+            setFormattedDate(`${day}-${month}-${year}`);
+        }
+    }, [data?.date])
 
     return (
         <div className={cls.card}>
@@ -31,7 +40,7 @@ export const InfoCard = ({setActiveEdit}) => {
             </div>
             <div className={cls.info}>
                 <span>Sana:</span>
-                <span>{data.date}</span>
+                <span>{formattedDate}</span>
             </div>
 
             {/*<p dangerouslySetInnerHTML={{__html: data.desc_json?.text}}></p>*/}

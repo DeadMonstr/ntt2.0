@@ -12,6 +12,10 @@ import {getOrganizationProfileData} from "entities/organizationProfile/model/sel
 
 export const AnnouncementsItem = memo(({userRole, onChange, item}) => {
 
+    const [startYear, startMonth, startDay] = item?.start_date?.split("-");
+    const startFormattedDate = `${startDay}-${startMonth}-${startYear}`;
+    const [year, month, day] = item?.expire_date?.split("-");
+    const formattedDate = `${day}-${month}-${year}`;
     const data = useSelector(getOrganizationProfileData)
     return (
         <div className={cls.announcementsItem}>
@@ -89,7 +93,7 @@ export const AnnouncementsItem = memo(({userRole, onChange, item}) => {
                         </div>
                         <p className={cls.info__subTitle}>Qabul muddati</p>
                     </div>
-                    <h3 className={cls.info__title}>{item.start_date} - {item.expire_date}</h3>
+                    <h3 className={cls.info__title}>{startFormattedDate} - {formattedDate}</h3>
                 </div>
             </div>
             <div className={cls.announcementsItem__text}>

@@ -47,6 +47,8 @@ export const ApplicationList = memo(({list = []}) => {
 
                 {
                     list?.map(item => {
+                        const [year, month, day] = item?.date?.split("-");
+                        const formattedDate = `${day}-${month}-${year}`;
                         return (
                             <tr
                                 onClick={() => {
@@ -65,7 +67,7 @@ export const ApplicationList = memo(({list = []}) => {
                                     <td>{item?.field}</td>
                                     <td>{item?.shift.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
                                     <td>{item?.language.map((item , index , arr) => <span>{item.name}{index !== arr.length - 1 && "\\"}</span>)}</td>
-                                    <td>{item?.date}</td>
+                                    <td>{formattedDate}</td>
                                 </> : null}
                             </tr>
                         )
